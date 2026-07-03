@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CAARCO · Hi-Fi (Atelier appliqué)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="hifi/atelier.css" />
+  <style>
+    body { background: #f0eee9; }
+    #intro { padding: 32px 32px 8px; max-width: 1200px; }
+    #intro .eyebrow {
+      font-family: "JetBrains Mono", monospace; font-size: 11px;
+      letter-spacing: 0.16em; text-transform: uppercase; color: var(--cendre);
+    }
+    #intro h1 { font-family: "Marcellus", serif; font-size: 56px; color: var(--foret); margin: 8px 0 12px; line-height: 1.02; font-weight: 400; }
+    #intro p { font-size: 15px; color: var(--charbon); max-width: 720px; line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <div id="intro">
+    <div class="eyebrow">Wireframes hi-fi · Atelier CAARCO appliqué</div>
+    <h1>L'application,<br />habillée du système.</h1>
+    <p>Les écrans clés repris en haute fidélité avec l'Atelier CAARCO : Forêt en couleur signature, Marcellus pour les titres, Plus Jakarta Sans pour le corps, Galets &amp; Plaquettes partout. Faites glisser, zoomez, ouvrez en plein écran (⤢).</p>
+  </div>
+
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <script type="text/babel" src="hifi/mobile.jsx"></script>
+  <script type="text/babel" src="hifi/web.jsx"></script>
+  <script type="text/babel" src="hifi/design-canvas.jsx"></script>
+
+  <script type="text/babel">
+    function App() {
+      const pw = 320, ph = 660;
+      return (
+        <DesignCanvas>
+          <DCSection id="client" title="Client · mobile" subtitle="Du parcours client : accueil → saisie → matching → tracking → notation">
+            <DCArtboard id="home" label="Accueil" width={pw} height={ph}><HomeClient /></DCArtboard>
+            <DCArtboard id="colis" label="Détails colis" width={pw} height={ph}><ColisDetails /></DCArtboard>
+            <DCArtboard id="match" label="Matching" width={pw} height={ph}><Matching /></DCArtboard>
+            <DCArtboard id="track" label="Tracking" width={pw} height={ph}><Tracking /></DCArtboard>
+            <DCArtboard id="note" label="Notation" width={pw} height={ph}><Notation /></DCArtboard>
+          </DCSection>
+
+          <DCSection id="growth" title="Fidélité · Parrainage" subtitle="Le système de croissance, en deux écrans dédiés">
+            <DCArtboard id="parr" label="Parrainage" width={pw} height={ph}><Parrainage /></DCArtboard>
+            <DCArtboard id="fid" label="Points · statuts" width={pw} height={ph}><Fidelite /></DCArtboard>
+          </DCSection>
+
+          <DCSection id="chauffeur" title="Transporteur · mobile" subtitle="Le côté chauffeur — tableau de bord, courses, gains">
+            <DCArtboard id="dash" label="Dashboard chauffeur" width={pw} height={ph}><DashboardChauffeur /></DCArtboard>
+          </DCSection>
+
+          <DCSection id="web" title="Web · public &amp; admin" subtitle="Site marketing CAARCO et back-office d'administration">
+            <DCArtboard id="land" label="Landing caarco.cm" width={960} height={680}><Landing /></DCArtboard>
+            <DCArtboard id="adm" label="Back-office · vue d'ensemble" width={1080} height={680}><AdminDash /></DCArtboard>
+          </DCSection>
+        </DesignCanvas>
+      );
+    }
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>

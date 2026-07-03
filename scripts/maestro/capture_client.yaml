@@ -1,0 +1,85 @@
+# ═══════════════════════════════════════════════════
+# CAARCO — Maestro Flow : capture automatique écrans client
+# Prérequis : maestro installé (iwr get.maestro.mobile.dev | iex)
+# Usage    : maestro test capture_client.yaml
+# ═══════════════════════════════════════════════════
+
+appId: com.caarco.app
+---
+
+# ── Lancement de l'app ─────────────────────────────
+- launchApp:
+    clearState: false
+
+- takeScreenshot: "01_splash_screen"
+- waitForAnimationToEnd
+
+# ── Onboarding ─────────────────────────────────────
+- takeScreenshot: "02_onboarding_slide_1"
+- swipe:
+    direction: LEFT
+    duration: 400
+- takeScreenshot: "03_onboarding_slide_2"
+- swipe:
+    direction: LEFT
+    duration: 400
+- takeScreenshot: "04_onboarding_slide_3"
+
+# ── Choix de rôle ──────────────────────────────────
+- tapOn: "Passer"
+- waitForAnimationToEnd
+- takeScreenshot: "05_choix_role"
+
+# ── Auth téléphone ─────────────────────────────────
+- tapOn: "Client"
+- waitForAnimationToEnd
+- takeScreenshot: "06_auth_saisie_telephone"
+
+# Saisir numéro de test
+- tapOn:
+    text: "Numéro de téléphone"
+- inputText: "600000001"
+- takeScreenshot: "06b_auth_telephone_rempli"
+- tapOn: "Continuer"
+- waitForAnimationToEnd
+
+# ── Saisie OTP ─────────────────────────────────────
+- takeScreenshot: "07_auth_saisie_otp"
+
+# Saisir OTP (remplacer par le code généré)
+- tapOn:
+    id: "otp-input"
+- inputText: "1234"
+- waitForAnimationToEnd
+
+# ── Accueil client ─────────────────────────────────
+- takeScreenshot: "08_client_accueil_carte"
+
+# ── Commander une course ───────────────────────────
+- tapOn: "Commander une livraison"
+- waitForAnimationToEnd
+- takeScreenshot: "09_client_saisie_adresses"
+
+- tapOn: "Adresse d'arrivée"
+- inputText: "Marché central"
+- waitForAnimationToEnd
+- takeScreenshot: "09b_client_autocompletion"
+
+- tapOn:
+    index: 0
+    text: "Marché"
+- waitForAnimationToEnd
+- tapOn: "Confirmer"
+- waitForAnimationToEnd
+
+# ── Détails colis ─────────────────────────────────
+- takeScreenshot: "10_client_details_colis"
+
+- tapOn: "Colis"
+- inputText: "Vêtements et chaussures"
+- takeScreenshot: "11_client_description_colis"
+- tapOn: "Continuer"
+- waitForAnimationToEnd
+
+# ── Prix estimé ───────────────────────────────────
+- takeScreenshot: "12_client_estimation_prix"

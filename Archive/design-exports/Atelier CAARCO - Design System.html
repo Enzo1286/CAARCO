@@ -1,0 +1,1200 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Atelier CAARCO — Le Système</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================================================
+       ATELIER CAARCO — design tokens
+       ============================================================ */
+    :root {
+      /* PIGMENTS */
+      --foret:        #1f3b2a; /* vert profond primaire */
+      --foret-90:     #284a36;
+      --foret-70:     #426356;
+      --foret-30:     #b4c4b9;
+      --foret-10:     #e6ede7;
+
+      --bambou:       #3d6b4a; /* vert action (boutons, succès) */
+      --bambou-soft:  #cfdbcf;
+
+      --nere:         #c89441; /* or chaud — accent, highlights */
+      --nere-soft:    #f1e3c2;
+
+      --laterite:     #b8612e; /* terre cuite — alertes, accent rare */
+      --laterite-soft:#f1d6c3;
+
+      --manioc:       #fbf9f3; /* fond crème principal */
+      --brume:        #ece9e0; /* fond secondaire (cartes claires) */
+      --cendre:       #6b6f68; /* gris moyen, texte secondaire */
+      --charbon:      #1d2420; /* encre — texte principal */
+      --nuit:         #0f1411; /* fond sombre profond */
+
+      /* PLUMES */
+      --plume-display: "Marcellus", "Cormorant Garamond", "Times New Roman", serif;
+      --plume-body:    "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+      --plume-mono:    "JetBrains Mono", "Courier New", monospace;
+
+      /* CADENCES — espacement poétique */
+      --pas:      4px;
+      --pause:    8px;
+      --souffle:  12px;
+      --arret:    16px;
+      --couloir:  24px;
+      --patio:    32px;
+      --parvis:   48px;
+      --place:    64px;
+      --horizon:  96px;
+
+      /* GALETS — rayons */
+      --galet-xs:   4px;
+      --galet-sm:   8px;
+      --galet-md:   14px;
+      --galet-lg:   24px;
+      --galet-full: 9999px;
+
+      /* OMBRES */
+      --voilage: 0 1px 2px rgba(31,59,42,.06), 0 2px 6px rgba(31,59,42,.04);
+      --canopee: 0 4px 12px rgba(31,59,42,.08), 0 12px 24px rgba(31,59,42,.06);
+      --futaie:  0 8px 24px rgba(31,59,42,.14), 0 24px 60px rgba(31,59,42,.12);
+    }
+
+    /* RESET */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: var(--plume-body);
+      background: var(--manioc);
+      color: var(--charbon);
+      font-size: 16px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* LAYOUT */
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 var(--patio); }
+    section { padding: var(--horizon) 0; border-bottom: 1px solid var(--brume); }
+    section:last-child { border-bottom: none; }
+
+    /* TYPO DISPLAY */
+    .display, h1, h2, h3 { font-family: var(--plume-display); font-weight: 400; color: var(--foret); }
+    h1 { font-size: clamp(48px, 7vw, 96px); line-height: 1.02; margin: 0; letter-spacing: -0.01em; }
+    h2 { font-size: clamp(36px, 4.5vw, 60px); line-height: 1.05; margin: 0 0 var(--couloir); letter-spacing: -0.005em; }
+    h3 { font-size: clamp(22px, 2.2vw, 30px); line-height: 1.15; margin: 0 0 var(--souffle); color: var(--foret); }
+
+    .eyebrow {
+      font-family: var(--plume-mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cendre);
+      margin: 0 0 var(--souffle);
+    }
+    .lede {
+      font-family: var(--plume-display);
+      font-size: clamp(20px, 2vw, 26px);
+      line-height: 1.4;
+      color: var(--charbon);
+      max-width: 720px;
+      margin: 0 0 var(--couloir);
+    }
+    .note {
+      font-size: 14px;
+      color: var(--cendre);
+      max-width: 580px;
+    }
+
+    /* COVER */
+    .cover {
+      background: var(--foret);
+      color: var(--manioc);
+      padding: var(--horizon) 0 var(--horizon);
+      position: relative;
+      overflow: hidden;
+    }
+    .cover .eyebrow { color: var(--nere-soft); }
+    .cover h1 { color: var(--manioc); }
+    .cover .lede { color: var(--foret-30); }
+    .cover .crown { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: var(--place); }
+    .cover .mark {
+      font-family: var(--plume-display);
+      font-size: 28px;
+      letter-spacing: 0.04em;
+      color: var(--manioc);
+    }
+    .cover .mark::before {
+      content: "";
+      display: inline-block;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--nere);
+      margin-right: 12px;
+      vertical-align: middle;
+    }
+    .cover .meta {
+      font-family: var(--plume-mono);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      color: var(--foret-30);
+      text-transform: uppercase;
+      text-align: right;
+      line-height: 1.7;
+    }
+    .cover-swatches {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 1px;
+      margin-top: var(--parvis);
+      border: 1px solid var(--foret-90);
+    }
+    .cover-swatches > div {
+      aspect-ratio: 4 / 1;
+      display: flex;
+      align-items: flex-end;
+      padding: var(--souffle);
+      font-family: var(--plume-mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* PRINCIPES */
+    .principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--patio); margin-top: var(--couloir); }
+    .principle .num {
+      font-family: var(--plume-display);
+      font-size: 60px;
+      line-height: 1;
+      color: var(--bambou);
+      opacity: 0.5;
+    }
+    .principle h4 {
+      font-family: var(--plume-display);
+      font-size: 24px;
+      color: var(--foret);
+      margin: var(--pause) 0 var(--pause);
+      font-weight: 400;
+    }
+    .principle p { margin: 0; color: var(--cendre); font-size: 15px; }
+
+    /* PIGMENTS — grille couleurs */
+    .pigments-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--arret); }
+    .pigment {
+      display: flex;
+      flex-direction: column;
+      border-radius: var(--galet-md);
+      overflow: hidden;
+      border: 1px solid var(--brume);
+      background: #fff;
+    }
+    .pigment .chip { height: 120px; position: relative; }
+    .pigment .chip .grain {
+      position: absolute; inset: auto var(--souffle) var(--souffle) auto;
+      font-family: var(--plume-mono); font-size: 10px;
+      padding: 3px 7px; border-radius: var(--galet-full);
+      background: rgba(255,255,255,0.85); color: var(--charbon);
+      letter-spacing: 0.06em;
+    }
+    .pigment .meta { padding: var(--souffle) var(--arret) var(--arret); }
+    .pigment .nom { font-family: var(--plume-display); font-size: 22px; color: var(--foret); }
+    .pigment .role { font-size: 13px; color: var(--cendre); margin-top: 2px; }
+    .pigment .hex { font-family: var(--plume-mono); font-size: 11px; color: var(--cendre); margin-top: 6px; letter-spacing: 0.06em; }
+
+    .pigments-section h3 { margin-top: var(--parvis); }
+
+    /* PLUMES */
+    .type-stack { display: grid; grid-template-columns: 220px 1fr; gap: var(--couloir); padding: var(--couloir) 0; border-bottom: 1px dashed var(--brume); align-items: baseline; }
+    .type-stack:last-child { border-bottom: none; }
+    .type-label { font-family: var(--plume-mono); font-size: 11px; letter-spacing: 0.14em; color: var(--cendre); text-transform: uppercase; }
+    .type-label .px { display: block; color: var(--charbon); font-size: 13px; margin-top: 4px; }
+    .type-sample.display { font-family: var(--plume-display); color: var(--foret); }
+    .type-sample.body { font-family: var(--plume-body); color: var(--charbon); }
+    .type-sample.mono { font-family: var(--plume-mono); color: var(--charbon); }
+
+    .pairing { display: grid; grid-template-columns: 1fr 1fr; gap: var(--patio); margin-top: var(--couloir); }
+    .pair-card { background: var(--manioc); border: 1px solid var(--brume); padding: var(--patio); border-radius: var(--galet-md); }
+    .pair-card .nm { font-family: var(--plume-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cendre); }
+
+    /* CADENCES */
+    .cadence-grid { display: grid; grid-template-columns: 120px 1fr 80px; gap: var(--arret); align-items: center; margin-bottom: var(--souffle); }
+    .cadence-name { font-family: var(--plume-display); font-size: 20px; color: var(--foret); }
+    .cadence-bar { height: 8px; background: var(--bambou); border-radius: var(--galet-full); }
+    .cadence-val { font-family: var(--plume-mono); font-size: 12px; color: var(--cendre); text-align: right; }
+
+    .radius-row, .shadow-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--arret); margin-top: var(--couloir); }
+    .radius-tile {
+      background: var(--manioc);
+      border: 1px solid var(--brume);
+      aspect-ratio: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--pause);
+    }
+    .radius-tile .form {
+      width: 64px; height: 64px;
+      background: var(--bambou);
+    }
+    .radius-tile .name { font-family: var(--plume-display); font-size: 18px; color: var(--foret); }
+    .radius-tile .val { font-family: var(--plume-mono); font-size: 11px; color: var(--cendre); }
+
+    .shadow-tile {
+      background: var(--manioc);
+      aspect-ratio: 4 / 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--pause);
+      padding: var(--couloir);
+    }
+    .shadow-tile .surface {
+      width: 100%; height: 60%;
+      background: #fff;
+      border-radius: var(--galet-md);
+    }
+    .shadow-tile.voilage .surface { box-shadow: var(--voilage); }
+    .shadow-tile.canopee .surface { box-shadow: var(--canopee); }
+    .shadow-tile.futaie .surface  { box-shadow: var(--futaie); }
+    .shadow-tile .name { font-family: var(--plume-display); font-size: 18px; color: var(--foret); }
+    .shadow-tile .val { font-family: var(--plume-mono); font-size: 10px; color: var(--cendre); }
+
+    /* PIÈCES (COMPOSANTS) */
+    .piece-block {
+      background: #fff;
+      border: 1px solid var(--brume);
+      border-radius: var(--galet-md);
+      padding: var(--patio);
+      margin-bottom: var(--arret);
+    }
+    .piece-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: var(--arret); }
+    .piece-head .nom { font-family: var(--plume-display); font-size: 28px; color: var(--foret); }
+    .piece-head .role { font-family: var(--plume-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cendre); }
+    .piece-stage { display: flex; flex-wrap: wrap; gap: var(--arret); align-items: center; padding: var(--couloir); background: var(--manioc); border-radius: var(--galet-sm); }
+    .piece-notes { margin-top: var(--souffle); font-size: 14px; color: var(--cendre); }
+
+    /* GALET (bouton) */
+    .galet {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: var(--pause);
+      font-family: var(--plume-body);
+      font-weight: 600;
+      font-size: 15px;
+      padding: 12px 22px;
+      border-radius: var(--galet-full);
+      border: 1.5px solid transparent;
+      cursor: pointer;
+      transition: all .15s ease;
+      letter-spacing: 0.01em;
+    }
+    .galet--primaire { background: var(--foret); color: var(--manioc); }
+    .galet--primaire:hover { background: var(--foret-90); transform: translateY(-1px); box-shadow: var(--voilage); }
+    .galet--secondaire { background: transparent; color: var(--foret); border-color: var(--foret); }
+    .galet--secondaire:hover { background: var(--foret-10); }
+    .galet--fantome { background: transparent; color: var(--foret); }
+    .galet--fantome:hover { background: var(--foret-10); }
+    .galet--accent { background: var(--nere); color: var(--charbon); }
+    .galet--accent:hover { background: #b08236; }
+    .galet--alerte { background: var(--laterite); color: var(--manioc); }
+    .galet--xs { font-size: 13px; padding: 6px 14px; }
+    .galet--lg { font-size: 17px; padding: 16px 28px; }
+
+    /* SILLON (input) */
+    .sillon {
+      display: flex; flex-direction: column; gap: 6px;
+      min-width: 220px;
+    }
+    .sillon-label {
+      font-family: var(--plume-mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cendre);
+    }
+    .sillon-field {
+      display: flex; align-items: center; gap: var(--pause);
+      background: var(--manioc);
+      border: 1.5px solid var(--brume);
+      border-radius: var(--galet-md);
+      padding: 12px 16px;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    .sillon-field input {
+      flex: 1; border: none; background: transparent; outline: none;
+      font-family: var(--plume-body); font-size: 15px; color: var(--charbon);
+    }
+    .sillon-field input::placeholder { color: var(--cendre); }
+    .sillon-field:focus-within { border-color: var(--foret); box-shadow: 0 0 0 3px var(--foret-10); }
+    .sillon-field .ico { color: var(--cendre); font-family: var(--plume-mono); font-size: 13px; }
+    .sillon-field--err { border-color: var(--laterite); }
+    .sillon-help { font-size: 12px; color: var(--cendre); }
+
+    /* PLAQUETTE (card) */
+    .plaquette {
+      background: #fff;
+      border: 1px solid var(--brume);
+      border-radius: var(--galet-lg);
+      padding: var(--couloir);
+      box-shadow: var(--voilage);
+      transition: box-shadow .2s, transform .2s;
+      max-width: 320px;
+    }
+    .plaquette:hover { box-shadow: var(--canopee); transform: translateY(-2px); }
+    .plaquette .titre { font-family: var(--plume-display); font-size: 22px; color: var(--foret); margin-bottom: var(--pause); }
+    .plaquette p { margin: 0 0 var(--arret); color: var(--cendre); font-size: 14px; line-height: 1.5; }
+    .plaquette--foret { background: var(--foret); color: var(--manioc); border-color: var(--foret); }
+    .plaquette--foret .titre { color: var(--manioc); }
+    .plaquette--foret p { color: var(--foret-30); }
+
+    /* PASTILLE (chip) */
+    .pastille {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 5px 12px;
+      border-radius: var(--galet-full);
+      font-size: 13px;
+      font-weight: 500;
+      background: var(--brume);
+      color: var(--charbon);
+      border: 1px solid transparent;
+    }
+    .pastille--active { background: var(--foret); color: var(--manioc); }
+    .pastille--contour { background: transparent; border-color: var(--foret); color: var(--foret); }
+    .pastille--nere { background: var(--nere-soft); color: #6b4815; }
+    .pastille--bambou { background: var(--bambou-soft); color: var(--foret); }
+
+    /* CACHET (badge) */
+    .cachet {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 4px 10px;
+      border-radius: var(--galet-sm);
+      font-family: var(--plume-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    .cachet--succes { background: var(--bambou-soft); color: var(--foret); }
+    .cachet--info   { background: var(--foret-10); color: var(--foret); }
+    .cachet--alerte { background: var(--nere-soft); color: #7a5615; }
+    .cachet--erreur { background: var(--laterite-soft); color: #7a3b15; }
+
+    /* MÉREAU (avatar) */
+    .mereau {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--foret);
+      color: var(--manioc);
+      font-family: var(--plume-display);
+      font-size: 18px;
+      border: 2px solid var(--manioc);
+      box-shadow: 0 0 0 1px var(--brume);
+    }
+    .mereau--sm { width: 28px; height: 28px; font-size: 12px; border-width: 1.5px; }
+    .mereau--lg { width: 64px; height: 64px; font-size: 26px; }
+    .mereau--nere { background: var(--nere); color: var(--charbon); }
+    .mereau--bambou { background: var(--bambou); }
+    .mereau--laterite { background: var(--laterite); }
+
+    /* BASCULE (toggle) */
+    .bascule {
+      position: relative;
+      width: 48px; height: 28px;
+      background: var(--brume);
+      border-radius: var(--galet-full);
+      cursor: pointer;
+      transition: background .2s;
+      flex-shrink: 0;
+    }
+    .bascule::after {
+      content: ""; position: absolute;
+      top: 3px; left: 3px;
+      width: 22px; height: 22px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: var(--voilage);
+      transition: transform .2s;
+    }
+    .bascule--on { background: var(--bambou); }
+    .bascule--on::after { transform: translateX(20px); }
+
+    /* JALONS (progress) */
+    .jalons {
+      width: 100%; height: 8px;
+      background: var(--brume);
+      border-radius: var(--galet-full);
+      overflow: hidden;
+    }
+    .jalons-fill { height: 100%; background: var(--foret); border-radius: var(--galet-full); }
+
+    /* ÉCHELON (stepper) */
+    .echelon { display: flex; align-items: center; gap: var(--pause); }
+    .echelon-step {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 13px; color: var(--cendre);
+    }
+    .echelon-step .num {
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: var(--brume); color: var(--cendre);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--plume-mono); font-size: 11px;
+      flex-shrink: 0;
+    }
+    .echelon-step--done .num { background: var(--bambou); color: var(--manioc); }
+    .echelon-step--current .num { background: var(--foret); color: var(--manioc); }
+    .echelon-step--current { color: var(--foret); font-weight: 600; }
+    .echelon-bar { width: 20px; height: 1px; background: var(--brume); }
+    .echelon-bar--done { background: var(--bambou); }
+
+    /* BANDEAU (toast) */
+    .bandeau {
+      display: flex; align-items: center; gap: var(--souffle);
+      background: var(--nuit); color: var(--manioc);
+      border-radius: var(--galet-md);
+      padding: 14px 18px;
+      box-shadow: var(--canopee);
+      font-size: 14px;
+      max-width: 380px;
+    }
+    .bandeau--succes { background: var(--foret); }
+    .bandeau--alerte { background: var(--nere); color: var(--charbon); }
+    .bandeau .ico {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: rgba(255,255,255,0.18);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: var(--plume-mono); font-size: 12px;
+      flex-shrink: 0;
+    }
+
+    /* CALICOT (banner) */
+    .calicot {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: var(--couloir);
+      background: var(--nere-soft);
+      color: #5c4012;
+      padding: var(--arret) var(--couloir);
+      border-radius: var(--galet-md);
+      border-left: 4px solid var(--nere);
+      max-width: 640px;
+    }
+    .calicot .copy strong { display: block; font-family: var(--plume-display); font-size: 18px; color: var(--charbon); margin-bottom: 2px; font-weight: 400; }
+    .calicot .copy span { font-size: 13px; }
+
+    /* ALCÔVE (modal preview) */
+    .alcove {
+      background: #fff;
+      border-radius: var(--galet-lg);
+      padding: var(--patio);
+      max-width: 420px;
+      box-shadow: var(--futaie);
+      border: 1px solid var(--brume);
+    }
+    .alcove .titre { font-family: var(--plume-display); font-size: 26px; color: var(--foret); margin-bottom: var(--pause); }
+    .alcove p { color: var(--cendre); font-size: 14px; margin: 0 0 var(--arret); }
+    .alcove .actions { display: flex; gap: var(--pause); justify-content: flex-end; }
+
+    /* ONGLET (tab) */
+    .onglets {
+      display: flex; gap: var(--couloir);
+      border-bottom: 1px solid var(--brume);
+    }
+    .onglet {
+      padding: var(--souffle) 0;
+      font-family: var(--plume-body);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--cendre);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+    }
+    .onglet--actif { color: var(--foret); border-bottom-color: var(--foret); }
+
+    /* lexique table */
+    .lexique {
+      width: 100%; border-collapse: collapse; margin-top: var(--couloir);
+    }
+    .lexique th, .lexique td {
+      text-align: left;
+      padding: var(--souffle) var(--arret);
+      border-bottom: 1px solid var(--brume);
+      font-size: 14px;
+    }
+    .lexique th {
+      font-family: var(--plume-mono);
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--cendre);
+      font-weight: 500;
+    }
+    .lexique .nom-orig { font-family: var(--plume-display); color: var(--foret); font-size: 17px; }
+    .lexique .tech { color: var(--cendre); }
+    .lexique .meta { font-family: var(--plume-mono); font-size: 11px; color: var(--cendre); }
+
+    /* footer */
+    footer {
+      background: var(--nuit);
+      color: var(--foret-30);
+      padding: var(--horizon) 0 var(--parvis);
+      font-size: 13px;
+    }
+    footer .mark {
+      font-family: var(--plume-display);
+      font-size: 22px;
+      color: var(--manioc);
+      margin-bottom: var(--couloir);
+    }
+    footer .mark::before {
+      content: ""; display: inline-block;
+      width: 12px; height: 12px;
+      border-radius: 50%; background: var(--nere);
+      margin-right: 10px; vertical-align: middle;
+    }
+    footer .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--patio); }
+    footer h5 { font-family: var(--plume-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--nere-soft); margin: 0 0 var(--souffle); font-weight: 500; }
+    footer ul { list-style: none; margin: 0; padding: 0; }
+    footer li { margin-bottom: 4px; color: var(--foret-30); }
+
+    @media (max-width: 880px) {
+      .pigments-grid { grid-template-columns: repeat(2, 1fr); }
+      .principles { grid-template-columns: 1fr; gap: var(--couloir); }
+      .radius-row, .shadow-row { grid-template-columns: repeat(2, 1fr); }
+      .cover-swatches { grid-template-columns: repeat(2, 1fr); }
+      .pairing { grid-template-columns: 1fr; }
+      .type-stack { grid-template-columns: 1fr; }
+      footer .grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       COVER
+       ============================================================ -->
+  <section class="cover">
+    <div class="wrap">
+      <div class="crown">
+        <div class="mark">CAARCO</div>
+        <div class="meta">
+          Atelier · v0.1<br/>
+          Cameroun<br/>
+          Mai 2026
+        </div>
+      </div>
+
+      <p class="eyebrow">Le système de design</p>
+      <h1>Atelier<br/>CAARCO.</h1>
+      <p class="lede" style="margin-top: var(--couloir);">
+        Une grammaire visuelle pour transporter, partout au Cameroun,
+        en gardant la même chaleur et la même rigueur que le service que nous voulons rendre.
+      </p>
+
+      <div class="cover-swatches" aria-hidden="true">
+        <div style="background:#1f3b2a;color:#fbf9f3">Forêt</div>
+        <div style="background:#3d6b4a;color:#fbf9f3">Bambou</div>
+        <div style="background:#c89441;color:#1d2420">Néré</div>
+        <div style="background:#b8612e;color:#fbf9f3">Latérite</div>
+        <div style="background:#fbf9f3;color:#1d2420">Manioc</div>
+        <div style="background:#ece9e0;color:#1d2420">Brume</div>
+        <div style="background:#1d2420;color:#fbf9f3">Charbon</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PRINCIPES
+       ============================================================ -->
+  <section>
+    <div class="wrap">
+      <p class="eyebrow">Manifeste</p>
+      <h2>Quatre principes,<br/>une seule voix.</h2>
+
+      <div class="principles" style="grid-template-columns: repeat(4, 1fr);">
+        <div class="principle">
+          <div class="num">01</div>
+          <h4>Limpide d'abord.</h4>
+          <p>Chaque écran répond à une question à la fois. L'utilisateur ne devine jamais ; il comprend.</p>
+        </div>
+        <div class="principle">
+          <div class="num">02</div>
+          <h4>Chaleureux, jamais bavard.</h4>
+          <p>Un crème, un vert profond, une typographie qui respire. Pas de gradients criards, pas de bruit.</p>
+        </div>
+        <div class="principle">
+          <div class="num">03</div>
+          <h4>Robuste au terrain.</h4>
+          <p>Réseau 3G, écran 4 pouces, soleil de midi. La beauté doit tenir au-delà du studio.</p>
+        </div>
+        <div class="principle">
+          <div class="num">04</div>
+          <h4>Camerounais, sans folklore.</h4>
+          <p>Notre identité vient des noms, des couleurs naturelles, du rythme. Pas des clichés.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PIGMENTS
+       ============================================================ -->
+  <section class="pigments-section">
+    <div class="wrap">
+      <p class="eyebrow">01 · Pigments</p>
+      <h2>Couleur.</h2>
+      <p class="lede">
+        Sept pigments inspirés des matières du Cameroun. Le vert <i>Forêt</i> tient la marque ;
+        le crème <i>Manioc</i> respire derrière chaque écran ; <i>Néré</i> et <i>Latérite</i>
+        ne sortent qu'avec parcimonie, comme une épice.
+      </p>
+
+      <h3 style="margin-top: var(--patio);">Pigments primaires</h3>
+      <div class="pigments-grid">
+        <div class="pigment">
+          <div class="chip" style="background: var(--foret);"><div class="grain">FORÊT · 700</div></div>
+          <div class="meta">
+            <div class="nom">Forêt</div>
+            <div class="role">Marque · fond sombre · titres</div>
+            <div class="hex">#1F3B2A · oklch(0.30 0.04 152)</div>
+          </div>
+        </div>
+        <div class="pigment">
+          <div class="chip" style="background: var(--bambou);"><div class="grain">BAMBOU · 500</div></div>
+          <div class="meta">
+            <div class="nom">Bambou</div>
+            <div class="role">Action · succès · CTAs secondaires</div>
+            <div class="hex">#3D6B4A · oklch(0.45 0.06 152)</div>
+          </div>
+        </div>
+        <div class="pigment">
+          <div class="chip" style="background: var(--nere);"><div class="grain">NÉRÉ · 500</div></div>
+          <div class="meta">
+            <div class="nom">Néré</div>
+            <div class="role">Accent rare · highlights · récompenses</div>
+            <div class="hex">#C89441 · oklch(0.71 0.13 75)</div>
+          </div>
+        </div>
+        <div class="pigment">
+          <div class="chip" style="background: var(--laterite);"><div class="grain">LATÉRITE · 500</div></div>
+          <div class="meta">
+            <div class="nom">Latérite</div>
+            <div class="role">Alerte · destructif · erreur</div>
+            <div class="hex">#B8612E · oklch(0.58 0.13 45)</div>
+          </div>
+        </div>
+      </div>
+
+      <h3>Neutres</h3>
+      <div class="pigments-grid">
+        <div class="pigment">
+          <div class="chip" style="background: var(--manioc); border-bottom: 1px solid var(--brume);"><div class="grain">MANIOC · 50</div></div>
+          <div class="meta">
+            <div class="nom">Manioc</div>
+            <div class="role">Fond principal · papier</div>
+            <div class="hex">#FBF9F3</div>
+          </div>
+        </div>
+        <div class="pigment">
+          <div class="chip" style="background: var(--brume);"><div class="grain">BRUME · 100</div></div>
+          <div class="meta">
+            <div class="nom">Brume</div>
+            <div class="role">Fond secondaire · bordures</div>
+            <div class="hex">#ECE9E0</div>
+          </div>
+        </div>
+        <div class="pigment">
+          <div class="chip" style="background: var(--cendre);"><div class="grain">CENDRE · 500</div></div>
+          <div class="meta">
+            <div class="nom">Cendre</div>
+            <div class="role">Texte secondaire · placeholders</div>
+            <div class="hex">#6B6F68</div>
+          </div>
+        </div>
+        <div class="pigment">
+          <div class="chip" style="background: var(--charbon);"><div class="grain">CHARBON · 900</div></div>
+          <div class="meta">
+            <div class="nom">Charbon</div>
+            <div class="role">Encre · texte principal</div>
+            <div class="hex">#1D2420</div>
+          </div>
+        </div>
+      </div>
+
+      <h3>Sémantique</h3>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--arret);">
+        <div class="plaquette" style="max-width:none;">
+          <div class="titre" style="font-size: 18px;">Succès</div>
+          <span class="cachet cachet--succes">Bambou · #3D6B4A</span>
+          <p style="margin-top: var(--souffle);">Confirmations, livraisons réussies, validation KYC.</p>
+        </div>
+        <div class="plaquette" style="max-width:none;">
+          <div class="titre" style="font-size: 18px;">Info</div>
+          <span class="cachet cachet--info">Forêt · #1F3B2A</span>
+          <p style="margin-top: var(--souffle);">Tracking en cours, états neutres, communication.</p>
+        </div>
+        <div class="plaquette" style="max-width:none;">
+          <div class="titre" style="font-size: 18px;">Alerte</div>
+          <span class="cachet cachet--alerte">Néré · #C89441</span>
+          <p style="margin-top: var(--souffle);">Retards, attention requise, KYC incomplet.</p>
+        </div>
+        <div class="plaquette" style="max-width:none;">
+          <div class="titre" style="font-size: 18px;">Erreur</div>
+          <span class="cachet cachet--erreur">Latérite · #B8612E</span>
+          <p style="margin-top: var(--souffle);">Litiges, refus, actions destructrices.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PLUMES
+       ============================================================ -->
+  <section>
+    <div class="wrap">
+      <p class="eyebrow">02 · Plumes</p>
+      <h2>Typographie.</h2>
+      <p class="lede">
+        Deux plumes seulement. <i>Marcellus</i> pour les titres — un romain élégant
+        qui porte l'autorité calme de la marque. <i>Plus Jakarta Sans</i> pour le corps —
+        un grotesque chaleureux, lisible sur petits écrans Android.
+      </p>
+
+      <div class="pairing">
+        <div class="pair-card">
+          <div class="nm">Display · Marcellus</div>
+          <div style="font-family: var(--plume-display); font-size: 56px; color: var(--foret); line-height: 1; margin-top: var(--arret);">
+            Envoyer, partout.
+          </div>
+          <div class="note" style="margin-top: var(--couloir);">Romain à empattements, contraste modéré.
+            À utiliser pour les H1/H2, les noms de pigments et les chiffres-héros. Une seule graisse : <span class="mono" style="font-family: var(--plume-mono);">400</span>.</div>
+        </div>
+        <div class="pair-card">
+          <div class="nm">Body · Plus Jakarta Sans</div>
+          <div style="font-family: var(--plume-body); font-size: 26px; color: var(--charbon); margin-top: var(--arret);">
+            Le grotesque qui sourit.
+          </div>
+          <div class="note" style="margin-top: var(--couloir);">Sans-serif géométrique, terminaisons douces.
+            Graisses utilisées : <span style="font-family: var(--plume-mono);">300 · 400 · 500 · 600 · 700</span>.
+            Tout le corps de texte, les labels, les boutons.</div>
+        </div>
+      </div>
+
+      <h3 style="margin-top: var(--parvis);">Échelle</h3>
+
+      <div class="type-stack">
+        <div class="type-label">Hero — Display<span class="px">96 / 1.02 / 400</span></div>
+        <div class="type-sample display" style="font-size: 84px; line-height: 1.02;">Atelier.</div>
+      </div>
+      <div class="type-stack">
+        <div class="type-label">Display 1<span class="px">60 / 1.05 / 400</span></div>
+        <div class="type-sample display" style="font-size: 60px; line-height: 1.05;">Quatre principes.</div>
+      </div>
+      <div class="type-stack">
+        <div class="type-label">Display 2<span class="px">36 / 1.1 / 400</span></div>
+        <div class="type-sample display" style="font-size: 36px; line-height: 1.1;">Pigments primaires</div>
+      </div>
+      <div class="type-stack">
+        <div class="type-label">Citation — Lede<span class="px">22 / 1.45 / 400</span></div>
+        <div class="type-sample display" style="font-size: 22px; line-height: 1.45;">Une grammaire visuelle pour transporter,
+          partout au Cameroun.</div>
+      </div>
+      <div class="type-stack">
+        <div class="type-label">Body Large<span class="px">18 / 1.55 / 400</span></div>
+        <div class="type-sample body" style="font-size: 18px;">CAARCO réunit les transporteurs vérifiés
+          d'une seule application — moto, camion, frigo, déménagement.</div>
+      </div>
+      <div class="type-stack">
+        <div class="type-label">Body<span class="px">15 / 1.55 / 400</span></div>
+        <div class="type-sample body" style="font-size: 15px;">Du marché à Akwa, ou du Cameroun à votre client en France via nos transitaires —
+          la même limpidité du début à la fin.</div>
+      </div>
+      <div class="type-stack">
+        <div class="type-label">Label / petits<span class="px">13 / 1.4 / 500</span></div>
+        <div class="type-sample body" style="font-size: 13px; font-weight: 500;">Statut · Or · 1 240 points · 12 envois ce mois</div>
+      </div>
+      <div class="type-stack">
+        <div class="type-label">Eyebrow · Mono<span class="px">11 / 0.16em / 500</span></div>
+        <div class="type-sample mono" style="font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;">Pigments primaires · sept teintes</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CADENCES
+       ============================================================ -->
+  <section>
+    <div class="wrap">
+      <p class="eyebrow">03 · Cadences</p>
+      <h2>Espacement, rayons, ombres.</h2>
+      <p class="lede">
+        Nous nommons l'espace comme on nomme les pièces d'une maison : un <i>pas</i>,
+        une <i>pause</i>, un <i>couloir</i>, un <i>parvis</i>. Ce vocabulaire évite
+        les <code>spacing-7</code> abstraits qui ne disent rien à personne.
+      </p>
+
+      <h3 style="margin-top: var(--patio);">Échelle d'espacement</h3>
+      <div style="max-width: 720px; margin-top: var(--couloir);">
+        <div class="cadence-grid"><div class="cadence-name">pas</div><div class="cadence-bar" style="width: 4px;"></div><div class="cadence-val">4 px</div></div>
+        <div class="cadence-grid"><div class="cadence-name">pause</div><div class="cadence-bar" style="width: 8px;"></div><div class="cadence-val">8 px</div></div>
+        <div class="cadence-grid"><div class="cadence-name">souffle</div><div class="cadence-bar" style="width: 12px;"></div><div class="cadence-val">12 px</div></div>
+        <div class="cadence-grid"><div class="cadence-name">arrêt</div><div class="cadence-bar" style="width: 16px;"></div><div class="cadence-val">16 px</div></div>
+        <div class="cadence-grid"><div class="cadence-name">couloir</div><div class="cadence-bar" style="width: 24px;"></div><div class="cadence-val">24 px</div></div>
+        <div class="cadence-grid"><div class="cadence-name">patio</div><div class="cadence-bar" style="width: 32px;"></div><div class="cadence-val">32 px</div></div>
+        <div class="cadence-grid"><div class="cadence-name">parvis</div><div class="cadence-bar" style="width: 48px;"></div><div class="cadence-val">48 px</div></div>
+        <div class="cadence-grid"><div class="cadence-name">place</div><div class="cadence-bar" style="width: 64px;"></div><div class="cadence-val">64 px</div></div>
+        <div class="cadence-grid"><div class="cadence-name">horizon</div><div class="cadence-bar" style="width: 96px;"></div><div class="cadence-val">96 px</div></div>
+      </div>
+
+      <h3 style="margin-top: var(--parvis);">Galets — rayons</h3>
+      <p class="note">Tous nos coins arrondis s'appellent <i>galets</i>, comme les pierres polies des rivières.</p>
+      <div class="radius-row">
+        <div class="radius-tile">
+          <div class="form" style="border-radius: 4px;"></div>
+          <div class="name">galet · xs</div>
+          <div class="val">4px</div>
+        </div>
+        <div class="radius-tile">
+          <div class="form" style="border-radius: 8px;"></div>
+          <div class="name">galet · sm</div>
+          <div class="val">8px</div>
+        </div>
+        <div class="radius-tile">
+          <div class="form" style="border-radius: 14px;"></div>
+          <div class="name">galet · md</div>
+          <div class="val">14px</div>
+        </div>
+        <div class="radius-tile">
+          <div class="form" style="border-radius: 24px;"></div>
+          <div class="name">galet · lg</div>
+          <div class="val">24px</div>
+        </div>
+        <div class="radius-tile">
+          <div class="form" style="border-radius: 9999px;"></div>
+          <div class="name">galet · full</div>
+          <div class="val">∞</div>
+        </div>
+      </div>
+
+      <h3 style="margin-top: var(--parvis);">Ombres — couches de forêt</h3>
+      <p class="note">Trois ombres : un voile, une canopée, une futaie. Au-delà, on en met trop.</p>
+      <div class="shadow-row" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="shadow-tile voilage">
+          <div class="surface"></div>
+          <div class="name">Voilage</div>
+          <div class="val">y2 6px · α .06</div>
+        </div>
+        <div class="shadow-tile canopee">
+          <div class="surface"></div>
+          <div class="name">Canopée</div>
+          <div class="val">y12 24px · α .08</div>
+        </div>
+        <div class="shadow-tile futaie">
+          <div class="surface"></div>
+          <div class="name">Futaie</div>
+          <div class="val">y24 60px · α .14</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PIÈCES (COMPOSANTS)
+       ============================================================ -->
+  <section>
+    <div class="wrap">
+      <p class="eyebrow">04 · Pièces</p>
+      <h2>Composants.</h2>
+      <p class="lede">
+        Chaque pièce de l'interface porte un nom — pas un acronyme. C'est plus long à apprendre,
+        mais une fois le vocabulaire en bouche, l'équipe parle la même langue : <i>« passe-moi le galet primaire »</i>,
+        <i>« cette pastille est trop large »</i>.
+      </p>
+
+      <!-- GALET -->
+      <div class="piece-block">
+        <div class="piece-head">
+          <div class="nom">Galet</div>
+          <div class="role">Bouton · 5 variantes · 3 tailles</div>
+        </div>
+        <div class="piece-stage">
+          <button class="galet galet--primaire">Envoyer le colis</button>
+          <button class="galet galet--secondaire">Voir le prix</button>
+          <button class="galet galet--fantome">Annuler</button>
+          <button class="galet galet--accent">Échanger 200 pts</button>
+          <button class="galet galet--alerte">Refuser KYC</button>
+        </div>
+        <div class="piece-stage" style="margin-top: var(--pause);">
+          <button class="galet galet--primaire galet--xs">XS</button>
+          <button class="galet galet--primaire">Standard</button>
+          <button class="galet galet--primaire galet--lg">Grand</button>
+        </div>
+        <div class="piece-notes">Forme : <i>pill</i>. La forme arrondie n'est jamais carrée — un galet ne taille pas. Hauteur fixe par taille, padding horizontal généreux (22px). Le primaire n'apparaît qu'une fois par écran.</div>
+      </div>
+
+      <!-- SILLON -->
+      <div class="piece-block">
+        <div class="piece-head">
+          <div class="nom">Sillon</div>
+          <div class="role">Champ de saisie · label + champ + aide</div>
+        </div>
+        <div class="piece-stage" style="align-items: flex-start;">
+          <div class="sillon">
+            <div class="sillon-label">Point de départ</div>
+            <div class="sillon-field"><span class="ico">◉</span><input placeholder="Marché A, Cameroun" /></div>
+            <div class="sillon-help">Tapez votre adresse ou utilisez la position GPS.</div>
+          </div>
+          <div class="sillon">
+            <div class="sillon-label">Poids approximatif</div>
+            <div class="sillon-field"><span class="ico">kg</span><input value="12.5" /></div>
+            <div class="sillon-help">Approximation suffisante — le transporteur ajustera.</div>
+          </div>
+          <div class="sillon">
+            <div class="sillon-label">Téléphone</div>
+            <div class="sillon-field sillon-field--err"><span class="ico">+237</span><input value="6•••" /></div>
+            <div class="sillon-help" style="color: var(--laterite);">Numéro invalide. 9 chiffres après l'indicatif.</div>
+          </div>
+        </div>
+        <div class="piece-notes">Label en haut (mono, 11px, uppercase, espacé). Champ haut de 48 px minimum (cible tactile). Focus : bordure Forêt + halo Forêt-10. Erreur : bordure Latérite.</div>
+      </div>
+
+      <!-- PLAQUETTE -->
+      <div class="piece-block">
+        <div class="piece-head">
+          <div class="nom">Plaquette</div>
+          <div class="role">Carte · conteneur principal de contenu</div>
+        </div>
+        <div class="piece-stage">
+          <div class="plaquette">
+            <div class="titre">Colis urbain</div>
+            <p>Voiture · ≤ 2 h · Cameroun et environs proches.</p>
+            <button class="galet galet--secondaire galet--xs">À partir de 1 200 F</button>
+          </div>
+          <div class="plaquette plaquette--foret">
+            <div class="titre">Course express moto</div>
+            <p>Le plus rapide. Idéal pour les documents et les petits colis.</p>
+            <button class="galet galet--accent galet--xs">Réserver</button>
+          </div>
+          <div class="plaquette">
+            <div class="titre">Statut Or</div>
+            <p>1 240 points · 760 pts avant Platine.</p>
+            <div class="jalons"><div class="jalons-fill" style="width: 62%;"></div></div>
+          </div>
+        </div>
+        <div class="piece-notes">Galet · lg (24px). Bordure fine Brume + Voilage. Au survol : Canopée, translation -2px. Variante Forêt pour les cartes héro / promos.</div>
+      </div>
+
+      <!-- PASTILLE & CACHET -->
+      <div class="piece-block">
+        <div class="piece-head">
+          <div class="nom">Pastille &amp; Cachet</div>
+          <div class="role">Étiquettes — filtres vs statuts</div>
+        </div>
+        <div class="piece-stage">
+          <span class="pastille">Tous</span>
+          <span class="pastille pastille--active">Moto</span>
+          <span class="pastille pastille--contour">Camion</span>
+          <span class="pastille pastille--nere">★ Néré · Premium</span>
+          <span class="pastille pastille--bambou">Disponible</span>
+        </div>
+        <div class="piece-stage" style="margin-top: var(--pause);">
+          <span class="cachet cachet--succes">● Vérifié</span>
+          <span class="cachet cachet--info">● Tracking</span>
+          <span class="cachet cachet--alerte">● Retard 12 min</span>
+          <span class="cachet cachet--erreur">● Litige</span>
+        </div>
+        <div class="piece-notes">La <i>Pastille</i> est cliquable (filtres, sélections). Le <i>Cachet</i> ne l'est jamais — il informe d'un état (en mono, uppercase, plus petit).</div>
+      </div>
+
+      <!-- MÉREAU -->
+      <div class="piece-block">
+        <div class="piece-head">
+          <div class="nom">Méreau</div>
+          <div class="role">Avatar · 3 tailles · 4 teintes</div>
+        </div>
+        <div class="piece-stage">
+          <span class="mereau mereau--sm">JM</span>
+          <span class="mereau">TP</span>
+          <span class="mereau mereau--lg">AB</span>
+          <span class="mereau mereau--nere">SK</span>
+          <span class="mereau mereau--bambou">FN</span>
+          <span class="mereau mereau--laterite">MV</span>
+        </div>
+        <div class="piece-notes">Du nom des jetons médiévaux que recevaient les paysans à la sortie d'office. Initiales en Marcellus. Bordure Manioc 2px puis halo Brume — donne l'impression d'être posé sur le papier.</div>
+      </div>
+
+      <!-- BASCULE + JALONS + ÉCHELON -->
+      <div class="piece-block">
+        <div class="piece-head">
+          <div class="nom">Bascule, Jalons, Échelon</div>
+          <div class="role">États binaires · progression · étapes</div>
+        </div>
+        <div class="piece-stage" style="flex-direction: column; align-items: stretch; gap: var(--couloir);">
+          <div style="display:flex; align-items:center; gap:var(--arret);">
+            <span style="font-size:14px; color: var(--charbon);">Disponible pour les courses</span>
+            <div class="bascule bascule--on"></div>
+            <span style="font-size:14px; color: var(--cendre);">Notifications push</span>
+            <div class="bascule"></div>
+          </div>
+          <div>
+            <div style="display:flex; justify-content:space-between; font-size: 12px; color: var(--cendre); margin-bottom: 4px;">
+              <span>Statut Or</span><span>62% — 760 pts avant Platine</span>
+            </div>
+            <div class="jalons"><div class="jalons-fill" style="width: 62%;"></div></div>
+          </div>
+          <div class="echelon">
+            <div class="echelon-step echelon-step--done"><span class="num">✓</span>Compte</div>
+            <div class="echelon-bar echelon-bar--done"></div>
+            <div class="echelon-step echelon-step--done"><span class="num">✓</span>CNI</div>
+            <div class="echelon-bar echelon-bar--done"></div>
+            <div class="echelon-step echelon-step--current"><span class="num">3</span>Véhicule</div>
+            <div class="echelon-bar"></div>
+            <div class="echelon-step"><span class="num">4</span>Assurance</div>
+            <div class="echelon-bar"></div>
+            <div class="echelon-step"><span class="num">5</span>Validation</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BANDEAU + CALICOT + ALCÔVE -->
+      <div class="piece-block">
+        <div class="piece-head">
+          <div class="nom">Bandeau, Calicot &amp; Alcôve</div>
+          <div class="role">Messages flottants · bannière persistante · modale</div>
+        </div>
+        <div class="piece-stage" style="flex-direction: column; align-items: flex-start; gap: var(--arret);">
+          <div class="bandeau bandeau--succes">
+            <span class="ico">✓</span>
+            <div>Colis livré à Akwa. Tchinda P. a été noté 5 étoiles.</div>
+          </div>
+          <div class="bandeau bandeau--alerte">
+            <span class="ico">!</span>
+            <div>Votre permis expire dans 14 jours. Pensez à le renouveler.</div>
+          </div>
+          <div class="calicot">
+            <div class="copy">
+              <strong>Parrainage activé</strong>
+              <span>Invitez 3 amis ce mois pour gagner un Statut Platine temporaire.</span>
+            </div>
+            <button class="galet galet--accent galet--xs">Inviter</button>
+          </div>
+          <div class="alcove">
+            <div class="titre">Confirmer la livraison ?</div>
+            <p>Une fois confirmée, le paiement sera libéré au transporteur. Cette action est définitive.</p>
+            <div class="actions">
+              <button class="galet galet--fantome">Annuler</button>
+              <button class="galet galet--primaire">Oui, confirmer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ONGLETS -->
+      <div class="piece-block">
+        <div class="piece-head">
+          <div class="nom">Onglet</div>
+          <div class="role">Navigation horizontale interne</div>
+        </div>
+        <div class="piece-stage" style="flex-direction: column; align-items: stretch;">
+          <div class="onglets">
+            <div class="onglet onglet--actif">En cours (3)</div>
+            <div class="onglet">À venir</div>
+            <div class="onglet">Historique</div>
+            <div class="onglet">Litiges</div>
+          </div>
+        </div>
+        <div class="piece-notes">Un seul onglet actif. Souligné Forêt 2px. Compteurs en parenthèses, pas en cachet (pour rester sobre).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       LEXIQUE
+       ============================================================ -->
+  <section>
+    <div class="wrap">
+      <p class="eyebrow">Annexe · Lexique</p>
+      <h2>De CAARCO<br/>au reste du web.</h2>
+      <p class="lede">Si vous arrivez d'ailleurs, voici la table de conversion entre nos noms et la terminologie usuelle.</p>
+
+      <table class="lexique">
+        <thead>
+          <tr><th>Nom CAARCO</th><th>Équivalent courant</th><th>Catégorie</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="nom-orig">Galet</td><td class="tech">Button</td><td class="meta">Pièce</td></tr>
+          <tr><td class="nom-orig">Sillon</td><td class="tech">Input / Text field</td><td class="meta">Pièce</td></tr>
+          <tr><td class="nom-orig">Plaquette</td><td class="tech">Card</td><td class="meta">Pièce</td></tr>
+          <tr><td class="nom-orig">Pastille</td><td class="tech">Chip / Filter tag</td><td class="meta">Pièce</td></tr>
+          <tr><td class="nom-orig">Cachet</td><td class="tech">Badge / Status pill</td><td class="meta">Pièce</td></tr>
+          <tr><td class="nom-orig">Méreau</td><td class="tech">Avatar</td><td class="meta">Pièce</td></tr>
+          <tr><td class="nom-orig">Bascule</td><td class="tech">Toggle / Switch</td><td class="meta">Pièce</td></tr>
+          <tr><td class="nom-orig">Jalons</td><td class="tech">Progress bar</td><td class="meta">Pièce</td></tr>
+          <tr><td class="nom-orig">Échelon</td><td class="tech">Stepper / Wizard</td><td class="meta">Pièce</td></tr>
+          <tr><td class="nom-orig">Bandeau</td><td class="tech">Toast / Snackbar</td><td class="meta">Pièce</td></tr>
+          <tr><td class="nom-orig">Calicot</td><td class="tech">Banner</td><td class="meta">Pièce</td></tr>
+          <tr><td class="nom-orig">Alcôve</td><td class="tech">Modal / Dialog</td><td class="meta">Pièce</td></tr>
+          <tr><td class="nom-orig">Onglet</td><td class="tech">Tab</td><td class="meta">Pièce</td></tr>
+          <tr><td class="nom-orig">Volet</td><td class="tech">Dropdown / Select panel</td><td class="meta">Pièce</td></tr>
+          <tr><td class="nom-orig">Forêt · Bambou · Néré · Latérite</td><td class="tech">Brand colors</td><td class="meta">Pigment</td></tr>
+          <tr><td class="nom-orig">Manioc · Brume · Cendre · Charbon</td><td class="tech">Neutrals</td><td class="meta">Pigment</td></tr>
+          <tr><td class="nom-orig">Marcellus</td><td class="tech">Display serif</td><td class="meta">Plume</td></tr>
+          <tr><td class="nom-orig">Plus Jakarta Sans</td><td class="tech">Body sans</td><td class="meta">Plume</td></tr>
+          <tr><td class="nom-orig">pas · pause · souffle · arrêt · couloir · patio · parvis · place · horizon</td><td class="tech">4 → 96 px spacing scale</td><td class="meta">Cadence</td></tr>
+          <tr><td class="nom-orig">Voilage · Canopée · Futaie</td><td class="tech">Shadow elevations</td><td class="meta">Cadence</td></tr>
+          <tr><td class="nom-orig">galet xs · sm · md · lg · full</td><td class="tech">Border radii</td><td class="meta">Cadence</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer>
+    <div class="wrap">
+      <div class="mark">Atelier CAARCO</div>
+      <div class="grid">
+        <div>
+          <h5>Système</h5>
+          <ul>
+            <li>Pigments</li>
+            <li>Plumes</li>
+            <li>Cadences</li>
+            <li>Pièces</li>
+          </ul>
+        </div>
+        <div>
+          <h5>Gouvernance</h5>
+          <ul>
+            <li>Version 0.1 · Mai 2026</li>
+            <li>Mainteneurs : équipe produit</li>
+            <li>Cycle : trimestriel</li>
+          </ul>
+        </div>
+        <div>
+          <h5>Ressources</h5>
+          <ul>
+            <li>Wireframes (CAARCO Wireframes.html)</li>
+            <li>Inspirations : nature camerounaise</li>
+            <li>Typo : Google Fonts</li>
+          </ul>
+        </div>
+        <div>
+          <h5>Contact</h5>
+          <ul>
+            <li>design@caarco.cm</li>
+            <li>Cameroun · CMR</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

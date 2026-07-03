@@ -1,0 +1,241 @@
+# ═══════════════════════════════════════════════════════════════
+# CAARCO — Capture automatique COMPLÈTE de tous les écrans
+# Compte test client  : 600000001
+# Compte test TR      : 600000002
+#
+# Lancer avec : maestro test caarco_tous_ecrans.yaml
+# Les screenshots sont sauvegardés dans : ./screenshots/
+# ═══════════════════════════════════════════════════════════════
+
+appId: com.caarco.app
+---
+
+# ════════════════════════════════════════════
+# BLOC 1 — SPLASH / ONBOARDING
+# ════════════════════════════════════════════
+
+- launchApp:
+    clearState: false
+- waitForAnimationToEnd:
+    timeout: 4000
+- takeScreenshot: "screenshots/01_splash"
+
+# Passer les slides d'onboarding si présents
+- runFlow:
+    when:
+      visible: "Passer"
+    commands:
+      - takeScreenshot: "screenshots/02_onboarding_slide_1"
+      - swipe:
+          direction: LEFT
+          duration: 500
+      - takeScreenshot: "screenshots/03_onboarding_slide_2"
+      - swipe:
+          direction: LEFT
+          duration: 500
+      - takeScreenshot: "screenshots/04_onboarding_slide_3"
+      - tapOn: "Passer"
+      - waitForAnimationToEnd
+
+# ════════════════════════════════════════════
+# BLOC 2 — CHOIX DU RÔLE
+# ════════════════════════════════════════════
+
+- runFlow:
+    when:
+      visible: "Client"
+    commands:
+      - takeScreenshot: "screenshots/05_choix_role"
+
+# ════════════════════════════════════════════
+# BLOC 3 — AUTHENTIFICATION CLIENT
+# ════════════════════════════════════════════
+
+- runFlow:
+    when:
+      visible: "Client"
+    commands:
+      - tapOn: "Client"
+      - waitForAnimationToEnd
+      - takeScreenshot: "screenshots/06_auth_choix_client"
+
+- runFlow:
+    when:
+      visible:
+        text: "Numéro"
+    commands:
+      - tapOn:
+          text: "Numéro"
+      - inputText: "600000001"
+      - takeScreenshot: "screenshots/07_auth_telephone_rempli"
+      - tapOn: "Continuer"
+      - waitForAnimationToEnd:
+          timeout: 3000
+      - takeScreenshot: "screenshots/08_auth_otp_ecran"
+
+# Saisir l'OTP (le code affiché sur cet écran — Maestro lit et saisit)
+- runFlow:
+    when:
+      visible:
+        id: "otp"
+    commands:
+      - tapOn:
+          id: "otp"
+      - inputText: "0000"
+      - waitForAnimationToEnd:
+          timeout: 4000
+
+# ════════════════════════════════════════════
+# BLOC 4 — ÉCRANS CLIENT
+# ════════════════════════════════════════════
+
+# Accueil avec carte
+- waitForAnimationToEnd:
+    timeout: 5000
+- takeScreenshot: "screenshots/09_client_accueil_carte"
+
+# Commander une livraison
+- runFlow:
+    when:
+      visible: "Commander"
+    commands:
+      - tapOn: "Commander"
+      - waitForAnimationToEnd
+      - takeScreenshot: "screenshots/10_client_saisie_adresses"
+
+# Saisir adresse arrivée
+- runFlow:
+    when:
+      visible: "Arrivée"
+    commands:
+      - tapOn: "Arrivée"
+      - inputText: "Marché central Bafoussam"
+      - waitForAnimationToEnd:
+          timeout: 2000
+      - takeScreenshot: "screenshots/11_client_autocompletion_adresse"
+      - pressKey: Back
+      - waitForAnimationToEnd
+
+# Détails du colis
+- runFlow:
+    when:
+      visible: "Type de transport"
+    commands:
+      - takeScreenshot: "screenshots/12_client_details_colis"
+      - tapOn: "Colis"
+      - waitForAnimationToEnd
+      - takeScreenshot: "screenshots/13_client_type_colis_selectionne"
+
+# Estimation du prix
+- runFlow:
+    when:
+      visible: "FCFA"
+    commands:
+      - takeScreenshot: "screenshots/14_client_estimation_prix"
+
+# Écran de paiement
+- runFlow:
+    when:
+      visible: "Payer"
+    commands:
+      - takeScreenshot: "screenshots/15_client_choix_paiement"
+
+# Historique
+- runFlow:
+    when:
+      visible: "Historique"
+    commands:
+      - tapOn: "Historique"
+      - waitForAnimationToEnd
+      - takeScreenshot: "screenshots/16_client_historique"
+
+# Profil client
+- runFlow:
+    when:
+      visible: "Profil"
+    commands:
+      - tapOn: "Profil"
+      - waitForAnimationToEnd
+      - takeScreenshot: "screenshots/17_client_profil"
+
+# ════════════════════════════════════════════
+# BLOC 5 — RELANCE POUR COMPTE TRANSPORTEUR
+# ════════════════════════════════════════════
+
+- launchApp:
+    clearState: true
+- waitForAnimationToEnd:
+    timeout: 3000
+
+# Choisir rôle Transporteur
+- runFlow:
+    when:
+      visible: "Transporteur"
+    commands:
+      - takeScreenshot: "screenshots/18_choix_role_transporteur"
+      - tapOn: "Transporteur"
+      - waitForAnimationToEnd
+
+# Auth transporteur
+- runFlow:
+    when:
+      visible: "Numéro"
+    commands:
+      - tapOn:
+          text: "Numéro"
+      - inputText: "600000002"
+      - tapOn: "Continuer"
+      - waitForAnimationToEnd:
+          timeout: 3000
+      - takeScreenshot: "screenshots/19_tr_auth_otp"
+
+# OTP transporteur
+- runFlow:
+    when:
+      visible:
+        id: "otp"
+    commands:
+      - tapOn:
+          id: "otp"
+      - inputText: "0000"
+      - waitForAnimationToEnd:
+          timeout: 4000
+
+# Dashboard transporteur
+- waitForAnimationToEnd:
+    timeout: 5000
+- takeScreenshot: "screenshots/20_tr_dashboard"
+
+# Toggle disponible
+- runFlow:
+    when:
+      visible: "Disponible"
+    commands:
+      - takeScreenshot: "screenshots/21_tr_toggle_disponible"
+      - tapOn: "Disponible"
+      - waitForAnimationToEnd
+      - takeScreenshot: "screenshots/22_tr_statut_actif"
+
+# Gains
+- runFlow:
+    when:
+      visible: "Gains"
+    commands:
+      - tapOn: "Gains"
+      - waitForAnimationToEnd
+      - takeScreenshot: "screenshots/23_tr_gains"
+
+# Profil transporteur
+- runFlow:
+    when:
+      visible: "Profil"
+    commands:
+      - tapOn: "Profil"
+      - waitForAnimationToEnd
+      - takeScreenshot: "screenshots/24_tr_profil"
+
+# ════════════════════════════════════════════
+# FIN
+# ════════════════════════════════════════════
+# Les screenshots sont dans ./screenshots/
+# Format : PNG haute résolution (résolution du téléphone)

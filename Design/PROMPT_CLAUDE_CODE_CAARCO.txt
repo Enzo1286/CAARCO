@@ -1,0 +1,290 @@
+=========================================================
+ CAARCO — PROMPT MAÎTRE POUR CLAUDE CODE
+ Colle ce texte dans Claude Code au démarrage du projet
+ Version 0.1 · Mai 2026 · Cameroun
+=========================================================
+
+Je veux créer une application mobile React Native (Expo) appelée CAARCO — une application de transport de marchandises et déménagement à la demande, similaire à Uber, pour le Cameroun.
+
+═══════════════════════════════════════════════════════
+1. CONTEXTE MÉTIER
+═══════════════════════════════════════════════════════
+
+CAARCO met en relation des clients qui ont besoin de transporter des biens
+(colis, meubles, marchandises) avec des transporteurs locaux au Cameroun.
+
+3 rôles utilisateurs :
+- CLIENT : demande une course, suit en temps réel, paie en XAF
+- TRANSPORTEUR : reçoit les demandes, accepte/refuse, navigue jusqu'au client
+- ADMINISTRATEUR : gère les utilisateurs, les litiges, les statistiques
+
+Formule de calcul du prix (en Francs CFA) :
+  prix = 500 + (distance_km × tarif_vehicule)
+  Tarifs : moto=150, voiture=250, camionnette=400, camion=700 (XAF/km)
+
+═══════════════════════════════════════════════════════
+2. STACK TECHNIQUE
+═══════════════════════════════════════════════════════
+
+- Framework    : React Native avec Expo SDK (dernière version stable)
+- Navigation   : React Navigation v6 (Stack + Bottom Tabs par rôle)
+- Backend      : Supabase (base de données + auth + temps réel)
+- GPS/Cartes   : react-native-maps + expo-location
+- Polices      : expo-google-fonts (Marcellus, Plus Jakarta Sans, JetBrains Mono)
+- État         : React Context API (pas de Redux pour simplifier)
+- Paiements    : prévu pour Orange Money / MTN MoMo (phase 2)
+
+═══════════════════════════════════════════════════════
+3. DESIGN SYSTEM — ATELIER CAARCO v0.1
+═══════════════════════════════════════════════════════
+
+TOUS les composants doivent utiliser ces valeurs exactes.
+Le fichier theme.js est déjà créé dans le projet — importe-le partout.
+
+COULEURS :
+  foret        #1f3b2a   → fond sombre, bouton principal, titres
+  foret90      #284a36   → hover bouton principal
+  foret70      #426356   → icônes secondaires
+  foret30      #b4c4b9   → texte sur fond sombre
+  foret10      #e6ede7   → fond focus, hover léger
+  bambou       #3d6b4a   → boutons succès, toggles actifs
+  bambouSoft   #cfdbcf   → fond chips bambou, progress bar
+  nere         #c89441   → or chaud : accent, prix en XAF, highlights
+  nereSoft     #f1e3c2   → fond calicot/banner, pastille néré
+  laterite     #b8612e   → terre cuite : erreurs, alertes rares
+  lateriteSoft #f1d6c3   → fond erreur
+  manioc       #fbf9f3   → crème : fond principal de TOUTES les vues
+  brume        #ece9e0   → fond secondaire, bordures, séparateurs
+  cendre       #6b6f68   → texte secondaire, placeholders
+  charbon      #1d2420   → texte principal
+  nuit         #0f1411   → fond sombre profond (toasts, header)
+  blanc        #ffffff   → cartes, surface modale
+
+TYPOGRAPHIE :
+  Display  → Marcellus_400Regular        (titres h1-h3, sérifés)
+  Body     → PlusJakartaSans_400Regular  (texte courant)
+  BodyMed  → PlusJakartaSans_500Medium   (labels, nav)
+  BodySemi → PlusJakartaSans_600SemiBold (boutons, onglets actifs)
+  Mono     → JetBrainsMono_400Regular    (prix XAF, labels uppercase, codes)
+
+TAILLES DE POLICE :
+  h1=48  h2=36  h3=24  lede=20  body=16  bodySm=15
+  caption=14  small=13  xs=11  xxs=10
+
+ESPACEMENT (en px) :
+  pas=4  pause=8  souffle=12  arret=16  couloir=24
+  patio=32  parvis=48  place=64  horizon=96
+
+RAYONS DE BORDURE :
+  xs=4  sm=8  md=14  lg=24  full=9999 (pilule)
+
+NOM DES COMPOSANTS (lexique propre à CAARCO) :
+  Galet    = Button        → borderRadius full, 5 variantes
+  Sillon   = TextInput     → label mono uppercase + field
+  Plaquette= Card          → blanc + brume border + voilage shadow
+  Pastille = Chip          → filtres et tags
+  Cachet   = Badge/Status  → mono uppercase, 4 couleurs
+  Méreau   = Avatar        → initiales en Marcellus
+  Bascule  = Toggle/Switch → bambou quand actif
+  Jalons   = ProgressBar   → foret fill sur brume track
+  Échelon  = Stepper       → enregistrement transporteur (5 étapes)
+  Bandeau  = Toast         → nuit/foret/nere selon type
+  Calicot  = Banner        → nereSoft + border-left nere
+  Alcôve   = Modal         → blanc + futaie shadow
+  Onglet   = Tab           → border-bottom foret quand actif
+  Volet    = Dropdown/Select
+
+PRINCIPES DE DESIGN :
+  01. Limpide d'abord — un écran = une question
+  02. Chaleureux, jamais bavard — pas de gradients criards
+  03. Robuste au terrain — fonctionne sur 3G, écran 4 pouces, soleil de midi
+  04. Camerounais sans folklore — identité dans les noms et couleurs, pas les clichés
+
+═══════════════════════════════════════════════════════
+4. STRUCTURE DES DOSSIERS À CRÉER
+═══════════════════════════════════════════════════════
+
+CAARCO/
+├── App.js                    ← entrée, chargement des polices
+├── theme.js                  ← design tokens (déjà fourni)
+├── src/
+│   ├── navigation/
+│   │   ├── ClientNavigator.js
+│   │   ├── TransporteurNavigator.js
+│   │   ├── AdminNavigator.js
+│   │   └── RootNavigator.js  ← redirige selon le rôle de l'utilisateur
+│   ├── screens/
+│   │   ├── auth/
+│   │   │   ├── SplashScreen.js
+│   │   │   ├── ConnexionScreen.js
+│   │   │   └── InscriptionScreen.js
+│   │   ├── client/
+│   │   │   ├── AccueilScreen.js      ← carte + saisie trajet
+│   │   │   ├── TrajetScreen.js       ← GPS + calcul prix XAF
+│   │   │   ├── ConfirmationScreen.js ← récap course + confirmation
+│   │   │   ├── SuiviScreen.js        ← suivi transporteur en temps réel
+│   │   │   └── HistoriqueScreen.js
+│   │   ├── transporteur/
+│   │   │   ├── TableauBordScreen.js  ← demandes entrantes
+│   │   │   ├── CourseScreen.js       ← détail + accepter/refuser
+│   │   │   ├── NavigationScreen.js   ← GPS vers le client
+│   │   │   └── RevenusScreen.js
+│   │   └── admin/
+│   │       ├── DashboardScreen.js
+│   │       ├── UtilisateursScreen.js
+│   │       └── LitigesScreen.js
+│   ├── components/
+│   │   ├── Galet.js           ← Button CAARCO (primaire, accent, fantome...)
+│   │   ├── Sillon.js          ← TextInput CAARCO
+│   │   ├── Plaquette.js       ← Card CAARCO
+│   │   ├── Pastille.js        ← Chip/Filter CAARCO
+│   │   ├── Cachet.js          ← Badge/Status CAARCO
+│   │   ├── Mereau.js          ← Avatar CAARCO
+│   │   ├── Bascule.js         ← Toggle CAARCO
+│   │   ├── Jalons.js          ← ProgressBar CAARCO
+│   │   ├── Echelon.js         ← Stepper CAARCO
+│   │   ├── Bandeau.js         ← Toast CAARCO
+│   │   ├── Alcove.js          ← Modal CAARCO
+│   │   └── Onglets.js         ← Tabs CAARCO
+│   ├── services/
+│   │   ├── supabase.js        ← initialisation client Supabase
+│   │   ├── auth.js            ← inscription, connexion, déconnexion
+│   │   ├── courses.js         ← CRUD courses
+│   │   ├── gps.js             ← calcul distance + géolocalisation
+│   │   └── prix.js            ← formule de calcul XAF
+│   └── context/
+│       ├── AuthContext.js     ← utilisateur connecté + rôle
+│       └── CourseContext.js   ← course en cours
+
+═══════════════════════════════════════════════════════
+5. BASE DE DONNÉES SUPABASE — TABLES À CRÉER
+═══════════════════════════════════════════════════════
+
+Crée ces 5 tables dans Supabase avec exactement ces colonnes :
+
+TABLE users :
+  id            uuid PRIMARY KEY (auth.uid)
+  nom           text NOT NULL
+  telephone     text UNIQUE NOT NULL
+  role          text NOT NULL CHECK (role IN ('client','transporteur','admin'))
+  photo_url     text
+  statut        text DEFAULT 'actif'
+  created_at    timestamptz DEFAULT now()
+
+TABLE vehicules :
+  id               uuid PRIMARY KEY DEFAULT gen_random_uuid()
+  transporteur_id  uuid REFERENCES users(id)
+  type             text NOT NULL CHECK (type IN ('moto','voiture','camionnette','camion'))
+  immatriculation  text UNIQUE NOT NULL
+  capacite_kg      int
+  photo_url        text
+  valide           boolean DEFAULT false
+
+TABLE courses :
+  id               uuid PRIMARY KEY DEFAULT gen_random_uuid()
+  client_id        uuid REFERENCES users(id)
+  transporteur_id  uuid REFERENCES users(id)
+  depart_adresse   text NOT NULL
+  depart_lat       float8
+  depart_lng       float8
+  arrivee_adresse  text NOT NULL
+  arrivee_lat      float8
+  arrivee_lng      float8
+  type_vehicule    text NOT NULL
+  distance_km      float8
+  prix_fcfa        int
+  statut           text DEFAULT 'en_attente'
+                     CHECK (statut IN ('en_attente','acceptee','en_route','livree','annulee'))
+  created_at       timestamptz DEFAULT now()
+  updated_at       timestamptz DEFAULT now()
+
+TABLE avis :
+  id               uuid PRIMARY KEY DEFAULT gen_random_uuid()
+  course_id        uuid REFERENCES courses(id)
+  auteur_id        uuid REFERENCES users(id)
+  note             int CHECK (note BETWEEN 1 AND 5)
+  commentaire      text
+  created_at       timestamptz DEFAULT now()
+
+TABLE paiements :
+  id               uuid PRIMARY KEY DEFAULT gen_random_uuid()
+  course_id        uuid REFERENCES courses(id)
+  montant_fcfa     int NOT NULL
+  methode          text CHECK (methode IN ('especes','orange_money','mtn_momo'))
+  statut           text DEFAULT 'en_attente'
+  ref_transaction  text
+  created_at       timestamptz DEFAULT now()
+
+═══════════════════════════════════════════════════════
+6. FORMULE DE PRIX — LOGIQUE EXACTE
+═══════════════════════════════════════════════════════
+
+// Fichier : src/services/prix.js
+const TARIFS = {
+  moto:        150,   // XAF par km
+  voiture:     250,
+  camionnette: 400,
+  camion:      700,
+};
+
+const FRAIS_FIXES = 500; // XAF — frais de prise en charge
+
+export function calculerPrix(distanceKm, typeVehicule) {
+  const tarif = TARIFS[typeVehicule];
+  if (!tarif) throw new Error('Type de véhicule invalide');
+  const prix = Math.ceil(FRAIS_FIXES + (distanceKm * tarif));
+  // Arrondi au 100 XAF supérieur pour la lisibilité
+  return Math.ceil(prix / 100) * 100;
+}
+
+// Affichage : toujours avec le format "12 500 XAF" (espace comme séparateur de milliers)
+export function formaterPrix(montant) {
+  return montant.toLocaleString('fr-FR') + ' XAF';
+}
+
+═══════════════════════════════════════════════════════
+7. COMMANDES D'INSTALLATION À EXÉCUTER
+═══════════════════════════════════════════════════════
+
+Exécute ces commandes dans l'ordre :
+
+npx create-expo-app CAARCO --template blank-typescript
+cd CAARCO
+
+# Navigation
+npm install @react-navigation/native @react-navigation/stack @react-navigation/bottom-tabs
+npx expo install react-native-screens react-native-safe-area-context react-native-gesture-handler
+
+# Cartes et GPS
+npx expo install react-native-maps expo-location
+
+# Supabase
+npm install @supabase/supabase-js
+
+# Polices Google Fonts
+npx expo install expo-font @expo-google-fonts/marcellus @expo-google-fonts/plus-jakarta-sans @expo-google-fonts/jetbrains-mono
+
+# AsyncStorage (pour la session)
+npx expo install @react-native-async-storage/async-storage
+
+═══════════════════════════════════════════════════════
+8. INSTRUCTIONS GÉNÉRALES
+═══════════════════════════════════════════════════════
+
+- Fond de TOUS les écrans : colors.manioc (#fbf9f3) — JAMAIS blanc pur
+- Couleur principale : colors.foret (#1f3b2a) — boutons, titres, icônes actives
+- Accent prix : colors.nere (#c89441) — UNIQUEMENT pour les montants en XAF
+- Police titres : Marcellus (Display) — pour tous les h1-h3
+- Police corps : Plus Jakarta Sans — pour tout le reste
+- Police mono : JetBrains Mono — pour les prix, les labels uppercase, les codes
+- Bordures : width=1, color=colors.brume (#ece9e0) — subtiles
+- Bouton principal : Galet primaire (foret) — toujours borderRadius=full (pilule)
+- Ne jamais utiliser de gradients (principe design #02)
+- Texte secondaire : colors.cendre (#6b6f68)
+- Messages de succès : colors.bambou (#3d6b4a)
+- Messages d'erreur : colors.laterite (#b8612e)
+
+=========================================================
+FIN DU PROMPT MAÎTRE CAARCO
+Commence par : npx create-expo-app CAARCO --template blank-typescript
+=========================================================
