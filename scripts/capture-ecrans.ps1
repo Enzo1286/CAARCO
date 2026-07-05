@@ -4,7 +4,7 @@
 # Prérequis : ADB installé + téléphone connecté en USB (débogage USB activé)
 # ═══════════════════════════════════════════════════
 
-$dossierSortie = "D:\CAARCO\screenshots\$(Get-Date -Format 'yyyy-MM-dd_HH-mm')"
+$dossierSortie = "$PSScriptRoot\..\screenshots\$(Get-Date -Format 'yyyy-MM-dd_HH-mm')"
 New-Item -ItemType Directory -Force -Path $dossierSortie | Out-Null
 
 # Liste des écrans à capturer (dans l'ordre recommandé)

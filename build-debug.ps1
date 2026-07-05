@@ -3,7 +3,7 @@
 # Usage : .\build-debug.ps1
 # ============================================================
 
-Set-Location "C:\CAARCO\App"
+Set-Location "$PSScriptRoot\App"
 
 # ── 1. Lire et injecter les variables d'environnement depuis .env ─────────
 Write-Host "Injection des variables d'environnement..." -ForegroundColor Cyan
@@ -31,7 +31,7 @@ Write-Host "  sdk.dir=$($env:LOCALAPPDATA)\Android\Sdk" -ForegroundColor Gray
 
 # ── 3. Compilation ─────────────────────────────────────────────────────────
 Write-Host "Compilation en cours..." -ForegroundColor Cyan
-Set-Location "C:\CAARCO\App\android"
+Set-Location "$PSScriptRoot\App\android"
 .\gradlew assembleDebug --max-workers=2
 
 if ($LASTEXITCODE -eq 0) {
@@ -39,11 +39,11 @@ if ($LASTEXITCODE -eq 0) {
     $size = [math]::Round((Get-Item $apk).Length / 1MB, 1)
     Write-Host ""
     Write-Host "BUILD OK — $size Mo" -ForegroundColor Green
-    Write-Host "APK : C:\CAARCO\App\android\$apk" -ForegroundColor Green
+    Write-Host "APK : $PSScriptRoot\App\android\$apk" -ForegroundColor Green
     Write-Host ""
     Write-Host "Pour installer sur le telephone (USB) :" -ForegroundColor Yellow
     Write-Host "  adb uninstall com.caarco.app" -ForegroundColor White
-    Write-Host "  adb install `"C:\CAARCO\App\android\$apk`"" -ForegroundColor White
+    Write-Host "  adb install `"$PSScriptRoot\App\android\$apk`"" -ForegroundColor White
 } else {
     Write-Host "BUILD FAILED" -ForegroundColor Red
 }

@@ -8,7 +8,7 @@
 
 $ErrorActionPreference = "SilentlyContinue"
 $WarningPreference = "SilentlyContinue"
-$projectRoot = "d:\CAARCO"
+$projectRoot = $PSScriptRoot
 
 # ════════════════════════════════════════════════════════════════
 # PHASE 1: Supprimer les artifacts corrompus
@@ -181,7 +181,7 @@ Write-Host "  Phase 1: $deletedCount artifact(s) supprimé(s)" -ForegroundColor 
 Write-Host "  Phase 2: $movedCount fichier(s)/dossier(s) archivé(s)" -ForegroundColor White
 Write-Host "  Phase 3: $renamedCount migration(s) renommée(s)" -ForegroundColor White
 
-Write-Host "`n📁 Structure Archive créée à: d:\CAARCO\Archive\n" -ForegroundColor Cyan
+Write-Host "`n📁 Structure Archive créée à: $projectRoot\Archive\n" -ForegroundColor Cyan
 
 # Calculer l'espace dans Archive
 $archiveSize = (Get-ChildItem -Path $archiveRoot -Recurse -File -ErrorAction SilentlyContinue | Measure-Object -Property Length -Sum).Sum

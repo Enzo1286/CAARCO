@@ -3,7 +3,7 @@
 # Usage : clic droit → Exécuter avec PowerShell
 # ═══════════════════════════════════════════════════
 
-$scriptDir = "D:\CAARCO\scripts"
+$scriptDir = $PSScriptRoot
 $maestroFlow = "$scriptDir\maestro\caarco_tous_ecrans.yaml"
 $dossierScreenshots = "$scriptDir\maestro\screenshots"
 

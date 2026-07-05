@@ -78,7 +78,7 @@ EXPO_PUBLIC_APP_ENV=             # development | staging | production
 ## ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ```
-Dossier     : D:\CAARCO-WEB (SÉPARÉ de D:\CAARCO — ne pas mélanger)
+Dossier     : D:\CAARCO-WEB (SÉPARÉ de D:\Mon projet\CAARCO — ne pas mélanger)
 Framework   : Next.js 16.2.6 (App Router, TypeScript)
 Style       : Tailwind CSS v4 + tokens Atelier CAARCO (globals.css)
 Animation   : framer-motion 12.x

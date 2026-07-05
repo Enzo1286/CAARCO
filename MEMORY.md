@@ -1,5 +1,7 @@
 # MÉMOIRE PROJET — CAARCO
-Dernière mise à jour : 2026-07-03
+Dernière mise à jour : 2026-07-04
+Emplacement projet  : D:\Mon projet\CAARCO (déplacé le 2026-07-04, ex-D:\CAARCO)
+                      ⚠️ Chemin avec ESPACE → toujours mettre les chemins entre guillemets
 Sessions totales    : 8
 Propriétaire        : Cedric Timene — Bafoussam, Cameroun
 
@@ -302,7 +304,7 @@ Langage    : TypeScript
 Style      : Tailwind CSS v4 + design tokens Atelier CAARCO
 Animation  : framer-motion 12.x
 Icônes     : lucide-react 1.17
-Dossier    : D:\CAARCO-WEB (séparé de l'app D:\CAARCO)
+Dossier    : D:\CAARCO-WEB (séparé de l'app D:\Mon projet\CAARCO)
 ```
 
 ### Pages (11 routes)
@@ -363,7 +365,7 @@ Dossier    : D:\CAARCO-WEB (séparé de l'app D:\CAARCO)
 - [x] CMS Google Sheets actif en production
 - [ ] ⚠️ Redéployer 4 Edge Functions sur Supabase (modifiées localement, pas publiées) :
        · notifier-transporteurs · moneroo-webhook · initier-paiement · initier-recharge
-       Commande : cd D:\CAARCO && npx supabase login
+       Commande : cd "D:\Mon projet\CAARCO" && npx supabase login
                   npx supabase functions deploy <nom> --project-ref dxwkikaniawpfljvteog
 - [ ] ⚠️ Consolider les migrations dupliquées (042, 056, 057, 058) avant réinit DB
 - [ ] Tests paiement Moneroo sandbox → production
@@ -576,6 +578,18 @@ Session 5 (2026-05-25) — Suite audit sécurité :
   4. ✅ initier-recharge : montant max 2 000 000 XAF ajouté
   5. ✅ initier-paiement : montant max 5 000 000 XAF + vérification prix côté DB (anti-falsification)
 - ⚠️ Edge Functions modifiées localement mais NON REDÉPLOYÉES (npx supabase login requis)
+
+Session 9 (2026-07-04) — Déménagement du projet :
+- Projet déplacé (copié) : D:\CAARCO → D:\Mon projet\CAARCO
+  · ⚠️ L'ancien dossier D:\CAARCO existe ENCORE (copie 4 Go) — à supprimer après vérification
+- Scripts corrigés (chemins en dur → $PSScriptRoot, insensible aux futurs déplacements) :
+  · build-release-usb.ps1, build-debug.ps1 (pointait encore sur C:\CAARCO !),
+    CLEANUP-SCRIPT.ps1, scripts/capture-auto.ps1, scripts/capture-ecrans.ps1
+- Caches purgés au nouvel emplacement (contenaient les chemins D:\CAARCO) :
+  · App/android/build (incl. autolinking.json — même root cause que Session 4),
+    App/android/app/build, App/android/.gradle, App/.expo
+  → Gradle régénère tout au prochain build
+- newArchEnabled=false → pas de CMake/ninja, l'espace dans "Mon projet" ne gêne pas Gradle
 
 ---
 
