@@ -68,13 +68,12 @@ Un ancien dossier `D:\CAARCO` (copie complète, ~4 Go, avant le déménagement d
   - commission de 20 % contournable → corrigée, débit désormais atomique et dérivé du prix stocké
   - contournement de l'OTP (en ligne et hors ligne) → corrigé
 
-### 🔴 Fait dans le code, mais **PAS ENCORE ACTIF EN PRODUCTION** — priorité n°1
-Les correctifs de sécurité ci-dessus existent en migration SQL (`085_securite_tc_et_courses.sql`) mais **n'ont pas été exécutés sur le Supabase de production**. Tant que ce n'est pas fait, les failles critiques (crédit TC gratuit, commission contournable) restent exploitables en prod. C'est une action que je ne peux pas faire à ta place (accès Dashboard Supabase requis) :
-1. Ouvrir Supabase → SQL Editor → exécuter `App/supabase/migrations/085_securite_tc_et_courses.sql`
-2. Redéployer les 4 Edge Functions modifiées localement mais jamais publiées : `notifier-transporteurs`, `moneroo-webhook`, `initier-paiement`, `initier-recharge`
-3. Redéployer la migration 086 (courses programmées) si pas encore fait
-4. **Nouveau (Sprint 1, ce soir)** : exécuter dans l'ordre `092_verrouiller_transitions_courses.sql`, `093_audit_admin.sql`, `094_mfa_admin.sql`
-5. Redéployer l'Edge Function `notchpay-init-achat-tc` (minimum de jetons changé de 100 à 1000)
+### ✅ Migrations SQL — état réel vérifié en base le 6 juillet 2026
+Vérification directe sur le Supabase de production (API Management, accès autorisé par Cedric le 5/07 au soir) : les migrations 085 et 086 étaient **déjà appliquées** (contrairement à ce que ce document indiquait plus tôt). Les migrations 092, 093, 094 (Sprint 1) et 095 (conflit horaire planifié) ont été **exécutées ce soir**, découpées en petits blocs (l'API Management de Supabase échoue silencieusement ou expire sur des scripts SQL trop longs en un seul envoi — la méthode fiable est le découpage par fonction).
+
+Reste **non fait**, hors de portée d'un déploiement SQL simple (nécessite `supabase functions deploy` ou un bundling que je n'ai pas encore les moyens de faire directement) :
+1. Redéployer les Edge Functions modifiées mais jamais publiées : `notifier-transporteurs`, `moneroo-webhook`, `initier-paiement`, `initier-recharge`
+2. Redéployer `notchpay-init-achat-tc` (minimum de jetons changé de 100 à 1000 dans le code)
 
 ### 🟠 Dette technique connue
 - **103 migrations avec des doublons de numéro** (056×3, 057×2, 058×2, 060×2, 061×2, 062×2) → risque d'ordre d'application non déterministe sur un futur `db reset`.

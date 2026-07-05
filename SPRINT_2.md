@@ -1,13 +1,15 @@
-# CAARCO — Sprint 2 : conformité Play Store + i18n FR/EN
-**Créé le 5 juillet 2026, à la fin du Sprint 1.** Rédigé en français (consigne Cedric). Basé sur `CAARCO_Cahier_Charges_Reprise_et_Prompt_REV1.md` §0.4.
+# CAARCO — Sprint 2 : conflit horaire planifié + conformité Play Store + i18n FR/EN
+**Créé le 5 juillet 2026, à la fin du Sprint 1. Mis à jour le 6 juillet 2026** (le chantier "conflit horaire" a été ajouté à ce sprint — pas un nouveau sprint, sur consigne explicite de Cedric : "il s'agissait juste de continuer le sprint en cours"). Rédigé en français (consigne Cedric).
 
 ---
 
 ## Où on en est
 
-Sprint 1 (sécurité serveur) est fait côté code : annulation de course verrouillée par RPC, minimum jetons à 1000, table `audit_admin`, 2FA TOTP admin, reset encadré. **Ces migrations (092, 093, 094) ne sont pas encore exécutées sur le Supabase de production** — c'est un prérequis avant de considérer le Sprint 1 vraiment "actif", mais ça n'empêche pas de démarrer le Sprint 2 en parallèle (travail sur le code, pas sur la base).
+**Sprint 1 (sécurité serveur) : fait ET déployé.** Les migrations 092, 093 et 094 ont été exécutées en production le 5 juillet (via l'API Management Supabase, token `deploy-078.ps1`, autorisé explicitement par Cedric pour gérer les migrations directement). Vérifié en base : `courses_protege_update`, `changer_statut_course`, `audit_admin`, `admin_aal_suffisant` sont tous actifs.
 
-Ce Sprint 2 est une passe de **nettoyage et de conformité**, pas de nouvelles fonctionnalités. Deux chantiers indépendants :
+**Chantier "Conflit horaire intelligent pour les courses planifiées" : fait ET déployé (6 juillet 2026).** Remplace le verrou fixe pre_active (H-45min, bloquant toute autre course pendant 45 min même pour une moto de 10 min) par un calcul de conflit dynamique server-side. Détail complet en fin de document (§ Conflit horaire — livré).
+
+Chantiers **restants** de ce Sprint 2 (pas encore commencés) :
 1. Conformité Play Store (suppression du code mort lié à l'ancien modèle financier)
 2. Extraction i18n complète FR/EN + corrections de copy
 
@@ -102,11 +104,29 @@ Même nombre de clés que `fr.js` (invariant vérifiable — un simple diff des 
 
 ---
 
-## Ordre suggéré
+## Chantier C — Conflit horaire intelligent pour les courses planifiées — ✅ FAIT et déployé (6 juillet 2026)
+
+Le verrou fixe (`pre_active` à H-45min, verrouillant le TR 45 min même pour une moto de 10 min) est remplacé par un calcul de conflit dynamique, entièrement serveur.
+
+**SQL (migration 095, déployée en prod)** :
+- `parametres_tarifs` étendue avec `marge_securite_min` et `vitesse_moyenne_kmh` par véhicule (moto 15min/28km-h, voiture 30min/22km-h, tricycle-camionnette 40min/18km-h, camion 60min/15km-h) — réutilise la table par véhicule existante plutôt que d'ajouter une énième config jamais lue.
+- `verifier_conflit_planifie(tr, course)` : calcule `now + eta_pickup + durée_course + retour_vers_planifiée + marge < heure_H`, en Haversine (pas d'appel OSRM synchrone possible depuis SQL/pg_net — décision assumée, documentée dans le code).
+- Câblée dans `candidater_course` (lignage 088). **Découverte importante en cours de route** : `accepterCourse()` (services/courses.js), utilisée par `CourseScreen.js`, contournait `candidater_course` avec un `UPDATE` direct — ni le quota KYC, ni le solde jetons, ni maintenant le conflit horaire n'y étaient vérifiés. Corrigé : `accepterCourse()` route désormais par la même RPC.
+- `pre_active` démarre maintenant dynamiquement (temps de trajet réel + marge du véhicule, plancher 15 min, plafond 90 min) au lieu d'une fenêtre fixe ± 5 min autour de 45 min. Cron `preactiver-courses-programmees` passé de 5 à 1 minute.
+- Présence avant l'heure H : avertissement à H-30 si le TR est hors ligne, libération + pénalité partagée avec le système de no-show existant (même compteur de suspension à 3/30 jours) à H-15, avec rebroadcast urgence.
+- `annuler_course_planifiee(course)` : annulation gratuite avant `annulation_gratuite_avant_h` (paramètre qui existait déjà en base, jamais lu jusqu'ici), pénalisée après (TR : -0,5 note + compteur de suspension ; client : simple drapeau, CAARCO ne détient jamais d'argent client).
+
+**Client** : 3 écrans neufs — `MesCoursesPlanifieesScreen` et `CoursePlanifieeDetailScreen` (client), `MesReservationsScreen` (transporteur, ouvre l'écran `CourseScreen` existant plutôt que d'en dupliquer un). Composant `CompteARebours` partagé. Nouveau namespace i18n `coursesPlanifiees` (fr.js/en.js, clés en miroir). Points d'entrée : bannière Accueil (carte distincte de la course immédiate — un client peut cumuler les deux), chip dans Historique, ligne de menu Profil, header "Prochaines courses" du tableau de bord TR. Correctif au passage : `pre_active` manquait des listes de statuts "à venir" de `HistoriqueScreen.js`.
+
+**Tests** : `App/supabase/tests/095_conflit_horaire_planifie_test.sql` — assertions SQL directes (pas de framework Jest dans ce repo, cf. Sprint 4 du Cahier des Charges). **Non exécuté contre la production** (insère de fausses données de test) — à lancer sur un environnement de test avant la prochaine session, ou à exécuter en prod seulement après validation explicite de Cedric.
+
+---
+
+## Ordre suggéré pour les chantiers restants (A et B)
 
 1. Chantier A d'abord (suppression), plus rapide et plus urgent pour la conformité store
 2. Chantier B ensuite (extraction i18n) — plus long, mécanique, bénéficie d'un arbre déjà nettoyé (moins d'écrans à traiter si A est fait avant)
 
 ## En fin de sprint
 
-Comme convenu : mettre à jour `ETAT_DU_PROJET_2026-07-05.md` et `CAARCO_Cahier_Charges_Reprise_et_Prompt_REV1.md` (cocher les items faits), committer, puis créer `SPRINT_3.md` (design et lisibilité — contraste Charbon/Néré, purge des hex en dur, dégradés hors palette, vérification du mode sombre — cf. REV1 §0.4).
+Comme convenu : mettre à jour `ETAT_DU_PROJET_2026-07-05.md` et `CAARCO_Cahier_Charges_Reprise_et_Prompt_REV1.md` (cocher les items faits), committer, puis **mettre à jour ce même `SPRINT_2.md`** tant que les chantiers A et B ne sont pas terminés — pas de `SPRINT_3.md` avant que ce sprint soit réellement clos (consigne Cedric, 6 juillet 2026).
