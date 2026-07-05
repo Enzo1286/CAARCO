@@ -1,5 +1,6 @@
 # CAARCO — État du projet
 **Date du scan : 5 juillet 2026** · Rédigé après scan complet du dépôt `D:\Mon projet\CAARCO`
+**Mise à jour : 5 juillet 2026 (soir) — Sprint 1 terminé côté code, en attente de déploiement Supabase.**
 
 ---
 
@@ -72,6 +73,8 @@ Les correctifs de sécurité ci-dessus existent en migration SQL (`085_securite_
 1. Ouvrir Supabase → SQL Editor → exécuter `App/supabase/migrations/085_securite_tc_et_courses.sql`
 2. Redéployer les 4 Edge Functions modifiées localement mais jamais publiées : `notifier-transporteurs`, `moneroo-webhook`, `initier-paiement`, `initier-recharge`
 3. Redéployer la migration 086 (courses programmées) si pas encore fait
+4. **Nouveau (Sprint 1, ce soir)** : exécuter dans l'ordre `092_verrouiller_transitions_courses.sql`, `093_audit_admin.sql`, `094_mfa_admin.sql`
+5. Redéployer l'Edge Function `notchpay-init-achat-tc` (minimum de jetons changé de 100 à 1000)
 
 ### 🟠 Dette technique connue
 - **103 migrations avec des doublons de numéro** (056×3, 057×2, 058×2, 060×2, 061×2, 062×2) → risque d'ordre d'application non déterministe sur un futur `db reset`.
@@ -95,6 +98,19 @@ Les correctifs de sécurité ci-dessus existent en migration SQL (`085_securite_
 - V2 : multi-villes (Douala, Yaoundé, Bamenda), Notchpay+Lygos en fallback, IA de validation des produits interdits
 
 ---
+
+## 4bis. Sprint 1 — Fait ce soir (côté code, PAS ENCORE déployé)
+
+Avant de commencer le Sprint 1, un nettoyage git s'est révélé nécessaire : `node_modules` et `.expo` étaient suivis par git dans `App/` malgré un `.gitignore` correct jamais commité, et trois secrets réels traînaient en clair dans des fichiers non commités (`.env.production.backup` : clé `service_role` + token d'accès Supabase ; `.env.demo` : clé `service_role` d'un projet démo ; `deploy-078.ps1` : token d'accès Supabase en dur). Aucun n'était dans l'historique git — pas de rotation nécessaire, juste ignorés proprement désormais. Une dizaine de fichiers fantômes vides (`NOW()`, `dateMax`, `{`, `npx`…), résidus d'un collage de code dans un terminal, ont aussi été supprimés.
+
+Sprint 1 (sécurité serveur, cf. Cahier des Charges REV1 §0.4) :
+- **Annulation de course verrouillée** : `annulerCourse()` route désormais par la RPC `changer_statut_course` au lieu d'un `UPDATE` direct. Nouveau trigger sur `courses` qui interdit tout changement de statut d'une course `en_cours` hors RPC de confiance — un client ne peut plus annuler une course déjà en cours, même en contournant l'app (migration 092).
+- **Minimum d'achat de jetons** abaissé à 1000 (paliers 1000/2500/5000/10000/25000), client + Edge Function `notchpay-init-achat-tc`.
+- **Table `audit_admin`** (écriture seule) : crédit de jetons, suppression de compte, remise à zéro (par compte et totale), changement de tarifs, résolution de litige écrivent désormais systématiquement qui/quoi/cible/quand (migration 093). Corrige au passage deux boutons admin qui ne fonctionnaient pas du tout : la suppression de compte (aucune policy RLS n'autorisait le `DELETE` direct que faisait le code) et la remise à zéro par compte (la RPC n'était accordée qu'au `service_role`, jamais appelable depuis l'app).
+- **Remise à zéro totale encadrée** : confirmation par saisie du mot SUPPRIMER (vérifiée aussi côté serveur) et bouton exclu des builds de production via `EXPO_PUBLIC_APP_ENV`.
+- **2FA TOTP** natif Supabase pour les comptes admin (migration 094) : nouvel écran "Sécurité" dans le back-office pour activer/désactiver, défi à la connexion si un facteur est vérifié. Aucun risque de blocage : un compte qui n'a pas encore activé le 2FA n'est jamais bloqué.
+
+⚠️ **Comme pour la migration 085, ces migrations (092, 093, 094) sont écrites mais pas exécutées en prod.** Tant qu'elles ne sont pas appliquées sur le Supabase de production (SQL Editor, dans l'ordre), les correctifs restent inactifs. À faire dans la même session que le reste du Sprint 0 restant.
 
 ## 5. Propositions pour suivre où tu en es
 

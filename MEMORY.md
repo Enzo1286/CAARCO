@@ -579,6 +579,46 @@ Session 5 (2026-05-25) — Suite audit sécurité :
   5. ✅ initier-paiement : montant max 5 000 000 XAF + vérification prix côté DB (anti-falsification)
 - ⚠️ Edge Functions modifiées localement mais NON REDÉPLOYÉES (npx supabase login requis)
 
+Session 10 (2026-07-05, soir) — Nettoyage git + Sprint 1 (sécurité serveur) :
+- Audit complet du 5/07 (matin) : ETAT_DU_PROJET, ECRANS_APPLICATION, FONCTIONNEMENT_COURSES,
+  BACKOFFICE_ADMIN, CAARCO_Cahier_Charges_Reprise_et_Prompt_REV1.md (contient le Master Prompt
+  de retrofit en Partie B — c'est le document de référence pour les sprints suivants)
+- Nettoyage git préalable (arbre trouvé très désynchronisé) :
+  · node_modules/ et .expo/ étaient suivis par git dans App/ malgré un .gitignore correct
+    jamais commité → untrack (git rm --cached), fichiers gardés sur disque
+  · 3 secrets réels trouvés en clair, jamais commités (donc pas de rotation nécessaire) :
+    .env.production.backup (service_role + token d'accès Supabase), .env.demo (service_role
+    démo), deploy-078.ps1 (token d'accès Supabase en dur) → tous ajoutés au .gitignore
+  · ~12 fichiers fantômes vides supprimés (NOW(), dateMax, {, npx, supabase.removeChannel(canal)…)
+    — résidus d'un collage de code JS/SQL dans un terminal, sans rapport avec le travail réel
+  · Migrations 077-091 + une bonne partie de src/ (écrans admin, composants, i18n) n'avaient
+    JAMAIS été commitées → tout resynchronisé en un commit propre
+- Sprint 1 (voir CAARCO_Cahier_Charges_Reprise_et_Prompt_REV1.md §0.4) fait côté code :
+  · annulerCourse() route par changer_statut_course (plus d'UPDATE direct) ; trigger
+    courses_protege_update étendu : une course en_cours ne peut plus changer de statut hors
+    RPC de confiance (migration 092)
+  · Minimum jetons 100→1000, paliers 1000/2500/5000/10000/25000 (client + Edge Function)
+  · Table audit_admin (écriture seule) + câblage sur crédit jetons, suppression de compte,
+    reset (par compte + total), changement de tarifs, résolution de litige (migration 093)
+    → a aussi corrigé 2 boutons admin cassés découverts en cours de route : suppression de
+    compte (aucune policy RLS n'autorisait le DELETE direct) et reset par compte (RPC
+    accordée au service_role seulement, jamais appelable depuis l'app)
+  · Reset total encadré : saisie "SUPPRIMER" (vérifiée aussi côté serveur) + exclusion du
+    build de production via EXPO_PUBLIC_APP_ENV
+  · 2FA TOTP admin natif Supabase (migration 094) : écran SecuriteAdminScreen (QR rendu
+    localement via WebView — jamais envoyé à un service tiers comme QRCodeView le fait pour
+    d'autres usages), défi à la connexion (MFAChallengeScreen), admin_aal_suffisant() dans
+    les 4 fonctions critiques. Zéro risque de verrouillage : un compte sans facteur activé
+    n'est jamais bloqué.
+- ⚠️ Comme la 085 (Session précédente), les migrations 092/093/094 sont écrites mais PAS
+  déployées sur le Supabase de production. Prochaine session : les exécuter (SQL Editor,
+  dans l'ordre) + redéployer notchpay-init-achat-tc.
+- SPRINT_2.md créé (conformité Play Store : suppression des 6 écrans financiers morts +
+  code mort de sélection manuelle + tranchage des dossiers supabase/ ; puis extraction i18n
+  FR/EN complète). Prochaine étape après le déploiement Supabase ci-dessus.
+- Consigne Cedric : tous les briefs/résumés/rapports doivent être en français désormais.
+- Consigne Cedric : raccourcis de build cdd/ct/crd/crt/prod (voir mémoire Claude Code).
+
 Session 9 (2026-07-04) — Déménagement du projet :
 - Projet déplacé (copié) : D:\CAARCO → D:\Mon projet\CAARCO
   · ⚠️ L'ancien dossier D:\CAARCO existe ENCORE (copie 4 Go) — à supprimer après vérification

@@ -29,12 +29,12 @@ Ce document n'est pas un cahier des charges de projet neuf : CAARCO est fonction
 |---|---|---|---|
 | Migration `085_securite_tc_et_courses.sql` écrite mais **non exécutée en prod** ; 4 Edge Functions modifiées non redéployées | Crédit de jetons gratuit et commission contournable **exploitables en production aujourd'hui** | Exécuter 085 + redéployer `notifier-transporteurs`, `moneroo-webhook`, `initier-paiement`, `initier-recharge` + migration 086 | 🔴 Immédiat |
 | Bouton « Payer » (achat de jetons) inopérant dans `MesTokensScreen` | Le chemin de revenu est cassé | Diagnostiquer (Edge Function `notchpay-init-achat-tc` non déployée ? secrets Notchpay absents ?) dans la même session Supabase que 085 | 🔴 Immédiat |
-| `annulerCourse()` fait un UPDATE direct : **rien côté serveur n'empêche un client d'annuler une course `en_cours`** (le bouton est juste masqué en UI) | Un client peut annuler pendant que le transporteur roule avec ses marchandises — litige garanti, transporteur lésé | Router toute annulation par la RPC `changer_statut_course` (matrice de transitions) ; interdire `en_cours → annulee` côté client | 🔴 Sprint 1 |
+| `annulerCourse()` fait un UPDATE direct : **rien côté serveur n'empêche un client d'annuler une course `en_cours`** (le bouton est juste masqué en UI) | Un client peut annuler pendant que le transporteur roule avec ses marchandises — litige garanti, transporteur lésé | Router toute annulation par la RPC `changer_statut_course` (matrice de transitions) ; interdire `en_cours → annulee` côté client | ✅ Corrigé le 5/07 (migration 092, non déployée) |
 | Paramètre `p_est_nuit` appelé côté client, absent de la signature SQL réelle de `calculer_prix` | La majoration de nuit ne s'applique probablement jamais — perte de revenu silencieuse | Vérifier sur Supabase prod ; aligner la signature ou retirer l'appel | 🔴 Sprint 1 (vérif : 5 min) |
-| Minimum d'achat 5 000 jetons | Équivaut à ~16 courses moto d'avance pour la population la plus pauvre en cash de l'écosystème — friction d'entrée majeure | Palier minimum à **1 000 jetons**, boutons rapides 1 000 / 2 500 / 5 000 / 10 000 / 25 000 | 🟠 Sprint 1 |
-| Aucun journal d'audit admin : créditer des jetons, supprimer un compte ou remettre la base à zéro ne laisse **aucune trace** | Invérifiable le jour où un partenaire regarde les chiffres ; porte ouverte aux abus internes | Table `audit_admin` en écriture seule (qui, quoi, cible, quand), alimentée par trigger sur les actions critiques | 🟠 Sprint 1 |
-| Pas de 2FA sur les comptes admin | Un seul mot de passe protège un compte qui peut vider l'app | Activer le MFA TOTP Supabase sur tout compte `role='admin'` | 🟠 Sprint 1 |
-| « Remise à zéro totale des données » dans ConfigTarifsScreen | **Décision de Cedric : le bouton reste.** Désaccord maintenu et enregistré : un tap ne devrait pas pouvoir détruire une base de production | Compromis d'encadrement : confirmation par saisie du mot « SUPPRIMER », entrée obligatoire dans `audit_admin`, et exclusion du build de production par variable d'environnement au moment du lancement public | 🟠 Sprint 1 |
+| Minimum d'achat 5 000 jetons | Équivaut à ~16 courses moto d'avance pour la population la plus pauvre en cash de l'écosystème — friction d'entrée majeure | Palier minimum à **1 000 jetons**, boutons rapides 1 000 / 2 500 / 5 000 / 10 000 / 25 000 | ✅ Corrigé le 5/07 (Edge Function non redéployée) |
+| Aucun journal d'audit admin : créditer des jetons, supprimer un compte ou remettre la base à zéro ne laisse **aucune trace** | Invérifiable le jour où un partenaire regarde les chiffres ; porte ouverte aux abus internes | Table `audit_admin` en écriture seule (qui, quoi, cible, quand), alimentée par trigger sur les actions critiques | ✅ Corrigé le 5/07 (migration 093, non déployée) |
+| Pas de 2FA sur les comptes admin | Un seul mot de passe protège un compte qui peut vider l'app | Activer le MFA TOTP Supabase sur tout compte `role='admin'` | ✅ Corrigé le 5/07 (migration 094, non déployée) |
+| « Remise à zéro totale des données » dans ConfigTarifsScreen | **Décision de Cedric : le bouton reste.** Désaccord maintenu et enregistré : un tap ne devrait pas pouvoir détruire une base de production | Compromis d'encadrement : confirmation par saisie du mot « SUPPRIMER », entrée obligatoire dans `audit_admin`, et exclusion du build de production par variable d'environnement au moment du lancement public | ✅ Corrigé le 5/07 (migration 093, non déployée) |
 | 6 écrans du modèle financier abandonné (Wallet, Recharge, Paiement, PayerTransporteur, Retrait, Encaissement) + boutons morts vers routes supprimées | Motif de refus Play Store — Google a déjà refusé CAARCO une fois pour activité financière | Suppression physique des fichiers + des styles morts (`btnWhatsapp`…) + du code mort de sélection manuelle (`CarteCandidature`, `renderItem={null}`) | 🟠 Sprint 2 (avant soumission) |
 | Deux dossiers `supabase/` concurrents ; migrations à numéros dupliqués (056×3, 057×2…) | Risque de modifier le mauvais dossier ; ordre d'application non déterministe | Archiver l'ancien dossier **hors du repo**, documenter l'ordre réel, renuméroter à partir de maintenant | 🟠 Sprint 2 |
 | « LOGIN » / « SIGN UP » en anglais ; « Tokens » anglicisme partout ; « Tricycle / Van » vs « Camionnette » pour le même palier ; « Vous avez une surprise ! » et « Merci CAARCO ! » | Copy incohérent avec le marché et deux mécaniques limite dark pattern | Fusionné dans le chantier i18n (§0.3) : chaque texte est touché une seule fois | 🟡 Sprint 2 |
@@ -67,12 +67,19 @@ Séquencement honnête : l'extraction + copy FR est dans le Sprint 2 (elle fusio
 3. Vérifier `p_est_nuit` sur la fonction `calculer_prix` de prod
 4. Commiter les 5 fichiers en attente — aucun travail ne démarre sur un arbre sale
 
-**Sprint 1 — Sécurité serveur et revenu (2–4 jours)**
-5. Annulation routée par la RPC de transitions ; `en_cours → annulee` interdit côté client (l'admin garde son bypass)
-6. Minimum d'achat à 1 000 jetons + nouveaux paliers rapides
-7. Table `audit_admin` (écriture seule, trigger sur crédit jetons, suppression de compte, reset, changement de tarifs, résolution de litige)
-8. 2FA TOTP sur les comptes admin
-9. Encadrement du reset : saisie « SUPPRIMER » + entrée d'audit (le bouton reste, décision Cedric)
+**Sprint 1 — Sécurité serveur et revenu (2–4 jours) — ✅ FAIT côté code le 5 juillet 2026 (soir), PAS ENCORE déployé en prod**
+5. ✅ Annulation routée par la RPC de transitions ; `en_cours → annulee` interdit côté client (l'admin garde son bypass) — migration 092
+6. ✅ Minimum d'achat à 1 000 jetons + nouveaux paliers rapides — client + Edge Function `notchpay-init-achat-tc`
+7. ✅ Table `audit_admin` (écriture seule, trigger sur crédit jetons, suppression de compte, reset, changement de tarifs, résolution de litige) — migration 093
+8. ✅ 2FA TOTP sur les comptes admin — migration 094 + écran Sécurité admin
+9. ✅ Encadrement du reset : saisie « SUPPRIMER » + entrée d'audit (le bouton reste, décision Cedric) + exclusion des builds de production
+
+⚠️ **Action requise avant que ces correctifs soient actifs** : exécuter `092_verrouiller_transitions_courses.sql`, `093_audit_admin.sql`, `094_mfa_admin.sql` sur le Supabase de production (SQL Editor, dans l'ordre), puis redéployer `notchpay-init-achat-tc`. Même situation que la migration 085 : écrite, pas encore appliquée.
+
+Découvertes en cours de route (corrigées dans le même Sprint 1, hors liste initiale) :
+- La suppression de compte (Transporteurs/Clients admin) ne fonctionnait pas du tout : le code faisait un `DELETE` direct qu'aucune policy RLS n'autorisait. Remplacé par une RPC `admin_supprimer_compte` (auditée).
+- La remise à zéro par compte (`admin_reset_compte`) n'était accordée qu'au `service_role` — jamais appelable depuis l'app admin. Corrigé (vérification `is_admin()` + `authenticated`).
+- Nettoyage git préalable nécessaire : `node_modules`/`.expo` étaient suivis par git dans `App/` malgré un `.gitignore` correct jamais commité ; trois secrets réels (clé `service_role` de prod, clé `service_role` démo, token d'accès Supabase) traînaient en clair dans des fichiers jamais commités — aucun dans l'historique git, pas de rotation nécessaire, désormais proprement ignorés.
 
 **En parallèle dès cette semaine (délais incompressibles, indépendants du code)**
 10. Créer le compte Google Play Console (25 USD) — anticiper l'exigence de test fermé des comptes personnels récents (~12 testeurs / 14 jours continus, vérifier les chiffres exacts à la création)
