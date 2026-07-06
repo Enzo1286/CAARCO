@@ -38,9 +38,9 @@ Ce document n'est pas un cahier des charges de projet neuf : CAARCO est fonction
 | 6 écrans du modèle financier abandonné (Wallet, Recharge, Paiement, PayerTransporteur, Retrait, Encaissement) + boutons morts vers routes supprimées | Motif de refus Play Store — Google a déjà refusé CAARCO une fois pour activité financière | Suppression physique des fichiers + des styles morts (`btnWhatsapp`…) + du code mort de sélection manuelle (`CarteCandidature`, `renderItem={null}`) | ✅ Sprint 2 (Fait) |
 | Deux dossiers `supabase/` concurrents ; migrations à numéros dupliqués (056×3, 057×2…) | Risque de modifier le mauvais dossier ; ordre d'application non déterministe | Archiver l'ancien dossier **hors du repo**, documenter l'ordre réel, renuméroter à partir de maintenant | ✅ Sprint 2 (Fait) |
 | « LOGIN » / « SIGN UP » en anglais ; « Tokens » anglicisme partout ; « Tricycle / Van » vs « Camionnette » pour le même palier ; « Vous avez une surprise ! » et « Merci CAARCO ! » | Copy incohérent avec le marché et deux mécaniques limite dark pattern | Fusionné dans le chantier i18n (§0.3) : chaque texte est touché une seule fois | ✅ Sprint 2 (Fait) |
-| Blanc sur Néré #c89441 ≈ 2,7:1 — **échec AA** sur le CTA principal (Commencer, Se connecter, prix) | Illisible en plein soleil sur écran d'entrée de gamme — le contexte d'usage réel | Règle : texte **Charbon #1d2420 sur fond Néré** (≈ 5,9:1, conforme). Blanc sur Latérite (≈ 4,4:1) réservé aux gros textes | 🟡 Sprint 3 |
-| Hex en dur éparpillés (`#e8e0d5`, `#e3ede5`, `rgba(...)`…) ; dégradés hors palette dont un **bleu** `#3d5c8a/#1e2e50` sur l'accueil ; `SplashAnimeeScreen` n'importe ni thème ni polices | Bugs garantis en mode sombre ; trahison du design system sur l'écran le plus vu | Tokenisation : grep de `#` et `rgba(` dans `src/screens/` comme test d'acceptation ; dégradés Services recomposés depuis la palette | 🟡 Sprint 3 |
-| Deux splash screens (emoji-camions + camion dessiné) | Doublon, qualité inégale, les emojis varient selon les surcouches Android | Garder `SplashAnimeeScreen` (camion dessiné), supprimer `SplashScreen` emoji | 🟡 Sprint 3 |
+| Blanc sur Néré #c89441 ≈ 2,7:1 — **échec AA** sur le CTA principal (Commencer, Se connecter, prix) | Illisible en plein soleil sur écran d'entrée de gamme — le contexte d'usage réel | Règle : texte **Charbon #1d2420 sur fond Néré** (≈ 5,9:1, conforme). Blanc sur Latérite (≈ 4,4:1) réservé aux gros textes | ✅ Sprint 3 (Fait) |
+| Hex en dur éparpillés (`#e8e0d5`, `#e3ede5`, `rgba(...)`…) ; dégradés hors palette dont un **bleu** `#3d5c8a/#1e2e50` sur l'accueil ; `SplashAnimeeScreen` n'importe ni thème ni polices | Bugs garantis en mode sombre ; trahison du design system sur l'écran le plus vu | Tokenisation : grep de `#` et `rgba(` dans `src/screens/` comme test d'acceptation ; dégradés Services recomposés depuis la palette | ✅ Sprint 3 (Fait) |
+| Deux splash screens (emoji-camions + camion dessiné) | Doublon, qualité inégale, les emojis varient selon les surcouches Android | Garder `SplashAnimeeScreen` (camion dessiné), supprimer `SplashScreen` emoji | ✅ Sprint 3 (Fait) |
 | Aucun filtre géographique sur la diffusion des courses immédiates (rayons 5/15 km en base, jamais lus par le code) | Tolérable à Bafoussam seule ; du bruit destructeur dès la 2ᵉ ville | Lire `rayon_matching_immediate_km` dans `notifier-transporteurs` — **bloquant avant toute expansion multi-villes**, pas avant le lancement Bafoussam | 🟡 Phase 2 |
 | Statuts fantômes (`brouillon`, `publiee`, `attribuee`) ; timeout UI 3 min vs expiration serveur 1h en dur | Dette de cohérence | Nettoyer la contrainte ; aligner l'expiration serveur sur le paramètre en base | 🟢 Fil de l'eau |
 | Zéro test automatisé sur les flux d'argent | Régression silencieuse possible sur le revenu | 5 à 10 tests ciblés uniquement : débit atomique, idempotence, OTP, quota KYC, transitions de statut — pas une suite complète | 🟡 Sprint 4 |
@@ -92,10 +92,10 @@ Découvertes en cours de route (corrigées dans le même Sprint 1, hors liste in
 15. ✅ Extraction i18n complète + corrections de copy FR (§0.3, points 1–2)
 16. ✅ `en.js` + sélecteur de langue (livrable en fast-follow si le calendrier serre)
 
-**Sprint 3 — Design et lisibilité (2–3 jours)**
-17. Contraste : Charbon sur Néré pour tous les CTA et prix
-18. Tokenisation des hex en dur + dégradés Services recomposés depuis la palette + suppression du splash emoji
-19. Vérification mode sombre écran par écran (les hex en dur corrigés au point 18 sont la cause principale des bugs)
+**Sprint 3 — Design et lisibilité (2–3 jours) — ✅ FAIT (6 juillet 2026)**
+17. ✅ Contraste : Charbon sur Néré pour tous les CTA et prix
+18. ✅ Tokenisation des hex en dur + dégradés Services recomposés depuis la palette + suppression du splash emoji
+19. ✅ Vérification mode sombre écran par écran (les hex en dur corrigés au point 18 sont la cause principale des bugs)
 
 **Sprint 4 — Lancement**
 20. 5–10 tests automatisés sur les flux d'argent uniquement

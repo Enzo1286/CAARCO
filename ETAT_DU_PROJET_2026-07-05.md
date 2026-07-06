@@ -1,6 +1,6 @@
 # CAARCO — État du projet
 **Date du scan : 5 juillet 2026** · Rédigé après scan complet du dépôt `D:\Mon projet\CAARCO`
-**Mise à jour : 5 juillet 2026 (soir) — Sprint 1 terminé côté code, en attente de déploiement Supabase.**
+**Mise à jour : 6 juillet 2026 — Sprints 1, 2 et 3 terminés côté code.**
 
 ---
 
@@ -68,6 +68,11 @@ Un ancien dossier `D:\CAARCO` (copie complète, ~4 Go, avant le déménagement d
   - commission de 20 % contournable → corrigée, débit désormais atomique et dérivé du prix stocké
   - contournement de l'OTP (en ligne et hors ligne) → corrigé
 - **Sprint 2 terminé (7 juillet 2026)** : Nettoyage du code mort (suppression des 6 écrans financiers obsolètes et du dossier supabase/ redondant), et mise en place complète de l'i18n (FR/EN) sur toute l'application.
+- **Sprint 3 terminé (6 juillet 2026)** : Tokenisation intégrale des couleurs pour support fiable du mode sombre, correction du contraste d'accessibilité (Charbon sur Néré), et suppression du code emoji redondant du splash screen. (Détails dans `SPRINT_3.md`).
+- **Fonctionnalités finalisées (6 juillet 2026) :** 
+  - **Support Hors-Ligne** : Le client et le transporteur peuvent désormais consulter leurs historiques sans réseau (mise en cache `AsyncStorage`). La prise de commande est intelligemment bloquée si la connexion internet est indisponible (`useNetInfo`).
+  - **Moyens de paiement** : Ajout du filtrage des paiements (MTN Money, Orange Money, Espèces) sur `ConfirmationScreen` et paramétrage depuis le `ProfilScreen`.
+  - **Menu Langue interactif** : Le paramètre de langue du profil a été transformé en menu déroulant fonctionnel et mis à jour côté base de données locale.
 
 ### ✅ Migrations SQL — état réel vérifié en base le 6 juillet 2026
 Vérification directe sur le Supabase de production (API Management, accès autorisé par Cedric le 5/07 au soir) : les migrations 085 et 086 étaient **déjà appliquées** (contrairement à ce que ce document indiquait plus tôt). Les migrations 092, 093, 094 (Sprint 1) et 095 (conflit horaire planifié) ont été **exécutées ce soir**, découpées en petits blocs (l'API Management de Supabase échoue silencieusement ou expire sur des scripts SQL trop longs en un seul envoi — la méthode fiable est le découpage par fonction).
@@ -81,6 +86,7 @@ Reste **non fait**, hors de portée d'un déploiement SQL simple (nécessite `su
 - **Zéro test automatisé** sur un flux qui gère de l'argent (TC, commission) — risque de régression silencieuse.
 - APK à 52,4 Mo, objectif < 30 Mo pour le Play Store — pas encore optimisé.
 - Bug ouvert non résolu : le bouton "Payer" (achat de TC) dans `MesTokensScreen` ne fait rien — suspicion d'Edge Function `notchpay-init-achat-tc` non déployée ou secrets Notchpay absents côté Supabase. En attente d'un log Metro pour diagnostiquer.
+- **Compilation Release impossible en l'état sous Windows** : La tâche Gradle `createBundleReleaseJsAndAssets` crashe (JVM Out Of Memory Error). Il faut augmenter la mémoire allouée à la JVM (`org.gradle.jvmargs`) dans `android/gradle.properties`.
 
 ### 📋 Pas encore fait
 - Redéploiement des migrations/fonctions ci-dessus (bloquant, voir plus haut)
