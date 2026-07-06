@@ -9,9 +9,9 @@
 
 **Chantier "Conflit horaire intelligent pour les courses planifiées" : fait ET déployé (6 juillet 2026).** Remplace le verrou fixe pre_active (H-45min, bloquant toute autre course pendant 45 min même pour une moto de 10 min) par un calcul de conflit dynamique server-side. Détail complet en fin de document (§ Conflit horaire — livré).
 
-Chantiers **restants** de ce Sprint 2 (pas encore commencés) :
-1. Conformité Play Store (suppression du code mort lié à l'ancien modèle financier)
-2. Extraction i18n complète FR/EN + corrections de copy
+**Chantier A (conformité Play Store, suppression du code mort) : A1-A4 faits (6 juillet 2026), A5 en attente de confirmation Cedric.** Détail en fin de section Chantier A (§ Chantier A — livré).
+
+**Chantier B (i18n FR/EN) : ✅ FAIT (7 juillet 2026), sous réserve du test manuel de bascule de langue sur device par Cedric (non testable ici).** `fr.js`/`en.js` à 1357 clés chacun, parité vérifiée. Détail complet en fin de section Chantier B (§ Chantier B — livré).
 
 ## Ce qui doit survivre sans y toucher
 
@@ -72,6 +72,18 @@ Le repo a deux dossiers `supabase/` : `D:\Mon projet\CAARCO\supabase` (ancien mo
 - `grep -r "CarteCandidature\|choisirTransporteur" src/` → zéro résultat (ou uniquement dans un commentaire expliquant la suppression)
 - L'app se lance et les flux client/TR complets fonctionnent toujours (tester une course de bout en bout)
 
+## Chantier A — livré (A1-A4, 6 juillet 2026)
+
+**A1-A2** : les 6 écrans du modèle financier abandonné + `AttenteReglementScreen.js` supprimés, ainsi que `services/wallet.js` et `cache/walletCache.js` (devenus morts une fois ces écrans retirés — ils n'étaient déjà plus enregistrés dans les navigators, juste orphelins sur disque). Style `btnWhatsapp` retiré d'`AccueilScreen.js`. `SuiviScreen.js` ne contenait aucun bouton mort vers ces routes.
+
+**A3** : `CarteCandidature` et `ouvrirProfil` supprimés d'`AttenteScreen.js` (le `FlatList`/`renderItem={null}` — un radar qui n'affichait jamais ses items — remplacé par un `ScrollView` simple ; les styles associés à la carte candidature retirés). `ProfilTransporteurScreen.js` côté client supprimé : son seul usage était ce flux de sélection manuelle (`onAppuyer` → `ouvrirProfil`), jamais atteignable ailleurs dans le code. `choisirTransporteur()` supprimée de `services/candidatures.js` : c'était un `UPDATE courses` direct contournant la RPC `candidater_course`, exactement l'anti-pattern que le Sprint 1 corrige — sa suppression est donc aussi un correctif de sécurité, pas seulement du nettoyage.
+
+**A4** : `SplashScreen.js` (emoji camions) supprimé. `SplashAnimeeScreen.js` n'était câblé nulle part — il attend `pret`/`onTermine`, conçu comme écran de transition pendant le chargement initial (cf. `ECRANS_APPLICATION_2026-07-05.md` §65). Intégré dans `RootNavigator.js` à la place du spinner `ActivityIndicator` affiché pendant `loading || chargeMaintenance` : `pret` est dérivé de ces deux états, `onTermine` bascule un state local qui affiche ensuite la navigation normale. Le stack d'authentification part directement sur `Connexion` (route `Splash` retirée, plus aucune référence ailleurs dans le code). **Changement de comportement assumé** : l'ancien SplashScreen avait un bouton "Commencer" (CTA manuel après 4s) ; le nouveau splash est purement un écran de chargement qui s'efface automatiquement dès que l'app est prête, sans interaction utilisateur — cohérent avec la description déjà documentée de SplashAnimeeScreen, mais à valider visuellement par Cedric sur device (non testable ici, pas d'émulateur/device disponible dans cet environnement).
+
+**Vérifications faites** : les deux critères d'acceptation grep ci-dessus sont au vert. Tous les fichiers touchés validés avec `@babel/parser` (syntaxe correcte). Bundle Metro web (`expo start --web`) lancé en test : bundling complet sans erreur de résolution de module, réponse HTTP 200 sur le bundle — confirme que la suppression des 11 fichiers et l'intégration de SplashAnimeeScreen ne cassent pas le graphe de modules. **Non testé** : le flux visuel réel sur device/émulateur (animation du splash, flux de course de bout en bout) — à faire par Cedric avant de considérer A4 définitivement clos.
+
+**A5 non fait** — nécessite une confirmation explicite de Cedric avant toute suppression (cf. ci-dessus). Constat à jour : `supabase/migrations` (racine) contient 85 fichiers, `App/supabase/migrations` en contient 107 (dont 090-095 du Sprint 1 et du chantier conflit horaire, tous présents). Aucun script du repo (`.ps1`, `.js`, `.json`) ne référence le dossier `supabase/` racine — cohérent avec le diagnostic "obsolète" du 5/07, mais la décision de suppression/archivage reste à valider avec Cedric.
+
 ---
 
 ## Chantier B — Extraction i18n complète + corrections de copy (FR d'abord, EN ensuite)
@@ -119,6 +131,63 @@ Le verrou fixe (`pre_active` à H-45min, verrouillant le TR 45 min même pour un
 **Client** : 3 écrans neufs — `MesCoursesPlanifieesScreen` et `CoursePlanifieeDetailScreen` (client), `MesReservationsScreen` (transporteur, ouvre l'écran `CourseScreen` existant plutôt que d'en dupliquer un). Composant `CompteARebours` partagé. Nouveau namespace i18n `coursesPlanifiees` (fr.js/en.js, clés en miroir). Points d'entrée : bannière Accueil (carte distincte de la course immédiate — un client peut cumuler les deux), chip dans Historique, ligne de menu Profil, header "Prochaines courses" du tableau de bord TR. Correctif au passage : `pre_active` manquait des listes de statuts "à venir" de `HistoriqueScreen.js`.
 
 **Tests** : `App/supabase/tests/095_conflit_horaire_planifie_test.sql` — assertions SQL directes (pas de framework Jest dans ce repo, cf. Sprint 4 du Cahier des Charges). **Non exécuté contre la production** (insère de fausses données de test) — à lancer sur un environnement de test avant la prochaine session, ou à exécuter en prod seulement après validation explicite de Cedric.
+
+---
+
+## Chantier B — état d'avancement (session du 6-7 juillet 2026)
+
+**Méthode établie et à poursuivre à l'identique** : pour chaque fichier, (1) identifier les chaînes en dur, (2) chercher une clé i18n existante déjà correcte pour réutilisation (beaucoup de namespaces avaient été écrits par anticipation lors d'une session antérieure mais jamais réellement câblés — `grep "t('namespace\."` dans tout `src/` pour confirmer qu'une clé candidate est bien inutilisée avant de la modifier librement), (3) sinon créer les clés manquantes dans `fr.js` puis leur miroir dans `en.js`, (4) câbler `useI18n()` + `t()` dans le fichier, (5) vérifier avec la séquence : `grep` de chaînes FR restantes hors JSX (regex `>[ \t]*[A-Za-zÀ-ÿ]...<`, plus `placeholder=`/`label=`/`Alert.alert(` littéraux) → doit être vide (sauf codes devise XAF, noms de marque CAARCO, noms de ville propres, badge "LIVE" — laissés tels quels par choix délibéré) ; script Node avec `@babel/parser` pour valider la syntaxe ; script Node de diff des clés aplaties fr.js vs en.js → doit être vide dans les deux sens.
+
+**Piège récurrent** : un paramètre local nommé `t` (callback `.map(t => ...)`, `setTimeout` stocké dans `const t = ...`, objet `TYPES_CONTRIBUTION` détruit en `([type, t])`) masque le `t` d'i18n dans la même portée — renommer la variable locale à chaque fois (`val`, `timer`, `cfgType`, `texteTrim`, etc.) avant d'ajouter `const { t } = useI18n();`.
+
+**Astuce pluriel** : le moteur i18n (`src/i18n/index.js`) fait un remplacement global de chaque `{variable}` — passer un seul `s` calculé (`n !== 1 ? 's' : ''`) et le réutiliser plusieurs fois dans un même gabarit fonctionne (`'{n} transporteur{s} recruté{s}'`).
+
+**Fichiers 100% terminés et vérifiés (grep + babel + parité) :**
+- `src/screens/client/` — 16 fichiers (ProfilScreen, AccueilScreen, TrajetScreen, DetailsColisScreen, ConfirmationScreen, SuiviScreen, CourseAccepteeScreen, NotationScreen, CourseDetailClientScreen, HistoriqueScreen, MessagesScreen, PointsScreen, ParrainageScreen, AttenteScreen, CoursePlanifieeDetailScreen, MesCoursesPlanifieesScreen)
+- `src/screens/transporteur/` — 16 fichiers (NavigationScreen, TableauBordScreen, SoumissionKYCScreen, StatutKYCScreen, MesTokensScreen, AdDetailScreen, MessagesTransporteurScreen, CourseScreen, RevenusScreen, StatsTransporteurScreen, NotationClientScreen, PacksAbonnementScreen, ProfilClientScreen, LeaderboardScreen, CoursesTransporteurScreen, MesReservationsScreen)
+- `src/screens/auth/` — 3 fichiers (ConnexionScreen avec le correctif B2 LOGIN/SIGN UP → `auth.connexion.choixLogin`/`choixSignup`, InscriptionScreen, MotDePasseOublieScreen)
+- `src/screens/` racine (partagés client+TR) — 8 fichiers (ChatScreen, MerciScreen, ChangerMotDePasseScreen, ProfilPublicScreen, CallScreen, EcranMaintenance, ContributionsCarteScreen, SplashAnimeeScreen)
+- `src/components/` — 4 fichiers faits (ContributionModal, AppelEntrantOverlay, SelecteurVille, PlanificateurCourse)
+
+**Restant à faire (`src/components/`)** : `BoutonSignalementCarte.js`, `CalendrierNaissance.js`, `TutorielPopup.js`, `MenuContextuel.js`, `LocationPicker.js` — 5 fichiers, aucun encore examiné.
+
+**Après ces 5 fichiers, avant de clore le Chantier B :**
+1. Vérification finale critère d'acceptation B1 : `grep` de chaînes FR en dur sur l'ensemble de `src/screens/` (hors `admin/`, explicitement exclu — écran mono-opérateur, reste français pour toujours, décision Cedric) et `src/components/` → doit être vide.
+2. Vérification finale B3 : script de diff des clés `fr.js`/`en.js` sur l'ensemble → doit rester à 0 différence.
+3. Vérification B4 : un sélecteur de langue avait déjà été trouvé câblé dans `ProfilScreen.js` (tableau `LANGUES` + ligne de menu) lors d'une session antérieure — à re-vérifier que ça fonctionne toujours, et surtout vérifier si la détection de langue système au premier lancement (`expo-localization` ou équivalent) est bien implémentée ; sinon l'ajouter (vérifier d'abord `package.json` avant d'ajouter une dépendance).
+4. Test manuel : basculer FR→EN dans le profil doit changer les textes affichés sans redémarrer l'app (critère d'acceptation B3 du cahier).
+
+**Deux bugs métier trouvés en passant, PAS corrigés (hors scope Chantier B, à trancher séparément avec Cedric) :**
+- `MerciScreen.js`, bannière streak client (3 courses dans la semaine) : le texte affichait "+100 XAF crédités sur votre wallet" — or `getStreakCetteSemaine()` (`services/jalons.js`) ne fait que COMPTER les courses de la semaine, aucune fonction ne crédite quoi que ce soit, et le modèle "wallet client" est supprimé depuis le Sprint 2 Chantier A. Corrigé uniquement pour l'extraction i18n (retiré la mention "wallet", gardé "+{montant} XAF crédités" pour rester cohérent avec `libelleJalon()` dans le même service) — mais la fonctionnalité annoncée ne existe probablement pas réellement derrière. À clarifier avec Cedric : soit implémenter un vrai crédit (sur quoi ? il n'y a plus de wallet client), soit remplacer par une récompense non-monétaire (points fidélité existants), soit retirer la bannière.
+- `ParrainageScreen.js` (mentionné dans une session antérieure, pas creusé davantage) : référence possible à un concept de gains wallet pour le client, potentiellement obsolète après la suppression du wallet — signalé mais non vérifié en détail.
+
+**Décisions de traduction pour info (cohérence à garder si le travail continue)** :
+- Codes devise (`XAF`), noms de ville camerounaises, marque "CAARCO" : jamais traduits.
+- Badge "LIVE" (Leaderboard) et placeholders numériques (OTP "0000", format téléphone) : laissés tels quels, considérés comme universels/non linguistiques.
+- Formatage de date/heure (`toLocaleDateString('fr-FR', ...)`) : laissé strictement en FR partout, y compris dans les fichiers déjà traduits — le connecteur "à" entre date et heure n'est PAS traduit. Une vraie i18n des dates (locale dynamique selon la langue active) est un chantier plus large, hors scope de cette extraction de texte statique.
+
+---
+
+## Chantier B — livré (7 juillet 2026)
+
+**5 derniers composants traités** : `BoutonSignalementCarte.js`, `CalendrierNaissance.js`, `TutorielPopup.js`, `MenuContextuel.js`, `LocationPicker.js` — plus `DropoffLocationPicker.js` et `PickupLocationPicker.js` (pas dans la liste initiale, mais découverts en cours de route : ce sont de simples wrappers qui passaient `titre`/`instruction`/`etiquetteLabel` en dur en français à `LocationPicker`). Nouvelles clés `fr.js`/`en.js` : `signalementCarte`, `calendrierNaissance`, `tutorielPopup`, `locationPicker` (+ `locationPicker.collecte`/`livraison`). `calendrierNaissance` réutilise `planificateurCourse.jour0-6` pour les en-têtes de jours (mêmes valeurs, évite la duplication). `fr.js`/`en.js` : 1357 clés chacun, parité vérifiée (script de diff, 0 écart).
+
+**Vérification finale B1/B3 sur l'ensemble du repo** (pas seulement les 5 fichiers) :
+- `grep` de chaînes FR en dur sur tout `src/screens/` (hors `admin/`) et `src/components/` → **zéro résultat**, hors exceptions déjà actées (séparateurs `·`, unités `pts`/`TC`, codes devise, marque CAARCO, `leafletBundle.js` qui est du code vendor minifié, pas du texte applicatif).
+- Syntaxe validée (`@babel/parser`) sur tous les fichiers touchés.
+- `npx expo export --platform web` lancé en test : bundle complet généré sans erreur de résolution de module (graphe entier, pas seulement les fichiers du jour) — confirme qu'aucune régression n'a été introduite.
+
+**B4 — sélecteur de langue + détection système** :
+- Le sélecteur FR/EN de `ProfilScreen.js` (déjà câblé lors d'une session antérieure) fonctionnait visuellement mais **ne persistait jamais réellement en base** : `mettreAJourProfil()` (`services/auth.js`) filtre les champs modifiables via une liste blanche `CHAMPS_PROFIL_AUTORISES`, et `langue` (comme `pseudo`) n'y figurait pas — silencieusement ignoré par l'UPDATE Supabase malgré le toast "sauvegardé" affiché. Le changement semblait tenir le temps de la session (mise à jour optimiste locale dans `AuthContext`), puis revenait au français au prochain démarrage (rechargement du profil depuis la base, qui n'avait jamais reçu la vraie valeur). **Corrigé** : `langue` et `pseudo` ajoutés à la liste blanche (colonnes bien présentes sur `users`, migration 004). Un seul changement, une seule cause : les deux étaient touchés par le même bug d'oubli dans la liste blanche.
+- **Détection de la langue système ajoutée**, sans nouvelle dépendance native : `src/i18n/detecterLangueSysteme.js` lit `NativeModules.I18nManager`/`SettingsManager` (déjà fournis par React Native cœur) plutôt que `expo-localization` — choix déjà motivé par le fait que l'app est en bare workflow, sans device/émulateur disponible ici pour valider un rebuild natif après ajout de dépendance. Câblée à deux endroits : (1) `services/auth.js` → `inscrire()` fixe `langue` du nouveau profil selon la langue détectée à l'inscription ; (2) `i18n/index.js` → `useI18n()` retombe sur la langue détectée (au lieu d'un français fixe) tant qu'aucun profil n'est chargé (écrans avant connexion). Tout ce qui n'est pas anglais est traité comme français (marché cible).
+- **Non testé sur device/émulateur** (indisponible dans cet environnement) — à valider par Cedric : bascule FR→EN dans le profil persiste après redémarrage de l'app, et un téléphone réglé en anglais affiche bien l'écran de connexion en anglais avant toute connexion.
+
+**Bug trouvé en marge, PAS corrigé (nécessite une migration, hors portée d'un fix de code)** : `ProfilScreen.js` permet aussi de modifier `sexe` et `date_naissance` (via le composant `CalendrierNaissance` qu'on vient de traduire), mais **ces deux colonnes n'existent dans aucune migration de `App/supabase/migrations`**. Ces champs sont eux aussi filtrés par `CHAMPS_PROFIL_AUTORISES` (ce qui, ici, masque involontairement l'absence de colonnes plutôt que de créer une erreur 400) — l'utilisateur voit "sauvegardé" mais rien n'est jamais écrit. Pour corriger : soit ajouter une migration `ALTER TABLE users ADD COLUMN sexe TEXT, ADD COLUMN date_naissance DATE` (à exécuter manuellement par Cedric sur le Dashboard Supabase, comme les précédentes) puis ajouter les deux champs à la liste blanche, soit retirer ces champs de `ProfilScreen.js` si l'information n'est finalement pas nécessaire. Décision à prendre avec Cedric.
+
+**Critères d'acceptation Chantier B — tous au vert** (hors test manuel device, non réalisable ici) :
+- ✅ Zéro chaîne FR en dur dans `src/screens/` (hors `admin/`) et `src/components/`
+- ✅ Parité stricte des clés `fr.js`/`en.js` (1357 = 1357)
+- ⚠️ "Basculer la langue change les textes sans redémarrer" — vrai dans la session courante (déjà le cas avant ce fix) ; la persistance réelle après redémarrage est corrigée dans le code mais pas vérifiée sur device.
 
 ---
 

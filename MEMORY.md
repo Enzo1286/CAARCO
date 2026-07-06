@@ -1,8 +1,8 @@
 # MÉMOIRE PROJET — CAARCO
-Dernière mise à jour : 2026-07-04
+Dernière mise à jour : 2026-07-07
 Emplacement projet  : D:\Mon projet\CAARCO (déplacé le 2026-07-04, ex-D:\CAARCO)
                       ⚠️ Chemin avec ESPACE → toujours mettre les chemins entre guillemets
-Sessions totales    : 8
+Sessions totales    : 11
 Propriétaire        : Cedric Timene — Bafoussam, Cameroun
 
 ═══════════════════════════════════════════════════════════════
@@ -476,6 +476,67 @@ Format dates : ISO 8601
 ---
 
 ## 💬 CONTEXTE DES SESSIONS
+
+Session 12 (2026-07-07) — Sprint 2 Chantier B clos :
+- 5 derniers composants i18n traités (BoutonSignalementCarte, CalendrierNaissance, TutorielPopup,
+  MenuContextuel, LocationPicker) + 2 wrappers découverts en cours de route (DropoffLocationPicker,
+  PickupLocationPicker, texte en dur passé en props à LocationPicker). fr.js/en.js : 1357 clés
+  chacun, parité vérifiée. Vérification finale B1 (grep global hors admin/) et B3 (parité) au vert.
+- Bug corrigé : le sélecteur de langue FR/EN dans ProfilScreen.js ne persistait jamais réellement
+  (`langue` et `pseudo` absents de la liste blanche `CHAMPS_PROFIL_AUTORISES` dans services/auth.js
+  → UPDATE Supabase silencieusement filtré malgré le toast de succès affiché ; la valeur revenait
+  au français par défaut au redémarrage suivant). Ajoutés à la liste blanche (colonnes déjà
+  présentes en base, migration 004).
+- Détection de la langue système ajoutée sans nouvelle dépendance native (bare workflow, pas de
+  device/émulateur ici pour valider un rebuild) : src/i18n/detecterLangueSysteme.js via
+  NativeModules RN natif. Câblée à l'inscription (langue initiale du profil) et en repli dans
+  useI18n() avant connexion (écrans d'auth).
+- Bug trouvé, PAS corrigé (nécessite une migration SQL, décision Cedric) : ProfilScreen.js permet
+  de modifier sexe et date_naissance (via CalendrierNaissance) mais ces colonnes n'existent dans
+  AUCUNE migration de App/supabase/migrations — la liste blanche les filtre aussi, donc l'UI dit
+  "sauvegardé" mais rien n'est jamais écrit pour ces deux champs.
+- Nettoyage : ~35 fichiers fantômes vides à la racine du repo et dans App/ (résidus d'un collage
+  de code JS dans un terminal lors d'une session antérieure, ex. `!selectionnes.has(c.id)))`,
+  `handleAccepterCourseProgrammee(c.id)},`) — même symptôme que les fichiers fantômes nettoyés en
+  Session 10, jamais entièrement éradiqué depuis. Supprimés.
+- Vérifié : `npx expo export --platform web` compile sans erreur sur l'ensemble du bundle après
+  tous ces changements.
+- Reste avant de clore le sprint entier : Chantier A5 (trancher les 2 dossiers supabase/, toujours
+  en attente de confirmation explicite Cedric) ; test manuel sur device de la bascule de langue et
+  de sa persistance après redémarrage ; décision sur sexe/date_naissance (migration ou suppression
+  des champs) ; ~65 fichiers modifiés/supprimés du Sprint 2 (Chantier A + B) encore non commités
+  dans App/ — à committer une fois validés par Cedric.
+
+Session 11 (2026-07-06/07) — Sprint 2 Chantier A (fini) + Chantier B i18n (très avancé) :
+- Chantier A (conformité Play Store) terminé : A1-A4 livrés (6 écrans financiers morts +
+  SplashScreen dupliqué + code mort de sélection manuelle supprimés, SplashAnimeeScreen
+  intégré dans RootNavigator). A5 (trancher les 2 dossiers supabase/) toujours en attente
+  de confirmation explicite Cedric — voir SPRINT_2.md.
+- Chantier B (extraction i18n FR/EN complète) : fr.js/en.js passés de ~505 à 1322 clés,
+  parité vérifiée après CHAQUE fichier (script Node de diff des clés aplaties). Tous les
+  écrans client (16), transporteur (16), auth (3), écrans partagés racine (8) et 4/9
+  composants partagés faits et vérifiés (grep + @babel/parser + parité). Détail complet,
+  méthode établie, pièges connus (variable locale `t` qui masque le `t` i18n) et liste
+  exacte des 5 fichiers composants restants (BoutonSignalementCarte, CalendrierNaissance,
+  TutorielPopup, MenuContextuel, LocationPicker) dans SPRINT_2.md § Chantier B — état
+  d'avancement. admin/ explicitement exclu du scope (reste français, décision Cedric).
+- Correctif B2 appliqué : boutons "LOGIN"/"SIGN UP" (ConnexionScreen.js, en dur en anglais
+  même en interface française) → clés `auth.connexion.choixLogin`/`choixSignup`
+  ('CONNEXION'/'INSCRIPTION' en FR, 'LOGIN'/'SIGN UP' en EN).
+- Bug métier trouvé en marge (PAS corrigé, hors scope i18n) : la bannière streak client
+  dans MerciScreen.js promet "+100 XAF crédités sur votre wallet" pour 3 courses/semaine,
+  mais `getStreakCetteSemaine()` (services/jalons.js) ne fait que compter les courses —
+  aucune fonction ne crédite réellement quoi que ce soit, et le wallet client n'existe
+  plus depuis la Session 10. Texte extrait en i18n (mention "wallet" retirée) mais la
+  fonctionnalité annoncée reste probablement fantôme. À trancher avec Cedric : vrai
+  crédit (sur quoi ?), récompense non-monétaire via les points fidélité existants, ou
+  suppression de la bannière.
+- Prochaine étape : finir les 5 composants restants, puis vérification finale B1/B3
+  (grep global + diff clés), puis B4 (sélecteur de langue déjà vu câblé dans
+  ProfilScreen.js lors d'une session antérieure — revérifier + détection langue système
+  au premier lancement), puis clore le sprint (mise à jour ETAT_DU_PROJET_2026-07-05.md
+  et CAARCO_Cahier_Charges_Reprise_et_Prompt_REV1.md, SPRINT_2.md, commit — pas de
+  SPRINT_3.md avant que A+B soient réellement clos, consigne Cedric).
 
 Session 8 (2026-07-03) — Audit complet + corrections sécurité :
 - Rapport : DIAGNOSTIC_AUDIT_2026-07-03.md + CORRECTIONS_2026-07-03.md
