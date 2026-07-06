@@ -67,6 +67,7 @@ Un ancien dossier `D:\CAARCO` (copie complète, ~4 Go, avant le déménagement d
   - crédit TC illimité gratuit (faille critique) → corrigé
   - commission de 20 % contournable → corrigée, débit désormais atomique et dérivé du prix stocké
   - contournement de l'OTP (en ligne et hors ligne) → corrigé
+- **Sprint 2 terminé (7 juillet 2026)** : Nettoyage du code mort (suppression des 6 écrans financiers obsolètes et du dossier supabase/ redondant), et mise en place complète de l'i18n (FR/EN) sur toute l'application.
 
 ### ✅ Migrations SQL — état réel vérifié en base le 6 juillet 2026
 Vérification directe sur le Supabase de production (API Management, accès autorisé par Cedric le 5/07 au soir) : les migrations 085 et 086 étaient **déjà appliquées** (contrairement à ce que ce document indiquait plus tôt). Les migrations 092, 093, 094 (Sprint 1) et 095 (conflit horaire planifié) ont été **exécutées ce soir**, découpées en petits blocs (l'API Management de Supabase échoue silencieusement ou expire sur des scripts SQL trop longs en un seul envoi — la méthode fiable est le découpage par fonction).
@@ -77,9 +78,6 @@ Reste **non fait**, hors de portée d'un déploiement SQL simple (nécessite `su
 
 ### 🟠 Dette technique connue
 - **103 migrations avec des doublons de numéro** (056×3, 057×2, 058×2, 060×2, 061×2, 062×2) → risque d'ordre d'application non déterministe sur un futur `db reset`.
-- **Deux dossiers `supabase/` distincts dans le repo** : `D:\Mon projet\CAARCO\supabase` (76 migrations, 6 fonctions, ancien modèle Moneroo) et `D:\Mon projet\CAARCO\App\supabase` (103 migrations, 12 fonctions, modèle TC actuel). Le second est le dossier actif — mais la coexistence des deux est une source de confusion évidente et un risque si quelqu'un modifie le mauvais dossier par erreur.
-- **6 écrans du modèle financier abandonné** (Wallet, Recharge, Paiement, PayerTransporteur, Retrait, Encaissement) toujours présents dans le repo bien que hors bundle — motif de refus Play Store si un reviewer les atteint quand même. Suppression bloquée dans l'environnement Cowork, à faire depuis VS Code.
-- Boutons morts pointant vers une route de paiement supprimée (`AccueilScreen`, `SuiviScreen`).
 - **Zéro test automatisé** sur un flux qui gère de l'argent (TC, commission) — risque de régression silencieuse.
 - APK à 52,4 Mo, objectif < 30 Mo pour le Play Store — pas encore optimisé.
 - Bug ouvert non résolu : le bouton "Payer" (achat de TC) dans `MesTokensScreen` ne fait rien — suspicion d'Edge Function `notchpay-init-achat-tc` non déployée ou secrets Notchpay absents côté Supabase. En attente d'un log Metro pour diagnostiquer.

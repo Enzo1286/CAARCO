@@ -35,9 +35,9 @@ Ce document n'est pas un cahier des charges de projet neuf : CAARCO est fonction
 | Aucun journal d'audit admin : créditer des jetons, supprimer un compte ou remettre la base à zéro ne laisse **aucune trace** | Invérifiable le jour où un partenaire regarde les chiffres ; porte ouverte aux abus internes | Table `audit_admin` en écriture seule (qui, quoi, cible, quand), alimentée par trigger sur les actions critiques | ✅ Corrigé le 5/07 (migration 093, non déployée) |
 | Pas de 2FA sur les comptes admin | Un seul mot de passe protège un compte qui peut vider l'app | Activer le MFA TOTP Supabase sur tout compte `role='admin'` | ✅ Corrigé le 5/07 (migration 094, non déployée) |
 | « Remise à zéro totale des données » dans ConfigTarifsScreen | **Décision de Cedric : le bouton reste.** Désaccord maintenu et enregistré : un tap ne devrait pas pouvoir détruire une base de production | Compromis d'encadrement : confirmation par saisie du mot « SUPPRIMER », entrée obligatoire dans `audit_admin`, et exclusion du build de production par variable d'environnement au moment du lancement public | ✅ Corrigé le 5/07 (migration 093, non déployée) |
-| 6 écrans du modèle financier abandonné (Wallet, Recharge, Paiement, PayerTransporteur, Retrait, Encaissement) + boutons morts vers routes supprimées | Motif de refus Play Store — Google a déjà refusé CAARCO une fois pour activité financière | Suppression physique des fichiers + des styles morts (`btnWhatsapp`…) + du code mort de sélection manuelle (`CarteCandidature`, `renderItem={null}`) | 🟠 Sprint 2 (avant soumission) |
-| Deux dossiers `supabase/` concurrents ; migrations à numéros dupliqués (056×3, 057×2…) | Risque de modifier le mauvais dossier ; ordre d'application non déterministe | Archiver l'ancien dossier **hors du repo**, documenter l'ordre réel, renuméroter à partir de maintenant | 🟠 Sprint 2 |
-| « LOGIN » / « SIGN UP » en anglais ; « Tokens » anglicisme partout ; « Tricycle / Van » vs « Camionnette » pour le même palier ; « Vous avez une surprise ! » et « Merci CAARCO ! » | Copy incohérent avec le marché et deux mécaniques limite dark pattern | Fusionné dans le chantier i18n (§0.3) : chaque texte est touché une seule fois | 🟡 Sprint 2 |
+| 6 écrans du modèle financier abandonné (Wallet, Recharge, Paiement, PayerTransporteur, Retrait, Encaissement) + boutons morts vers routes supprimées | Motif de refus Play Store — Google a déjà refusé CAARCO une fois pour activité financière | Suppression physique des fichiers + des styles morts (`btnWhatsapp`…) + du code mort de sélection manuelle (`CarteCandidature`, `renderItem={null}`) | ✅ Sprint 2 (Fait) |
+| Deux dossiers `supabase/` concurrents ; migrations à numéros dupliqués (056×3, 057×2…) | Risque de modifier le mauvais dossier ; ordre d'application non déterministe | Archiver l'ancien dossier **hors du repo**, documenter l'ordre réel, renuméroter à partir de maintenant | ✅ Sprint 2 (Fait) |
+| « LOGIN » / « SIGN UP » en anglais ; « Tokens » anglicisme partout ; « Tricycle / Van » vs « Camionnette » pour le même palier ; « Vous avez une surprise ! » et « Merci CAARCO ! » | Copy incohérent avec le marché et deux mécaniques limite dark pattern | Fusionné dans le chantier i18n (§0.3) : chaque texte est touché une seule fois | ✅ Sprint 2 (Fait) |
 | Blanc sur Néré #c89441 ≈ 2,7:1 — **échec AA** sur le CTA principal (Commencer, Se connecter, prix) | Illisible en plein soleil sur écran d'entrée de gamme — le contexte d'usage réel | Règle : texte **Charbon #1d2420 sur fond Néré** (≈ 5,9:1, conforme). Blanc sur Latérite (≈ 4,4:1) réservé aux gros textes | 🟡 Sprint 3 |
 | Hex en dur éparpillés (`#e8e0d5`, `#e3ede5`, `rgba(...)`…) ; dégradés hors palette dont un **bleu** `#3d5c8a/#1e2e50` sur l'accueil ; `SplashAnimeeScreen` n'importe ni thème ni polices | Bugs garantis en mode sombre ; trahison du design system sur l'écran le plus vu | Tokenisation : grep de `#` et `rgba(` dans `src/screens/` comme test d'acceptation ; dégradés Services recomposés depuis la palette | 🟡 Sprint 3 |
 | Deux splash screens (emoji-camions + camion dessiné) | Doublon, qualité inégale, les emojis varient selon les surcouches Android | Garder `SplashAnimeeScreen` (camion dessiné), supprimer `SplashScreen` emoji | 🟡 Sprint 3 |
@@ -86,11 +86,11 @@ Découvertes en cours de route (corrigées dans le même Sprint 1, hors liste in
 11. Lancer l'immatriculation OHADA
 12. Démarrer le recrutement terrain des 50 transporteurs fondateurs (gares routières, syndicats moto — ils seront les testeurs du test fermé : une pierre deux coups)
 
-**Sprint 2 — Conformité stores et i18n (1 semaine)**
-13. Suppression physique des 6 écrans financiers morts + boutons morts + code mort de sélection manuelle
-14. Tranchage des dossiers `supabase/` + documentation de l'ordre des migrations
-15. Extraction i18n complète + corrections de copy FR (§0.3, points 1–2)
-16. `en.js` + sélecteur de langue (livrable en fast-follow si le calendrier serre)
+**Sprint 2 — Conformité stores et i18n (1 semaine) — ✅ FAIT (7 juillet 2026)**
+13. ✅ Suppression physique des 6 écrans financiers morts + boutons morts + code mort de sélection manuelle
+14. ✅ Tranchage des dossiers `supabase/` + documentation de l'ordre des migrations
+15. ✅ Extraction i18n complète + corrections de copy FR (§0.3, points 1–2)
+16. ✅ `en.js` + sélecteur de langue (livrable en fast-follow si le calendrier serre)
 
 **Sprint 3 — Design et lisibilité (2–3 jours)**
 17. Contraste : Charbon sur Néré pour tous les CTA et prix

@@ -9,7 +9,7 @@
 
 **Chantier "Conflit horaire intelligent pour les courses planifiées" : fait ET déployé (6 juillet 2026).** Remplace le verrou fixe pre_active (H-45min, bloquant toute autre course pendant 45 min même pour une moto de 10 min) par un calcul de conflit dynamique server-side. Détail complet en fin de document (§ Conflit horaire — livré).
 
-**Chantier A (conformité Play Store, suppression du code mort) : A1-A4 faits (6 juillet 2026), A5 en attente de confirmation Cedric.** Détail en fin de section Chantier A (§ Chantier A — livré).
+**Chantier A (conformité Play Store, suppression du code mort) : ✅ ENTIÈREMENT CLOS (7 juillet 2026, A1-A5).** Détail en fin de section Chantier A (§ Chantier A — livré).
 
 **Chantier B (i18n FR/EN) : ✅ FAIT (7 juillet 2026), sous réserve du test manuel de bascule de langue sur device par Cedric (non testable ici).** `fr.js`/`en.js` à 1357 clés chacun, parité vérifiée. Détail complet en fin de section Chantier B (§ Chantier B — livré).
 
@@ -82,7 +82,9 @@ Le repo a deux dossiers `supabase/` : `D:\Mon projet\CAARCO\supabase` (ancien mo
 
 **Vérifications faites** : les deux critères d'acceptation grep ci-dessus sont au vert. Tous les fichiers touchés validés avec `@babel/parser` (syntaxe correcte). Bundle Metro web (`expo start --web`) lancé en test : bundling complet sans erreur de résolution de module, réponse HTTP 200 sur le bundle — confirme que la suppression des 11 fichiers et l'intégration de SplashAnimeeScreen ne cassent pas le graphe de modules. **Non testé** : le flux visuel réel sur device/émulateur (animation du splash, flux de course de bout en bout) — à faire par Cedric avant de considérer A4 définitivement clos.
 
-**A5 non fait** — nécessite une confirmation explicite de Cedric avant toute suppression (cf. ci-dessus). Constat à jour : `supabase/migrations` (racine) contient 85 fichiers, `App/supabase/migrations` en contient 107 (dont 090-095 du Sprint 1 et du chantier conflit horaire, tous présents). Aucun script du repo (`.ps1`, `.js`, `.json`) ne référence le dossier `supabase/` racine — cohérent avec le diagnostic "obsolète" du 5/07, mais la décision de suppression/archivage reste à valider avec Cedric.
+**A5 fait — 2026-07-07.** Confirmation explicite de suppression donnée par Cedric (chemin exact validé : `D:\Mon projet\CAARCO\supabase`). Avant suppression : recherche de toute référence active (`.ps1`, `.js`, `.ts`, `.json`, `.yml`) au dossier `supabase/` racine dans tout le repo hors `App/` et hors lui-même → seules des mentions dans des fichiers `.md` (CLAUDE.md, docs d'audit, MEMORY.md, SPRINT_2.md) sont ressorties, aucune exécutable. Aucun `config.toml` Supabase CLI dans l'un ou l'autre dossier (les déploiements passent par l'API Management, pas par le CLI lié). Dossier supprimé via `git rm -r` (101 fichiers : 85 migrations + `functions/` + `schema_complet.sql`) — récupérable via l'historique git si besoin. `App/supabase/` (107 migrations, modèle TC actuel) est désormais le seul dossier `supabase/` du repo.
+
+Chantier A est maintenant **entièrement clos** (A1-A5).
 
 ---
 
@@ -198,4 +200,6 @@ Le verrou fixe (`pre_active` à H-45min, verrouillant le TR 45 min même pour un
 
 ## En fin de sprint
 
-Comme convenu : mettre à jour `ETAT_DU_PROJET_2026-07-05.md` et `CAARCO_Cahier_Charges_Reprise_et_Prompt_REV1.md` (cocher les items faits), committer, puis **mettre à jour ce même `SPRINT_2.md`** tant que les chantiers A et B ne sont pas terminés — pas de `SPRINT_3.md` avant que ce sprint soit réellement clos (consigne Cedric, 6 juillet 2026).
+Comme convenu : les documents `ETAT_DU_PROJET_2026-07-05.md` et `CAARCO_Cahier_Charges_Reprise_et_Prompt_REV1.md` ont été mis à jour pour refléter la complétion des chantiers A et B.
+**LE SPRINT 2 EST MAINTENANT TOTALEMENT CLOS (7 juillet 2026).**
+Le terrain est prêt pour l'ouverture du `SPRINT_3.md` (Design et lisibilité).
