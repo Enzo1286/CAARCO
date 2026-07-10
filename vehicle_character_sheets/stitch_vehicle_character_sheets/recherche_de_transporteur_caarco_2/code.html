@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CAARCO - Recherche de transporteur</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&amp;family=Marcellus&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "error": "#ba1a1a",
+                      "surface-container-low": "#f5f3ee",
+                      "surface-tint": "#486551",
+                      "nere": "#c89441",
+                      "foret-30": "#b4c4b9",
+                      "surface-container-highest": "#e4e2dd",
+                      "secondary-fixed-dim": "#a0d2aa",
+                      "manioc": "#fbf9f3",
+                      "surface-container-high": "#eae8e2",
+                      "on-tertiary-fixed": "#291800",
+                      "tertiary-fixed-dim": "#f6bd65",
+                      "inverse-primary": "#aeceb7",
+                      "surface": "#fbf9f3",
+                      "on-secondary-fixed-variant": "#225031",
+                      "on-tertiary-container": "#c99441",
+                      "outline": "#727972",
+                      "on-secondary-container": "#406e4d",
+                      "background": "#fbf9f3",
+                      "inverse-surface": "#30312d",
+                      "on-primary": "#ffffff",
+                      "on-error": "#ffffff",
+                      "laterite": "#b8612e",
+                      "tertiary-container": "#4a3000",
+                      "surface-container-lowest": "#ffffff",
+                      "inverse-on-surface": "#f2f1eb",
+                      "surface-bright": "#fbf9f3",
+                      "on-primary-fixed-variant": "#304d3b",
+                      "primary": "#082516",
+                      "tertiary": "#2e1c00",
+                      "on-surface": "#1b1c19",
+                      "on-surface-variant": "#424843",
+                      "secondary": "#3a6847",
+                      "on-primary-fixed": "#042011",
+                      "nuit": "#0f1411",
+                      "foret": "#1f3b2a",
+                      "surface-dim": "#dcdad4",
+                      "on-error-container": "#93000a",
+                      "primary-container": "#1f3b2a",
+                      "secondary-container": "#bcefc5",
+                      "charbon": "#1d2420",
+                      "on-tertiary": "#ffffff",
+                      "on-background": "#1b1c19",
+                      "foret-90": "#284a36",
+                      "surface-variant": "#e4e2dd",
+                      "on-primary-container": "#86a58f",
+                      "primary-fixed": "#caebd2",
+                      "outline-variant": "#c2c8c1",
+                      "surface-container": "#f0eee8",
+                      "error-container": "#ffdad6",
+                      "brume": "#ece9e0",
+                      "primary-fixed-dim": "#aeceb7",
+                      "secondary-fixed": "#bcefc5",
+                      "tertiary-fixed": "#ffddb0",
+                      "on-tertiary-fixed-variant": "#614000",
+                      "bambou": "#3d6b4a",
+                      "on-secondary-fixed": "#00210d",
+                      "on-secondary": "#ffffff",
+                      "cendre": "#6b6f68"
+              },
+              "borderRadius": {
+                      "DEFAULT": "1rem",
+                      "lg": "2rem",
+                      "xl": "3rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "arret": "16px",
+                      "patio": "32px",
+                      "couloir": "24px",
+                      "souffle": "12px",
+                      "pas": "4px",
+                      "place": "64px",
+                      "pause": "8px",
+                      "parvis": "48px"
+              },
+              "fontFamily": {
+                      "label-mono": [
+                              "JetBrains Mono"
+                      ],
+                      "h3": [
+                              "Marcellus"
+                      ],
+                      "body-semibold": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "h1": [
+                              "Marcellus"
+                      ],
+                      "body-medium": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "price-display": [
+                              "JetBrains Mono"
+                      ],
+                      "lede": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "body": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "h2": [
+                              "Marcellus"
+                      ]
+              },
+              "fontSize": {
+                      "label-mono": [
+                              "13px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h3": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-semibold": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "h1": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-medium": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "price-display": [
+                              "18px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "lede": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h2": [
+                              "36px",
+                              {
+                                      "lineHeight": "44px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        .radar-sweep {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200px;
+            height: 200px;
+            margin-top: -100px;
+            margin-left: -100px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, rgba(188, 239, 197, 0) 0deg, rgba(188, 239, 197, 0.4) 300deg, rgba(188, 239, 197, 0.8) 360deg);
+            animation: radar 2s linear infinite;
+        }
+
+        .radar-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            border: 1px solid rgba(188, 239, 197, 0.2);
+        }
+        
+        .orbit-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 150px;
+            height: 150px;
+            margin-top: -75px;
+            margin-left: -75px;
+            animation: orbit 4s linear infinite;
+        }
+        
+        .orbit-icon {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #bcefc5; /* secondary-fixed */
+        }
+        
+        .orbit-container-2 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 250px;
+            height: 250px;
+            margin-top: -125px;
+            margin-left: -125px;
+            animation: orbit 6s linear infinite reverse;
+        }
+
+        @keyframes radar {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes orbit {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.5; }
+            50% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.5; }
+        }
+        
+        .pulse-text {
+            animation: pulse 2s ease-in-out infinite;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-gradient-to-b from-foret to-charbon min-h-screen flex flex-col items-center justify-center font-body text-on-surface relative overflow-hidden">
+<!-- Top Navigation (Suppressed for transactional wait state, but keeping absolute bare minimum header for context if needed, though strictly we can rely on canvas priority) -->
+<!-- Interactive Canvas Area -->
+<main class="flex-1 w-full flex flex-col items-center justify-center relative z-10 px-couloir max-w-lg mx-auto">
+<!-- Radar Animation Container -->
+<div class="relative w-[300px] h-[300px] mb-place">
+<!-- Concentric Circles -->
+<div class="radar-circle w-[100px] h-[100px]"></div>
+<div class="radar-circle w-[200px] h-[200px]"></div>
+<div class="radar-circle w-[300px] h-[300px]"></div>
+<!-- Sweeping Radar -->
+<div class="radar-sweep"></div>
+<!-- Central Pin -->
+<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-secondary-fixed rounded-full shadow-[0_0_15px_rgba(188,239,197,0.8)] z-20"></div>
+<!-- Orbiting Vehicles -->
+<div class="orbit-container z-20">
+<span class="material-symbols-outlined orbit-icon" data-icon="local_shipping" data-weight="fill">local_shipping</span>
+</div>
+<div class="orbit-container-2 z-20">
+<span class="material-symbols-outlined orbit-icon text-sm" data-icon="airport_shuttle" data-weight="fill">airport_shuttle</span>
+</div>
+</div>
+<!-- Information Card -->
+<div class="bg-surface w-full rounded-xl p-couloir shadow-2xl border border-brume/20 flex flex-col gap-patio">
+<!-- Status Header -->
+<div class="text-center flex flex-col gap-pause">
+<h2 class="font-h3 text-h3 text-foret pulse-text">Recherche d'un transporteur en cours...</h2>
+<p class="font-body text-body text-cendre">Veuillez patienter, nous contactons les chauffeurs à proximité.</p>
+</div>
+<hr class="border-t border-brume w-full"/>
+<!-- Trip Summary -->
+<div class="flex flex-col gap-arret relative">
+<!-- Vertical Progress Line -->
+<div class="absolute left-[11px] top-6 bottom-6 w-[2px] bg-brume"></div>
+<!-- Pickup -->
+<div class="flex items-start gap-souffle relative z-10">
+<div class="w-6 h-6 rounded-full bg-manioc border-2 border-foret flex items-center justify-center mt-1 shrink-0">
+<div class="w-2 h-2 rounded-full bg-foret"></div>
+</div>
+<div class="flex flex-col">
+<span class="font-label-mono text-label-mono text-cendre uppercase">Point de départ</span>
+<span class="font-body-medium text-body-medium text-charbon">Marché Central, Douala</span>
+</div>
+</div>
+<!-- Drop-off -->
+<div class="flex items-start gap-souffle relative z-10">
+<div class="w-6 h-6 rounded-full bg-manioc border-2 border-nere flex items-center justify-center mt-1 shrink-0">
+<div class="w-2 h-2 rounded-full bg-nere"></div>
+</div>
+<div class="flex flex-col">
+<span class="font-label-mono text-label-mono text-cendre uppercase">Destination</span>
+<span class="font-body-medium text-body-medium text-charbon">Port de Kribi, Kribi</span>
+</div>
+</div>
+</div>
+<!-- Action Button -->
+<button class="w-full bg-surface-container-highest text-charbon font-body-semibold text-body-semibold py-souffle px-couloir rounded-full hover:bg-brume transition-colors duration-200 mt-pause flex items-center justify-center gap-pause">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+                Annuler la commande
+            </button>
+</div>
+</main>
+<!-- Background atmospheric elements -->
+<div class="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+<div class="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] bg-foret-90/20 blur-[100px] rounded-full"></div>
+<div class="absolute -bottom-[20%] -right-[10%] w-[60%] h-[60%] bg-charbon/50 blur-[120px] rounded-full"></div>
+</div>
+</body></html>

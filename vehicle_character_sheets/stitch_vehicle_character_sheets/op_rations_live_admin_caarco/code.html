@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CAARCO - Opérations Live</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary-fixed-dim": "#a0d2aa",
+                      "error": "#ba1a1a",
+                      "foret-90": "#284a36",
+                      "background": "#fbf9f3",
+                      "surface-variant": "#e4e2dd",
+                      "on-secondary-container": "#406e4d",
+                      "on-surface-variant": "#424843",
+                      "on-primary-container": "#86a58f",
+                      "inverse-on-surface": "#f2f1eb",
+                      "surface-dim": "#dcdad4",
+                      "primary-fixed": "#caebd2",
+                      "on-primary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-bright": "#fbf9f3",
+                      "on-primary-fixed": "#042011",
+                      "surface-container-low": "#f5f3ee",
+                      "on-surface": "#1b1c19",
+                      "inverse-primary": "#aeceb7",
+                      "bambou": "#3d6b4a",
+                      "surface-tint": "#486551",
+                      "on-secondary-fixed": "#00210d",
+                      "secondary-fixed": "#bcefc5",
+                      "on-tertiary-fixed": "#291800",
+                      "manioc": "#fbf9f3",
+                      "foret-30": "#b4c4b9",
+                      "on-tertiary-fixed-variant": "#614000",
+                      "outline": "#727972",
+                      "surface-container-high": "#eae8e2",
+                      "secondary-container": "#bcefc5",
+                      "tertiary-fixed-dim": "#f6bd65",
+                      "nere": "#c89441",
+                      "inverse-surface": "#30312d",
+                      "tertiary-container": "#4a3000",
+                      "on-primary-fixed-variant": "#304d3b",
+                      "on-error": "#ffffff",
+                      "surface": "#fbf9f3",
+                      "on-secondary": "#ffffff",
+                      "surface-container": "#f0eee8",
+                      "error-container": "#ffdad6",
+                      "brume": "#ece9e0",
+                      "surface-container-highest": "#e4e2dd",
+                      "nuit": "#0f1411",
+                      "on-secondary-fixed-variant": "#225031",
+                      "primary-container": "#1f3b2a",
+                      "laterite": "#b8612e",
+                      "cendre": "#6b6f68",
+                      "foret": "#1f3b2a",
+                      "on-tertiary-container": "#c99441",
+                      "charbon": "#1d2420",
+                      "primary": "#082516",
+                      "on-background": "#1b1c19",
+                      "on-error-container": "#93000a",
+                      "secondary": "#3a6847",
+                      "outline-variant": "#c2c8c1",
+                      "on-tertiary": "#ffffff",
+                      "tertiary": "#2e1c00",
+                      "primary-fixed-dim": "#aeceb7",
+                      "tertiary-fixed": "#ffddb0"
+              },
+              "borderRadius": {
+                      "DEFAULT": "1rem",
+                      "lg": "2rem",
+                      "xl": "3rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "pas": "4px",
+                      "souffle": "12px",
+                      "couloir": "24px",
+                      "arret": "16px",
+                      "pause": "8px",
+                      "patio": "32px",
+                      "place": "64px",
+                      "parvis": "48px"
+              },
+              "fontFamily": {
+                      "h1": [
+                              "Marcellus"
+                      ],
+                      "lede": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "h3": [
+                              "Marcellus"
+                      ],
+                      "body-medium": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "body-semibold": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "body": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "h2": [
+                              "Marcellus"
+                      ],
+                      "price-display": [
+                              "JetBrains Mono"
+                      ],
+                      "label-mono": [
+                              "JetBrains Mono"
+                      ]
+              },
+              "fontSize": {
+                      "h1": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "lede": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h3": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-medium": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-semibold": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h2": [
+                              "36px",
+                              {
+                                      "lineHeight": "44px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "price-display": [
+                              "18px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "label-mono": [
+                              "13px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .map-bg {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none"><rect width="100" height="100" fill="%23f5f3ee"/><path d="M0,50 Q25,30 50,50 T100,50" fill="none" stroke="%23ece9e0" stroke-width="2"/><path d="M20,0 L20,100 M80,0 L80,100" fill="none" stroke="%23ece9e0" stroke-width="1"/></svg>');
+            background-size: cover;
+        }
+        .pulse-live {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(186, 26, 26, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(186, 26, 26, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(186, 26, 26, 0); }
+        }
+        
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body h-screen w-full overflow-hidden flex flex-col md:flex-row">
+<!-- TopAppBar (Web & Mobile, adjusted for map context) -->
+<header class="bg-manioc dark:bg-charbon border-b border-brume dark:border-foret-90 flex justify-between items-center w-full px-couloir py-arret absolute top-0 left-0 z-50 md:hidden shadow-sm">
+<button class="text-foret dark:text-secondary-fixed-dim p-pause">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="font-h3 text-h3 text-foret dark:text-secondary-fixed-dim">CAARCO</h1>
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center font-h1 text-sm text-foret border border-brume">
+            DP
+        </div>
+</header>
+<!-- SideNav (Web) -->
+<aside class="hidden md:flex flex-col h-full w-80 rounded-r-lg bg-manioc border-r border-brume dark:border-foret-90 shadow-lg py-patio z-40 relative flex-shrink-0">
+<div class="px-couloir mb-patio">
+<h1 class="font-h2 text-h2 text-foret">CAARCO</h1>
+<div class="flex items-center gap-arret mt-arret">
+<div class="w-12 h-12 rounded-full bg-surface-variant flex items-center justify-center font-h1 text-lg text-foret border border-brume">
+                    AU
+                </div>
+<div>
+<p class="font-body-semibold text-body-semibold text-charbon">CAARCO Admin</p>
+<p class="font-label-mono text-label-mono text-cendre">Super User</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 overflow-y-auto">
+<ul class="space-y-pas">
+<li>
+<a class="flex items-center gap-arret text-char dark:text-foret-30 mx-souffle px-arret py-souffle hover:bg-brume dark:hover:bg-foret-90 transition-all duration-200 ease-in-out rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-body-medium text-body-medium">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-arret bg-foret text-on-primary rounded-lg mx-souffle px-arret py-souffle transition-all duration-200 ease-in-out shadow-sm" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="font-body-medium text-body-medium">Operations</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-arret text-char dark:text-foret-30 mx-souffle px-arret py-souffle hover:bg-brume dark:hover:bg-foret-90 transition-all duration-200 ease-in-out rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-body-medium text-body-medium">Users</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-arret text-char dark:text-foret-30 mx-souffle px-arret py-souffle hover:bg-brume dark:hover:bg-foret-90 transition-all duration-200 ease-in-out rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+<span class="font-body-medium text-body-medium">KYC</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-arret text-char dark:text-foret-30 mx-souffle px-arret py-souffle hover:bg-brume dark:hover:bg-foret-90 transition-all duration-200 ease-in-out rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-body-medium text-body-medium">Finances</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-arret text-char dark:text-foret-30 mx-souffle px-arret py-souffle hover:bg-brume dark:hover:bg-foret-90 transition-all duration-200 ease-in-out rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="campaign">campaign</span>
+<span class="font-body-medium text-body-medium">Marketing</span>
+</a>
+</li>
+</ul>
+</nav>
+<div class="px-couloir mt-auto pt-arret border-t border-brume">
+<p class="font-label-mono text-label-mono text-cendre text-center">v1.2.0</p>
+</div>
+</aside>
+<!-- Main Content Area (Map Canvas) -->
+<main class="flex-1 relative h-full w-full bg-surface-container-low overflow-hidden">
+<!-- Map Background (Placeholder) -->
+<div class="absolute inset-0 w-full h-full" data-alt="A top-down view of a detailed city map interface, designed in a modern, light-mode, minimalist style. The map uses soft beige and light green tones, resembling a premium logistics dashboard. Roads are depicted in crisp white, and subtle terrain features are in pale earth tones. The scene is bright and professional." data-location="Douala" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDAiRjFtez08lqkBz6Ny4rXSUAbbXqSHpqQu-tcuaQTKGCDm8TX80V_I0kkS7fnwvFXeTvd8HqScghn3B-7KKeZLv3gjzSt9CwbVQsS7Ul5RIAOZSeV1bCwMolS0OAg7Zp0kcVytdr2cUBcGQN6UTBM9ygcwSqkHlq7knUcSbbw9zS7z26hIilTIYNFhVP9gntLQkjqYFUIrFaMzfnA21a0IEEFV2Q9Ol9wB_E_U7xutGipY6XzkiM1')"></div>
+<!-- Overlays Layer -->
+<div class="absolute inset-0 z-10 pointer-events-none flex flex-col pt-[72px] md:pt-0">
+<!-- Top Controls (Floating) -->
+<div class="p-couloir flex flex-col md:flex-row justify-between items-start md:items-center gap-arret pointer-events-auto w-full max-w-7xl mx-auto">
+<!-- Title & Live Badge -->
+<div class="flex items-center gap-arret bg-blanc/90 backdrop-blur-md px-couloir py-souffle rounded-full border border-brume shadow-[0px_4px_12px_rgba(29,36,32,0.05)]">
+<h2 class="font-h3 text-h3 text-charbon m-0">Opérations Live</h2>
+<div class="flex items-center gap-pause bg-error-container text-on-error-container px-souffle py-pas rounded-full pulse-live">
+<div class="w-2 h-2 rounded-full bg-error"></div>
+<span class="font-label-mono text-label-mono font-bold tracking-wider">LIVE</span>
+</div>
+</div>
+<!-- Floating Stat Bar -->
+<div class="flex flex-wrap items-center gap-souffle bg-blanc/90 backdrop-blur-md p-souffle rounded-full border border-brume shadow-[0px_4px_12px_rgba(29,36,32,0.05)]">
+<div class="flex items-center gap-pause px-souffle border-r border-brume last:border-r-0">
+<span class="material-symbols-outlined text-bambou text-sm" data-icon="local_shipping">local_shipping</span>
+<div class="flex flex-col">
+<span class="font-label-mono text-[10px] text-cendre uppercase">TR en ligne</span>
+<span class="font-price-display text-price-display text-charbon">42</span>
+</div>
+</div>
+<div class="flex items-center gap-pause px-souffle border-r border-brume last:border-r-0">
+<span class="material-symbols-outlined text-nere text-sm" data-icon="route">route</span>
+<div class="flex flex-col">
+<span class="font-label-mono text-[10px] text-cendre uppercase">Courses actives</span>
+<span class="font-price-display text-price-display text-charbon">12</span>
+</div>
+</div>
+<div class="flex items-center gap-pause px-souffle">
+<span class="material-symbols-outlined text-laterite text-sm" data-icon="package_2">package_2</span>
+<div class="flex flex-col">
+<span class="font-label-mono text-[10px] text-cendre uppercase">En livraison</span>
+<span class="font-price-display text-price-display text-charbon">8</span>
+</div>
+</div>
+</div>
+<!-- Search Bar -->
+<div class="relative w-full md:w-auto min-w-[300px]">
+<span class="material-symbols-outlined absolute left-souffle top-1/2 -translate-y-1/2 text-cendre" data-icon="search">search</span>
+<input class="w-full bg-blanc/90 backdrop-blur-md border border-brume rounded-full py-souffle pl-[40px] pr-couloir font-body text-body text-charbon focus:outline-none focus:border-foret focus:ring-1 focus:ring-foret shadow-[0px_4px_12px_rgba(29,36,32,0.05)] placeholder:text-cendre" placeholder="Rechercher TR, ID Course..." type="text"/>
+</div>
+</div>
+<!-- Map Markers (Simulated) -->
+<div class="flex-1 relative w-full h-full">
+<!-- Marker 1 (Transporter Online) -->
+<div class="absolute top-[30%] left-[40%] transform -translate-x-1/2 -translate-y-1/2 pointer-events-auto cursor-pointer group">
+<div class="w-10 h-10 bg-bambou text-on-primary rounded-full flex items-center justify-center shadow-md border-2 border-blanc group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-sm" data-icon="local_shipping">local_shipping</span>
+</div>
+<div class="absolute -bottom-1 -right-1 w-3 h-3 bg-secondary-fixed rounded-full border border-blanc"></div>
+</div>
+<!-- Marker 2 (Active Mission Line) -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none" style="z-index: 0;">
+<path class="animate-[dash_20s_linear_infinite]" d="M 300 250 C 400 200, 500 350, 600 300" fill="none" stroke="#c89441" stroke-dasharray="6 6" stroke-width="3"></path>
+<style>@keyframes dash { to { stroke-dashoffset: -100; } }</style>
+</svg>
+<div class="absolute top-[250px] left-[300px] transform -translate-x-1/2 -translate-y-1/2 pointer-events-auto cursor-pointer">
+<div class="w-4 h-4 bg-charbon rounded-full border-2 border-blanc shadow-sm"></div>
+</div>
+<div class="absolute top-[300px] left-[600px] transform -translate-x-1/2 -translate-y-1/2 pointer-events-auto cursor-pointer">
+<div class="w-6 h-6 bg-laterite text-on-primary rounded-sm flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-[12px]" data-icon="location_on">location_on</span>
+</div>
+</div>
+</div>
+<!-- Bottom Area: Legend & Mini Cards -->
+<div class="mt-auto p-couloir pointer-events-auto w-full flex flex-col gap-arret">
+<!-- Legend -->
+<div class="self-end bg-blanc/90 backdrop-blur-md p-souffle rounded-lg border border-brume shadow-sm flex flex-col gap-pause mb-arret">
+<div class="flex items-center gap-pause">
+<div class="w-3 h-3 rounded-full bg-bambou border border-blanc"></div>
+<span class="font-label-mono text-label-mono text-cendre">TR Disponible</span>
+</div>
+<div class="flex items-center gap-pause">
+<div class="w-4 h-1 bg-nere"></div>
+<span class="font-label-mono text-label-mono text-cendre">Course Active</span>
+</div>
+<div class="flex items-center gap-pause">
+<div class="w-3 h-3 bg-laterite rounded-sm"></div>
+<span class="font-label-mono text-label-mono text-cendre">Point de Livraison</span>
+</div>
+</div>
+<!-- Active Missions Horizontal Scroll -->
+<div class="w-full overflow-x-auto hide-scrollbar pb-souffle">
+<div class="flex gap-arret w-max">
+<!-- Card 1 -->
+<div class="bg-blanc border border-brume rounded-lg p-arret shadow-[0px_4px_12px_rgba(29,36,32,0.05)] w-[280px] flex-shrink-0 cursor-pointer hover:border-foret transition-colors">
+<div class="flex justify-between items-start mb-souffle">
+<div>
+<span class="font-label-mono text-[10px] text-cendre uppercase block">ID Course</span>
+<span class="font-price-display text-price-display text-charbon block">#CR-8472</span>
+</div>
+<div class="bg-nereSoft text-on-tertiary-container px-pause py-pas rounded uppercase font-label-mono text-[10px] flex items-center gap-1 border border-nere/20">
+<span class="material-symbols-outlined text-[10px]" data-icon="route">route</span> En transit
+                                </div>
+</div>
+<div class="flex items-center gap-souffle border-t border-brume pt-souffle">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center font-h3 text-xs text-foret border border-brume">
+                                    SA
+                                </div>
+<div class="flex-1 overflow-hidden">
+<p class="font-body-semibold text-body-semibold text-charbon truncate">Samuel E.</p>
+<p class="font-label-mono text-[10px] text-cendre truncate">Camionnette 12m3</p>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-blanc border border-brume rounded-lg p-arret shadow-[0px_4px_12px_rgba(29,36,32,0.05)] w-[280px] flex-shrink-0 cursor-pointer hover:border-foret transition-colors">
+<div class="flex justify-between items-start mb-souffle">
+<div>
+<span class="font-label-mono text-[10px] text-cendre uppercase block">ID Course</span>
+<span class="font-price-display text-price-display text-charbon block">#CR-8473</span>
+</div>
+<div class="bg-lateriteSoft text-laterite px-pause py-pas rounded uppercase font-label-mono text-[10px] flex items-center gap-1 border border-laterite/20" style="background-color: rgba(184, 97, 46, 0.1);">
+<span class="material-symbols-outlined text-[10px]" data-icon="package_2">package_2</span> Chargement
+                                </div>
+</div>
+<div class="flex items-center gap-souffle border-t border-brume pt-souffle">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center font-h3 text-xs text-foret border border-brume">
+                                    MD
+                                </div>
+<div class="flex-1 overflow-hidden">
+<p class="font-body-semibold text-body-semibold text-charbon truncate">Marie D.</p>
+<p class="font-label-mono text-[10px] text-cendre truncate">Fourgon 20m3</p>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-blanc border border-brume rounded-lg p-arret shadow-[0px_4px_12px_rgba(29,36,32,0.05)] w-[280px] flex-shrink-0 cursor-pointer hover:border-foret transition-colors opacity-70">
+<div class="flex justify-between items-start mb-souffle">
+<div>
+<span class="font-label-mono text-[10px] text-cendre uppercase block">ID Course</span>
+<span class="font-price-display text-price-display text-cendre block">#CR-8470</span>
+</div>
+<div class="bg-bambou/10 text-bambou px-pause py-pas rounded uppercase font-label-mono text-[10px] flex items-center gap-1 border border-bambou/20">
+<span class="material-symbols-outlined text-[10px]" data-icon="check_circle">check_circle</span> Livré
+                                </div>
+</div>
+<div class="flex items-center gap-souffle border-t border-brume pt-souffle">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center font-h3 text-xs text-cendre border border-brume">
+                                    JP
+                                </div>
+<div class="flex-1 overflow-hidden">
+<p class="font-body-semibold text-body-semibold text-cendre truncate">Jean P.</p>
+<p class="font-label-mono text-[10px] text-cendre/70 truncate">Moto Cargo</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

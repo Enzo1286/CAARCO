@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Opérations en temps réel - Terroir Moderne</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Marcellus&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            font-feature-settings: 'liga';
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#f0eee8",
+                        "on-secondary-fixed-variant": "#225031",
+                        "primary-container": "#1f3b2a",
+                        "nuit": "#0f1411",
+                        "error-container": "#ffdad6",
+                        "brume": "#ece9e0",
+                        "surface-container-highest": "#e4e2dd",
+                        "tertiary-container": "#4a3000",
+                        "inverse-surface": "#30312d",
+                        "surface": "#fbf9f3",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#304d3b",
+                        "on-error": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "primary": "#082516",
+                        "on-background": "#1b1c19",
+                        "tertiary-fixed": "#ffddb0",
+                        "secondary": "#3a6847",
+                        "outline-variant": "#c2c8c1",
+                        "on-tertiary": "#ffffff",
+                        "tertiary": "#2e1c00",
+                        "primary-fixed-dim": "#aeceb7",
+                        "cendre": "#6b6f68",
+                        "laterite": "#b8612e",
+                        "charbon": "#1d2420",
+                        "foret": "#1f3b2a",
+                        "on-tertiary-container": "#c99441",
+                        "primary-fixed": "#caebd2",
+                        "surface-dim": "#dcdad4",
+                        "inverse-on-surface": "#f2f1eb",
+                        "on-primary-container": "#86a58f",
+                        "surface-variant": "#e4e2dd",
+                        "on-secondary-container": "#406e4d",
+                        "on-surface-variant": "#424843",
+                        "foret-90": "#284a36",
+                        "background": "#fbf9f3",
+                        "secondary-fixed-dim": "#a0d2aa",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#eae8e2",
+                        "outline": "#727972",
+                        "on-tertiary-fixed-variant": "#614000",
+                        "on-tertiary-fixed": "#291800",
+                        "manioc": "#fbf9f3",
+                        "foret-30": "#b4c4b9",
+                        "tertiary-fixed-dim": "#f6bd65",
+                        "nere": "#c89441",
+                        "secondary-container": "#bcefc5",
+                        "surface-tint": "#486551",
+                        "surface-container-low": "#f5f3ee",
+                        "on-surface": "#1b1c19",
+                        "inverse-primary": "#aeceb7",
+                        "bambou": "#3d6b4a",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#fbf9f3",
+                        "on-primary-fixed": "#042011",
+                        "secondary-fixed": "#bcefc5",
+                        "on-secondary-fixed": "#00210d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "souffle": "12px",
+                        "couloir": "24px",
+                        "arret": "16px",
+                        "pas": "4px",
+                        "place": "64px",
+                        "parvis": "48px",
+                        "pause": "8px",
+                        "patio": "32px"
+                    },
+                    "fontFamily": {
+                        "body-semibold": ["Plus Jakarta Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "h2": ["Marcellus"],
+                        "price-display": ["JetBrains Mono"],
+                        "label-mono": ["JetBrains Mono"],
+                        "h1": ["Marcellus"],
+                        "lede": ["Plus Jakarta Sans"],
+                        "h3": ["Marcellus"],
+                        "body-medium": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-semibold": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "body": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "h2": ["36px", {"lineHeight": "44px", "fontWeight": "400"}],
+                        "price-display": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                        "label-mono": ["13px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "400"}],
+                        "h1": ["48px", {"lineHeight": "56px", "fontWeight": "400"}],
+                        "lede": ["20px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "h3": ["24px", {"lineHeight": "32px", "fontWeight": "400"}],
+                        "body-medium": ["16px", {"lineHeight": "24px", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface h-screen w-full overflow-hidden flex flex-col md:flex-row">
+<!-- Mobile TopAppBar (from JSON) -->
+<header class="md:hidden w-full top-0 sticky border-b border-brume bg-surface flat no shadows flex justify-between items-center px-couloir py-souffle z-50">
+<div class="flex items-center gap-souffle">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden border border-brume">
+<img class="w-full h-full object-cover" data-alt="A sophisticated headshot of an administrator in a well-lit office, embodying a modern corporate identity with natural earth tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2s_P1wxutucVxc6LgrU30fju0rlc4igtYxRdrCe1hzMAFVwlZBZsySxhOUkobodZEEiXMkv7jHQiy_vYb5KnGFm8p8_yHYkxHRoBWPyPeo6cl8A-SPBkX1dwzBX5E0rBEMIPjY0t14-QGA3SDCf6KBTGUHNn9Yx6Wh_MQSC5blEiOB0Qd8mpQrddvrRx1PKUFtb6_r-l0Pn8W33zq3dgTL1w0MVxx0GmZXoxn-v-aB9XXKvSlmzKg"/>
+</div>
+<span class="font-h3 text-h3 text-primary">Terroir Moderne</span>
+</div>
+<button class="hover:bg-surface-container-low transition-colors active:scale-95 duration-100 p-pause rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">notifications</span>
+</button>
+</header>
+<!-- Desktop NavigationDrawer (from JSON) -->
+<aside class="hidden md:flex flex-col h-full w-80 fixed left-0 top-0 bg-surface-container shadow-sm z-40 p-arret">
+<!-- Profile Header -->
+<div class="flex items-center gap-souffle mb-place">
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-brume shrink-0">
+<img alt="Admin Avatar" class="w-full h-full object-cover" data-alt="A professional, high-contrast portrait photo of a logistics administrator in a modern office space, warm natural light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDw7ZGL1Wxdyu0r0CKo8OQN-f0iQ71EwluHbKQpwuYdjQcHh4ysCfI1xmwlgPpwsUb3e5SQna-mEHbeKeSclQP0N3h8p2pPQ59NTP0Ymfi9_G8n9oprpg7kHh82735WRRaj8eUQCcg9R1gEySQBLc8JEWh5b5gZJae9Ez9B37ep7Rn8u5NWTUCPpd8x5lCE8wXLkYKxGE6pXbpWzzYGHYJ0tsIplCB4fAEvuxR8CSrxTEZbOeS8mLBo"/>
+</div>
+<div class="flex flex-col">
+<span class="font-body-semibold text-body-semibold text-primary">Administration</span>
+<span class="font-label-mono text-label-mono text-cendre">Gestion du Fret</span>
+<span class="font-label-mono text-label-mono text-cendre mt-1">Région Centre</span>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="flex flex-col gap-pause flex-1">
+<!-- Active Item: Tableau de bord (Matches "Real-time operations map") -->
+<a class="flex items-center gap-arret p-souffle bg-primary-container text-on-primary-container rounded-lg font-body-semibold active:opacity-80 transition-all group" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span>Tableau de bord</span>
+</a>
+<!-- Inactive Items -->
+<a class="flex items-center gap-arret p-souffle text-on-surface-variant font-body hover:bg-surface-container-highest transition-all rounded-lg active:opacity-80" href="#">
+<span class="material-symbols-outlined">verified_user</span>
+<span>Vérification KYC</span>
+</a>
+<a class="flex items-center gap-arret p-souffle text-on-surface-variant font-body hover:bg-surface-container-highest transition-all rounded-lg active:opacity-80" href="#">
+<span class="material-symbols-outlined">gavel</span>
+<span>Litiges &amp; Support</span>
+</a>
+<a class="flex items-center gap-arret p-souffle text-on-surface-variant font-body hover:bg-surface-container-highest transition-all rounded-lg active:opacity-80" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span>Finances</span>
+</a>
+<a class="flex items-center gap-arret p-souffle text-on-surface-variant font-body hover:bg-surface-container-highest transition-all rounded-lg active:opacity-80" href="#">
+<span class="material-symbols-outlined">campaign</span>
+<span>Marketing</span>
+</a>
+<a class="flex items-center gap-arret p-souffle text-on-surface-variant font-body hover:bg-surface-container-highest transition-all rounded-lg active:opacity-80 mt-auto" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Paramètres</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Canvas (The Map View) -->
+<main class="flex-1 h-full relative md:ml-80 flex flex-col bg-manioc">
+<!-- Top Operations Bar -->
+<div class="absolute top-couloir left-couloir right-couloir z-20 flex flex-col md:flex-row justify-between items-start md:items-center gap-arret pointer-events-none">
+<div class="bg-surface-container-lowest border border-brume rounded-full px-arret py-souffle shadow-[0px_4px_12px_rgba(29,36,32,0.05)] pointer-events-auto flex items-center gap-arret">
+<h1 class="font-h3 text-h3 text-primary hidden md:block">Opérations Directes</h1>
+<div class="w-px h-6 bg-brume hidden md:block"></div>
+<!-- Filters / Status Overview -->
+<div class="flex items-center gap-souffle">
+<button class="flex items-center gap-pause px-souffle py-pas rounded-full bg-laterite/10 hover:bg-laterite/20 transition-colors">
+<div class="w-2 h-2 rounded-full bg-laterite"></div>
+<span class="font-label-mono text-label-mono text-charbon uppercase">12 Attente</span>
+</button>
+<button class="flex items-center gap-pause px-souffle py-pas rounded-full bg-bambou/10 hover:bg-bambou/20 transition-colors">
+<div class="w-2 h-2 rounded-full bg-bambou"></div>
+<span class="font-label-mono text-label-mono text-charbon uppercase">8 Acceptée</span>
+</button>
+<button class="flex items-center gap-pause px-souffle py-pas rounded-full bg-foret/10 hover:bg-foret/20 transition-colors">
+<div class="w-2 h-2 rounded-full bg-foret relative">
+<div class="absolute inset-0 bg-foret rounded-full animate-ping opacity-75"></div>
+</div>
+<span class="font-label-mono text-label-mono text-charbon uppercase">24 En Cours</span>
+</button>
+</div>
+</div>
+<!-- Search / Quick Action -->
+<div class="pointer-events-auto">
+<div class="bg-surface-container-lowest border border-brume rounded-full flex items-center px-arret py-souffle shadow-[0px_4px_12px_rgba(29,36,32,0.05)] focus-within:border-foret transition-colors">
+<span class="material-symbols-outlined text-cendre mr-pause">search</span>
+<input class="bg-transparent border-none focus:ring-0 font-body text-body text-primary placeholder-cendre outline-none w-48 md:w-64" placeholder="Rechercher ID ou Transporteur..." type="text"/>
+</div>
+</div>
+</div>
+<!-- The Interactive Map Container -->
+<!-- Note: Using data-location for map generation placeholder -->
+<div class="w-full h-full relative cursor-grab bg-surface-container" data-alt="A clean, minimalist vector-style map of Cameroon, designed for a modern digital dashboard interface. The map uses subtle earth tones, light beige and soft green, avoiding excessive detail, focusing on main arterial routes. High contrast, clean aesthetic, suitable for plotting logistics tracking points." data-location="Cameroon" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDH6KqcwWcpTfvPJhUnrpCFxInEXrvSjPIDiqHD2yGpZ4aRBfKQXL7w_IA4wDFNr3YE8UEscJEzZ5qez7nPtsANGaLX3dqZ6x2vFLO9tvzUI5T7IBYyVkaJNvdzPEHrxRYyEmeG_v3bzjOIcMme8wgeKjst8ethj1gy_W0GLKmhKgLVcAcQ_YyWqVAEKJxfegWhMFufCrGLT5mzJdIfA6Pw0JwpL66FDC8Uf8wr2Ygpk4T1MVTGcdbe')">
+<!-- Simulated Map Markers -->
+<!-- Marker 1: En Cours (Pulse) -->
+<div class="absolute top-[40%] left-[35%] -translate-x-1/2 -translate-y-1/2 group cursor-pointer" onclick="showRideDetails('CM-9021', 'Jean-Pierre N.', 'Camion Froid 02', 'en_cours')">
+<div class="relative flex items-center justify-center">
+<div class="absolute w-8 h-8 bg-foret/30 rounded-full animate-ping"></div>
+<div class="w-4 h-4 bg-foret border-2 border-surface-container-lowest rounded-full shadow-md z-10"></div>
+</div>
+</div>
+<!-- Marker 2: En Attente -->
+<div class="absolute top-[60%] left-[45%] -translate-x-1/2 -translate-y-1/2 group cursor-pointer" onclick="showRideDetails('CM-8812', 'Coopérative Sud', 'Non assigné', 'en_attente')">
+<div class="relative flex items-center justify-center">
+<div class="w-4 h-4 bg-laterite border-2 border-surface-container-lowest rounded-full shadow-md z-10 hover:scale-125 transition-transform"></div>
+</div>
+</div>
+<!-- Marker 3: Acceptée -->
+<div class="absolute top-[25%] left-[55%] -translate-x-1/2 -translate-y-1/2 group cursor-pointer" onclick="showRideDetails('CM-9105', 'Brasseries Dist.', 'Transport Éclair', 'acceptee')">
+<div class="relative flex items-center justify-center">
+<div class="w-4 h-4 bg-bambou border-2 border-surface-container-lowest rounded-full shadow-md z-10 hover:scale-125 transition-transform"></div>
+</div>
+</div>
+<!-- Marker 4: En Cours (Pulse) -->
+<div class="absolute top-[70%] left-[60%] -translate-x-1/2 -translate-y-1/2 group cursor-pointer" onclick="showRideDetails('CM-9044', 'Marché Central', 'Fourgon A1', 'en_cours')">
+<div class="relative flex items-center justify-center">
+<div class="absolute w-8 h-8 bg-foret/30 rounded-full animate-ping"></div>
+<div class="w-4 h-4 bg-foret border-2 border-surface-container-lowest rounded-full shadow-md z-10"></div>
+</div>
+</div>
+<!-- Map Controls (Zoom/etc) -->
+<div class="absolute bottom-place right-couloir flex flex-col gap-souffle">
+<div class="bg-surface-container-lowest border border-brume rounded-lg flex flex-col shadow-[0px_4px_12px_rgba(29,36,32,0.05)] overflow-hidden">
+<button class="p-souffle hover:bg-surface-container-low transition-colors border-b border-brume flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">add</span>
+</button>
+<button class="p-souffle hover:bg-surface-container-low transition-colors flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">remove</span>
+</button>
+</div>
+<button class="bg-surface-container-lowest border border-brume rounded-lg p-souffle shadow-[0px_4px_12px_rgba(29,36,32,0.05)] hover:bg-surface-container-low transition-colors flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">my_location</span>
+</button>
+</div>
+</div>
+<!-- Floating Ride Details Panel (Alcôve style) -->
+<div class="absolute bottom-couloir left-couloir md:left-couloir md:bottom-couloir w-[calc(100%-48px)] md:w-96 bg-surface-container-lowest border border-brume rounded-lg shadow-[0px_10px_25px_rgba(15,20,17,0.15)] transform translate-y-full opacity-0 transition-all duration-300 pointer-events-none z-30" id="rideDetailsPanel">
+<!-- Panel Header -->
+<div class="p-arret border-b border-brume flex justify-between items-center bg-manioc/50 rounded-t-lg">
+<div class="flex items-center gap-souffle">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center border border-brume">
+<span class="material-symbols-outlined text-cendre">package</span>
+</div>
+<div>
+<h3 class="font-body-semibold text-body-semibold text-primary" id="panelRideId">CM-0000</h3>
+<p class="font-label-mono text-label-mono text-cendre uppercase mt-pas">Détails Trajet</p>
+</div>
+</div>
+<button class="text-cendre hover:text-primary transition-colors p-pas rounded-full hover:bg-surface-container-low" onclick="closeRideDetails()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Panel Content -->
+<div class="p-arret flex flex-col gap-arret">
+<!-- Status Badge -->
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-label-mono text-cendre uppercase">Statut</span>
+<div class="px-souffle py-pas rounded-sm font-label-mono text-label-mono uppercase tracking-wider flex items-center gap-pause" id="panelStatusBadge">
+<!-- Filled by JS -->
+</div>
+</div>
+<div class="w-full h-px bg-brume"></div>
+<!-- Client Info -->
+<div class="flex items-start gap-souffle">
+<span class="material-symbols-outlined text-cendre mt-1">person</span>
+<div>
+<span class="font-label-mono text-label-mono text-cendre uppercase block mb-pas">Client</span>
+<p class="font-body-medium text-body-medium text-primary" id="panelClientName">Nom du Client</p>
+</div>
+</div>
+<!-- Transporter Info -->
+<div class="flex items-start gap-souffle">
+<span class="material-symbols-outlined text-cendre mt-1">local_shipping</span>
+<div>
+<span class="font-label-mono text-label-mono text-cendre uppercase block mb-pas">Transporteur</span>
+<p class="font-body-medium text-body-medium text-primary" id="panelTransporterName">Nom Transporteur</p>
+</div>
+</div>
+<!-- Action Button -->
+<button class="mt-souffle w-full bg-surface-container border border-brume text-primary font-body-semibold text-body-semibold py-souffle rounded-full hover:bg-surface-container-highest transition-colors flex items-center justify-center gap-pause">
+<span>Ouvrir le dossier</span>
+<span class="material-symbols-outlined text-base">arrow_forward</span>
+</button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Hidden on desktop, present for mobile continuity if needed, but per prompt context this is a focused Admin view. I will omit the BottomNavBar to prioritize the map canvas on mobile, adhering to the "Limpide d'abord" rule for focused tasks. Admin ops dashboard is a focused view.) -->
+<!-- Micro-interaction Scripts -->
+<script>
+        const panel = document.getElementById('rideDetailsPanel');
+        const idEl = document.getElementById('panelRideId');
+        const clientEl = document.getElementById('panelClientName');
+        const transEl = document.getElementById('panelTransporterName');
+        const statusBadgeEl = document.getElementById('panelStatusBadge');
+
+        const statusConfig = {
+            'en_attente': { label: 'En attente', colorClass: 'bg-laterite/10 text-laterite', iconColor: 'bg-laterite' },
+            'acceptee': { label: 'Acceptée', colorClass: 'bg-bambou/10 text-bambou', iconColor: 'bg-bambou' },
+            'en_cours': { label: 'En cours', colorClass: 'bg-foret/10 text-foret', iconColor: 'bg-foret' }
+        };
+
+        function showRideDetails(id, client, transporter, statusKey) {
+            // Populate data
+            idEl.textContent = id;
+            clientEl.textContent = client;
+            transEl.textContent = transporter;
+
+            // Configure badge
+            const cfg = statusConfig[statusKey];
+            statusBadgeEl.className = `px-souffle py-pas rounded-sm font-label-mono text-label-mono uppercase tracking-wider flex items-center gap-pause ${cfg.colorClass}`;
+            statusBadgeEl.innerHTML = `
+                <div class="w-2 h-2 rounded-full ${cfg.iconColor}"></div>
+                <span>${cfg.label}</span>
+            `;
+
+            // Animate in
+            panel.classList.remove('translate-y-full', 'opacity-0', 'pointer-events-none');
+            panel.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
+        }
+
+        function closeRideDetails() {
+            // Animate out
+            panel.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
+            panel.classList.add('translate-y-full', 'opacity-0', 'pointer-events-none');
+        }
+    </script>
+</body></html>

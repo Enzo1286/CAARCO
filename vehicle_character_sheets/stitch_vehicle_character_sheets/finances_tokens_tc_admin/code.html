@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Finances - Terroir Moderne</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#f0eee8",
+                        "on-secondary-fixed-variant": "#225031",
+                        "primary-container": "#1f3b2a",
+                        "nuit": "#0f1411",
+                        "error-container": "#ffdad6",
+                        "brume": "#ece9e0",
+                        "surface-container-highest": "#e4e2dd",
+                        "tertiary-container": "#4a3000",
+                        "inverse-surface": "#30312d",
+                        "surface": "#fbf9f3",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#304d3b",
+                        "on-error": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "primary": "#082516",
+                        "on-background": "#1b1c19",
+                        "tertiary-fixed": "#ffddb0",
+                        "secondary": "#3a6847",
+                        "outline-variant": "#c2c8c1",
+                        "on-tertiary": "#ffffff",
+                        "tertiary": "#2e1c00",
+                        "primary-fixed-dim": "#aeceb7",
+                        "cendre": "#6b6f68",
+                        "laterite": "#b8612e",
+                        "charbon": "#1d2420",
+                        "foret": "#1f3b2a",
+                        "on-tertiary-container": "#c99441",
+                        "primary-fixed": "#caebd2",
+                        "surface-dim": "#dcdad4",
+                        "inverse-on-surface": "#f2f1eb",
+                        "on-primary-container": "#86a58f",
+                        "surface-variant": "#e4e2dd",
+                        "on-secondary-container": "#406e4d",
+                        "on-surface-variant": "#424843",
+                        "foret-90": "#284a36",
+                        "background": "#fbf9f3",
+                        "secondary-fixed-dim": "#a0d2aa",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#eae8e2",
+                        "outline": "#727972",
+                        "on-tertiary-fixed-variant": "#614000",
+                        "on-tertiary-fixed": "#291800",
+                        "manioc": "#fbf9f3",
+                        "foret-30": "#b4c4b9",
+                        "tertiary-fixed-dim": "#f6bd65",
+                        "nere": "#c89441",
+                        "secondary-container": "#bcefc5",
+                        "surface-tint": "#486551",
+                        "surface-container-low": "#f5f3ee",
+                        "on-surface": "#1b1c19",
+                        "inverse-primary": "#aeceb7",
+                        "bambou": "#3d6b4a",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#fbf9f3",
+                        "on-primary-fixed": "#042011",
+                        "secondary-fixed": "#bcefc5",
+                        "on-secondary-fixed": "#00210d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "souffle": "12px",
+                        "couloir": "24px",
+                        "arret": "16px",
+                        "pas": "4px",
+                        "place": "64px",
+                        "parvis": "48px",
+                        "pause": "8px",
+                        "patio": "32px"
+                    },
+                    "fontFamily": {
+                        "body-semibold": ["Plus Jakarta Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "h2": ["Marcellus"],
+                        "price-display": ["JetBrains Mono"],
+                        "label-mono": ["JetBrains Mono"],
+                        "h1": ["Marcellus"],
+                        "lede": ["Plus Jakarta Sans"],
+                        "h3": ["Marcellus"],
+                        "body-medium": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-semibold": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "h2": ["36px", { "lineHeight": "44px", "fontWeight": "400" }],
+                        "price-display": ["18px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "label-mono": ["13px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "400" }],
+                        "h1": ["48px", { "lineHeight": "56px", "fontWeight": "400" }],
+                        "lede": ["20px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "h3": ["24px", { "lineHeight": "32px", "fontWeight": "400" }],
+                        "body-medium": ["16px", { "lineHeight": "24px", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.manioc'); color: theme('colors.on-surface'); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .material-symbols-outlined[data-weight="fill"] { font-variation-settings: 'FILL' 1; }
+        /* Chart specific styles */
+        .chart-bar { transition: height 0.3s ease-in-out; }
+        .chart-bar:hover { opacity: 0.8; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body text-body antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen flex">
+<!-- NavigationDrawer (Hidden on mobile) -->
+<nav class="hidden md:flex flex-col h-full w-80 fixed left-0 top-0 bg-surface-container shadow-sm p-arret z-40">
+<div class="flex items-center gap-souffle mb-patio px-souffle pt-souffle">
+<div class="h-12 w-12 rounded-full overflow-hidden border border-brume">
+<img alt="Admin Avatar" class="h-full w-full object-cover" data-alt="A highly professional studio portrait of an African male logistics administrator wearing a tailored earth-toned linen suit. The lighting is soft and corporate, creating a trustworthy and modern business aesthetic against a neutral light grey background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGoE5ikBEYNB-5NiIeL542tDUawlSdSRwdMnq5da021GJMALN7xvv7nc3Y77-40FvhALgP65kJxL9x2gV_S92mb06LJ96mmM0E1smC_Xsu7fWInowFDdZwB5L99jBUfGY-k0zhvaXcBMCoV_tEXpiKdapRZYvOwNTZEAyZ_fbYmhvuATqk8Zk9npALn6l6ZZ0xF11gtclIUewZHXnNHD9-j25Nas4VZTtxp1TCFrb_cuX2ReWu0SUX"/>
+</div>
+<div class="flex flex-col">
+<span class="font-body-semibold text-body-semibold text-on-surface">Administration</span>
+<span class="font-label-mono text-label-mono text-cendre uppercase">Gestion du Fret</span>
+<span class="font-label-mono text-label-mono text-primary-fixed-dim">Région Centre</span>
+</div>
+</div>
+<div class="flex-1 flex flex-col gap-pas overflow-y-auto">
+<a class="text-on-surface-variant font-body hover:bg-surface-container-highest transition-all flex items-center gap-arret px-arret py-souffle rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Tableau de bord
+            </a>
+<a class="text-on-surface-variant font-body hover:bg-surface-container-highest transition-all flex items-center gap-arret px-arret py-souffle rounded-lg" href="#">
+<span class="material-symbols-outlined">verified_user</span>
+                Vérification KYC
+            </a>
+<a class="text-on-surface-variant font-body hover:bg-surface-container-highest transition-all flex items-center gap-arret px-arret py-souffle rounded-lg" href="#">
+<span class="material-symbols-outlined">gavel</span>
+                Litiges &amp; Support
+            </a>
+<a class="bg-primary-container text-on-primary-container rounded-lg font-body-semibold hover:bg-surface-container-highest transition-all active:opacity-80 flex items-center gap-arret px-arret py-souffle" href="#">
+<span class="material-symbols-outlined" data-weight="fill">payments</span>
+                Finances
+            </a>
+<a class="text-on-surface-variant font-body hover:bg-surface-container-highest transition-all flex items-center gap-arret px-arret py-souffle rounded-lg" href="#">
+<span class="material-symbols-outlined">campaign</span>
+                Marketing
+            </a>
+</div>
+<div class="mt-auto pt-arret border-t border-brume">
+<a class="text-on-surface-variant font-body hover:bg-surface-container-highest transition-all flex items-center gap-arret px-arret py-souffle rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Paramètres
+            </a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-80 pb-place md:pb-couloir">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky bg-surface border-b border-brume z-30">
+<div class="flex justify-between items-center px-couloir py-souffle w-full">
+<div class="flex items-center gap-arret md:hidden">
+<button class="text-on-surface hover:bg-surface-container-low p-2 rounded-full transition-colors active:scale-95 duration-100">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-brume">
+<img alt="User profile avatar" class="h-full w-full object-cover" data-alt="A highly professional studio portrait of an African male logistics administrator wearing a tailored earth-toned linen suit. The lighting is soft and corporate, creating a trustworthy and modern business aesthetic against a neutral light grey background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBARirV8PnY0H5FPd1DWHS6s1t97RBwacGUo526yyb2o4It25twRI5vB2GabiKrdqSCdRFdvOz7oxWDnir0WSgPNLIznNor2zrNuCt8yKh2ipFsaKsKuzhUYVpHehLXH14mBqkRHShIrgbSbvk0_HGtv9X04hS67tRFKxjX2U3aDOwAYx5m5U86p7hN13_iA4GjQP81Hbza6-u5_exAzSXgogWK60zd_oQcCrDSmXuXq8_Sx9xxg8bH"/>
+</div>
+</div>
+<h1 class="font-h3 text-h3 text-primary md:mx-auto">Terroir Moderne</h1>
+<button class="text-primary hover:bg-surface-container-low p-2 rounded-full transition-colors active:scale-95 duration-100 flex items-center justify-center relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-laterite rounded-full"></span>
+</button>
+</div>
+</header>
+<div class="px-couloir py-patio max-w-7xl mx-auto space-y-place">
+<!-- Dashboard Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-arret">
+<div>
+<h2 class="font-h1 text-h1 text-primary">Performances Financières</h2>
+<p class="font-lede text-lede text-cendre mt-pas">Vue d'ensemble des Tokens de Course (TC) et commissions.</p>
+</div>
+<div class="flex gap-souffle">
+<button class="bg-surface-container border border-brume text-on-surface px-arret py-pause rounded-full font-body-medium text-body-medium flex items-center gap-pause hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-[20px]">calendar_month</span>
+                        Ce Mois
+                        <span class="material-symbols-outlined text-[20px]">expand_more</span>
+</button>
+<button class="bg-foret text-foret-30 px-arret py-pause rounded-full font-body-semibold text-body-semibold flex items-center gap-pause hover:bg-foret-90 transition-colors">
+<span class="material-symbols-outlined text-[20px]">download</span>
+                        Rapport
+                    </button>
+</div>
+</div>
+<!-- Key Metrics Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-arret">
+<!-- Total TC Sold -->
+<div class="bg-surface border border-brume rounded-xl p-couloir shadow-[0px_4px_12px_rgba(29,36,32,0.05)] relative overflow-hidden group">
+<div class="absolute -right-8 -top-8 w-32 h-32 bg-primary-container rounded-full opacity-10 group-hover:scale-110 transition-transform duration-500"></div>
+<div class="flex justify-between items-start mb-arret relative z-10">
+<span class="font-label-mono text-label-mono text-cendre uppercase tracking-wider">Volume de Vente</span>
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">token</span>
+</div>
+</div>
+<div class="relative z-10">
+<div class="font-h2 text-h2 text-primary flex items-baseline gap-pas">
+                            1,452,000 <span class="font-price-display text-price-display text-nere">TC</span>
+</div>
+<div class="flex items-center gap-pas mt-pause text-secondary">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<span class="font-body-medium text-body-medium">+12.4%</span>
+<span class="font-body text-body text-cendre">vs mois dernier</span>
+</div>
+</div>
+</div>
+<!-- Total Commissions -->
+<div class="bg-surface border border-brume rounded-xl p-couloir shadow-[0px_4px_12px_rgba(29,36,32,0.05)] relative overflow-hidden group">
+<div class="absolute -right-8 -top-8 w-32 h-32 bg-nere rounded-full opacity-10 group-hover:scale-110 transition-transform duration-500"></div>
+<div class="flex justify-between items-start mb-arret relative z-10">
+<span class="font-label-mono text-label-mono text-cendre uppercase tracking-wider">Commissions Perçues</span>
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-nere">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</div>
+</div>
+<div class="relative z-10">
+<div class="font-h2 text-h2 text-primary flex items-baseline gap-pas">
+                            145,200 <span class="font-price-display text-price-display text-nere">TC</span>
+</div>
+<div class="flex items-center gap-pas mt-pause text-secondary">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<span class="font-body-medium text-body-medium">+8.1%</span>
+<span class="font-body text-body text-cendre">vs mois dernier</span>
+</div>
+</div>
+</div>
+<!-- Active Transporters -->
+<div class="bg-primary border border-primary-container rounded-xl p-couloir shadow-[0px_10px_25px_rgba(15,20,17,0.15)] relative overflow-hidden text-on-primary">
+<div class="flex justify-between items-start mb-arret relative z-10">
+<span class="font-label-mono text-label-mono text-primary-fixed-dim uppercase tracking-wider">Transporteurs Actifs</span>
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-primary-fixed">
+<span class="material-symbols-outlined">local_shipping</span>
+</div>
+</div>
+<div class="relative z-10">
+<div class="font-h2 text-h2">
+                            342
+                        </div>
+<div class="flex items-center gap-pas mt-pause text-primary-fixed-dim">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span class="font-body text-body">28 en cours de validation</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Layout: Chart + Alerts -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-arret">
+<!-- Trend Chart Section -->
+<div class="lg:col-span-2 bg-surface border border-brume rounded-xl p-couloir shadow-[0px_4px_12px_rgba(29,36,32,0.05)] flex flex-col">
+<div class="flex justify-between items-center mb-patio">
+<h3 class="font-h3 text-h3 text-primary">Évolution des Ventes TC</h3>
+<div class="flex gap-souffle">
+<span class="flex items-center gap-pas font-label-mono text-label-mono text-cendre">
+<span class="w-3 h-3 rounded-full bg-foret"></span> Ventes (kTC)
+                            </span>
+<span class="flex items-center gap-pas font-label-mono text-label-mono text-cendre">
+<span class="w-3 h-3 rounded-full bg-nere"></span> Commissions (kTC)
+                            </span>
+</div>
+</div>
+<!-- Simulated Chart -->
+<div class="flex-1 min-h-[300px] flex items-end gap-2 md:gap-4 pt-10 border-b border-l border-brume pb-2 pl-2 relative">
+<!-- Y-Axis labels -->
+<div class="absolute left-[-40px] top-0 bottom-0 flex flex-col justify-between font-label-mono text-label-mono text-cendre py-2 items-end pr-2">
+<span>150</span>
+<span>100</span>
+<span>50</span>
+<span>0</span>
+</div>
+<!-- Chart Bars -->
+<!-- Week 1 -->
+<div class="flex-1 flex flex-col items-center justify-end h-full group relative">
+<div class="w-full max-w-[40px] flex items-end gap-1 px-1 h-[60%]">
+<div class="w-1/2 bg-foret rounded-t-sm h-full chart-bar group-hover:bg-primary"></div>
+<div class="w-1/2 bg-nere rounded-t-sm h-[20%] chart-bar group-hover:bg-tertiary-container"></div>
+</div>
+<span class="absolute -bottom-8 font-label-mono text-label-mono text-cendre">S1</span>
+</div>
+<!-- Week 2 -->
+<div class="flex-1 flex flex-col items-center justify-end h-full group relative">
+<div class="w-full max-w-[40px] flex items-end gap-1 px-1 h-[75%]">
+<div class="w-1/2 bg-foret rounded-t-sm h-full chart-bar group-hover:bg-primary"></div>
+<div class="w-1/2 bg-nere rounded-t-sm h-[30%] chart-bar group-hover:bg-tertiary-container"></div>
+</div>
+<span class="absolute -bottom-8 font-label-mono text-label-mono text-cendre">S2</span>
+</div>
+<!-- Week 3 -->
+<div class="flex-1 flex flex-col items-center justify-end h-full group relative">
+<div class="w-full max-w-[40px] flex items-end gap-1 px-1 h-[50%]">
+<div class="w-1/2 bg-foret rounded-t-sm h-full chart-bar group-hover:bg-primary"></div>
+<div class="w-1/2 bg-nere rounded-t-sm h-[15%] chart-bar group-hover:bg-tertiary-container"></div>
+</div>
+<span class="absolute -bottom-8 font-label-mono text-label-mono text-cendre">S3</span>
+</div>
+<!-- Week 4 -->
+<div class="flex-1 flex flex-col items-center justify-end h-full group relative">
+<div class="w-full max-w-[40px] flex items-end gap-1 px-1 h-[90%]">
+<div class="w-1/2 bg-foret rounded-t-sm h-full chart-bar group-hover:bg-primary"></div>
+<div class="w-1/2 bg-nere rounded-t-sm h-[35%] chart-bar group-hover:bg-tertiary-container"></div>
+</div>
+<span class="absolute -bottom-8 font-label-mono text-label-mono text-cendre">S4</span>
+</div>
+<!-- Horizontal Grid Lines -->
+<div class="absolute left-0 right-0 top-0 border-t border-brume border-dashed w-full"></div>
+<div class="absolute left-0 right-0 top-[33%] border-t border-brume border-dashed w-full"></div>
+<div class="absolute left-0 right-0 top-[66%] border-t border-brume border-dashed w-full"></div>
+</div>
+</div>
+<!-- Low Balance Alerts -->
+<div class="bg-surface border border-brume rounded-xl shadow-[0px_4px_12px_rgba(29,36,32,0.05)] flex flex-col h-[500px]">
+<div class="p-couloir border-b border-brume flex justify-between items-center bg-surface-container-low rounded-t-xl">
+<div>
+<h3 class="font-h3 text-h3 text-primary">Alertes Solde</h3>
+<p class="font-label-mono text-label-mono text-laterite uppercase mt-pas flex items-center gap-pause">
+<span class="material-symbols-outlined text-[16px]">warning</span>
+                                Solde &lt; 1,000 TC
+                            </p>
+</div>
+<div class="w-8 h-8 rounded-full bg-error-container text-on-error-container flex items-center justify-center font-body-semibold text-body-semibold">
+                            3
+                        </div>
+</div>
+<div class="flex-1 overflow-y-auto p-souffle flex flex-col gap-souffle">
+<!-- Alert Item 1 -->
+<div class="p-arret rounded-lg border border-outline-variant hover:border-laterite transition-colors bg-surface cursor-pointer">
+<div class="flex items-center gap-arret">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center font-h2 text-[20px] text-primary shrink-0">
+                                    EK
+                                </div>
+<div class="flex-1 min-w-0">
+<h4 class="font-body-semibold text-body-semibold text-on-surface truncate">Ets. Kengne Transport</h4>
+<p class="font-label-mono text-label-mono text-cendre truncate">ID: TR-8942-DLA</p>
+</div>
+</div>
+<div class="mt-souffle flex justify-between items-end">
+<div class="font-price-display text-price-display text-error">
+                                    250 <span class="text-sm">TC</span>
+</div>
+<button class="text-secondary hover:text-primary font-body-medium text-body-medium flex items-center gap-pas">
+                                    Relancer <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Alert Item 2 -->
+<div class="p-arret rounded-lg border border-outline-variant hover:border-laterite transition-colors bg-surface cursor-pointer">
+<div class="flex items-center gap-arret">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center font-h2 text-[20px] text-primary shrink-0">
+                                    LM
+                                </div>
+<div class="flex-1 min-w-0">
+<h4 class="font-body-semibold text-body-semibold text-on-surface truncate">Logistics Mfoundi</h4>
+<p class="font-label-mono text-label-mono text-cendre truncate">ID: TR-1105-YDE</p>
+</div>
+</div>
+<div class="mt-souffle flex justify-between items-end">
+<div class="font-price-display text-price-display text-error">
+                                    420 <span class="text-sm">TC</span>
+</div>
+<button class="text-secondary hover:text-primary font-body-medium text-body-medium flex items-center gap-pas">
+                                    Relancer <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Alert Item 3 -->
+<div class="p-arret rounded-lg border border-outline-variant hover:border-laterite transition-colors bg-surface cursor-pointer">
+<div class="flex items-center gap-arret">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center font-h2 text-[20px] text-primary shrink-0">
+                                    SB
+                                </div>
+<div class="flex-1 min-w-0">
+<h4 class="font-body-semibold text-body-semibold text-on-surface truncate">Société Bafia Fret</h4>
+<p class="font-label-mono text-label-mono text-cendre truncate">ID: TR-4421-BFA</p>
+</div>
+</div>
+<div class="mt-souffle flex justify-between items-end">
+<div class="font-price-display text-price-display text-error">
+                                    890 <span class="text-sm">TC</span>
+</div>
+<button class="text-secondary hover:text-primary font-body-medium text-body-medium flex items-center gap-pas">
+                                    Relancer <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<div class="p-souffle border-t border-brume text-center">
+<button class="font-body-medium text-body-medium text-primary hover:underline">Voir tous les comptes à risque</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

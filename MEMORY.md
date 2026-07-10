@@ -1,8 +1,8 @@
 # MÉMOIRE PROJET — CAARCO
-Dernière mise à jour : 2026-07-07
+Dernière mise à jour : 2026-07-09
 Emplacement projet  : D:\Mon projet\CAARCO (déplacé le 2026-07-04, ex-D:\CAARCO)
                       ⚠️ Chemin avec ESPACE → toujours mettre les chemins entre guillemets
-Sessions totales    : 11
+Sessions totales    : 15
 Propriétaire        : Cedric Timene — Bafoussam, Cameroun
 
 ═══════════════════════════════════════════════════════════════
@@ -476,6 +476,119 @@ Format dates : ISO 8601
 ---
 
 ## 💬 CONTEXTE DES SESSIONS
+
+Sessions 16-21 (2026-07-08/09) — Refonte visuelle Lots 0-6 (en cours) :
+- Suite directe de la Session 15 ci-dessous. Détail exhaustif (méthode, composants, i18n,
+  DoD, découvertes) volontairement **pas** dupliqué ici — c'est le rôle assumé de
+  `REFONTE_TRACKING.md` (racine du projet) et de la Partie D du CDC
+  (`CAARCO_Cahier_Charges_Reprise_et_Prompt_REV1.md`, sections D.4 à D.10), pensés dès le
+  départ pour qu'une nouvelle conversation reprenne sans relire tout l'historique (D.2bis).
+  Lire ces deux fichiers avant toute nouvelle session de refonte plutôt que ce journal.
+- Statut au 09/07/2026 : Lot 0 (composants transverses, 11 fichiers) et Lots 1-6 clos
+  (Auth, Accueil, Commande client ×2, Post-course client, Fidélité & réservations client —
+  16 écrans au total). Prochain : Lot 7 (tableau de bord & mission transporteur).
+- Seul point à retenir hors détail technique : **découverte au Lot 6** (CDC D.10.5) —
+  le mécanisme de crédit de commission parrainage (`commissions_parrainage`) est mort sous
+  le flux Jetons de Course actif (jamais porté depuis l'ancien modèle séquestre) ; la tuile
+  "Gains de parrainage" de `ParrainageScreen.js` affichera 0 FCFA pour tous les utilisateurs
+  tant que Cedric n'a pas tranché (porter le mécanisme sur le modèle TC, ou ajuster la
+  promesse du texte `parrainageEcran.etape3`). Non corrigé (décision produit hors périmètre
+  visuel), à ajouter à la liste des décisions Cedric en attente aux côtés de C.2 #3 (déjà
+  dans le CDC C.2/D.3.3).
+- Panne d'outillage toujours ouverte, signalée à chaque lot depuis le Lot 4 : `npx babel
+  --presets babel-preset-expo` échoue systématiquement dans l'environnement agent (même sur
+  du code non modifié) — validation syntaxique contournée via `@babel/parser` à chaque lot.
+  À réparer sur poste (Cedric) si la commande standard redevient nécessaire.
+
+Session 15 (2026-07-08) — Décision refonte visuelle complète, avant le lancement :
+- Cedric a tranché : refonte visuelle **complète** de l'app, en s'appuyant largement sur le
+  dossier de maquettes Stitch, et **avant** le lancement Play Store — pas après, pas en
+  parallèle discret. Conséquence directe : les items 21 (assets store) et 22 (test fermé) du
+  Sprint 4 sont repoussés après ce nouveau chantier (item 20, tests SQL, reste indépendant et
+  peut avancer sans attendre). Les 2 corrections backend 🔴 de C.3.2 (trigger `wallets`, RPC
+  `admin_crediter_wallet_client`) restent elles aussi indépendantes — à ne pas laisser traîner
+  en attendant la refonte, ce sont de simples migrations SQL sans lien avec le design.
+- Roadmap §0.4 mise à jour : "Sprint 4bis — Refonte visuelle complète" inséré avant la clôture
+  du Sprint 4 (numérotation des items 20-22 conservée pour ne pas casser les références déjà
+  écrites dans SPRINT_4.md et project_sprint_status.md).
+- Nouvelle **Partie D** créée dans CAARCO_Cahier_Charges_Reprise_et_Prompt_REV1.md : D.0
+  (décision + cadrage, coût calendrier explicite) et D.1 (méthode — la grille C.1-C.4 sert de
+  porte d'entrée : ~75 écrans ✅ utilisables tels quels, 6 🔧 à corriger avant usage, 2 ⚠️
+  toujours hors périmètre tant que Cedric n'a pas tranché, 6 ❌ définitivement exclus).
+  Précision actée : la refonte porte sur la mise en page/ergonomie, PAS sur un changement de
+  design system (palette/typo Atelier CAARCO conservées, sauf décision distincte future sur
+  `terroir_moderne_2`).
+- **D.2 fait dans la foulée (même session, Cedric a dit "maintenant")** : inventaire complet
+  des 64 écrans réels mappés à leurs maquettes Stitch. ~10 écrans sans maquette identifiée
+  (fonctionnalités postérieures à l'export : courses programmées, sécurité admin Sprint 1,
+  campagnes push). ~8 répartitions ambiguës entre plusieurs écrans réels et une maquette
+  partagée (mes_courses_caarco, gestion_des_utilisateurs_admin, op_rations_live_admin*,
+  suivi_en_temps_r_el*, v_rification_kyc_transporteur*) — volontairement pas tranchées ici,
+  à trancher à l'ouverture de chaque lot (D.4) plutôt que devinées. **1 piège de nom vérifié
+  et neutralisé** : `RetraitsAdminScreen.js` affiche en réalité les soldes TC des TR (déjà
+  renommé dans le code, commentaire explicite ligne 13) — sans rapport avec `retrait_de_gains*`
+  (❌) malgré la ressemblance de nom, bon exemple concret de la méthode C.4 appliquée. Rappel
+  des 2 écrans bloqués par décision Cedric en attente : `PointsScreen`/`MerciScreen` (récompense
+  streak) et `PacksAbonnementScreen` (commission paliers) — ne pas les retoucher visuellement
+  avant tranchage produit.
+- **Process pour la suite (Cedric, même session)** : avancer étape par étape, proposer des
+  idées d'amélioration à chaque étape, et fournir à chaque fois un prompt prêt à coller dans
+  une nouvelle conversation pour démarrer la phase suivante (au lieu de tout enchaîner dans une
+  seule conversation qui grossit). 4 améliorations adoptées : fichier de suivi dédié, passe
+  composants avant les écrans, captures avant/après par lot, lever les ambiguïtés en amont
+  plutôt que lot par lot — détail en Partie D.2bis du CDC.
+- **8 ambiguïtés de D.2 levées dans la foulée**, par lecture réelle du titre/contenu de chaque
+  maquette concernée (pas par déduction) : `mes_courses_caarco_1/2` = 2 itérations du même écran
+  (`HistoriqueScreen.js` client uniquement, pas partagé avec le TR ni les courses planifiées) ;
+  `gestion_des_utilisateurs_admin` = `UtilisateursScreen.js` seul ; `op_rations_live_admin` =
+  `CoursesEnCoursAdminScreen.js` et `op_rations_live_admin_caarco` = `OperationsAdminScreen.js`
+  (2 écrans distincts, pas une variante) ; KYC transporteur `_1`=soumission/`_2`=statut ; les 4
+  maquettes "suivi" = toutes `SuiviScreen.js` (vocabulaire passager confirmé, aucune ne va à
+  `NavigationScreen.js`) ; `d_tails_du_trajet` en réalité une variante de `ConfirmationScreen.js`
+  ("Confirmer la commande"), pas de la fiche course planifiée ; `profil_client_caarco`/
+  `profil_transporteur_caarco` mappent tous les deux à `ProfilPublicScreen.js` (écran unique,
+  confirmé partagé entre `ClientNavigator.js` et `TransporteurNavigator.js`). Ceci a aussi
+  confirmé que ~12 écrans (pas 10) n'ont aucune maquette Stitch — la plupart liés aux courses
+  programmées (Session 8, postérieures probables à l'export) ou vues filtrées d'un écran
+  généraliste déjà attribué ailleurs.
+- **`REFONTE_TRACKING.md` créé** à la racine du projet : suivi écran par écran (à faire/en
+  cours/fait/bloqué/sans maquette) + rappel des 2 écrans bloqués et des 2 corrections backend
+  🔴 indépendantes. À mettre à jour à la fin de chaque lot — c'est la source de vérité d'avancement
+  pour la suite, pas la Partie D du CDC (qui garde la méthode et les preuves, pas le statut).
+- Reste à faire, en nouvelles sessions (un chantier = une conversation, avec prompt de
+  démarrage fourni à chaque fois) : D.3 (priorisation/lots, en commençant par le Lot 0 —
+  passe composants transverses), puis D.4+ (lots d'implémentation). Rien codé sur les écrans
+  à ce stade — uniquement le cadrage, l'inventaire et le suivi documentés.
+
+Session 14 (2026-07-08) — Partie C (gouvernance maquettes Stitch) clôturée :
+- C.1-C.3 (classification des ~95 maquettes du dossier `vehicle_character_sheets/`, plan de
+  correction, vérification croisée bilinguisme FR/EN + modèle jetons) déjà faites en amont de
+  cette session — détail complet dans CAARCO_Cahier_Charges_Reprise_et_Prompt_REV1.md.
+- C.3.2 a révélé que le résidu wallet/séquestre n'est pas du code mort inoffensif : le trigger
+  `after_course_terminee` → `verifier_streak_client` écrit réellement dans `wallets` à chaque
+  3ᵉ course/semaine d'un client (🔴 actif aujourd'hui), et la RPC `admin_crediter_wallet_client`
+  est exploitable sans contrôle de rôle serveur si la migration 070 est déployée (🔴).
+- C.4 rédigée : procédure permanente de tri de toute future maquette IA (Stitch ou autre) contre
+  la grille C.1 (❌/⚠️/🔧/✅) avant qu'elle serve de référence de design. Tri fait par l'IA
+  (preuve écrite + vérification du code réel) ; Cedric ne tranche que les ⚠️ et les décisions
+  produit. Règle centrale : « classer par CAPACITÉ, jamais par nom » — pour empêcher qu'un écran
+  déjà aboli (§0.2) revienne sous un nom différent, y compris côté backend (migrations/RPC/
+  triggers, pas seulement le visuel). Rappel court ajouté dans CLAUDE.md (protocole de démarrage
+  obligatoire) pointant vers la procédure C.4 du CDC.
+- Partie C entièrement close (C.1 à C.4). Points ouverts transférés hors Partie C — ce sont des
+  décisions produit/backend, pas de la gouvernance de maquettes : sort des tables orphelines
+  `wallets`/`transactions_wallet`/`retraits`/`jalons_client`, neutralisation du trigger
+  `after_course_terminee`, contrôle de rôle manquant sur `admin_crediter_wallet_client`, bug de
+  perte silencieuse `sexe`/`date_naissance` dans `ProfilScreen.js` — tous en attente de décision
+  Cedric, à traiter en dehors de tout travail sur les maquettes Stitch.
+
+Session 13 (2026-07-08) — Audit complet et préparation production :
+- Réalisation de l'audit de qualité complet (score 9/10).
+- Déploiement réussi des 5 Edge Functions critiques (Notchpay et matching/dispatch push) sur le Supabase de production.
+- Résolution du bug d'achat TC : alignement du minimum à 1000 TC dans `tokensTC.js` (client) pour matcher la validation de l'Edge Function.
+- Résolution du bug PowerShell du script `build-debug.ps1` (réécriture 100% ASCII propre résolvant le parse error PowerShell lié à l'encodage et aux guillemets imbriqués).
+- Vérification du build debug local Gradle de 11 minutes (succès, APK généré à 88,2 Mo).
+- Rédaction du diagnostic qualitatif et du changelog de production final.
 
 Session 12 (2026-07-07) — Sprint 2 Chantier B clos :
 - 5 derniers composants i18n traités (BoutonSignalementCarte, CalendrierNaissance, TutorielPopup,

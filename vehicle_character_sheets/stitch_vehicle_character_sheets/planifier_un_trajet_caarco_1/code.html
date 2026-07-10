@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CAARCO - Détails du Trajet</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "error": "#ba1a1a",
+                      "surface-container-low": "#f5f3ee",
+                      "surface-tint": "#486551",
+                      "nere": "#c89441",
+                      "foret-30": "#b4c4b9",
+                      "surface-container-highest": "#e4e2dd",
+                      "secondary-fixed-dim": "#a0d2aa",
+                      "manioc": "#fbf9f3",
+                      "surface-container-high": "#eae8e2",
+                      "on-tertiary-fixed": "#291800",
+                      "tertiary-fixed-dim": "#f6bd65",
+                      "inverse-primary": "#aeceb7",
+                      "surface": "#fbf9f3",
+                      "on-secondary-fixed-variant": "#225031",
+                      "on-tertiary-container": "#c99441",
+                      "outline": "#727972",
+                      "on-secondary-container": "#406e4d",
+                      "background": "#fbf9f3",
+                      "inverse-surface": "#30312d",
+                      "on-primary": "#ffffff",
+                      "on-error": "#ffffff",
+                      "laterite": "#b8612e",
+                      "tertiary-container": "#4a3000",
+                      "surface-container-lowest": "#ffffff",
+                      "inverse-on-surface": "#f2f1eb",
+                      "surface-bright": "#fbf9f3",
+                      "on-primary-fixed-variant": "#304d3b",
+                      "primary": "#082516",
+                      "tertiary": "#2e1c00",
+                      "on-surface": "#1b1c19",
+                      "on-surface-variant": "#424843",
+                      "secondary": "#3a6847",
+                      "on-primary-fixed": "#042011",
+                      "nuit": "#0f1411",
+                      "foret": "#1f3b2a",
+                      "surface-dim": "#dcdad4",
+                      "on-error-container": "#93000a",
+                      "primary-container": "#1f3b2a",
+                      "secondary-container": "#bcefc5",
+                      "charbon": "#1d2420",
+                      "on-tertiary": "#ffffff",
+                      "on-background": "#1b1c19",
+                      "foret-90": "#284a36",
+                      "surface-variant": "#e4e2dd",
+                      "on-primary-container": "#86a58f",
+                      "primary-fixed": "#caebd2",
+                      "outline-variant": "#c2c8c1",
+                      "surface-container": "#f0eee8",
+                      "error-container": "#ffdad6",
+                      "brume": "#ece9e0",
+                      "primary-fixed-dim": "#aeceb7",
+                      "secondary-fixed": "#bcefc5",
+                      "tertiary-fixed": "#ffddb0",
+                      "on-tertiary-fixed-variant": "#614000",
+                      "bambou": "#3d6b4a",
+                      "on-secondary-fixed": "#00210d",
+                      "on-secondary": "#ffffff",
+                      "cendre": "#6b6f68"
+              },
+              "borderRadius": {
+                      "DEFAULT": "1rem",
+                      "lg": "2rem",
+                      "xl": "3rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "arret": "16px",
+                      "patio": "32px",
+                      "couloir": "24px",
+                      "souffle": "12px",
+                      "pas": "4px",
+                      "place": "64px",
+                      "pause": "8px",
+                      "parvis": "48px"
+              },
+              "fontFamily": {
+                      "label-mono": ["JetBrains Mono"],
+                      "h3": ["Marcellus"],
+                      "body-semibold": ["Plus Jakarta Sans"],
+                      "h1": ["Marcellus"],
+                      "body-medium": ["Plus Jakarta Sans"],
+                      "price-display": ["JetBrains Mono"],
+                      "lede": ["Plus Jakarta Sans"],
+                      "body": ["Plus Jakarta Sans"],
+                      "h2": ["Marcellus"]
+              },
+              "fontSize": {
+                      "label-mono": ["13px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "400"}],
+                      "h3": ["24px", {"lineHeight": "32px", "fontWeight": "400"}],
+                      "body-semibold": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                      "h1": ["48px", {"lineHeight": "56px", "fontWeight": "400"}],
+                      "body-medium": ["16px", {"lineHeight": "24px", "fontWeight": "500"}],
+                      "price-display": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                      "lede": ["20px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "body": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "h2": ["36px", {"lineHeight": "44px", "fontWeight": "400"}]
+              }
+            }
+          }
+        }
+      </script>
+<style>.bottom-sheet {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)
+    }
+.custom-scrollbar::-webkit-scrollbar {
+    width: 0;
+    background: transparent
+    }
+.map-bg {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuC448Mz72ooLo8ZSvwDVQmY14iM4XP8EFczWj_qYUoXZVF4KUMCO-CVqwQxSvdf3q8995GNGqS189KV6nWpd2of0uuD1xc6PMmB9Zkh6NrU-CuqfnGTmEs6GBssoHRxs7ZC0fTOKzQ-O45ZAdeXGJRSPbXoEUrETISOqyhNKSC8GIjZgHO9ARTvCPBm1TZMenYPShRWeLnkKaMMIQfL8Cz49I3oKi5FOAYqo9nzcjJisbr1RzqCZUt3);
+    background-size: cover;
+    background-position: center
+    }</style>
+</head>
+<body class="bg-background text-on-surface font-body h-screen w-screen overflow-hidden flex flex-col relative">
+<!-- Header / TopAppBar -->
+<header class="bg-manioc dark:bg-nuit w-full top-0 sticky border-b border-brume dark:border-on-surface-variant flex justify-between items-center px-couloir py-arret w-full max-w-full z-20">
+<button class="flex items-center justify-center p-pas text-foret dark:text-primary-fixed-dim hover:bg-surface-container rounded-full transition-colors duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">menu</span>
+</button>
+<h1 class="font-h1 text-[24px] md:text-h2 tracking-tight text-foret dark:text-primary-fixed-dim uppercase">CAARCO</h1>
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center border border-brume overflow-hidden">
+<span class="font-h3 text-xs text-foret">USR</span>
+</div>
+</header>
+<!-- Map Canvas Area -->
+<main class="flex-1 relative w-full bg-surface-container-high">
+<!-- Interactive Map Mockup using Background Image -->
+<div class="absolute inset-0 map-bg" data-alt="A clean, minimalist, high-contrast vector street map of a modern African city, featuring precise road networks in soft gray against a cream background, with subtle forest green route highlights and small nere gold markers indicating pickup and dropoff points. The overall aesthetic is professional, functional, and aligns with a high-end logistics service." data-location="Douala" style="">
+<!-- Simulated Route / Markers -->
+<div class="absolute inset-0 bg-gradient-to-b from-transparent to-surface-container/60 pointer-events-none"></div>
+<!-- Marker Start -->
+<div class="absolute top-1/4 left-1/3 flex flex-col items-center animate-bounce shadow-lg">
+<div class="bg-foret text-manioc p-pas rounded-full border-2 border-manioc flex items-center justify-center">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">trip_origin</span>
+</div>
+<div class="w-1 h-8 bg-foret/20 mt-1"></div>
+</div>
+<!-- Marker End -->
+<div class="absolute top-1/2 left-2/3 flex flex-col items-center">
+<div class="bg-nere text-charbon p-pas rounded-full border-2 border-manioc flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">location_on</span>
+</div>
+</div>
+<!-- Path connecting markers -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+<path class="opacity-70" d="M 33% 25% C 45% 25%, 50% 50%, 66% 50%" fill="none" stroke="#1f3b2a" stroke-dasharray="8 8" stroke-width="4"></path>
+</svg>
+</div>
+<!-- Floating Back Button (Contextual) -->
+<button class="absolute top-arret left-arret bg-manioc border border-brume text-foret p-souffle rounded-full shadow-sm hover:bg-surface-variant transition-colors z-10">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">arrow_back</span>
+</button>
+</main>
+<!-- Bottom Sheet / Interactive Canvas -->
+<section class="bottom-sheet absolute bottom-0 left-0 w-full bg-manioc rounded-t-xl shadow-lg border-t border-brume z-30 flex flex-col h-[75vh] md:h-auto md:max-h-[85vh] md:w-[450px] md:left-1/2 md:-translate-x-1/2 md:bottom-arret md:rounded-xl">
+<!-- Handle for mobile drag -->
+<div class="w-full flex justify-center py-pas cursor-grab md:hidden">
+<div class="w-12 h-1 bg-surface-variant rounded-full mt-2"></div>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar p-couloir flex flex-col gap-arret">
+<!-- Time Selection Toggle (Cachet styled) -->
+<div class="flex bg-surface-container p-pas rounded-full relative mb-pause border border-brume">
+<!-- Active Indicator (Sliding background) -->
+<div class="absolute left-pas top-pas bottom-pas w-[calc(50%-4px)] bg-manioc rounded-full shadow-sm transition-transform duration-300"></div>
+<button class="flex-1 py-souffle text-center font-label-mono text-label-mono uppercase z-10 text-foret relative">
+                    Maintenant
+                </button>
+<button class="flex-1 py-souffle text-center font-label-mono text-label-mono uppercase z-10 text-cendre hover:text-foret transition-colors relative">
+                    Planifier
+                </button>
+</div>
+<!-- Location Inputs (Sillon) -->
+<div class="bg-surface rounded-lg border border-brume p-arret flex flex-col gap-arret relative">
+<!-- Decorative Connecting Line -->
+<div class="absolute left-[34px] top-[40px] bottom-[40px] w-px bg-brume"></div>
+<!-- Input: Départ -->
+<div class="flex items-center gap-souffle group relative z-10">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-foret shrink-0">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">trip_origin</span>
+</div>
+<div class="flex-1">
+<label class="block font-label-mono text-[10px] uppercase text-cendre mb-1">Départ</label>
+<input class="w-full bg-transparent border-b border-brume focus:border-foret text-body-medium font-body-medium text-charbon py-1 outline-none transition-colors" placeholder="Point de départ" type="text" value="Gare Centrale de Bessengue"/>
+</div>
+</div>
+<!-- Input: Destination -->
+<div class="flex items-center gap-souffle group relative z-10">
+<div class="w-8 h-8 rounded-full bg-nere/10 flex items-center justify-center text-nere shrink-0">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 0;">location_on</span>
+</div>
+<div class="flex-1">
+<label class="block font-label-mono text-[10px] uppercase text-cendre mb-1">Destination</label>
+<input class="w-full bg-transparent border-b border-brume focus:border-foret text-body-medium font-body-medium text-charbon py-1 outline-none transition-colors placeholder-cendre" placeholder="Entrez la destination" type="text"/>
+</div>
+</div>
+</div>
+<!-- Vehicle Selector (Horizontal Scroll) -->
+<div class="mt-pause">
+<h3 class="font-label-mono text-label-mono uppercase text-cendre mb-souffle pl-pas">Sélectionnez un véhicule</h3>
+<div class="flex gap-souffle overflow-x-auto custom-scrollbar pb-pas snap-x">
+<!-- Vehicle Option 1: Moto -->
+<label class="cursor-pointer snap-start shrink-0 relative">
+<input checked="" class="peer sr-only" name="vehicle" type="radio"/>
+<div class="w-32 bg-blanc border border-brume rounded-lg p-souffle flex flex-col items-center gap-2 peer-checked:border-foret peer-checked:bg-surface-container-low transition-all shadow-sm">
+<div class="w-20 h-20 bg-surface-container rounded-md overflow-hidden flex items-center justify-center">
+<img class="object-cover w-full h-full mix-blend-multiply" data-alt="None" src="https://lh3.googleusercontent.com/aida/AP1WRLvGC14beQ_wpwzCzI90T5hCpBizZ36zlFOxxcV8xlYqf4cASxVRFTsIYtHRJ9NKmShITqMG2AaZpXcJt5XIst3wkIxt9YHHNJopSkbMlooqgxEyaY3aRi2-RjwMV_iBCSWQo0_VhalDUT2aNR1bwnDAzGrtQpeFW8EU-dMw7UsRxeaYAojPwFGXD8vIlBFfQ_Qr90QAPvx_BkaDQVlifCzOVjj0LZvuy-zs_bf1d7uZHnXoE_dFhkG0TQ"/>
+</div>
+<div class="text-center w-full">
+<span class="block font-body-medium text-body-medium text-foret">Moto</span>
+<span class="block font-price-display text-label-mono text-nere mt-1">1,500 FCFA</span>
+</div>
+<!-- Active Check -->
+<div class="absolute top-2 right-2 opacity-0 peer-checked:opacity-100 text-foret bg-manioc rounded-full">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+</label>
+<!-- Vehicle Option 2: Voiture -->
+<label class="cursor-pointer snap-start shrink-0 relative">
+<input class="peer sr-only" name="vehicle" type="radio"/>
+<div class="w-32 bg-blanc border border-brume rounded-lg p-souffle flex flex-col items-center gap-2 peer-checked:border-foret peer-checked:bg-surface-container-low transition-all shadow-sm opacity-60 hover:opacity-100">
+<div class="w-20 h-20 bg-surface-container rounded-md overflow-hidden flex items-center justify-center relative">
+<span class="material-symbols-outlined text-3xl text-cendre" style="font-variation-settings: 'FILL' 0;">directions_car</span>
+</div>
+<div class="text-center w-full">
+<span class="block font-body-medium text-body-medium text-foret">Voiture</span>
+<span class="block font-price-display text-label-mono text-nere mt-1">3,000 FCFA</span>
+</div>
+</div>
+</label>
+<!-- Vehicle Option 3: Camionnette -->
+<label class="cursor-pointer snap-start shrink-0 relative">
+<input class="peer sr-only" name="vehicle" type="radio"/>
+<div class="w-32 bg-blanc border border-brume rounded-lg p-souffle flex flex-col items-center gap-2 peer-checked:border-foret peer-checked:bg-surface-container-low transition-all shadow-sm opacity-60 hover:opacity-100">
+<div class="w-20 h-20 bg-surface-container rounded-md overflow-hidden flex items-center justify-center">
+<img class="object-cover w-full h-full mix-blend-multiply" data-alt="None" src="https://lh3.googleusercontent.com/aida/AP1WRLtCLn3x9r36p7nLw4SunPY0ggI1fA5tmiHITPhFMJ_d8N1TchmDPrN2y_nayfhZ4Eb7G8xt20dNZeRPMPNp7Biiq0KPTSikLh98TbxsNmygwIbOerTusO2OrfwgZKVZm2kaIbItJUzRWVhe3CC9fmFgqfoOjnr4gTQLlvEakFCMjjTTefL2ZhfIMT-Vf0GaXpb5wBdoay9XdAYFnm83QITAFjzaoOYhSoeW6H6DpreOirA3KGF4BxVQ7a8"/>
+</div>
+<div class="text-center w-full">
+<span class="block font-body-medium text-body-medium text-foret">Fourgon</span>
+<span class="block font-price-display text-label-mono text-nere mt-1">8,500 FCFA</span>
+</div>
+</div>
+</label>
+</div>
+</div>
+<!-- Details Note -->
+<div class="flex items-start gap-souffle p-souffle bg-surface-variant/30 rounded border border-brume/50 mt-auto">
+<span class="material-symbols-outlined text-cendre text-sm shrink-0" style="font-variation-settings: 'FILL' 0;">info</span>
+<p class="font-body text-label-mono text-charbon/80">
+                    Les tarifs sont estimatifs et peuvent varier en fonction du trafic et de la demande locale.
+                </p>
+</div>
+</div>
+<!-- Footer CTA (Galet) -->
+<div class="p-couloir pt-pas bg-manioc border-t border-brume shadow-[0_-4px_12px_rgba(29,36,32,0.02)]">
+<button class="w-full bg-foret text-foret-30 py-4 px-6 rounded-full font-body-semibold text-body-semibold flex justify-between items-center hover:bg-foret-90 transition-colors shadow-sm">
+<span>Confirmer le trajet</span>
+<div class="flex items-center gap-2">
+<span class="font-price-display text-nere">1,500 FCFA</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 0;">arrow_forward</span>
+</div>
+</button>
+</div>
+</section>
+</body></html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Messagerie CAARCO</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&amp;family=Marcellus&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "nuit": "#0f1411",
+                    "surface-container-high": "#eae8e2",
+                    "bambou": "#3d6b4a",
+                    "primary-fixed": "#caebd2",
+                    "inverse-surface": "#30312d",
+                    "foret-30": "#b4c4b9",
+                    "tertiary": "#2e1c00",
+                    "tertiary-fixed": "#ffddb0",
+                    "secondary-container": "#bcefc5",
+                    "surface-container-low": "#f5f3ee",
+                    "surface-tint": "#486551",
+                    "on-surface": "#1b1c19",
+                    "on-primary-fixed": "#042011",
+                    "cendre": "#6b6f68",
+                    "on-secondary-fixed-variant": "#225031",
+                    "on-surface-variant": "#424843",
+                    "tertiary-fixed-dim": "#f6bd65",
+                    "on-tertiary-fixed": "#291800",
+                    "brume": "#ece9e0",
+                    "secondary-fixed-dim": "#a0d2aa",
+                    "secondary-fixed": "#bcefc5",
+                    "foret": "#1f3b2a",
+                    "surface-bright": "#fbf9f3",
+                    "on-error-container": "#93000a",
+                    "primary": "#082516",
+                    "foret-90": "#284a36",
+                    "on-secondary-fixed": "#00210d",
+                    "error": "#ba1a1a",
+                    "on-error": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "inverse-primary": "#aeceb7",
+                    "surface-dim": "#dcdad4",
+                    "on-primary-container": "#86a58f",
+                    "primary-container": "#1f3b2a",
+                    "on-primary": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "charbon": "#1d2420",
+                    "surface-container-highest": "#e4e2dd",
+                    "outline": "#727972",
+                    "on-secondary": "#ffffff",
+                    "manioc": "#fbf9f3",
+                    "on-background": "#1b1c19",
+                    "secondary": "#3a6847",
+                    "on-tertiary-container": "#c99441",
+                    "surface": "#fbf9f3",
+                    "surface-container-lowest": "#ffffff",
+                    "background": "#fbf9f3",
+                    "on-secondary-container": "#406e4d",
+                    "outline-variant": "#c2c8c1",
+                    "nere": "#c89441",
+                    "primary-fixed-dim": "#aeceb7",
+                    "surface-container": "#f0eee8",
+                    "laterite": "#b8612e",
+                    "tertiary-container": "#4a3000",
+                    "surface-variant": "#e4e2dd",
+                    "on-tertiary-fixed-variant": "#614000",
+                    "inverse-on-surface": "#f2f1eb",
+                    "on-primary-fixed-variant": "#304d3b"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "souffle": "12px",
+                    "patio": "32px",
+                    "pas": "4px",
+                    "place": "64px",
+                    "couloir": "24px",
+                    "parvis": "48px",
+                    "arret": "16px",
+                    "pause": "8px"
+            },
+            "fontFamily": {
+                    "body-medium": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "lede": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "h2": [
+                            "Marcellus"
+                    ],
+                    "body": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "body-semibold": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "label-mono": [
+                            "JetBrains Mono"
+                    ],
+                    "h3": [
+                            "Marcellus"
+                    ],
+                    "h1": [
+                            "Marcellus"
+                    ],
+                    "price-display": [
+                            "JetBrains Mono"
+                    ]
+            },
+            "fontSize": {
+                    "body-medium": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "lede": [
+                            "20px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "h2": [
+                            "36px",
+                            {
+                                    "lineHeight": "44px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "body": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "body-semibold": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "label-mono": [
+                            "13px",
+                            {
+                                    "lineHeight": "16px",
+                                    "letterSpacing": "0.05em",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "h3": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "h1": [
+                            "48px",
+                            {
+                                    "lineHeight": "56px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "price-display": [
+                            "18px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "500"
+                            }
+                    ]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .bambousoft-bg { background-color: rgba(61, 107, 74, 0.15); }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-manioc text-on-surface font-body h-screen flex flex-col">
+<!-- TopAppBar (Customized for Chat) -->
+<header class="w-full top-0 sticky bg-manioc dark:bg-nuit border-b border-brume dark:border-on-surface-variant flex justify-between items-center px-couloir py-arret z-10">
+<div class="flex items-center gap-arret">
+<button aria-label="Retour" class="text-foret dark:text-primary-fixed-dim hover:bg-surface-container dark:hover:bg-surface-variant/10 p-pause rounded-full transition-colors duration-200">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<div class="flex items-center gap-souffle">
+<div class="w-10 h-10 rounded-full bg-surface-container overflow-hidden border border-brume">
+<img alt="Avatar Transporteur" class="w-full h-full object-cover" data-alt="A close-up portrait of a professional African delivery driver in a crisp, dark green uniform. The lighting is bright and natural, highlighting a friendly but focused expression. The background is slightly blurred, suggesting an urban street setting. The image should convey trust and reliability, fitting for a premium logistics application. Corporate modern style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAI6tGCgmDoD4jul04t7v1_3MJs9N-CG0qo9xvL0nY23t1cWxxkjVSJ570-g5firYoowhh_rYxTfb6vUu7ZWjZ1nCz48EOnGf8Y8hr4Subjb-SLBZs3tySSrVlb1plLlKU0WVmGBhZ5eF-DDdolANP5IgN746e91smmqyIKWgDTAEFJ4XynFi0tCWlsv4-MK050ky8rSV5R3Noxpp6W82S2L2EdjzPJkDPYRPuauWbDHZ-cCWAn8DmV"/>
+</div>
+<div>
+<h2 class="font-body-semibold text-body-semibold text-foret dark:text-primary-fixed-dim m-0">Jean-Pierre T.</h2>
+<p class="font-label-mono text-label-mono text-bambou flex items-center gap-pas m-0">
+<span class="w-2 h-2 rounded-full bg-bambou inline-block"></span>
+                        En ligne
+                    </p>
+</div>
+</div>
+</div>
+<button aria-label="Appeler" class="text-foret dark:text-primary-fixed-dim hover:bg-surface-container dark:hover:bg-surface-variant/10 p-pause rounded-full transition-colors duration-200">
+<span class="material-symbols-outlined" data-icon="call">call</span>
+</button>
+</header>
+<!-- Chat Canvas -->
+<main class="flex-1 overflow-y-auto px-couloir py-patio flex flex-col gap-arret">
+<!-- Date Divider -->
+<div class="flex justify-center my-pause">
+<div class="bg-surface-container px-souffle py-pas rounded-full border border-brume">
+<span class="font-label-mono text-label-mono text-cendre uppercase">Aujourd'hui, 14:30</span>
+</div>
+</div>
+<!-- Message from Transporter (Destinataire - Brume) -->
+<div class="flex flex-col items-start max-w-[85%] self-start">
+<div class="bg-brume text-charbon px-arret py-souffle rounded-t-lg rounded-br-lg rounded-bl-none shadow-sm border border-surface-variant">
+<p class="font-body text-body m-0">Bonjour ! Je suis en route pour récupérer votre colis. J'estime mon arrivée à 15h15.</p>
+</div>
+<span class="font-label-mono text-label-mono text-cendre mt-pas ml-pause">14:32</span>
+</div>
+<!-- Message from Transporter (Destinataire - Brume) -->
+<div class="flex flex-col items-start max-w-[85%] self-start mt-pause">
+<div class="bg-brume text-charbon px-arret py-souffle rounded-t-lg rounded-br-lg rounded-bl-none shadow-sm border border-surface-variant">
+<p class="font-body text-body m-0">Pouvez-vous confirmer que le grand portail bleu est bien ouvert ?</p>
+</div>
+<span class="font-label-mono text-label-mono text-cendre mt-pas ml-pause">14:33</span>
+</div>
+<!-- Message from Client (Expéditeur - BambouSoft) -->
+<div class="flex flex-col items-end max-w-[85%] self-end">
+<div class="bambousoft-bg text-foret px-arret py-souffle rounded-t-lg rounded-bl-lg rounded-br-none shadow-sm border border-bambou/20">
+<p class="font-body text-body m-0">Bonjour Jean-Pierre. C'est parfait, je vous attends.</p>
+</div>
+<span class="font-label-mono text-label-mono text-cendre mt-pas mr-pause">14:35</span>
+</div>
+<!-- Message from Client (Expéditeur - BambouSoft) -->
+<div class="flex flex-col items-end max-w-[85%] self-end mt-pause">
+<div class="bambousoft-bg text-foret px-arret py-souffle rounded-t-lg rounded-bl-lg rounded-br-none shadow-sm border border-bambou/20">
+<p class="font-body text-body m-0">Oui, le portail est ouvert. Vous pouvez vous garer juste devant la cour intérieure.</p>
+</div>
+<span class="font-label-mono text-label-mono text-cendre mt-pas mr-pause flex items-center gap-pas">
+                14:36 <span class="material-symbols-outlined text-[14px]" data-icon="done_all">done_all</span>
+</span>
+</div>
+<!-- Message from Transporter (Destinataire - Brume) -->
+<div class="flex flex-col items-start max-w-[85%] self-start mt-patio">
+<div class="bg-brume text-charbon px-arret py-souffle rounded-t-lg rounded-br-lg rounded-bl-none shadow-sm border border-surface-variant">
+<p class="font-body text-body m-0">Entendu, merci pour la précision. À tout de suite.</p>
+</div>
+<span class="font-label-mono text-label-mono text-cendre mt-pas ml-pause">14:40</span>
+</div>
+<!-- Spacer for input area -->
+<div class="h-4"></div>
+</main>
+<!-- Bottom Input Bar -->
+<footer class="w-full bg-manioc border-t border-brume px-couloir py-arret sticky bottom-0 z-10">
+<div class="flex items-end gap-souffle bg-surface-container rounded-lg p-pause border border-outline-variant focus-within:border-foret transition-colors duration-200">
+<button aria-label="Joindre un fichier" class="text-cendre hover:text-foret p-pause rounded-full transition-colors self-end mb-[2px]">
+<span class="material-symbols-outlined" data-icon="attach_file">attach_file</span>
+</button>
+<button aria-label="Prendre une photo" class="text-cendre hover:text-foret p-pause rounded-full transition-colors self-end mb-[2px]">
+<span class="material-symbols-outlined" data-icon="photo_camera">photo_camera</span>
+</button>
+<textarea class="flex-1 bg-transparent border-none focus:ring-0 resize-none font-body text-body text-on-surface placeholder-cendre py-pause min-h-[44px] max-h-[120px]" placeholder="Écrire un message..." rows="1"></textarea>
+<button aria-label="Envoyer" class="bg-foret text-manioc hover:bg-foret-90 p-pause rounded-full transition-colors self-end mb-[2px] shadow-sm flex items-center justify-center w-10 h-10">
+<span class="material-symbols-outlined" data-icon="send">send</span>
+</button>
+</div>
+</footer>
+<!-- BottomNavBar (Suppressed as this is a transactional task-focused screen) -->
+<!-- According to instructions: "Automatic Suppression: You MUST exclude the navigation shell if the page intent is: ... Task-Focused: Any sub-page featuring a "Close" or "Back" action that implies a temporary departure from the main navigation flow." -->
+</body></html>

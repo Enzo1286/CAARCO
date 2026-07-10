@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Terroir Moderne - Vérification KYC</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&amp;family=Marcellus&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container": "#f0eee8",
+                      "on-secondary-fixed-variant": "#225031",
+                      "primary-container": "#1f3b2a",
+                      "nuit": "#0f1411",
+                      "error-container": "#ffdad6",
+                      "brume": "#ece9e0",
+                      "surface-container-highest": "#e4e2dd",
+                      "tertiary-container": "#4a3000",
+                      "inverse-surface": "#30312d",
+                      "surface": "#fbf9f3",
+                      "on-secondary": "#ffffff",
+                      "on-primary-fixed-variant": "#304d3b",
+                      "on-error": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "primary": "#082516",
+                      "on-background": "#1b1c19",
+                      "tertiary-fixed": "#ffddb0",
+                      "secondary": "#3a6847",
+                      "outline-variant": "#c2c8c1",
+                      "on-tertiary": "#ffffff",
+                      "tertiary": "#2e1c00",
+                      "primary-fixed-dim": "#aeceb7",
+                      "cendre": "#6b6f68",
+                      "laterite": "#b8612e",
+                      "charbon": "#1d2420",
+                      "foret": "#1f3b2a",
+                      "on-tertiary-container": "#c99441",
+                      "primary-fixed": "#caebd2",
+                      "surface-dim": "#dcdad4",
+                      "inverse-on-surface": "#f2f1eb",
+                      "on-primary-container": "#86a58f",
+                      "surface-variant": "#e4e2dd",
+                      "on-secondary-container": "#406e4d",
+                      "on-surface-variant": "#424843",
+                      "foret-90": "#284a36",
+                      "background": "#fbf9f3",
+                      "secondary-fixed-dim": "#a0d2aa",
+                      "error": "#ba1a1a",
+                      "surface-container-high": "#eae8e2",
+                      "outline": "#727972",
+                      "on-tertiary-fixed-variant": "#614000",
+                      "on-tertiary-fixed": "#291800",
+                      "manioc": "#fbf9f3",
+                      "foret-30": "#b4c4b9",
+                      "tertiary-fixed-dim": "#f6bd65",
+                      "nere": "#c89441",
+                      "secondary-container": "#bcefc5",
+                      "surface-tint": "#486551",
+                      "surface-container-low": "#f5f3ee",
+                      "on-surface": "#1b1c19",
+                      "inverse-primary": "#aeceb7",
+                      "bambou": "#3d6b4a",
+                      "on-primary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-bright": "#fbf9f3",
+                      "on-primary-fixed": "#042011",
+                      "secondary-fixed": "#bcefc5",
+                      "on-secondary-fixed": "#00210d"
+              },
+              "borderRadius": {
+                      "DEFAULT": "1rem",
+                      "lg": "2rem",
+                      "xl": "3rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "souffle": "12px",
+                      "couloir": "24px",
+                      "arret": "16px",
+                      "pas": "4px",
+                      "place": "64px",
+                      "parvis": "48px",
+                      "pause": "8px",
+                      "patio": "32px"
+              },
+              "fontFamily": {
+                      "body-semibold": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "body": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "h2": [
+                              "Marcellus"
+                      ],
+                      "price-display": [
+                              "JetBrains Mono"
+                      ],
+                      "label-mono": [
+                              "JetBrains Mono"
+                      ],
+                      "h1": [
+                              "Marcellus"
+                      ],
+                      "lede": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "h3": [
+                              "Marcellus"
+                      ],
+                      "body-medium": [
+                              "Plus Jakarta Sans"
+                      ]
+              },
+              "fontSize": {
+                      "body-semibold": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h2": [
+                              "36px",
+                              {
+                                      "lineHeight": "44px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "price-display": [
+                              "18px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "label-mono": [
+                              "13px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h1": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "lede": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h3": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-medium": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "500"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body min-h-screen flex flex-col md:flex-row">
+<!-- NavigationDrawer (Desktop) -->
+<nav class="hidden md:flex flex-col h-full w-80 fixed left-0 top-0 bg-surface-container shadow-sm p-arret z-40">
+<div class="mb-parvis flex items-center gap-arret">
+<div class="w-12 h-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-h2 text-h2">
+                A
+            </div>
+<div>
+<h2 class="font-h3 text-h3 text-primary">Administration</h2>
+<p class="font-body text-body text-on-surface-variant">Gestion du Fret</p>
+<p class="font-label-mono text-label-mono text-cendre uppercase">Région Centre</p>
+</div>
+</div>
+<ul class="flex flex-col gap-pause flex-1">
+<li>
+<a class="flex items-center gap-souffle px-arret py-souffle text-on-surface-variant font-body hover:bg-surface-container-highest transition-all rounded-lg active:opacity-80" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                    Tableau de bord
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-souffle px-arret py-souffle bg-primary-container text-on-primary-container rounded-lg font-body-semibold hover:bg-surface-container-highest transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+                    Vérification KYC
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-souffle px-arret py-souffle text-on-surface-variant font-body hover:bg-surface-container-highest transition-all rounded-lg active:opacity-80" href="#">
+<span class="material-symbols-outlined" data-icon="gavel">gavel</span>
+                    Litiges &amp; Support
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-souffle px-arret py-souffle text-on-surface-variant font-body hover:bg-surface-container-highest transition-all rounded-lg active:opacity-80" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+                    Finances
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-souffle px-arret py-souffle text-on-surface-variant font-body hover:bg-surface-container-highest transition-all rounded-lg active:opacity-80" href="#">
+<span class="material-symbols-outlined" data-icon="campaign">campaign</span>
+                    Marketing
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-souffle px-arret py-souffle text-on-surface-variant font-body hover:bg-surface-container-highest transition-all rounded-lg active:opacity-80" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                    Paramètres
+                </a>
+</li>
+</ul>
+</nav>
+<!-- TopAppBar (Mobile) -->
+<header class="md:hidden flex justify-between items-center px-couloir py-souffle w-full top-0 sticky bg-surface text-primary border-b border-brume z-40">
+<div class="flex items-center gap-arret">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-h3 text-h3">
+                A
+            </div>
+<h1 class="font-h3 text-h3 text-primary font-bold">Terroir Moderne</h1>
+</div>
+<button class="text-primary hover:bg-surface-container-low transition-colors active:scale-95 duration-100 p-pause rounded-full">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-80 p-couloir pb-place max-w-7xl mx-auto w-full">
+<header class="mb-patio flex flex-col md:flex-row md:items-end justify-between gap-arret">
+<div>
+<h1 class="font-h1 text-h1 text-charbon mb-pas">Vérification KYC</h1>
+<p class="font-lede text-lede text-on-surface-variant">4 dossiers en attente de validation.</p>
+</div>
+<div class="flex gap-souffle">
+<button class="px-arret py-souffle rounded-full bg-surface-container text-on-surface-variant font-body-semibold flex items-center gap-pause hover:bg-surface-container-highest transition-colors border border-brume">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+                    Filtrer
+                </button>
+</div>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-arret">
+<!-- Left Column: List (4 cols) -->
+<div class="lg:col-span-4 flex flex-col gap-arret">
+<!-- Item 1 (Active) -->
+<div class="bg-surface-container-lowest border border-foret rounded-xl p-arret shadow-[0px_4px_12px_rgba(29,36,32,0.05)] cursor-pointer relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-foret"></div>
+<div class="flex justify-between items-start mb-souffle">
+<div class="flex items-center gap-souffle">
+<div class="w-12 h-12 rounded-full bg-surface-container text-primary flex items-center justify-center font-h3 text-h3 border border-brume font-h2">
+                                MO
+                            </div>
+<div>
+<h3 class="font-body-semibold text-body-semibold text-charbon">Musa Ousmane</h3>
+<p class="font-label-mono text-label-mono text-cendre uppercase">Camion Benne 10T</p>
+</div>
+</div>
+<span class="px-2 py-1 rounded text-label-mono font-label-mono uppercase bg-[#f6bd65]/20 text-[#614000]">En attente</span>
+</div>
+<p class="font-label-mono text-label-mono text-on-surface-variant text-right">Soumis il y a 2h</p>
+</div>
+<!-- Item 2 -->
+<div class="bg-surface-container-lowest border border-brume rounded-xl p-arret hover:shadow-[0px_4px_12px_rgba(29,36,32,0.05)] cursor-pointer transition-shadow">
+<div class="flex justify-between items-start mb-souffle">
+<div class="flex items-center gap-souffle">
+<div class="w-12 h-12 rounded-full bg-surface-container text-primary flex items-center justify-center font-h3 text-h3 border border-brume font-h2">
+                                EA
+                            </div>
+<div>
+<h3 class="font-body-semibold text-body-semibold text-charbon">Ewonde Alain</h3>
+<p class="font-label-mono text-label-mono text-cendre uppercase">Fourgonnette</p>
+</div>
+</div>
+<span class="px-2 py-1 rounded text-label-mono font-label-mono uppercase bg-[#f6bd65]/20 text-[#614000]">En attente</span>
+</div>
+<p class="font-label-mono text-label-mono text-on-surface-variant text-right">Soumis hier</p>
+</div>
+<!-- Item 3 -->
+<div class="bg-surface-container-lowest border border-brume rounded-xl p-arret hover:shadow-[0px_4px_12px_rgba(29,36,32,0.05)] cursor-pointer transition-shadow">
+<div class="flex justify-between items-start mb-souffle">
+<div class="flex items-center gap-souffle">
+<div class="w-12 h-12 rounded-full bg-surface-container text-primary flex items-center justify-center font-h3 text-h3 border border-brume font-h2">
+                                NT
+                            </div>
+<div>
+<h3 class="font-body-semibold text-body-semibold text-charbon">Ndjomo T.</h3>
+<p class="font-label-mono text-label-mono text-cendre uppercase">Pick-up 4x4</p>
+</div>
+</div>
+<span class="px-2 py-1 rounded text-label-mono font-label-mono uppercase bg-[#f6bd65]/20 text-[#614000]">En attente</span>
+</div>
+<p class="font-label-mono text-label-mono text-on-surface-variant text-right">Soumis le 12/10</p>
+</div>
+</div>
+<!-- Right Column: Detail View (8 cols) -->
+<div class="lg:col-span-8">
+<div class="bg-surface-container-lowest border border-brume rounded-xl p-couloir shadow-[0px_4px_12px_rgba(29,36,32,0.05)] h-full flex flex-col">
+<!-- Header Profile -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-patio pb-arret border-b border-brume gap-arret">
+<div class="flex items-center gap-arret">
+<div class="w-16 h-16 rounded-full bg-surface-container text-primary flex items-center justify-center font-h2 text-h2 border border-brume">
+                                MO
+                            </div>
+<div>
+<h2 class="font-h3 text-h3 text-charbon">Musa Ousmane</h2>
+<div class="flex items-center gap-souffle mt-pas">
+<p class="font-label-mono text-label-mono text-cendre uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="call">call</span> +237 6XX XXX XXX
+                                    </p>
+<p class="font-label-mono text-label-mono text-cendre uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="location_on">location_on</span> Douala, Littoral
+                                    </p>
+</div>
+</div>
+</div>
+<div class="flex gap-souffle">
+<button class="px-arret py-souffle rounded-full bg-error-container text-on-error-container font-body-semibold hover:opacity-90 transition-opacity">
+                                Rejeter
+                            </button>
+<button class="px-arret py-souffle rounded-full bg-foret text-foret-30 font-body-semibold hover:opacity-90 transition-opacity">
+                                Approuver
+                            </button>
+</div>
+</div>
+<!-- Documents Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-arret flex-1">
+<!-- Document 1: CNI -->
+<div class="flex flex-col gap-souffle">
+<div class="flex justify-between items-center">
+<h3 class="font-body-semibold text-body-semibold text-charbon flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="badge">badge</span>
+                                    Carte Nationale d'Identité
+                                </h3>
+</div>
+<div class="aspect-video bg-surface-container rounded-lg border border-brume overflow-hidden relative group">
+<img class="w-full h-full object-cover" data-alt="A macro shot of a weathered national identity card resting on a raw wooden table in soft, diffused light. The style is modern, grounded, and slightly tactile, emphasizing trust and authenticity without revealing legible personal details. The color palette features natural wood tones and crisp white card edges." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYdogcczzcyy4aaBrd2kUo5q1B0ub6HH2UmmYWIckLaC59C50og-rYMHqcSjqlm8rP0mVOCXumlkPcHnC93X9bquDSGU5zjDsls70ro5y_zqiqKCjQNdMNDQy2aPUcGk9E8ncB-LbOKP2Iqpd5vjXVD8PHD10fmG444p69e3QelTDArfwLUw3lMSDEuEJGCL7p8fBMAZooekiJceYs9gZHwprj7hXjC4awBH9t4hcGpUjdgYCLUv6H"/>
+<div class="absolute inset-0 bg-nuit/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-zoom-in">
+<span class="material-symbols-outlined text-white text-4xl" data-icon="zoom_in">zoom_in</span>
+</div>
+</div>
+<div class="flex flex-col gap-pas mt-2">
+<label class="font-label-mono text-label-mono text-cendre uppercase">Numéro CNI</label>
+<div class="px-arret py-souffle bg-manioc border border-brume rounded text-charbon font-body">112233445566</div>
+</div>
+</div>
+<!-- Document 2: Permis -->
+<div class="flex flex-col gap-souffle">
+<div class="flex justify-between items-center">
+<h3 class="font-body-semibold text-body-semibold text-charbon flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="id_card">id_card</span>
+                                    Permis de Conduire (Cat. C)
+                                </h3>
+</div>
+<div class="aspect-video bg-surface-container rounded-lg border border-brume overflow-hidden relative group">
+<img class="w-full h-full object-cover" data-alt="A close-up of a professional driver's license placed on a clean, light-colored concrete surface. The lighting is bright and high-key, creating a modern, professional aesthetic. The focus is on the holographic security elements and the layout of the card, conveying robustness and compliance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCN6gZ1FlA4JdvpJzfduU8vMNPj7ivw0Lg67vOOVLxJ1vqsjjoi3gpIcvabNdYeqpBY4UpVYvEdUO_ega6fEqFp_b6znEq8lLZCDjvSdRoDBwA9C4bODDaQT03jjZZ_PaY3UFfm-tdHMzjNW3xqCHrnjUkb-Uu0rSVGCRX5QGuB_jPoxyN-Cso26S7J_HYN7ydAY1SB9eFD9FYAI1a9K4j2W2YPYz6uFcO1la-SrcaEAeSe_fpoNfuU"/>
+<div class="absolute inset-0 bg-nuit/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-zoom-in">
+<span class="material-symbols-outlined text-white text-4xl" data-icon="zoom_in">zoom_in</span>
+</div>
+</div>
+<div class="flex flex-col gap-pas mt-2">
+<label class="font-label-mono text-label-mono text-cendre uppercase">Expiration</label>
+<div class="px-arret py-souffle bg-manioc border border-brume rounded text-charbon font-body">12/2026</div>
+</div>
+</div>
+<!-- Document 3: Véhicule -->
+<div class="flex flex-col gap-souffle md:col-span-2 mt-arret">
+<h3 class="font-body-semibold text-body-semibold text-charbon flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="local_shipping">local_shipping</span>
+                                Photos du Véhicule (Camion Benne 10T)
+                            </h3>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-souffle">
+<div class="aspect-square bg-surface-container rounded-lg border border-brume overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A front view of a clean, robust heavy-duty dump truck parked on a dusty road under bright sunlight. The aesthetic is industrial yet premium, emphasizing functional utility. The truck is painted in neutral earth tones with subtle dust, grounding it in reality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4b7bUV1f7jTNyCou6AO0N1fCWWTsyb4KWzi2okv7xwP9-ojIaByfjqJME8yQPGVo0Jl_NwONm86EVbHGYdvhgYi_f7NX1lj-IW7L4KujM0nsHjpNIWblXVhh7xfxSBOS96J2Le05N7gsYgxjhD21XuwbxmnYlEEPxhWWOCGz0v0Qcu1C6UAqlxacCStRNwLQuxO4WWmHRwag_c-BCF32Jp-yWbGjmi5LADndOp8DF4aymLmItQzLZ"/>
+</div>
+<div class="aspect-square bg-surface-container rounded-lg border border-brume overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A side profile view of a sturdy 10-ton dump truck parked against a backdrop of green tropical foliage. The lighting is bright and clear, highlighting the vehicle's capacity and readiness for heavy freight transport. The colors are natural and organic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOCmcCQ55gOiiT0460OuWGXvn5r-IFJlTCNI2MjnXWMjy5x2PNQUBKnaIofdLWvAsZbr0zgYzv1aMOUb-8IXWd2OgcEo_pt7CKrtnIkkrCuM-0AP8gFqfB_jsJKaU_H__a6VQ84oRXl2TszRzuSYi8_sQErfipvtWcfDhIJ67chVvd1Itt1gfJXt_rvC9gBbDou9k3jSDE3wjPgicvUzgq0sJmhhrXkpdPA3o4uTksyaVcrZx6wixE"/>
+</div>
+<div class="aspect-square bg-surface-container rounded-lg border border-brume overflow-hidden flex items-center justify-center bg-surface-container-low text-cendre">
+<span class="font-label-mono text-label-mono uppercase">Plaque Arrière</span>
+</div>
+<div class="aspect-square bg-surface-container rounded-lg border border-brume overflow-hidden flex items-center justify-center bg-surface-container-low text-cendre">
+<span class="font-label-mono text-label-mono uppercase">Intérieur Cabine</span>
+</div>
+</div>
+<div class="flex flex-col gap-pas mt-2 md:w-1/2">
+<label class="font-label-mono text-label-mono text-cendre uppercase">Immatriculation</label>
+<div class="px-arret py-souffle bg-manioc border border-brume rounded text-charbon font-body">LT 456 AB</div>
+</div>
+</div>
+</div>
+<!-- Action Area / Rejection Reason -->
+<div class="mt-patio pt-arret border-t border-brume">
+<div class="flex flex-col gap-pas">
+<label class="font-label-mono text-label-mono text-cendre uppercase">Motif (si rejet ou demande d'info)</label>
+<textarea class="w-full px-arret py-souffle bg-manioc border border-brume focus:border-foret focus:ring-0 rounded-lg text-charbon font-body resize-none h-24" placeholder="Ex: CNI illisible, merci de re-télécharger une photo claire..."></textarea>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-couloir pb-souffle pt-pas bg-surface border-t border-brume rounded-t-lg shadow-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-transform active:scale-90 font-label-mono text-label-mono" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+            Accueil
+        </a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-transform active:scale-90 font-label-mono text-label-mono" href="#">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+            Suivi
+        </a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-transform active:scale-90 font-label-mono text-label-mono" href="#">
+<span class="material-symbols-outlined" data-icon="contact_support">contact_support</span>
+            Support
+        </a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-pas py-pas font-label-mono text-label-mono active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+            Compte
+        </a>
+</nav>
+</body></html>

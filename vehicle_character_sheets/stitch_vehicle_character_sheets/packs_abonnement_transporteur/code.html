@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TransLogix - Packs d'Abonnement</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#304d3b",
+                        "inverse-on-surface": "#f2f1eb",
+                        "surface-variant": "#e4e2dd",
+                        "on-background": "#1b1c19",
+                        "error": "#ba1a1a",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed-dim": "#f6bd65",
+                        "secondary-fixed": "#bcefc5",
+                        "inverse-primary": "#aeceb7",
+                        "on-secondary-container": "#406e4d",
+                        "on-error": "#ffffff",
+                        "cendre": "#6b6f68",
+                        "on-error-container": "#93000a",
+                        "on-surface": "#1b1c19",
+                        "bambou": "#3d6b4a",
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#c2c8c1",
+                        "on-surface-variant": "#424843",
+                        "tertiary-fixed": "#ffddb0",
+                        "nere": "#c89441",
+                        "surface-container-high": "#eae8e2",
+                        "secondary-container": "#bcefc5",
+                        "primary-fixed": "#caebd2",
+                        "background": "#fbf9f3",
+                        "manioc": "#fbf9f3",
+                        "surface-bright": "#fbf9f3",
+                        "tertiary": "#2e1c00",
+                        "surface-container": "#f0eee8",
+                        "inverse-surface": "#30312d",
+                        "laterite": "#b8612e",
+                        "foret-90": "#284a36",
+                        "on-tertiary-container": "#c99441",
+                        "nuit": "#0f1411",
+                        "on-primary-container": "#86a58f",
+                        "surface-container-low": "#f5f3ee",
+                        "on-secondary-fixed-variant": "#225031",
+                        "surface-dim": "#dcdad4",
+                        "on-primary-fixed": "#042011",
+                        "charbon": "#1d2420",
+                        "secondary-fixed-dim": "#a0d2aa",
+                        "on-secondary": "#ffffff",
+                        "outline": "#727972",
+                        "surface": "#fbf9f3",
+                        "primary-fixed-dim": "#aeceb7",
+                        "foret-30": "#b4c4b9",
+                        "primary-container": "#1f3b2a",
+                        "surface-container-highest": "#e4e2dd",
+                        "on-secondary-fixed": "#00210d",
+                        "secondary": "#3a6847",
+                        "foret": "#1f3b2a",
+                        "surface-tint": "#486551",
+                        "on-tertiary-fixed": "#291800",
+                        "on-tertiary-fixed-variant": "#614000",
+                        "primary": "#082516",
+                        "on-primary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "brume": "#ece9e0",
+                        "tertiary-container": "#4a3000"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "pas": "4px",
+                        "souffle": "12px",
+                        "place": "64px",
+                        "arret": "16px",
+                        "parvis": "48px",
+                        "pause": "8px",
+                        "patio": "32px",
+                        "couloir": "24px"
+                    },
+                    "fontFamily": {
+                        "lede": ["Plus Jakarta Sans"],
+                        "label-mono": ["JetBrains Mono"],
+                        "h3": ["Marcellus"],
+                        "price-display": ["JetBrains Mono"],
+                        "h2": ["Marcellus"],
+                        "h1": ["Marcellus"],
+                        "body": ["Plus Jakarta Sans"],
+                        "body-semibold": ["Plus Jakarta Sans"],
+                        "body-medium": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "lede": ["20px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-mono": ["13px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "400" }],
+                        "h3": ["24px", { "lineHeight": "32px", "fontWeight": "400" }],
+                        "price-display": ["18px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "h2": ["36px", { "lineHeight": "44px", "fontWeight": "400" }],
+                        "h1": ["48px", { "lineHeight": "56px", "fontWeight": "400" }],
+                        "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-semibold": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "body-medium": ["16px", { "lineHeight": "24px", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-manioc text-on-surface font-body min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="docked full-width top-0 bg-manioc shadow-sm z-40 sticky">
+<div class="flex justify-between items-center px-couloir py-souffle w-full">
+<button aria-label="Menu" class="p-pause hover:bg-brume rounded-full active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-foret" style="font-variation-settings: 'FILL' 1;">menu</span>
+</button>
+<h1 class="font-h3 text-h3 text-foret tracking-tight">TransLogix</h1>
+<div class="w-10 h-10 rounded-full bg-brume overflow-hidden border border-outline-variant flex-shrink-0">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="A professional close-up portrait of an African transport driver. He is wearing a clean, modern uniform jacket. The background is slightly blurred showing a loading dock in warm afternoon light. The style is highly realistic, corporate, and trustworthy, with natural lighting highlighting his friendly expression." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzpQZh548w_-pZmKmFx0pq3u9F9AVQhktjOeIv0PS97_VP0Ckrw82hEDXag7zUZjiEkQ4iYOi4zriRGIn5j9fC6RWu32JdiM07_tzt2-PmWoeBNaIMJrj7IDHEVKxplB6V_bah5I_4CyIRV60wNhJ9038qlaNXfXvycoy10kuGSOmbfYDPMy1a6f8IbgznFbI0MgXjtheweogPvANtiP_Db4Y7B9Kl_8UVmQdtkIGQsD-A2JGcptmS"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow px-couloir pt-patio pb-place overflow-x-hidden">
+<div class="max-w-7xl mx-auto w-full">
+<!-- Page Header -->
+<div class="mb-parvis text-center md:text-left">
+<h2 class="font-h2 text-h2 text-charbon mb-pause">Packs d'Abonnement</h2>
+<p class="font-lede text-lede text-cendre max-w-2xl">Développez votre activité avec des outils professionnels. Choisissez le plan qui correspond à vos ambitions.</p>
+</div>
+<!-- Pricing Cards Container (Horizontal scroll on mobile, Grid on desktop) -->
+<div class="flex flex-nowrap md:grid md:grid-cols-3 gap-arret overflow-x-auto hide-scrollbar snap-x snap-mandatory pb-souffle -mx-couloir px-couloir md:mx-0 md:px-0">
+<!-- Plan 1: STANDARD -->
+<div class="snap-center shrink-0 w-[85vw] md:w-auto bg-surface-container-lowest border border-brume rounded-lg p-couloir flex flex-col relative h-full">
+<div class="mb-patio">
+<span class="font-label-mono text-label-mono text-cendre uppercase tracking-wider block mb-pause">Plan</span>
+<h3 class="font-h3 text-h3 text-charbon mb-souffle">STANDARD</h3>
+<div class="flex items-baseline gap-pause mb-souffle">
+<span class="font-price-display text-price-display text-foret text-3xl">Gratuit</span>
+</div>
+<p class="font-body text-body text-cendre">Pour démarrer et tester la plateforme sans engagement.</p>
+</div>
+<div class="flex-grow mb-patio">
+<ul class="space-y-souffle">
+<li class="flex items-start gap-souffle">
+<span class="material-symbols-outlined text-cendre mt-1 text-sm">check_circle</span>
+<span class="font-body text-body text-on-surface-variant">20% commission par course</span>
+</li>
+<li class="flex items-start gap-souffle">
+<span class="material-symbols-outlined text-cendre mt-1 text-sm">check_circle</span>
+<span class="font-body text-body text-on-surface-variant">Matching basique</span>
+</li>
+<li class="flex items-start gap-souffle">
+<span class="material-symbols-outlined text-cendre mt-1 text-sm">check_circle</span>
+<span class="font-body text-body text-on-surface-variant">Accès au tableau de bord</span>
+</li>
+</ul>
+</div>
+<button class="w-full bg-brume text-charbon font-body-semibold py-souffle px-arret rounded-full hover:bg-surface-variant transition-colors mt-auto">
+                        Activer ce pack
+                    </button>
+</div>
+<!-- Plan 2: PRO (Highlighted) -->
+<div class="snap-center shrink-0 w-[85vw] md:w-auto bg-surface-container-lowest border-2 border-nere rounded-lg p-couloir flex flex-col relative h-full shadow-[0px_4px_12px_rgba(29,36,32,0.05)] transform md:-translate-y-2">
+<!-- Popular Badge -->
+<div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-nere text-on-tertiary-fixed font-label-mono text-label-mono px-souffle py-pas rounded-sm uppercase flex items-center gap-pas shadow-sm">
+<span class="material-symbols-outlined text-[14px]">star</span>
+                        Plus Populaire
+                    </div>
+<div class="mb-patio mt-pause">
+<span class="font-label-mono text-label-mono text-nere uppercase tracking-wider block mb-pause">Plan</span>
+<h3 class="font-h3 text-h3 text-charbon mb-souffle">PRO</h3>
+<div class="flex items-baseline gap-pause mb-souffle">
+<span class="font-price-display text-price-display text-foret text-3xl">5,000</span>
+<span class="font-body text-body text-cendre">XAF/mois</span>
+</div>
+<p class="font-body text-body text-cendre">Pour les transporteurs réguliers souhaitant optimiser leurs revenus.</p>
+</div>
+<div class="flex-grow mb-patio">
+<ul class="space-y-souffle">
+<li class="flex items-start gap-souffle">
+<span class="material-symbols-outlined text-bambou mt-1 text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body-medium text-body-medium text-charbon">12% commission par course</span>
+</li>
+<li class="flex items-start gap-souffle">
+<span class="material-symbols-outlined text-bambou mt-1 text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body text-body text-on-surface-variant">Badge Pro visible</span>
+</li>
+<li class="flex items-start gap-souffle">
+<span class="material-symbols-outlined text-bambou mt-1 text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body text-body text-on-surface-variant">Priorité de matching</span>
+</li>
+<li class="flex items-start gap-souffle">
+<span class="material-symbols-outlined text-bambou mt-1 text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body text-body text-on-surface-variant">Support prioritaire</span>
+</li>
+</ul>
+</div>
+<button class="w-full bg-foret text-foret-30 font-body-semibold py-souffle px-arret rounded-full hover:opacity-90 transition-opacity mt-auto">
+                        Activer ce pack
+                    </button>
+</div>
+<!-- Plan 3: ELITE -->
+<div class="snap-center shrink-0 w-[85vw] md:w-auto bg-surface-container-lowest border border-brume rounded-lg p-couloir flex flex-col relative h-full">
+<div class="mb-patio">
+<span class="font-label-mono text-label-mono text-cendre uppercase tracking-wider block mb-pause">Plan</span>
+<h3 class="font-h3 text-h3 text-charbon mb-souffle">ELITE</h3>
+<div class="flex items-baseline gap-pause mb-souffle">
+<span class="font-price-display text-price-display text-foret text-3xl">10,000</span>
+<span class="font-body text-body text-cendre">XAF/mois</span>
+</div>
+<p class="font-body text-body text-cendre">La solution complète pour les flottes et professionnels engagés.</p>
+</div>
+<div class="flex-grow mb-patio">
+<ul class="space-y-souffle">
+<li class="flex items-start gap-souffle">
+<span class="material-symbols-outlined text-primary mt-1 text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body-medium text-body-medium text-charbon">8% commission par course</span>
+</li>
+<li class="flex items-start gap-souffle">
+<span class="material-symbols-outlined text-primary mt-1 text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body text-body text-on-surface-variant">Badge Elite</span>
+</li>
+<li class="flex items-start gap-souffle">
+<span class="material-symbols-outlined text-primary mt-1 text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body text-body text-on-surface-variant">Courses illimitées</span>
+</li>
+<li class="flex items-start gap-souffle">
+<span class="material-symbols-outlined text-primary mt-1 text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body text-body text-on-surface-variant">Gestionnaire de compte dédié</span>
+</li>
+</ul>
+</div>
+<button class="w-full bg-brume text-charbon font-body-semibold py-souffle px-arret rounded-full hover:bg-surface-variant transition-colors mt-auto">
+                        Activer ce pack
+                    </button>
+</div>
+</div>
+<div class="mt-parvis text-center md:hidden">
+<p class="font-label-mono text-label-mono text-cendre">← Glissez pour voir plus →</p>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full flex justify-around items-center px-souffle pb-arret pt-pas bg-manioc border-t border-brume shadow-sm z-50 rounded-t-lg">
+<button class="flex flex-col items-center justify-center text-cendre px-souffle py-pas hover:text-foret active:scale-90 transition-all">
+<span class="material-symbols-outlined mb-1 text-[24px]">explore</span>
+<span class="font-label-mono text-[10px]">Explorer</span>
+</button>
+<button class="flex flex-col items-center justify-center text-cendre px-souffle py-pas hover:text-foret active:scale-90 transition-all">
+<span class="material-symbols-outlined mb-1 text-[24px]">location_on</span>
+<span class="font-label-mono text-[10px]">Suivi</span>
+</button>
+<button class="flex flex-col items-center justify-center text-cendre px-souffle py-pas hover:text-foret active:scale-90 transition-all">
+<span class="material-symbols-outlined mb-1 text-[24px]">receipt_long</span>
+<span class="font-label-mono text-[10px]">Commandes</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-souffle py-pas active:scale-90 transition-all">
+<span class="material-symbols-outlined mb-1 text-[24px]" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-mono text-[10px]">Profil</span>
+</button>
+</nav>
+</body></html>

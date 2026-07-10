@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CAARCO - Accueil</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;family=Marcellus&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#406e4d",
+                        "tertiary-fixed-dim": "#f6bd65",
+                        "surface-container": "#f0eee8",
+                        "on-secondary": "#ffffff",
+                        "primary-container": "#1f3b2a",
+                        "surface": "#fbf9f3",
+                        "tertiary-container": "#4a3000",
+                        "secondary-container": "#bcefc5",
+                        "cendre": "#6b6f68",
+                        "surface-dim": "#dcdad4",
+                        "on-secondary-fixed": "#00210d",
+                        "surface-variant": "#e4e2dd",
+                        "error": "#ba1a1a",
+                        "surface-container-low": "#f5f3ee",
+                        "surface-tint": "#486551",
+                        "nere": "#c89441",
+                        "on-secondary-fixed-variant": "#225031",
+                        "on-primary-fixed": "#042011",
+                        "foret": "#1f3b2a",
+                        "inverse-on-surface": "#f2f1eb",
+                        "on-tertiary-fixed": "#291800",
+                        "error-container": "#ffdad6",
+                        "manioc": "#fbf9f3",
+                        "on-primary-fixed-variant": "#304d3b",
+                        "primary-fixed-dim": "#aeceb7",
+                        "primary": "#082516",
+                        "secondary-fixed-dim": "#a0d2aa",
+                        "on-surface": "#1b1c19",
+                        "bambou": "#3d6b4a",
+                        "on-surface-variant": "#424843",
+                        "on-background": "#1b1c19",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#30312d",
+                        "on-primary-container": "#86a58f",
+                        "foret-90": "#284a36",
+                        "inverse-primary": "#aeceb7",
+                        "surface-container-highest": "#e4e2dd",
+                        "on-tertiary": "#ffffff",
+                        "brume": "#ece9e0",
+                        "on-tertiary-fixed-variant": "#614000",
+                        "on-primary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#ffddb0",
+                        "secondary": "#3a6847",
+                        "surface-container-high": "#eae8e2",
+                        "foret-30": "#b4c4b9",
+                        "outline-variant": "#c2c8c1",
+                        "tertiary": "#2e1c00",
+                        "laterite": "#b8612e",
+                        "charbon": "#1d2420",
+                        "on-tertiary-container": "#c99441",
+                        "nuit": "#0f1411",
+                        "background": "#fbf9f3",
+                        "surface-bright": "#fbf9f3",
+                        "primary-fixed": "#caebd2",
+                        "secondary-fixed": "#bcefc5",
+                        "outline": "#727972"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "place": "64px",
+                        "parvis": "48px",
+                        "couloir": "24px",
+                        "arret": "16px",
+                        "pause": "8px",
+                        "patio": "32px",
+                        "pas": "4px",
+                        "souffle": "12px"
+                    },
+                    "fontFamily": {
+                        "h1": ["Marcellus"],
+                        "body-medium": ["Plus Jakarta Sans"],
+                        "price-display": ["JetBrains Mono"],
+                        "lede": ["Plus Jakarta Sans"],
+                        "body-semibold": ["Plus Jakarta Sans"],
+                        "label-mono": ["JetBrains Mono"],
+                        "body": ["Plus Jakarta Sans"],
+                        "h3": ["Marcellus"],
+                        "h2": ["Marcellus"]
+                    },
+                    "fontSize": {
+                        "h1": ["48px", { "lineHeight": "56px", "fontWeight": "400" }],
+                        "body-medium": ["16px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "price-display": ["18px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "lede": ["20px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-semibold": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "label-mono": ["13px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "400" }],
+                        "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "h3": ["24px", { "lineHeight": "32px", "fontWeight": "400" }],
+                        "h2": ["36px", { "lineHeight": "44px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .map-bg {
+            background-color: #fbf9f3;
+            background-image: radial-gradient(#ece9e0 2px, transparent 2px);
+            background-size: 32px 32px;
+        }
+    </style>
+</head>
+<body class="bg-manioc text-on-surface font-body w-full min-h-screen overflow-hidden flex flex-col relative">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-40 bg-manioc border-b border-brume">
+<div class="flex justify-between items-center px-couloir py-arret w-full max-w-full">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container transition-colors duration-200">
+<span class="material-symbols-outlined text-foret" style="font-variation-settings: 'FILL' 0;">menu</span>
+</button>
+<h1 class="font-h1 text-h3 tracking-tight text-foret">CAARCO</h1>
+<button class="w-10 h-10 rounded-full overflow-hidden border border-brume hover:bg-surface-container transition-colors duration-200 flex items-center justify-center bg-surface-container">
+<span class="material-symbols-outlined text-cendre">person</span>
+</button>
+</div>
+</header>
+<!-- Main Content (Map Area) -->
+<main class="flex-grow relative w-full h-full">
+<!-- Interactive Map Background -->
+<div aria-label="Interactive Map of Douala" class="absolute inset-0 map-bg w-full h-full z-0" data-location="Douala, Cameroon" style="">
+<!-- Simulated Map Elements -->
+<div class="absolute top-[20%] left-[30%] w-4 h-4 bg-bambou rounded-full shadow-lg border-2 border-manioc"></div>
+<div class="absolute top-[40%] left-[60%] w-6 h-6 bg-nere rounded-full shadow-lg border-2 border-manioc flex items-center justify-center">
+<div class="w-2 h-2 bg-manioc rounded-full"></div>
+</div>
+<svg class="absolute inset-0 w-full h-full pointer-events-none" style="z-index: 1;">
+<path d="M 30% 20% Q 40% 30% 60% 40%" fill="none" stroke="#b4c4b9" stroke-dasharray="8 8" stroke-width="4"></path>
+</svg>
+</div>
+<!-- Search Bar Overlay (Top) -->
+<div class="absolute top-arret left-couloir right-couloir z-20">
+<div class="bg-surface-container-lowest border border-brume rounded-xl shadow-[0px_4px_12px_rgba(29,36,32,0.05)] p-pas flex flex-col">
+<div class="flex items-center px-souffle py-pause border-b border-brume">
+<span class="material-symbols-outlined text-bambou mr-souffle text-[20px]">my_location</span>
+<input class="bg-transparent border-none w-full text-body-medium text-foret focus:ring-0 p-0" readonly="" type="text" value="Aéroport International de Douala"/>
+</div>
+<div class="flex items-center px-souffle py-pause">
+<span class="material-symbols-outlined text-nere mr-souffle text-[20px]">location_on</span>
+<input class="bg-transparent border-none w-full text-body-medium text-cendre focus:ring-0 p-0" placeholder="Où allez-vous ?" type="text"/>
+</div>
+</div>
+</div>
+<!-- Bottom Sheet (Trip Request) -->
+<div class="absolute bottom-0 left-0 w-full bg-surface-container-lowest rounded-t-[2rem] shadow-[0px_-4px_25px_rgba(15,20,17,0.1)] z-30 pb-place transition-transform transform translate-y-0" id="bottom-sheet">
+<!-- Handle -->
+<div class="w-full flex justify-center pt-souffle pb-pause cursor-grab">
+<div class="w-12 h-1.5 bg-surface-variant rounded-full"></div>
+</div>
+<div class="px-couloir pt-pause">
+<h2 class="font-h2 text-h3 text-foret mb-arret">Où allez-vous ?</h2>
+<!-- Vehicle Selection Grid -->
+<div class="grid grid-cols-2 gap-arret mb-patio">
+<!-- Moto -->
+<label class="relative cursor-pointer group">
+<input checked="" class="peer sr-only" name="vehicle" type="radio"/>
+<div class="bg-manioc border border-brume rounded-xl p-souffle flex flex-col items-center gap-pause peer-checked:border-foret peer-checked:shadow-[0px_4px_12px_rgba(29,36,32,0.05)] transition-all h-full">
+<div class="w-full aspect-square bg-surface-container rounded-lg overflow-hidden relative flex items-center justify-center p-2">
+<img class="object-contain w-full h-full mix-blend-multiply" data-alt="Vector illustration of a delivery motorcycle in forest green and bamboo green with nere gold accents, clean corporate style on a cream background." src="https://lh3.googleusercontent.com/aida/AP1WRLvGC14beQ_wpwzCzI90T5hCpBizZ36zlFOxxcV8xlYqf4cASxVRFTsIYtHRJ9NKmShITqMG2AaZpXcJt5XIst3wkIxt9YHHNJopSkbMlooqgxEyaY3aRi2-RjwMV_iBCSWQo0_VhalDUT2aNR1bwnDAzGrtQpeFW8EU-dMw7UsRxeaYAojPwFGXD8vIlBFfQ_Qr90QAPvx_BkaDQVlifCzOVjj0LZvuy-zs_bf1d7uZHnXoE_dFhkG0TQ"/>
+</div>
+<div class="text-center w-full">
+<h3 class="font-body-semibold text-body-medium text-foret">Moto</h3>
+<div class="flex items-center justify-center gap-1 mt-1 text-cendre">
+<span class="material-symbols-outlined text-[16px]">person</span>
+<span class="font-label-mono text-label-mono">1</span>
+</div>
+<div class="font-price-display text-price-display text-nere mt-pause">1 500 XAF</div>
+</div>
+</div>
+</label>
+<!-- Camionnette -->
+<label class="relative cursor-pointer group">
+<input class="peer sr-only" name="vehicle" type="radio"/>
+<div class="bg-manioc border border-brume rounded-xl p-souffle flex flex-col items-center gap-pause peer-checked:border-foret peer-checked:shadow-[0px_4px_12px_rgba(29,36,32,0.05)] transition-all h-full">
+<div class="w-full aspect-square bg-surface-container rounded-lg overflow-hidden relative flex items-center justify-center p-2">
+<img class="object-contain w-full h-full mix-blend-multiply" data-alt="Vector illustration of a small utility van in forest green and bamboo green with nere gold accents, clean corporate style on a cream background." src="https://lh3.googleusercontent.com/aida/AP1WRLtCLn3x9r36p7nLw4SunPY0ggI1fA5tmiHITPhFMJ_d8N1TchmDPrN2y_nayfhZ4Eb7G8xt20dNZeRPMPNp7Biiq0KPTSikLh98TbxsNmygwIbOerTusO2OrfwgZKVZm2kaIbItJUzRWVhe3CC9fmFgqfoOjnr4gTQLlvEakFCMjjTTefL2ZhfIMT-Vf0GaXpb5wBdoay9XdAYFnm83QITAFjzaoOYhSoeW6H6DpreOirA3KGF4BxVQ7a8"/>
+</div>
+<div class="text-center w-full">
+<h3 class="font-body-semibold text-body-medium text-foret">Camionnette</h3>
+<div class="flex items-center justify-center gap-1 mt-1 text-cendre">
+<span class="material-symbols-outlined text-[16px]">box</span>
+<span class="font-label-mono text-label-mono">50kg</span>
+</div>
+<div class="font-price-display text-price-display text-nere mt-pause">4 500 XAF</div>
+</div>
+</div>
+</label>
+</div>
+<!-- Action Button -->
+<button class="w-full bg-foret text-foret-30 font-body-semibold text-body-medium py-arret rounded-full shadow-lg hover:bg-foret-90 transition-colors duration-200">
+                    Confirmer CAARCO
+                </button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-lg bg-foret shadow-lg flex justify-around items-center px-arret pb-souffle pt-pause h-20 md:hidden">
+<button class="flex flex-col items-center justify-center bg-bambou/20 text-manioc rounded-xl p-souffle w-16 h-14 transition-all">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-mono text-[10px] uppercase tracking-wider">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-foret-30/70 hover:text-manioc p-souffle w-16 h-14 transition-all scale-95">
+<span class="material-symbols-outlined mb-1">local_shipping</span>
+<span class="font-label-mono text-[10px] uppercase tracking-wider">Orders</span>
+</button>
+<button class="flex flex-col items-center justify-center text-foret-30/70 hover:text-manioc p-souffle w-16 h-14 transition-all scale-95">
+<span class="material-symbols-outlined mb-1">account_balance_wallet</span>
+<span class="font-label-mono text-[10px] uppercase tracking-wider">Wallet</span>
+</button>
+<button class="flex flex-col items-center justify-center text-foret-30/70 hover:text-manioc p-souffle w-16 h-14 transition-all scale-95">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="font-label-mono text-[10px] uppercase tracking-wider">Profile</span>
+</button>
+</nav>
+</body></html>

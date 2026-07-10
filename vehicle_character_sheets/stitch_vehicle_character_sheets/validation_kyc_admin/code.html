@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vérification KYC - CAARCO</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Marcellus&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#304d3b",
+                        "inverse-on-surface": "#f2f1eb",
+                        "surface-variant": "#e4e2dd",
+                        "on-background": "#1b1c19",
+                        "error": "#ba1a1a",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed-dim": "#f6bd65",
+                        "secondary-fixed": "#bcefc5",
+                        "inverse-primary": "#aeceb7",
+                        "on-secondary-container": "#406e4d",
+                        "on-error": "#ffffff",
+                        "cendre": "#6b6f68",
+                        "on-error-container": "#93000a",
+                        "on-surface": "#1b1c19",
+                        "bambou": "#3d6b4a",
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#c2c8c1",
+                        "on-surface-variant": "#424843",
+                        "tertiary-fixed": "#ffddb0",
+                        "nere": "#c89441",
+                        "surface-container-high": "#eae8e2",
+                        "secondary-container": "#bcefc5",
+                        "primary-fixed": "#caebd2",
+                        "background": "#fbf9f3",
+                        "manioc": "#fbf9f3",
+                        "surface-bright": "#fbf9f3",
+                        "tertiary": "#2e1c00",
+                        "surface-container": "#f0eee8",
+                        "inverse-surface": "#30312d",
+                        "laterite": "#b8612e",
+                        "foret-90": "#284a36",
+                        "on-tertiary-container": "#c99441",
+                        "nuit": "#0f1411",
+                        "on-primary-container": "#86a58f",
+                        "surface-container-low": "#f5f3ee",
+                        "on-secondary-fixed-variant": "#225031",
+                        "surface-dim": "#dcdad4",
+                        "on-primary-fixed": "#042011",
+                        "charbon": "#1d2420",
+                        "secondary-fixed-dim": "#a0d2aa",
+                        "on-secondary": "#ffffff",
+                        "outline": "#727972",
+                        "surface": "#fbf9f3",
+                        "primary-fixed-dim": "#aeceb7",
+                        "foret-30": "#b4c4b9",
+                        "primary-container": "#1f3b2a",
+                        "surface-container-highest": "#e4e2dd",
+                        "on-secondary-fixed": "#00210d",
+                        "secondary": "#3a6847",
+                        "foret": "#1f3b2a",
+                        "surface-tint": "#486551",
+                        "on-tertiary-fixed": "#291800",
+                        "on-tertiary-fixed-variant": "#614000",
+                        "primary": "#082516",
+                        "on-primary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "brume": "#ece9e0",
+                        "tertiary-container": "#4a3000"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "pas": "4px",
+                        "souffle": "12px",
+                        "place": "64px",
+                        "arret": "16px",
+                        "parvis": "48px",
+                        "pause": "8px",
+                        "patio": "32px",
+                        "couloir": "24px"
+                    },
+                    "fontFamily": {
+                        "lede": ["Plus Jakarta Sans"],
+                        "label-mono": ["JetBrains Mono"],
+                        "h3": ["Marcellus"],
+                        "price-display": ["JetBrains Mono"],
+                        "h2": ["Marcellus"],
+                        "h1": ["Marcellus"],
+                        "body": ["Plus Jakarta Sans"],
+                        "body-semibold": ["Plus Jakarta Sans"],
+                        "body-medium": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "lede": ["20px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-mono": ["13px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "400" }],
+                        "h3": ["24px", { "lineHeight": "32px", "fontWeight": "400" }],
+                        "price-display": ["18px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "h2": ["36px", { "lineHeight": "44px", "fontWeight": "400" }],
+                        "h1": ["48px", { "lineHeight": "56px", "fontWeight": "400" }],
+                        "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-semibold": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "body-medium": ["16px", { "lineHeight": "24px", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-manioc text-on-background min-h-screen antialiased selection:bg-surface-tint selection:text-on-primary">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-manioc border-b border-brume flex justify-between items-center px-couloir h-place max-w-full">
+<div class="flex items-center gap-souffle text-foret">
+<div class="h-8 w-8 rounded-full bg-surface-variant flex items-center justify-center font-h3 text-label-mono text-on-surface-variant uppercase border border-brume">
+                A
+            </div>
+<span class="font-body-medium text-body-medium text-on-surface-variant hidden md:inline-block">Administrateur CAARCO</span>
+</div>
+<h1 class="font-h2 text-h2 text-foret tracking-tight">CAARCO</h1>
+<button aria-label="notifications" class="text-cendre hover:bg-brume/50 transition-colors duration-200 h-10 w-10 flex items-center justify-center rounded-full">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-place pb-place px-couloir max-w-5xl mx-auto flex flex-col gap-patio mt-arret">
+<!-- Context & Header -->
+<div class="flex flex-col gap-souffle">
+<button class="flex items-center gap-pas text-cendre hover:text-foret transition-colors w-fit group">
+<span class="material-symbols-outlined text-[20px] group-hover:-translate-x-1 transition-transform">arrow_back</span>
+<span class="font-label-mono text-label-mono uppercase">Retour à la liste</span>
+</button>
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-arret border-b border-brume pb-arret">
+<div>
+<h2 class="font-h2 text-h2 text-foret">Dossier de: Amadou M.</h2>
+<p class="font-body text-body text-cendre mt-pas">Soumis le 24 Octobre 2023, 14:30</p>
+</div>
+<!-- Status Badge (Cachet) -->
+<div class="inline-flex items-center gap-pas bg-tertiary-fixed text-on-tertiary-fixed px-souffle py-pas rounded-sm border border-tertiary-fixed-dim w-fit">
+<span class="material-symbols-outlined text-[16px]">pending</span>
+<span class="font-label-mono text-label-mono uppercase">EN ATTENTE</span>
+</div>
+</div>
+</div>
+<!-- Document Grid (Bento style integration of Plaquettes) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-arret">
+<!-- Section 1: Identité -->
+<section class="lg:col-span-7 bg-surface-container-lowest border border-brume rounded-DEFAULT p-couloir shadow-sm flex flex-col gap-arret">
+<div class="flex items-center gap-souffle mb-pas">
+<span class="material-symbols-outlined text-cendre">badge</span>
+<h3 class="font-label-mono text-label-mono text-cendre uppercase">Identité</h3>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-arret">
+<div class="flex flex-col gap-pause">
+<span class="font-body text-label-mono text-on-surface-variant">Carte Nationale d'Identité (Recto)</span>
+<div class="relative w-full aspect-[1.58] rounded-lg overflow-hidden border border-surface-variant bg-surface-container flex items-center justify-center group cursor-pointer">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A close-up, high-resolution photograph of the front side of a standard identity card placed perfectly flat on a clean, light-colored wooden table surface. The lighting is exceptionally bright and even, casting very soft, diffused shadows, which emphasizes the utilitarian and professional corporate aesthetic necessary for a strict document verification process. The overall mood is serious, administrative, and impeccably clean, adhering to a modern light-mode design palette with subtle earth tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-j2OVZ6_c8cp0g0ebP_CyZ5n_CjtN4FvJDkhXWckV4zTsUQHQE36ZmxXOamR4VRR24EaGkBpmXFPG78uIyTy9X23962Y8eyik1JWhKfSOiaGWjzWyTkrXd70xKnNrVtsn0wXbgereCj9qxBFOwaifw_Hh1FxgCQZ2IphyhQ5uGBhknX9AwWH_NyhNVIFA5XM0eGYPxcQwS5E6E5dpJJwRu5tMfN4e9QbKg00C-kWmj9bP63wQdsGa"/>
+<div class="absolute inset-0 bg-nuit/0 group-hover:bg-nuit/10 transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-surface-container-lowest opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-md">zoom_in</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-pause">
+<span class="font-body text-label-mono text-on-surface-variant">Carte Nationale d'Identité (Verso)</span>
+<div class="relative w-full aspect-[1.58] rounded-lg overflow-hidden border border-surface-variant bg-surface-container flex items-center justify-center group cursor-pointer">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A high-quality, clear photograph of the back side of a standard national identity card, resting evenly on a pristine, minimalist desk surface. The ambient lighting is strong, neutral white, ensuring all textual and visual elements on the card are highly legible. The visual style is highly functional, robust, and aligns perfectly with a premium, quiet luxury corporate interface designed for rapid logistics administration and data processing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMj4KE7-Kmh8ig_1BuDdqBvVI_pfHVLShHyMxyveYnjpDmzAPcqi4YCsFvKJiBUg6dYkYhkA8DwEh9mVNTKwqsWFC8oOE9Lpwqq_pN69zXHENKQeBwz6P_xItVw5sDYYdS63jWOKshZDB-XQD82kFZt91zId8PiOay-0P-AfGmA6G7dV6yI8XWQAuNIDZC0QubSGF34N27wQchUXOOWziWeB0Mf8FYikDicu9Q2QVOMup87p-a37uk"/>
+<div class="absolute inset-0 bg-nuit/0 group-hover:bg-nuit/10 transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-surface-container-lowest opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-md">zoom_in</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: Permis de conduire -->
+<section class="lg:col-span-5 bg-surface-container-lowest border border-brume rounded-DEFAULT p-couloir shadow-sm flex flex-col gap-arret">
+<div class="flex items-center gap-souffle mb-pas">
+<span class="material-symbols-outlined text-cendre">drive_eta</span>
+<h3 class="font-label-mono text-label-mono text-cendre uppercase">Permis de conduire</h3>
+</div>
+<div class="flex flex-col gap-pause h-full justify-between">
+<span class="font-body text-label-mono text-on-surface-variant">Catégorie B - Valide jusqu'en 2028</span>
+<div class="relative w-full flex-grow min-h-[160px] rounded-lg overflow-hidden border border-surface-variant bg-surface-container flex items-center justify-center group cursor-pointer">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A crisp, well-lit overhead photograph of a modern driver's license card resting perfectly flat on a minimalist white architectural surface. The image is taken to maintain a clean, modern aesthetic suitable for a professional transport and logistics administrative interface. The bright, high-key lighting ensures absolute clarity of the document, reflecting a utilitarian yet highly polished corporate brand identity rooted in organic, earthy textures and precise functional design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTrpXAQwu4gGc8Njgm-CKQ2tm2TEtLmyunLs93cORcLchlVAWgpk8pgkZ4IsOl2dRIaUQzAuMokXm1MuV33HOR5cVypl7F8RF7UqRjOSfV8GFe6FZmxn-IDZAJg1Sosw02mOf7wFRkdICKKWZKl6GUno-Y9Xy0AW4H5jQ9eO6szBpR25GYTDGHI4U-ayoM5A2NQ7wjoAf14a_bGz6Qx8063D1kk4VTEBzLwmIdtxApdpwR4nWrduog"/>
+<div class="absolute inset-0 bg-nuit/0 group-hover:bg-nuit/10 transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-surface-container-lowest opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-md">zoom_in</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: Véhicule -->
+<section class="lg:col-span-12 bg-surface-container-lowest border border-brume rounded-DEFAULT p-couloir shadow-sm flex flex-col gap-arret">
+<div class="flex items-center justify-between border-b border-surface-variant pb-souffle">
+<div class="flex items-center gap-souffle">
+<span class="material-symbols-outlined text-cendre">local_shipping</span>
+<h3 class="font-label-mono text-label-mono text-cendre uppercase">Véhicule</h3>
+</div>
+<span class="font-body-medium text-body-medium text-foret">Toyota Hiace - LT 1234 AB</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-arret mt-pas">
+<!-- Front -->
+<div class="flex flex-col gap-pause">
+<span class="font-body text-label-mono text-on-surface-variant">Face avant (Plaque visible)</span>
+<div class="relative w-full aspect-[4/3] rounded-lg overflow-hidden border border-surface-variant bg-surface-container group cursor-pointer">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A high-quality, clear daytime photograph of the front view of a meticulously clean, modern commercial delivery van parked on a paved surface in a neat urban setting. The natural sunlight is bright and illuminating, highlighting the vehicle's excellent condition, front grille, and readable license plate. This imagery perfectly fits a robust and professional logistics company's high-end functional style, grounded in a color palette of organic textures and precise utility." src="https://lh3.googleusercontent.com/aida-public/AB6AXuADd47IMilmCYIf7Cfd1g89w-nLvs52cQsYHOQarwwArHsH6ZmvmDR2QSsniADNH9bgDWZxFFYL7vCfkHhATL30CtWLHQpc4G-_YLwpExr9c4-774wXXXR2sxKmPKvtOk34m9Rd-lg0yhZUEgWtWm25pwglAEpgxN1-46xaJjHUikvBdPvTTrGQQMlgIC2OlMYcCXz8XxP9_52tuy8WHKa5aBzTOsj8zk4qz7ZTxpXclSEFBQSsfdH5"/>
+</div>
+</div>
+<!-- Side -->
+<div class="flex flex-col gap-pause">
+<span class="font-body text-label-mono text-on-surface-variant">Profil (État carrosserie)</span>
+<div class="relative w-full aspect-[4/3] rounded-lg overflow-hidden border border-surface-variant bg-surface-container group cursor-pointer">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A clear, professional daytime photograph showing the full side profile of a modern, white commercial delivery van. The background features a slightly blurred urban industrial park to keep strict focus on the vehicle's pristine bodywork and length. The overall tone of the image is grounded, highly reliable, and utilitarian, directly reflecting a high-quality, premium transport and freight service operating in a modern, light-mode interface environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTK0Eaaa3G3OK12nvqH2GgaMH-OceBJUVD2Fd8nix4IJ3FAyuoC4SxYgniGc6dC3uLtHwCjS49H9AIGqAeEIYEHC7G7ajnUxm2kzc16ZoDjhVMEKZv7GhxT2DjXb0AgIZGAnvFRo5szx86CCetQjXZaAmSJp8af0rlh2bZyeQfiYFLrvr-y5DiMMr8LOPIt8jdU4NNYsjBAovmvR6997yu5FKIUQ_vQ4YyhV-w2xjxvyMHaYVYguGm"/>
+</div>
+</div>
+<!-- Interior -->
+<div class="flex flex-col gap-pause">
+<span class="font-body text-label-mono text-on-surface-variant">Intérieur (Habitacle)</span>
+<div class="relative w-full aspect-[4/3] rounded-lg overflow-hidden border border-surface-variant bg-surface-container group cursor-pointer">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A bright, incredibly clear photograph taken from the driver's perspective inside a modern commercial van, looking slightly towards the passenger side. The image showcases a spotlessly clean dashboard, well-maintained steering wheel, and front seats. The bright natural light coming through the windshield communicates operational readiness and strict professionalism, aligning flawlessly with a high-end utilitarian logistics aesthetic and a sophisticated, earth-toned corporate brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHCLINC21PFS0QvHqrQ_x619z6RhlD-GEH40mBzZP1yEt_aGB5tmnnNe1KGWxVkYDw42ccPiXl7wQ_ALBIOfMMSMsbFaxhbNMJE-3r0T8w0MMv0OM61yBgoA3IPCeZJuUE7oTWykLQ6XxcimbBO95mQmZOfHGePTxZb-42SYw0B9tjAomo0s4OqhoTDun5YuKKICLZiEmNaIW6ufhgT-fibGs9rb57ws66DP6jqxNJuB-4W7qX8s2v"/>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Action Panel -->
+<section class="bg-surface-container-low border border-brume rounded-DEFAULT p-couloir mt-arret flex flex-col gap-couloir">
+<!-- Rejection Reason Input (Sillon) -->
+<div class="flex flex-col gap-pause w-full max-w-2xl">
+<label class="font-label-mono text-label-mono text-cendre uppercase" for="rejection-reason">Motif du rejet (Obligatoire si rejet)</label>
+<textarea class="w-full bg-manioc border border-brume rounded-md px-souffle py-pause font-body text-body text-on-background focus:border-foret focus:ring-1 focus:ring-foret outline-none transition-colors resize-none" id="rejection-reason" placeholder="Expliquez brièvement pourquoi ce dossier est incomplet ou invalide..." rows="3"></textarea>
+</div>
+<!-- Action Buttons (Galet) -->
+<div class="flex flex-col sm:flex-row gap-arret pt-arret border-t border-brume w-full sm:justify-end">
+<button class="flex items-center justify-center px-couloir py-souffle rounded-full bg-surface-container border border-error text-error hover:bg-error-container transition-colors font-body-semibold text-body-semibold min-w-[160px]">
+<span class="material-symbols-outlined mr-pause text-[20px]">cancel</span>
+                    Rejeter
+                </button>
+<button class="flex items-center justify-center px-couloir py-souffle rounded-full bg-bambou text-on-primary hover:bg-foret transition-colors font-body-semibold text-body-semibold min-w-[200px] shadow-sm">
+<span class="material-symbols-outlined mr-pause text-[20px]">check_circle</span>
+                    Approuver le dossier
+                </button>
+</div>
+</section>
+</main>
+</body></html>

@@ -19,6 +19,16 @@
     Prochaine étape: [étape suivante]"
 5. Poser UNE seule question si un point bloquant est détecté
 
+Règle maquettes IA (Stitch ou tout autre outil) : si un nouveau dossier de
+maquettes apparaît dans le repo, ou si une session s'apprête à en citer un
+comme référence de design, vérifier d'abord qu'il est trié dans le CDC
+(CAARCO_Cahier_Charges_Reprise_et_Prompt_REV1.md, grille C.1, ❌/⚠️/🔧/✅).
+S'il ne l'est pas, l'annoncer et appliquer la procédure C.4 avant toute
+utilisation — jamais coder un écran depuis une maquette non triée. Un nom
+d'écran différent d'un nom déjà classé ❌ (§0.2) n'est jamais une preuve de
+nouveauté : classer par ce que l'écran FAIT (solde, retrait, virement,
+paiement pair-à-pair, séquestre), pas par son nom.
+
 À LA FIN DE CHAQUE SESSION :
 - Mettre à jour MEMORY.md
 - Annoncer : "💾 Session sauvegardée. Prochaine fois on reprend : [étape]"

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Messages - CAARCO</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Marcellus&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "nere": "#c89441",
+                        "tertiary": "#2e1c00",
+                        "outline": "#727972",
+                        "secondary": "#3a6847",
+                        "on-secondary": "#ffffff",
+                        "foret": "#1f3b2a",
+                        "surface-variant": "#e4e2dd",
+                        "surface-container": "#f0eee8",
+                        "secondary-fixed": "#bcefc5",
+                        "on-primary-fixed-variant": "#304d3b",
+                        "primary": "#082516",
+                        "on-tertiary-container": "#c99441",
+                        "on-surface": "#1b1c19",
+                        "manioc": "#fbf9f3",
+                        "on-tertiary-fixed": "#291800",
+                        "charbon": "#1d2420",
+                        "on-tertiary-fixed-variant": "#614000",
+                        "surface-container-highest": "#e4e2dd",
+                        "on-tertiary": "#ffffff",
+                        "outline-variant": "#c2c8c1",
+                        "laterite": "#b8612e",
+                        "inverse-on-surface": "#f2f1eb",
+                        "primary-container": "#1f3b2a",
+                        "on-secondary-fixed-variant": "#225031",
+                        "surface-tint": "#486551",
+                        "surface-container-low": "#f5f3ee",
+                        "secondary-container": "#bcefc5",
+                        "on-primary-fixed": "#042011",
+                        "inverse-primary": "#aeceb7",
+                        "on-surface-variant": "#424843",
+                        "error": "#ba1a1a",
+                        "bambou": "#3d6b4a",
+                        "tertiary-fixed-dim": "#f6bd65",
+                        "on-error-container": "#93000a",
+                        "surface-bright": "#fbf9f3",
+                        "on-secondary-fixed": "#00210d",
+                        "tertiary-container": "#4a3000",
+                        "tertiary-fixed": "#ffddb0",
+                        "nuit": "#0f1411",
+                        "error-container": "#ffdad6",
+                        "foret-90": "#284a36",
+                        "brume": "#ece9e0",
+                        "background": "#fbf9f3",
+                        "secondary-fixed-dim": "#a0d2aa",
+                        "surface-dim": "#dcdad4",
+                        "primary-fixed-dim": "#aeceb7",
+                        "foret-30": "#b4c4b9",
+                        "surface-container-high": "#eae8e2",
+                        "cendre": "#6b6f68",
+                        "on-background": "#1b1c19",
+                        "on-primary": "#ffffff",
+                        "on-primary-container": "#86a58f",
+                        "primary-fixed": "#caebd2",
+                        "on-secondary-container": "#406e4d",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-surface": "#30312d",
+                        "on-error": "#ffffff",
+                        "surface": "#fbf9f3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "patio": "32px",
+                        "pause": "8px",
+                        "pas": "4px",
+                        "parvis": "48px",
+                        "arret": "16px",
+                        "place": "64px",
+                        "couloir": "24px",
+                        "souffle": "12px"
+                    },
+                    "fontFamily": {
+                        "price-display": ["JetBrains Mono"],
+                        "h3": ["Marcellus"],
+                        "body": ["Plus Jakarta Sans"],
+                        "h2": ["Marcellus"],
+                        "lede": ["Plus Jakarta Sans"],
+                        "h1": ["Marcellus"],
+                        "body-medium": ["Plus Jakarta Sans"],
+                        "label-mono": ["JetBrains Mono"],
+                        "body-semibold": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "price-display": ["18px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "h3": ["24px", { "lineHeight": "32px", "fontWeight": "400" }],
+                        "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "h2": ["36px", { "lineHeight": "44px", "fontWeight": "400" }],
+                        "lede": ["20px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "h1": ["48px", { "lineHeight": "56px", "fontWeight": "400" }],
+                        "body-medium": ["16px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "label-mono": ["13px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "400" }],
+                        "body-semibold": ["16px", { "lineHeight": "24px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #fbf9f3; /* manioc */
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-manioc text-charbon font-body min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="w-full top-0 bg-manioc dark:bg-charbon border-b border-brume dark:border-on-surface-variant flex justify-between items-center px-couloir py-arret sticky z-40">
+<div class="flex items-center gap-arret">
+<button class="text-foret dark:text-primary-fixed-dim hover:bg-brume dark:hover:bg-foret-90 p-pas rounded-full transition-all opacity-100 active:opacity-80">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="font-h2 text-h2 text-foret dark:text-nere">CAARCO</h1>
+</div>
+<div>
+<div class="w-10 h-10 rounded-full bg-brume overflow-hidden border border-outline-variant flex items-center justify-center font-h3 text-foret">
+                MT
+            </div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="px-couloir py-patio max-w-3xl mx-auto">
+<h2 class="font-h3 text-h3 text-foret mb-couloir">Messages</h2>
+<!-- Search / Filter Sillon -->
+<div class="mb-patio">
+<label class="font-label-mono text-label-mono text-cendre uppercase block mb-pause">Rechercher</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-arret top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="w-full bg-manioc border border-brume rounded-lg py-3 pl-12 pr-4 font-body focus:border-foret focus:outline-none transition-colors" placeholder="Rechercher une conversation..." type="text"/>
+</div>
+</div>
+<!-- Conversations List -->
+<div class="flex flex-col gap-arret">
+<!-- Conversation Item: Unread -->
+<button class="w-full text-left bg-surface-container-lowest border border-brume rounded-lg p-arret flex items-start gap-arret hover:bg-brume transition-colors relative">
+<div class="w-12 h-12 shrink-0 rounded-full bg-surface-variant flex items-center justify-center font-h3 text-foret relative">
+                    AB
+                    <span class="absolute top-0 right-0 w-3 h-3 bg-foret border-2 border-surface-container-lowest rounded-full"></span>
+</div>
+<div class="flex-grow min-w-0">
+<div class="flex justify-between items-baseline mb-pas">
+<h3 class="font-body-semibold text-charbon truncate">Amadou B. - Transporteur</h3>
+<span class="font-label-mono text-label-mono text-foret whitespace-nowrap ml-arret">10:42</span>
+</div>
+<p class="font-body text-charbon truncate">Je suis à 5 minutes du point de collecte, préparez la palette s'il vous plaît.</p>
+</div>
+</button>
+<!-- Conversation Item: Read -->
+<button class="w-full text-left bg-surface-container-lowest border border-brume rounded-lg p-arret flex items-start gap-arret hover:bg-brume transition-colors opacity-80">
+<div class="w-12 h-12 shrink-0 rounded-full bg-surface-variant flex items-center justify-center font-h3 text-cendre">
+                    CL
+                </div>
+<div class="flex-grow min-w-0">
+<div class="flex justify-between items-baseline mb-pas">
+<h3 class="font-body-semibold text-charbon truncate">Chloé L. - Client</h3>
+<span class="font-label-mono text-label-mono text-outline whitespace-nowrap ml-arret">Hier</span>
+</div>
+<p class="font-body text-on-surface-variant truncate">Merci beaucoup pour la livraison rapide !</p>
+</div>
+</button>
+<!-- Conversation Item: Read -->
+<button class="w-full text-left bg-surface-container-lowest border border-brume rounded-lg p-arret flex items-start gap-arret hover:bg-brume transition-colors opacity-80">
+<div class="w-12 h-12 shrink-0 rounded-full bg-surface-variant flex items-center justify-center font-h3 text-cendre">
+                    DK
+                </div>
+<div class="flex-grow min-w-0">
+<div class="flex justify-between items-baseline mb-pas">
+<h3 class="font-body-semibold text-charbon truncate">David K. - Logistique</h3>
+<span class="font-label-mono text-label-mono text-outline whitespace-nowrap ml-arret">Mar</span>
+</div>
+<p class="font-body text-on-surface-variant truncate">Les documents douaniers sont validés pour le trajet Douala-Yaoundé.</p>
+</div>
+</button>
+<!-- Conversation Item: Unread -->
+<button class="w-full text-left bg-surface-container-lowest border border-brume rounded-lg p-arret flex items-start gap-arret hover:bg-brume transition-colors relative">
+<div class="w-12 h-12 shrink-0 rounded-full bg-surface-variant flex items-center justify-center font-h3 text-foret relative">
+                    SA
+                    <span class="absolute top-0 right-0 w-3 h-3 bg-foret border-2 border-surface-container-lowest rounded-full"></span>
+</div>
+<div class="flex-grow min-w-0">
+<div class="flex justify-between items-baseline mb-pas">
+<h3 class="font-body-semibold text-charbon truncate">Support CAARCO</h3>
+<span class="font-label-mono text-label-mono text-foret whitespace-nowrap ml-arret">Lun</span>
+</div>
+<p class="font-body text-charbon truncate">Votre profil a été vérifié avec succès. Bienvenue sur la plateforme.</p>
+</div>
+</button>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only shell) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 rounded-t-lg bg-manioc dark:bg-charbon border-t border-brume dark:border-on-surface-variant shadow-lg flex justify-around items-center h-20 px-pas pb-safe">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-arret py-pas hover:text-nere" href="#">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+<span class="font-body text-body-medium text-xs mt-1">Expéditions</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-arret py-pas hover:text-nere" href="#">
+<span class="material-symbols-outlined" data-icon="location_on">location_on</span>
+<span class="font-body text-body-medium text-xs mt-1">Suivi</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-arret py-pas hover:text-nere" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-body text-body-medium text-xs mt-1">Portefeuille</span>
+</a>
+<!-- ACTIVE TAB -->
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-foret text-on-secondary-container dark:text-on-primary rounded-xl px-arret py-pas active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="chat" style="font-variation-settings: 'FILL' 1;">chat</span>
+<span class="font-body-semibold text-xs mt-1">Messages</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-arret py-pas hover:text-nere" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-body text-body-medium text-xs mt-1">Compte</span>
+</a>
+</nav>
+<!-- Desktop Nav Cluster (Hidden on Mobile) -->
+<nav class="hidden md:flex fixed top-0 right-couloir h-full items-start pt-couloir z-50 pointer-events-none">
+<div class="pointer-events-auto flex gap-arret items-center bg-manioc/80 backdrop-blur-md rounded-full px-arret py-pause border border-brume">
+<a class="text-on-surface-variant font-body hover:bg-brume px-4 py-2 rounded-full transition-colors" href="#">Expéditions</a>
+<a class="text-on-surface-variant font-body hover:bg-brume px-4 py-2 rounded-full transition-colors" href="#">Suivi</a>
+<a class="text-on-surface-variant font-body hover:bg-brume px-4 py-2 rounded-full transition-colors" href="#">Portefeuille</a>
+<a class="text-foret font-body-semibold bg-secondary-container px-4 py-2 rounded-full transition-colors" href="#">Messages</a>
+<a class="text-on-surface-variant font-body hover:bg-brume px-4 py-2 rounded-full transition-colors" href="#">Compte</a>
+</div>
+</nav>
+</body></html>

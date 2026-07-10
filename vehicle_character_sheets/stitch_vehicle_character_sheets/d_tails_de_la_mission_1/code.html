@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mission Details - CAARCO</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Marcellus&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for gallery */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<!-- Tailwind Configuration (Terroir Moderne) -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface-variant": "#424843",
+                    "nuit": "#0f1411",
+                    "surface-container": "#f0eee8",
+                    "secondary-container": "#bcefc5",
+                    "foret-90": "#284a36",
+                    "on-tertiary-fixed": "#291800",
+                    "on-background": "#1b1c19",
+                    "error-container": "#ffdad6",
+                    "nere": "#c89441",
+                    "on-secondary-container": "#406e4d",
+                    "surface": "#fbf9f3",
+                    "primary-container": "#1f3b2a",
+                    "tertiary-fixed": "#ffddb0",
+                    "tertiary": "#2e1c00",
+                    "on-error": "#ffffff",
+                    "secondary-fixed-dim": "#a0d2aa",
+                    "secondary": "#3a6847",
+                    "tertiary-fixed-dim": "#f6bd65",
+                    "surface-container-lowest": "#ffffff",
+                    "bambou": "#3d6b4a",
+                    "on-secondary": "#ffffff",
+                    "inverse-primary": "#aeceb7",
+                    "tertiary-container": "#4a3000",
+                    "background": "#fbf9f3",
+                    "surface-dim": "#dcdad4",
+                    "on-tertiary-fixed-variant": "#614000",
+                    "outline": "#727972",
+                    "secondary-fixed": "#bcefc5",
+                    "on-primary-fixed-variant": "#304d3b",
+                    "error": "#ba1a1a",
+                    "foret-30": "#b4c4b9",
+                    "surface-container-highest": "#e4e2dd",
+                    "manioc": "#fbf9f3",
+                    "on-primary-fixed": "#042011",
+                    "primary": "#082516",
+                    "on-primary-container": "#86a58f",
+                    "on-secondary-fixed": "#00210d",
+                    "on-surface": "#1b1c19",
+                    "on-secondary-fixed-variant": "#225031",
+                    "on-primary": "#ffffff",
+                    "surface-container-low": "#f5f3ee",
+                    "cendre": "#6b6f68",
+                    "on-error-container": "#93000a",
+                    "surface-variant": "#e4e2dd",
+                    "on-tertiary-container": "#c99441",
+                    "inverse-on-surface": "#f2f1eb",
+                    "inverse-surface": "#30312d",
+                    "brume": "#ece9e0",
+                    "primary-fixed-dim": "#aeceb7",
+                    "primary-fixed": "#caebd2",
+                    "laterite": "#b8612e",
+                    "surface-tint": "#486551",
+                    "outline-variant": "#c2c8c1",
+                    "surface-bright": "#fbf9f3",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-high": "#eae8e2",
+                    "charbon": "#1d2420",
+                    "foret": "#1f3b2a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "pas": "4px",
+                    "arret": "16px",
+                    "place": "64px",
+                    "patio": "32px",
+                    "parvis": "48px",
+                    "pause": "8px",
+                    "couloir": "24px",
+                    "souffle": "12px"
+            },
+            "fontFamily": {
+                    "price-display": ["JetBrains Mono"],
+                    "h2": ["Marcellus"],
+                    "h3": ["Marcellus"],
+                    "body-semibold": ["Plus Jakarta Sans"],
+                    "label-mono": ["JetBrains Mono"],
+                    "h1": ["Marcellus"],
+                    "lede": ["Plus Jakarta Sans"],
+                    "body-medium": ["Plus Jakarta Sans"],
+                    "body": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "price-display": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "h2": ["36px", {"lineHeight": "44px", "fontWeight": "400"}],
+                    "h3": ["24px", {"lineHeight": "32px", "fontWeight": "400"}],
+                    "body-semibold": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "label-mono": ["13px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "400"}],
+                    "h1": ["48px", {"lineHeight": "56px", "fontWeight": "400"}],
+                    "lede": ["20px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-medium": ["16px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "body": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-manioc text-charbon font-body antialiased min-h-screen relative pb-[140px]">
+<!-- Contextual Top App Bar (Task-Focused, suppresses global nav) -->
+<header class="sticky top-0 z-40 w-full bg-manioc/90 backdrop-blur-md border-b border-brume px-couloir py-arret flex items-center justify-between transition-colors duration-200">
+<button aria-label="Retour" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-foret text-[24px]" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-h3 text-h3 text-foret flex-1 text-center truncate px-arret">Course en cours</h1>
+<button aria-label="Aide" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-cendre text-[24px]" data-icon="support_agent">support_agent</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="w-full max-w-md mx-auto flex flex-col pt-pause space-y-patio">
+<!-- Map Snippet Visual Anchor -->
+<div class="px-couloir w-full">
+<div class="relative w-full h-48 rounded-xl overflow-hidden shadow-sm border border-brume bg-surface-variant">
+<img class="w-full h-full object-cover" data-alt="A top-down digital map view of a city in Cameroon, styled in a modern, clean UI aesthetic. The map uses a subtle color palette of soft beiges, muted greens, and crisp whites to match a premium logistics app. The layout is minimalist, emphasizing a highlighted route without clutter. Soft natural light mode aesthetic." data-location="Yaoundé, Cameroon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgYIf2SYooNfRjQPsQipVQ3tJFjfuGL81cL9DpvsMkPxTayaxUVMHBeWgSHVk2a6egxOvBW32I_CnmIA3jJU1zRHIFmK6R7yKgNAq50pqzAAiZoouLygKSrCSMwVpfssgvHecedVi2rNqh_k2abR7K2E90HjVWmWPrbg87OonDknpJ11V3S8GE1B33atMeprn6pRP_Hw8M2jBNnl7PsdqbLLI6Jd01jMuWcq6_H5IBbQgad4JxcMOU"/>
+<!-- Subtle vignette overlay -->
+<div class="absolute inset-0 bg-gradient-to-t from-manioc/40 to-transparent pointer-events-none"></div>
+<!-- Status Badge Overlay -->
+<div class="absolute top-souffle left-souffle bg-surface-container-lowest/90 backdrop-blur border border-brume px-souffle py-pas rounded flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed animate-pulse"></span>
+<span class="font-label-mono text-label-mono text-foret uppercase">En approche</span>
+</div>
+</div>
+</div>
+<!-- Section: Client Info (Plaquette) -->
+<section class="px-couloir">
+<div class="bg-surface-container-lowest border border-brume rounded-xl p-arret flex items-center justify-between shadow-[0px_4px_12px_rgba(29,36,32,0.02)]">
+<div class="flex items-center gap-arret">
+<!-- Avatar (Mereau style) -->
+<div class="relative w-14 h-14 rounded-full overflow-hidden border border-surface-variant bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A professional, high-quality portrait of a Cameroonian individual, softly lit with warm, natural sunlight. Wearing clean, modern earth-toned clothing. The background is a blurred, bright outdoor setting. The mood is trustworthy and approachable, fitting a premium service app profile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2iaDCF0r63ymYwkehjefOrbWO4cUcj9LCipHYEHTiMSHKBZajNj-aS8_--CNzJKooldg3h3XyZ1p5N4u5QgP_p0xyueIoaWm17NgKRrdLclbYaofeLZhT2EQ70Ch_6bYczAFdhlDvjE5ekyg-3OcyQ46cdeNlb5BsKyPt2VzVZNuI6eZVIYm5IAY1Sd4GsEQ-RR3ERVXBbV-WHhxjSS-wkiyEwaqDt0JBLrhoiJ-uvlef31klzdYr"/>
+</div>
+<div class="flex flex-col justify-center">
+<h2 class="font-body-semibold text-body-semibold text-charbon">Jean-Marc T.</h2>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-nere text-[16px]" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-mono text-label-mono text-cendre">4.92 • 120 courses</span>
+</div>
+</div>
+</div>
+<!-- Call Action (Secondary CTA within context) -->
+<button aria-label="Appeler le client" class="w-12 h-12 rounded-full bg-surface-container hover:bg-surface-variant flex items-center justify-center transition-colors border border-brume flex-shrink-0">
+<span class="material-symbols-outlined text-foret text-[24px]" data-icon="phone">phone</span>
+</button>
+</div>
+</section>
+<!-- Section: Itinerary / Addresses (Plaquette + Jalons) -->
+<section class="px-couloir">
+<h3 class="font-label-mono text-label-mono text-cendre uppercase mb-pause pl-2 tracking-wider">Itinéraire</h3>
+<div class="bg-surface-container-lowest border border-brume rounded-xl p-couloir shadow-[0px_4px_12px_rgba(29,36,32,0.02)]">
+<!-- Pickup Node -->
+<div class="flex items-start gap-arret">
+<div class="flex flex-col items-center mt-1">
+<div class="w-4 h-4 rounded-full border-[3px] border-secondary-container bg-surface-container-lowest z-10"></div>
+<div class="w-[2px] h-12 bg-brume my-1"></div> <!-- Track -->
+</div>
+<div class="flex-1 pb-pause">
+<p class="font-label-mono text-label-mono text-cendre uppercase mb-1">Point de retrait</p>
+<p class="font-body-medium text-body-medium text-charbon">Marché Central, Yaoundé</p>
+<p class="font-body text-body text-outline text-sm mt-1">Secteur B, Boutique 42</p>
+</div>
+</div>
+<!-- Drop-off Node -->
+<div class="flex items-start gap-arret">
+<div class="flex flex-col items-center mt-1">
+<div class="w-4 h-4 rounded-sm bg-foret z-10 flex items-center justify-center">
+<div class="w-1.5 h-1.5 rounded-sm bg-surface-container-lowest"></div>
+</div>
+</div>
+<div class="flex-1">
+<p class="font-label-mono text-label-mono text-cendre uppercase mb-1">Point de livraison</p>
+<p class="font-body-medium text-body-medium text-charbon">Quartier Bastos, Rue 1.042</p>
+<p class="font-body text-body text-outline text-sm mt-1">Bâtiment C, 2ème étage</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Package Details & Gallery -->
+<section class="px-couloir">
+<div class="flex items-center justify-between mb-pause pl-2">
+<h3 class="font-label-mono text-label-mono text-cendre uppercase tracking-wider">Détails du colis</h3>
+</div>
+<div class="bg-surface-container-lowest border border-brume rounded-xl p-arret shadow-[0px_4px_12px_rgba(29,36,32,0.02)]">
+<!-- Tags (Cachet style) -->
+<div class="flex flex-wrap gap-souffle mb-arret">
+<span class="bg-surface-container px-3 py-1.5 rounded border border-surface-variant font-label-mono text-label-mono text-on-surface-variant uppercase">15 kg</span>
+<span class="bg-error-container/30 px-3 py-1.5 rounded border border-error-container font-label-mono text-label-mono text-error uppercase">Fragile</span>
+<span class="bg-surface-container px-3 py-1.5 rounded border border-surface-variant font-label-mono text-label-mono text-on-surface-variant uppercase">Carton</span>
+</div>
+<p class="font-label-mono text-label-mono text-cendre uppercase mb-souffle">Photos du colis</p>
+<!-- Horizontal Scroll Gallery -->
+<div class="flex overflow-x-auto gap-souffle pb-2 hide-scrollbar snap-x">
+<div class="snap-start flex-shrink-0 w-32 h-32 rounded-lg overflow-hidden border border-brume bg-surface-container relative">
+<img class="w-full h-full object-cover" data-alt="A close-up photograph of a securely sealed, high-quality cardboard shipping box resting on a clean, light beige surface. The lighting is bright and even, highlighting the texture of the cardboard and the crisp edges of the packaging tape. The scene conveys robustness and careful handling in a modern logistics context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNhnT-m0c4zGq4qtAd8dA1xyp0KGSqzf3Hj_SCJY6qNRmd78FRlXtw4hetX-_3xiiurxcAUq_c25Pa6FQ-bx9ABqxFd2I8E_4OB44NFD0PjORZtH63OMr6hERfhfIcgi7Lv0syk1qp_-ll53WAosRE0KwZphLD_uxLKGPHkZkejriRyO_d5h1HK2vTkMIsdua1XvdxXH-37Im0SFLYJ5EIcruVHh53Z1J3lmCPca9rJlUHB76WcsQi"/>
+</div>
+<div class="snap-start flex-shrink-0 w-32 h-32 rounded-lg overflow-hidden border border-brume bg-surface-container relative">
+<img class="w-full h-full object-cover" data-alt="A detailed shot of a medium-sized parcel wrapped in protective, eco-friendly brown kraft paper. It sits against a minimalist, off-white background. Soft, diffused lighting creates gentle shadows, emphasizing a tactile, organic yet professional aesthetic consistent with a premium delivery service." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSr-TjlpTG7iONisLJEcS6zJbey2HCXYMGKpdpXqvrkVioVXcbeNT88ncaYPfJQupf6q9lbzpxon1UaIIuBFVBJQNBq3svAtX_B6UGvGdQGSsC0gyqTBkl_MgCWNrvbc4O87eIJtaWQ9WY7YD17s4NOkbmVQpfc1dMPDFn0ht5q8OTY5pXoMD_Oi-jwhuoxByHNN3jHlZ6bTrY9WuoKPTAA1qtWh3xp19AxIonuYoBShcuSp2o-7dp"/>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Sticky Bottom Action Bar (Replaces standard BottomNavBar for transactional focus) -->
+<div class="fixed bottom-0 left-0 w-full z-50 bg-surface-container-lowest border-t border-brume shadow-[0px_-10px_25px_rgba(15,20,17,0.05)] pb-safe">
+<div class="max-w-md mx-auto px-couloir py-arret flex flex-col gap-arret">
+<!-- Gain Info -->
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-label-mono text-cendre uppercase">Gain estimé</span>
+<span class="font-price-display text-price-display text-nere">12,500 FCFA</span>
+</div>
+<!-- Primary Navigation Action (Galet style) -->
+<button class="w-full bg-foret text-foret-30 font-body-semibold text-body-semibold py-4 px-6 rounded-full flex items-center justify-center gap-3 hover:bg-foret-90 transition-colors active:scale-[0.98]">
+<span class="material-symbols-outlined text-[20px]" data-icon="navigation">navigation</span>
+                Lancer la navigation
+            </button>
+</div>
+</div>
+</body></html>

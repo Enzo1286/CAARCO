@@ -1,0 +1,269 @@
+<!DOCTYPE html><html lang="fr"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>CAARCO - Payer un Transporteur</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;family=Marcellus&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#304d3b",
+                        "inverse-on-surface": "#f2f1eb",
+                        "surface-variant": "#e4e2dd",
+                        "on-background": "#1b1c19",
+                        "error": "#ba1a1a",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed-dim": "#f6bd65",
+                        "secondary-fixed": "#bcefc5",
+                        "inverse-primary": "#aeceb7",
+                        "on-secondary-container": "#406e4d",
+                        "on-error": "#ffffff",
+                        "cendre": "#6b6f68",
+                        "on-error-container": "#93000a",
+                        "on-surface": "#1b1c19",
+                        "bambou": "#3d6b4a",
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#c2c8c1",
+                        "on-surface-variant": "#424843",
+                        "tertiary-fixed": "#ffddb0",
+                        "nere": "#c89441",
+                        "surface-container-high": "#eae8e2",
+                        "secondary-container": "#bcefc5",
+                        "primary-fixed": "#caebd2",
+                        "background": "#fbf9f3",
+                        "manioc": "#fbf9f3",
+                        "surface-bright": "#fbf9f3",
+                        "tertiary": "#2e1c00",
+                        "surface-container": "#f0eee8",
+                        "inverse-surface": "#30312d",
+                        "laterite": "#b8612e",
+                        "foret-90": "#284a36",
+                        "on-tertiary-container": "#c99441",
+                        "nuit": "#0f1411",
+                        "on-primary-container": "#86a58f",
+                        "surface-container-low": "#f5f3ee",
+                        "on-secondary-fixed-variant": "#225031",
+                        "surface-dim": "#dcdad4",
+                        "on-primary-fixed": "#042011",
+                        "charbon": "#1d2420",
+                        "secondary-fixed-dim": "#a0d2aa",
+                        "on-secondary": "#ffffff",
+                        "outline": "#727972",
+                        "surface": "#fbf9f3",
+                        "primary-fixed-dim": "#aeceb7",
+                        "foret-30": "#b4c4b9",
+                        "primary-container": "#1f3b2a",
+                        "surface-container-highest": "#e4e2dd",
+                        "on-secondary-fixed": "#00210d",
+                        "secondary": "#3a6847",
+                        "foret": "#1f3b2a",
+                        "surface-tint": "#486551",
+                        "on-tertiary-fixed": "#291800",
+                        "on-tertiary-fixed-variant": "#614000",
+                        "primary": "#082516",
+                        "on-primary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "brume": "#ece9e0",
+                        "tertiary-container": "#4a3000"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "pas": "4px",
+                        "souffle": "12px",
+                        "place": "64px",
+                        "arret": "16px",
+                        "parvis": "48px",
+                        "pause": "8px",
+                        "patio": "32px",
+                        "couloir": "24px"
+                    },
+                    "fontFamily": {
+                        "lede": ["Plus Jakarta Sans"],
+                        "label-mono": ["JetBrains Mono"],
+                        "h3": ["Marcellus"],
+                        "price-display": ["JetBrains Mono"],
+                        "h2": ["Marcellus"],
+                        "h1": ["Marcellus"],
+                        "body": ["Plus Jakarta Sans"],
+                        "body-semibold": ["Plus Jakarta Sans"],
+                        "body-medium": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "lede": ["20px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-mono": ["13px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "400" }],
+                        "h3": ["24px", { "lineHeight": "32px", "fontWeight": "400" }],
+                        "price-display": ["18px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "h2": ["36px", { "lineHeight": "44px", "fontWeight": "400" }],
+                        "h1": ["48px", { "lineHeight": "56px", "fontWeight": "400" }],
+                        "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-semibold": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "body-medium": ["16px", { "lineHeight": "24px", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-manioc dark:bg-charbon min-h-screen flex flex-col font-body">
+<!-- TopAppBar -->
+<header class="w-full top-0 border-b border-brume dark:border-on-surface-variant flex justify-between items-center px-couloir py-arret z-50 bg-manioc dark:bg-charbon sticky">
+<button class="hover:bg-brume dark:hover:bg-foret-90 p-2 rounded-full transition-all">
+<span class="material-symbols-outlined text-foret dark:text-primary-fixed-dim" data-icon="menu">menu</span>
+</button>
+<h1 class="font-h2 text-h2 text-foret dark:text-nere">CAARCO</h1>
+<div class="hover:bg-brume dark:hover:bg-foret-90 p-1 rounded-full transition-all cursor-pointer">
+<img alt="User profile avatar" class="w-10 h-10 rounded-full object-cover" data-alt="A small circular avatar of a professional Cameroonian logistics client, well-lit, wearing casual business attire, smiling slightly against a neutral background. Modern corporate photography style, high quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHqqPadkOZZbDE5kjJRune1Qk10W0cpcrNnN7mhzCElDaJR8HU3NmlqYDN7NnyuTe5GbR151EKCPfY4jqMr2VxjcQDfv_aqQR16wCNDdiAmyoAtpbLSwHRKxG_IyJYRbn1FEwoy5YGfpkmrMDMufJ7qWkctj5vlMqVSiGZJ7mdIqTe2mUn8EzzuHL352tthwnKx3irpVR_i4XvsM9MWg6CnFtQWjLhDxUQu9B9FGT8GpOIZgyOm9DK">
+</div>
+</header>
+<main class="flex-grow px-couloir py-patio pb-32">
+<div class="max-w-md mx-auto space-y-patio">
+<!-- Header Section -->
+<div class="text-center">
+<h2 class="font-h3 text-h3 text-foret mb-pause">Identifier un Transporteur</h2>
+<p class="font-body text-body text-on-surface-variant">Sélectionnez une méthode pour identifier le destinataire.</p>
+</div>
+<!-- Wallet Balance Card -->
+
+<!-- Tabs -->
+<div class="flex space-x-2 bg-surface-container-high p-1 rounded-full">
+<button class="flex-1 py-2 px-4 rounded-full bg-manioc shadow-sm font-body-medium text-body-medium text-foret flex items-center justify-center space-x-2">
+<span class="material-symbols-outlined text-sm" data-icon="qr_code_scanner">qr_code_scanner</span>
+<span class="">Scanner QR</span>
+</button>
+<button class="flex-1 py-2 px-4 rounded-full font-body text-body text-on-surface-variant hover:bg-brume transition-colors flex items-center justify-center space-x-2">
+<span class="material-symbols-outlined text-sm" data-icon="keyboard">keyboard</span>
+<span class="">Manuelle</span>
+</button>
+<button class="flex-1 py-2 px-4 rounded-full font-body text-body text-on-surface-variant hover:bg-brume transition-colors flex items-center justify-center space-x-2">
+<span class="material-symbols-outlined text-sm" data-icon="history">history</span>
+<span class="">Récents</span>
+</button>
+</div>
+<!-- Scanner View Placeholder (Active Tab Content) -->
+<div class="bg-nuit rounded-2xl h-64 relative overflow-hidden flex items-center justify-center border-2 border-brume shadow-[0px_10px_25px_rgba(15,20,17,0.15)]">
+<div class="absolute inset-0 opacity-40">
+<img alt="Camera view" class="w-full h-full object-cover" data-alt="A slightly blurred viewpoint from a smartphone camera looking at a cardboard shipping box in a well-lit modern warehouse, preparing to scan a QR code. Industrial aesthetic with soft natural light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVOUHTJRiSeUoZN4ozL1prVoT_8mvJq7Y0cJPw-IgHhwWxElLngxOaQy-2cZkBRybOyfXn7_4neUlxIgRKN3Lt1YpnmH4Sv14wQ1lDbPcRnzvLiPRX-1BDVsg9FQVKkHN5uGXK33A50aclBI-qH4x1A8ftLiHt2-qbJ-x0PMEwynKoa_KZyCF7U_Qk4kn9K8wZSwTWfu-oxh_vzxVUuHmOC0ijGNn6zurihLRuDvyM3A_Ou1zRw_4J">
+</div>
+<!-- Scanner Frame -->
+<div class="relative w-48 h-48 border-2 border-bambou rounded-lg shadow-[0_0_0_9999px_rgba(0,0,0,0.5)] flex items-center justify-center">
+<div class="absolute w-full h-0.5 bg-secondary-fixed animate-pulse shadow-[0_0_8px_#bcefc5]"></div>
+</div>
+<p class="absolute bottom-4 text-manioc font-body text-sm text-center w-full z-10">Alignez le QR code dans le cadre</p>
+</div>
+<!-- Manual Input (Hidden by default, shown for structure) -->
+<div class="hidden space-y-arret">
+<div class="relative">
+<label class="font-label-mono text-label-mono text-cendre uppercase block mb-1">ID Transporteur</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 flex items-center pl-3">
+<span class="material-symbols-outlined text-outline" data-icon="badge">badge</span>
+</span>
+<input class="w-full bg-manioc border border-brume rounded-lg py-3 pl-10 pr-4 text-foret focus:outline-none focus:border-foret transition-colors font-body" placeholder="Ex: TR-8942-DLA" type="text">
+</div>
+</div>
+</div>
+<!-- Identified Driver Card (Simulated successful scan) -->
+<div class="bg-surface-container-lowest border border-brume rounded-xl p-arret shadow-[0px_4px_12px_rgba(29,36,32,0.05)]">
+<div class="flex items-center space-x-arret mb-arret">
+<div class="w-12 h-12 rounded-full bg-foret-90 flex items-center justify-center text-manioc font-h3 text-xl">
+                        AY
+                    </div>
+<div>
+<h4 class="font-body-semibold text-body-semibold text-foret">Amadou Yaya</h4>
+<p class="font-body text-sm text-on-surface-variant flex items-center">
+<span class="material-symbols-outlined text-xs mr-1" data-icon="local_shipping">local_shipping</span>
+                            Camion 10T - Plateau
+                        </p>
+</div>
+<div class="ml-auto">
+<span class="bg-secondary-fixed text-on-secondary-fixed-variant px-2 py-1 rounded text-xs font-label-mono uppercase tracking-wider">Vérifié</span>
+</div>
+</div>
+
+</div>
+<!-- Action Button -->
+
+<button class="w-full bg-foret hover:bg-primary-container text-manioc font-body-semibold py-4 rounded-full transition-all shadow-md mt-patio flex items-center justify-center space-x-2"><span class="">Confirmer l'identification</span><span class="material-symbols-outlined text-sm">check_circle</span></button></div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-lg border-t border-brume dark:border-on-surface-variant shadow-lg bg-manioc dark:bg-charbon hidden md:hidden flex justify-around items-center h-20 px-pas pb-safe">
+<!-- Expéditions -->
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-arret py-pas hover:text-nere">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+<span class="font-body text-body-medium text-xs mt-1">Expéditions</span>
+</div>
+<!-- Suivi -->
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-arret py-pas hover:text-nere">
+<span class="material-symbols-outlined" data-icon="location_on">location_on</span>
+<span class="font-body text-body-medium text-xs mt-1">Suivi</span>
+</div>
+<!-- Portefeuille (Active) -->
+<div class="flex flex-col items-center justify-center bg-secondary-container dark:bg-foret text-on-secondary-container dark:text-on-primary rounded-xl px-arret py-pas transform scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet" data-weight="fill" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+<span class="font-body text-body-medium text-xs mt-1 font-semibold">Portefeuille</span>
+</div>
+<!-- Messages -->
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-arret py-pas hover:text-nere">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+<span class="font-body text-body-medium text-xs mt-1">Messages</span>
+</div>
+<!-- Compte -->
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-arret py-pas hover:text-nere">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-body text-body-medium text-xs mt-1">Compte</span>
+</div>
+</nav>
+<!-- Desktop Sidebar (Hidden on mobile) -->
+<aside class="fixed left-0 top-0 h-full w-80 rounded-r-lg bg-manioc dark:bg-nuit shadow-xl hidden md:flex flex-col py-patio z-40 pt-24 border-r border-brume">
+<div class="px-couloir mb-8">
+<div class="flex items-center space-x-4">
+<img alt="Avatar de l'utilisateur" class="w-12 h-12 rounded-full object-cover" data-alt="A small circular avatar of a professional Cameroonian logistics client, well-lit, wearing casual business attire, smiling slightly against a neutral background. Modern corporate photography style, high quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzHN2NgwEocW819XQoXue13JkwvDQaGbn6MFSStHzxwFYIGvlieliC_3UhapwXF9CVL3IWLuXI37uhN1bVLUSzNy2_Y3ElWpXmh1-xiyrRzw69JPoCrhBam0aJQ7fi9bfB-JqfumY0cujR8VBbCMmWXoYI4fWZ5I47rdzoW5wWV-y5xrJntLgAoLtkH8uiOTXVv3B-RogFoEcnSTAARyRmhNkdhJ-60iFvvpNYx8G0G4bJncJcfceV">
+<div>
+<h3 class="font-h3 text-h3 text-foret dark:text-nere">Moussa Traoré</h3>
+<p class="font-body text-sm text-on-surface-variant">Client Vérifié</p>
+<p class="font-body text-xs text-cendre">Douala, CM</p>
+</div>
+</div>
+</div>
+<nav class="flex-grow flex flex-col space-y-2">
+<a class="flex items-center px-couloir py-3 text-on-surface-variant dark:text-surface-variant mx-arret hover:bg-brume dark:hover:bg-surface-variant transition-colors duration-200 rounded-full" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="account_circle">account_circle</span>
+<span class="font-body">Profil Utilisateur</span>
+</a>
+<a class="flex items-center px-couloir py-3 text-on-surface-variant dark:text-surface-variant mx-arret hover:bg-brume dark:hover:bg-surface-variant transition-colors duration-200 rounded-full" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="military_tech">military_tech</span>
+<span class="font-body">Points Fidélité</span>
+</a>
+<a class="flex items-center px-couloir py-3 text-on-surface-variant dark:text-surface-variant mx-arret hover:bg-brume dark:hover:bg-surface-variant transition-colors duration-200 rounded-full" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="share">share</span>
+<span class="font-body">Parrainage</span>
+</a>
+<a class="flex items-center px-couloir py-3 bg-secondary-fixed dark:bg-foret-90 text-on-secondary-fixed-variant dark:text-on-primary-fixed rounded-full mx-arret transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="account_balance_wallet" data-weight="fill" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+<span class="font-body-semibold">Portefeuille</span>
+</a>
+<a class="flex items-center px-couloir py-3 text-on-surface-variant dark:text-surface-variant mx-arret hover:bg-brume dark:hover:bg-surface-variant transition-colors duration-200 rounded-full" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="settings">settings</span>
+<span class="font-body">Paramètres</span>
+</a>
+</nav>
+<div class="mt-auto pt-8 border-t border-brume mx-arret">
+<a class="flex items-center px-couloir py-3 text-error hover:bg-error-container transition-colors duration-200 rounded-full" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="logout">logout</span>
+<span class="font-body">Déconnexion</span>
+</a>
+</div>
+</aside>
+
+
+</body></html>

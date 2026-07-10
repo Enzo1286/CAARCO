@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CAARCO - Profil Utilisateur</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;family=Marcellus&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed-variant": "#225031",
+                        "on-error": "#ffffff",
+                        "bambou": "#3d6b4a",
+                        "on-secondary": "#ffffff",
+                        "foret-90": "#284a36",
+                        "secondary-container": "#bcefc5",
+                        "surface-container-low": "#f5f3ee",
+                        "nuit": "#0f1411",
+                        "nere": "#c89441",
+                        "inverse-on-surface": "#f2f1eb",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#3a6847",
+                        "surface-variant": "#e4e2dd",
+                        "cendre": "#6b6f68",
+                        "error": "#ba1a1a",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#4a3000",
+                        "primary": "#082516",
+                        "primary-fixed": "#caebd2",
+                        "on-primary-container": "#86a58f",
+                        "outline-variant": "#c2c8c1",
+                        "manioc": "#fbf9f3",
+                        "primary-fixed-dim": "#aeceb7",
+                        "on-tertiary-fixed-variant": "#614000",
+                        "on-surface": "#1b1c19",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed": "#00210d",
+                        "surface-bright": "#fbf9f3",
+                        "foret": "#1f3b2a",
+                        "inverse-surface": "#30312d",
+                        "surface-tint": "#486551",
+                        "on-tertiary-container": "#c99441",
+                        "on-background": "#1b1c19",
+                        "error-container": "#ffdad6",
+                        "foret-30": "#b4c4b9",
+                        "charbon": "#1d2420",
+                        "tertiary": "#2e1c00",
+                        "surface-container": "#f0eee8",
+                        "on-tertiary-fixed": "#291800",
+                        "primary-container": "#1f3b2a",
+                        "on-surface-variant": "#424843",
+                        "surface-dim": "#dcdad4",
+                        "tertiary-fixed-dim": "#f6bd65",
+                        "on-secondary-container": "#406e4d",
+                        "background": "#fbf9f3",
+                        "on-primary-fixed-variant": "#304d3b",
+                        "brume": "#ece9e0",
+                        "on-primary-fixed": "#042011",
+                        "surface": "#fbf9f3",
+                        "secondary-fixed-dim": "#a0d2aa",
+                        "secondary-fixed": "#bcefc5",
+                        "outline": "#727972",
+                        "tertiary-fixed": "#ffddb0",
+                        "surface-container-high": "#eae8e2",
+                        "laterite": "#b8612e",
+                        "surface-container-highest": "#e4e2dd",
+                        "inverse-primary": "#aeceb7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "parvis": "48px",
+                        "souffle": "12px",
+                        "place": "64px",
+                        "patio": "32px",
+                        "arret": "16px",
+                        "pause": "8px",
+                        "couloir": "24px",
+                        "pas": "4px"
+                    },
+                    "fontFamily": {
+                        "label-mono": ["JetBrains Mono"],
+                        "body": ["Plus Jakarta Sans"],
+                        "h3": ["Marcellus"],
+                        "price-display": ["JetBrains Mono"],
+                        "h1": ["Marcellus"],
+                        "body-medium": ["Plus Jakarta Sans"],
+                        "lede": ["Plus Jakarta Sans"],
+                        "h2": ["Marcellus"],
+                        "body-semibold": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "label-mono": ["13px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "400"}],
+                        "body": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "h3": ["24px", {"lineHeight": "32px", "fontWeight": "400"}],
+                        "price-display": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                        "h1": ["48px", {"lineHeight": "56px", "fontWeight": "400"}],
+                        "body-medium": ["16px", {"lineHeight": "24px", "fontWeight": "500"}],
+                        "lede": ["20px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "h2": ["36px", {"lineHeight": "44px", "fontWeight": "400"}],
+                        "body-semibold": ["16px", {"lineHeight": "24px", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        [data-weight="fill"] {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-manioc text-charbon font-body min-h-screen pb-place md:pb-0">
+<!-- TopAppBar (JSON) - Web Only -->
+<header class="hidden md:flex justify-between items-center px-couloir py-arret w-full max-w-full bg-manioc w-full top-0 sticky border-b border-brume transition-colors duration-200 z-50">
+<div class="flex items-center gap-arret text-foret">
+<span class="material-symbols-outlined cursor-pointer hover:bg-surface-container p-pause rounded-full" data-icon="menu">menu</span>
+</div>
+<h1 class="font-h1 text-h2 tracking-tight text-foret">CAARCO</h1>
+<div class="flex items-center gap-arret text-foret">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-brume cursor-pointer hover:bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A close up professional portrait of an African delivery driver in a modern logistical setting. Warm natural sunlight highlights the face. Clean, crisp corporate style with subtle earth tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuAaE5oAYvOqiU-SnMJlS6nc0l-SNEsr3o7szFPJY-JRQMnbiF5_7Yb9Cuqo16XcaJlz3OW-af4LPW_UXt4UmW4OE3MNbRxGqTC_r3hkXQ0z9l_L88Bg9iFj7XTckTe9t-gR293tdhfY9O21oCENw8hfPR-ziJDx53dqrWscuNW-l6qPeBqV8sf3nT-OLfiGW-fRpkVGcLIvZnsxEyYi3bNX7fYKTTjlUcVPpQPNVdIqQSwD56e6a5"/>
+</div>
+</div>
+</header>
+<!-- TopAppBar - Mobile Only (Simplified) -->
+<header class="md:hidden flex justify-between items-center px-couloir py-arret w-full max-w-full bg-manioc w-full top-0 sticky border-b border-brume z-50">
+<h1 class="font-h1 text-[32px] leading-[40px] tracking-tight text-foret">CAARCO</h1>
+</header>
+<main class="max-w-2xl mx-auto px-couloir pt-patio md:pt-place pb-place">
+<!-- Profile Header (Mereau & Info) -->
+<section class="flex flex-col items-center text-center mb-parvis">
+<div class="w-24 h-24 rounded-full overflow-hidden border-2 border-brume mb-arret relative">
+<img class="w-full h-full object-cover" data-alt="A high quality, professional profile photo of a Cameroonian logistics worker. Neutral off-white background, soft lighting, modern corporate aesthetic. Earth tone clothing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCm5ef_ZgHzmXUdc8YNXRig32WHluG_poobu48f3tPmM4kMuIvw2kSRWcVtQDkPY_8W6g1rW5zMLlIdmaphWeL1gPOs4D025glaSB_xfXBp-lydGISJR1t327S1c_ZADALDFTstLYzcgARo_t4h2MBh_tVfIH0V_RJhrag0q6jKTb44eYQowDnLraX-fAshpv6AGsIg0EpAAp8zW2ZDGiJBu-hv5LknX-nUw4A1YOMO3_tr4ai1S571"/>
+<!-- Edit Overlay -->
+<div class="absolute inset-0 bg-charbon/30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity cursor-pointer">
+<span class="material-symbols-outlined text-manioc">edit</span>
+</div>
+</div>
+<h2 class="font-h2 text-h2 text-foret mb-pas">Jean-Baptiste Etoa</h2>
+<p class="font-body-medium text-body-medium text-cendre mb-arret">+237 6 00 00 00 00</p>
+<!-- Fidelity Badge (Cachet) -->
+<div class="bg-bambou/20 text-foret px-souffle py-pas rounded border border-secondary-container flex items-center gap-pause inline-flex">
+<span class="material-symbols-outlined text-sm" data-icon="verified" data-weight="fill">verified</span>
+<span class="font-label-mono text-label-mono uppercase tracking-wider">Transporteur Gold</span>
+</div>
+</section>
+<!-- Navigation Menu -->
+<nav class="flex flex-col gap-pas">
+<!-- Personal Info -->
+<a class="flex items-center justify-between p-arret bg-surface-container-lowest border border-brume rounded hover:bg-surface-container transition-colors duration-200 group" href="#">
+<div class="flex items-center gap-arret">
+<span class="material-symbols-outlined text-foret group-hover:text-primary transition-colors" data-icon="person_outline">person_outline</span>
+<span class="font-body-medium text-body-medium text-charbon">Informations personnelles</span>
+</div>
+<span class="material-symbols-outlined text-cendre">chevron_right</span>
+</a>
+<!-- Vehicle (Carriers only) -->
+<a class="flex items-center justify-between p-arret bg-surface-container-lowest border border-brume rounded hover:bg-surface-container transition-colors duration-200 group" href="#">
+<div class="flex items-center gap-arret">
+<span class="material-symbols-outlined text-foret group-hover:text-primary transition-colors" data-icon="local_shipping">local_shipping</span>
+<span class="font-body-medium text-body-medium text-charbon">Mon Véhicule</span>
+</div>
+<span class="material-symbols-outlined text-cendre">chevron_right</span>
+</a>
+<!-- App Settings -->
+<a class="flex items-center justify-between p-arret bg-surface-container-lowest border border-brume rounded hover:bg-surface-container transition-colors duration-200 group" href="#">
+<div class="flex items-center gap-arret">
+<span class="material-symbols-outlined text-foret group-hover:text-primary transition-colors" data-icon="settings">settings</span>
+<span class="font-body-medium text-body-medium text-charbon">Paramètres de l'application</span>
+</div>
+<span class="material-symbols-outlined text-cendre">chevron_right</span>
+</a>
+<!-- Help & Support -->
+<a class="flex items-center justify-between p-arret bg-surface-container-lowest border border-brume rounded hover:bg-surface-container transition-colors duration-200 group" href="#">
+<div class="flex items-center gap-arret">
+<span class="material-symbols-outlined text-foret group-hover:text-primary transition-colors" data-icon="help_outline">help_outline</span>
+<span class="font-body-medium text-body-medium text-charbon">Aide &amp; Support</span>
+</div>
+<span class="material-symbols-outlined text-cendre">chevron_right</span>
+</a>
+<!-- Logout -->
+<button class="w-full mt-patio flex items-center justify-center gap-pause p-arret bg-surface-container-lowest border border-brume rounded text-error hover:bg-error-container/20 transition-colors duration-200">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-body-medium text-body-medium">Déconnexion</span>
+</button>
+</nav>
+</main>
+<!-- BottomNavBar (JSON) - Mobile Only -->
+<!-- Active State Logic: Active is "Profile" based on the page content -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-arret pb-souffle pt-pause bg-foret rounded-t-lg shadow-lg">
+<!-- Home (Inactive) -->
+<a class="flex flex-col items-center justify-center text-foret-30/70 p-souffle hover:text-manioc transition-all scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="home">home</span>
+<span class="font-label-mono text-[10px] uppercase">Home</span>
+</a>
+<!-- Orders (Inactive) -->
+<a class="flex flex-col items-center justify-center text-foret-30/70 p-souffle hover:text-manioc transition-all scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="local_shipping">local_shipping</span>
+<span class="font-label-mono text-[10px] uppercase">Orders</span>
+</a>
+<!-- Wallet (Inactive) -->
+<a class="flex flex-col items-center justify-center text-foret-30/70 p-souffle hover:text-manioc transition-all scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-label-mono text-[10px] uppercase">Wallet</span>
+</a>
+<!-- Profile (Active) -->
+<a class="flex flex-col items-center justify-center bg-bambou/20 text-manioc rounded-xl p-souffle transition-all scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="person" data-weight="fill">person</span>
+<span class="font-label-mono text-[10px] uppercase">Profile</span>
+</a>
+</nav>
+</body></html>

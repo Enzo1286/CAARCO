@@ -1,0 +1,278 @@
+<!DOCTYPE html><html class="light" lang="fr"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>CAARCO - Recharge Rapide Wallet</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&amp;family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind Config injected from Design System -->
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-fixed-variant": "#304d3b",
+                      "inverse-on-surface": "#f2f1eb",
+                      "surface-variant": "#e4e2dd",
+                      "on-background": "#1b1c19",
+                      "error": "#ba1a1a",
+                      "on-tertiary": "#ffffff",
+                      "tertiary-fixed-dim": "#f6bd65",
+                      "secondary-fixed": "#bcefc5",
+                      "inverse-primary": "#aeceb7",
+                      "on-secondary-container": "#406e4d",
+                      "on-error": "#ffffff",
+                      "cendre": "#6b6f68",
+                      "on-error-container": "#93000a",
+                      "on-surface": "#1b1c19",
+                      "bambou": "#3d6b4a",
+                      "surface-container-lowest": "#ffffff",
+                      "outline-variant": "#c2c8c1",
+                      "on-surface-variant": "#424843",
+                      "tertiary-fixed": "#ffddb0",
+                      "nere": "#c89441",
+                      "surface-container-high": "#eae8e2",
+                      "secondary-container": "#bcefc5",
+                      "primary-fixed": "#caebd2",
+                      "background": "#fbf9f3",
+                      "manioc": "#fbf9f3",
+                      "surface-bright": "#fbf9f3",
+                      "tertiary": "#2e1c00",
+                      "surface-container": "#f0eee8",
+                      "inverse-surface": "#30312d",
+                      "laterite": "#b8612e",
+                      "foret-90": "#284a36",
+                      "on-tertiary-container": "#c99441",
+                      "nuit": "#0f1411",
+                      "on-primary-container": "#86a58f",
+                      "surface-container-low": "#f5f3ee",
+                      "on-secondary-fixed-variant": "#225031",
+                      "surface-dim": "#dcdad4",
+                      "on-primary-fixed": "#042011",
+                      "charbon": "#1d2420",
+                      "secondary-fixed-dim": "#a0d2aa",
+                      "on-secondary": "#ffffff",
+                      "outline": "#727972",
+                      "surface": "#fbf9f3",
+                      "primary-fixed-dim": "#aeceb7",
+                      "foret-30": "#b4c4b9",
+                      "primary-container": "#1f3b2a",
+                      "surface-container-highest": "#e4e2dd",
+                      "on-secondary-fixed": "#00210d",
+                      "secondary": "#3a6847",
+                      "foret": "#1f3b2a",
+                      "surface-tint": "#486551",
+                      "on-tertiary-fixed": "#291800",
+                      "on-tertiary-fixed-variant": "#614000",
+                      "primary": "#082516",
+                      "on-primary": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "brume": "#ece9e0",
+                      "tertiary-container": "#4a3000"
+              },
+              "borderRadius": {
+                      "DEFAULT": "1rem",
+                      "lg": "2rem",
+                      "xl": "3rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "pas": "4px",
+                      "souffle": "12px",
+                      "place": "64px",
+                      "arret": "16px",
+                      "parvis": "48px",
+                      "pause": "8px",
+                      "patio": "32px",
+                      "couloir": "24px"
+              },
+              "fontFamily": {
+                      "lede": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "label-mono": [
+                              "JetBrains Mono"
+                      ],
+                      "h3": [
+                              "Marcellus"
+                      ],
+                      "price-display": [
+                              "JetBrains Mono"
+                      ],
+                      "h2": [
+                              "Marcellus"
+                      ],
+                      "h1": [
+                              "Marcellus"
+                      ],
+                      "body": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "body-semibold": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "body-medium": [
+                              "Plus Jakarta Sans"
+                      ]
+              },
+              "fontSize": {
+                      "lede": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-mono": [
+                              "13px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h3": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "price-display": [
+                              "18px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "h2": [
+                              "36px",
+                              {
+                                      "lineHeight": "44px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h1": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-semibold": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-medium": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "500"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+</head>
+<body class="bg-manioc text-on-surface font-body min-h-screen pb-place">
+<!-- TopAppBar -->
+<header class="bg-manioc dark:bg-charbon w-full top-0 border-b border-brume dark:border-on-surface-variant flex justify-between items-center px-couloir py-arret sticky z-50">
+<button class="text-foret dark:text-primary-fixed-dim hover:bg-brume dark:hover:bg-foret-90 p-pause rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined">close</span>
+</button>
+<div class="font-h3 text-h3 text-foret font-bold tracking-tight">CAARCO</div>
+<div class="w-[40px]"></div> <!-- Spacer for balance -->
+</header>
+<main class="max-w-xl mx-auto px-couloir pt-patio pb-place space-y-patio">
+<!-- Header Text -->
+<div>
+<h1 class="font-h2 text-h2 text-foret mb-pause">Achat de Tokens de Course</h1>
+<p class="font-body text-body text-cendre">Sélectionnez le nombre de tokens à ajouter à votre compte.</p>
+</div>
+<!-- Warning Banner -->
+
+<!-- Quick Selection -->
+<section class="space-y-arret">
+<h2 class="font-label-mono text-label-mono text-cendre uppercase">Nombre de Tokens</h2>
+<div class="grid grid-cols-2 gap-arret">
+<!-- Amount Options -->
+<button class="bg-surface-container-lowest border border-brume p-arret rounded-lg hover:border-foret hover:shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-foret-30 focus:border-foret text-center">
+<span class="font-price-display text-price-display text-foret">500 XAF</span>
+</button>
+<button class="bg-surface-container-lowest border border-brume p-arret rounded-lg hover:border-foret hover:shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-foret-30 focus:border-foret text-center">
+<span class="font-price-display text-price-display text-foret">1,000 XAF</span>
+</button>
+<!-- Pre-selected option matching missing amount -->
+<button class="bg-primary-fixed border-2 border-foret p-arret rounded-lg shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-foret-30 text-center relative overflow-hidden">
+<div class="absolute top-0 right-0 bg-foret text-on-primary text-[10px] font-bold px-2 py-1 rounded-bl-lg">Recommandé</div>
+<span class="font-price-display text-price-display text-foret">2,500 XAF</span>
+</button>
+<button class="bg-surface-container-lowest border border-brume p-arret rounded-lg hover:border-foret hover:shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-foret-30 focus:border-foret text-center">
+<span class="font-price-display text-price-display text-foret">5,000 XAF</span>
+</button>
+</div>
+<!-- Custom Amount -->
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border border-brume rounded-lg p-arret pl-arret pr-[60px] font-price-display text-price-display text-charbon placeholder:text-outline focus:border-foret focus:ring-1 focus:ring-foret transition-colors shadow-sm" id="customAmount" placeholder="Nombre de tokens personnalisé" type="number">
+<span class="absolute right-arret top-1/2 -translate-y-1/2 font-label-mono text-label-mono text-cendre pointer-events-none">Tokens</span>
+</div>
+</section>
+<!-- Payment Methods -->
+<section class="space-y-arret">
+<h2 class="font-label-mono text-label-mono text-cendre uppercase">Moyen de paiement</h2>
+<div class="space-y-souffle">
+<!-- Orange Money -->
+<label class="flex items-center gap-arret bg-surface-container-lowest border border-brume p-arret rounded-lg cursor-pointer hover:bg-surface-container-low transition-colors shadow-sm group has-[:checked]:border-foret has-[:checked]:bg-primary-fixed/20">
+<input checked="" class="w-5 h-5 text-foret bg-manioc border-outline focus:ring-foret" name="payment_method" type="radio" value="om">
+<div class="w-10 h-10 bg-[#ff6600] rounded-full flex items-center justify-center shrink-0">
+<!-- Simulated Logo -->
+<span class="font-body-semibold text-white text-xs">OM</span>
+</div>
+<div class="flex-1">
+<div class="font-body-medium text-body-medium text-charbon">Orange Money</div>
+</div>
+</label>
+<!-- MTN MoMo -->
+<label class="flex items-center gap-arret bg-surface-container-lowest border border-brume p-arret rounded-lg cursor-pointer hover:bg-surface-container-low transition-colors shadow-sm group has-[:checked]:border-foret has-[:checked]:bg-primary-fixed/20">
+<input class="w-5 h-5 text-foret bg-manioc border-outline focus:ring-foret" name="payment_method" type="radio" value="momo">
+<div class="w-10 h-10 bg-[#ffcc00] rounded-full flex items-center justify-center shrink-0">
+<!-- Simulated Logo -->
+<span class="font-body-semibold text-charbon text-xs">MoMo</span>
+</div>
+<div class="flex-1">
+<div class="font-body-medium text-body-medium text-charbon">MTN MoMo</div>
+</div>
+</label>
+</div>
+</section>
+</main>
+<!-- Bottom Fixed Action -->
+<div class="fixed bottom-0 w-full bg-manioc border-t border-brume p-couloir pb-safe shadow-[0_-4px_12px_rgba(29,36,32,0.05)] z-40 max-w-xl left-1/2 -translate-x-1/2">
+<div class="flex items-center justify-center gap-pause mb-souffle text-cendre">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+<span class="font-label-mono text-label-mono">Paiement sécurisé via Notchpay</span>
+</div>
+<button class="w-full bg-foret text-on-primary font-body-semibold text-body-semibold py-arret px-couloir rounded-full shadow-lg hover:bg-foret-90 active:scale-95 transition-all duration-200">Acheter les tokens</button>
+</div>
+
+
+</body></html>

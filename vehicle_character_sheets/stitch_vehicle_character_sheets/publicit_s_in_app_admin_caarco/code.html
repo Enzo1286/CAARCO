@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CAARCO - Gestion des Publicités</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#a0d2aa",
+                        "error": "#ba1a1a",
+                        "foret-90": "#284a36",
+                        "background": "#fbf9f3",
+                        "surface-variant": "#e4e2dd",
+                        "on-secondary-container": "#406e4d",
+                        "on-surface-variant": "#424843",
+                        "on-primary-container": "#86a58f",
+                        "inverse-on-surface": "#f2f1eb",
+                        "surface-dim": "#dcdad4",
+                        "primary-fixed": "#caebd2",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#fbf9f3",
+                        "on-primary-fixed": "#042011",
+                        "surface-container-low": "#f5f3ee",
+                        "on-surface": "#1b1c19",
+                        "inverse-primary": "#aeceb7",
+                        "bambou": "#3d6b4a",
+                        "surface-tint": "#486551",
+                        "on-secondary-fixed": "#00210d",
+                        "secondary-fixed": "#bcefc5",
+                        "on-tertiary-fixed": "#291800",
+                        "manioc": "#fbf9f3",
+                        "foret-30": "#b4c4b9",
+                        "on-tertiary-fixed-variant": "#614000",
+                        "outline": "#727972",
+                        "surface-container-high": "#eae8e2",
+                        "secondary-container": "#bcefc5",
+                        "tertiary-fixed-dim": "#f6bd65",
+                        "nere": "#c89441",
+                        "inverse-surface": "#30312d",
+                        "tertiary-container": "#4a3000",
+                        "on-primary-fixed-variant": "#304d3b",
+                        "on-error": "#ffffff",
+                        "surface": "#fbf9f3",
+                        "on-secondary": "#ffffff",
+                        "surface-container": "#f0eee8",
+                        "error-container": "#ffdad6",
+                        "brume": "#ece9e0",
+                        "surface-container-highest": "#e4e2dd",
+                        "nuit": "#0f1411",
+                        "on-secondary-fixed-variant": "#225031",
+                        "primary-container": "#1f3b2a",
+                        "laterite": "#b8612e",
+                        "cendre": "#6b6f68",
+                        "foret": "#1f3b2a",
+                        "on-tertiary-container": "#c99441",
+                        "charbon": "#1d2420",
+                        "primary": "#082516",
+                        "on-background": "#1b1c19",
+                        "on-error-container": "#93000a",
+                        "secondary": "#3a6847",
+                        "outline-variant": "#c2c8c1",
+                        "on-tertiary": "#ffffff",
+                        "tertiary": "#2e1c00",
+                        "primary-fixed-dim": "#aeceb7",
+                        "tertiary-fixed": "#ffddb0"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "pas": "4px",
+                        "souffle": "12px",
+                        "couloir": "24px",
+                        "arret": "16px",
+                        "pause": "8px",
+                        "patio": "32px",
+                        "place": "64px",
+                        "parvis": "48px"
+                    },
+                    "fontFamily": {
+                        "h1": ["Marcellus"],
+                        "lede": ["Plus Jakarta Sans"],
+                        "h3": ["Marcellus"],
+                        "body-medium": ["Plus Jakarta Sans"],
+                        "body-semibold": ["Plus Jakarta Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "h2": ["Marcellus"],
+                        "price-display": ["JetBrains Mono"],
+                        "label-mono": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "h1": ["48px", { "lineHeight": "56px", "fontWeight": "400" }],
+                        "lede": ["20px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "h3": ["24px", { "lineHeight": "32px", "fontWeight": "400" }],
+                        "body-medium": ["16px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "body-semibold": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "h2": ["36px", { "lineHeight": "44px", "fontWeight": "400" }],
+                        "price-display": ["18px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "label-mono": ["13px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .icon-fill { font-variation-settings: 'FILL' 1; }
+        
+        /* Custom scrollbar for drawer */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #e4e2dd; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #c2c8c1; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-manioc text-charbon font-body min-h-screen flex overflow-hidden">
+<!-- Navigation Drawer (Desktop) -->
+<aside class="hidden md:flex flex-col h-full w-80 rounded-r-lg bg-manioc border-r border-brume shadow-lg py-patio z-50 shrink-0">
+<!-- Header -->
+<div class="px-couloir mb-patio flex items-center gap-arret">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center border border-brume shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional portrait photograph of an administrative user, featuring soft, flattering lighting and a neutral expression. The background is a subtle, modern office environment with earth tones that match the application's 'Terroir Moderne' aesthetic, conveying trust and competence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDj8_zfRUNdi4aMwlJXgiJSf8YYLRUs0cBvL0gzI0Oa4QoF_N8Io3y1q6eEaznsglNctLX5yDmFe-9986eQFiGtmLSEBLxK4t4aLUhlCyJSdZuhobVBTRgYkepDRFoz8Dz8BRndxWwGWGvNUkqcB5nq3H_t4bv-CZhtWs02YzvXCpxJYE2dqSOKe3m0U4wiB0yUb6uvOos8VvMox2ZnKQ_bVvKknspzR5dCnfu32iUWhqNlff7zqBvG"/>
+</div>
+<div>
+<h3 class="font-body-semibold text-body-semibold text-foret">CAARCO Admin</h3>
+<p class="font-body-medium text-body-medium text-cendre text-sm">Super User</p>
+<p class="font-label-mono text-label-mono text-surface-variant text-[10px] mt-1">v1.2.0</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="flex-1 overflow-y-auto space-y-pause">
+<a class="flex items-center gap-arret text-charbon mx-souffle px-arret py-souffle hover:bg-brume transition-all duration-200 ease-in-out rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-medium text-body-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-arret text-charbon mx-souffle px-arret py-souffle hover:bg-brume transition-all duration-200 ease-in-out rounded-lg" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-body-medium text-body-medium">Operations</span>
+</a>
+<a class="flex items-center gap-arret text-charbon mx-souffle px-arret py-souffle hover:bg-brume transition-all duration-200 ease-in-out rounded-lg" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-body-medium text-body-medium">Users</span>
+</a>
+<a class="flex items-center gap-arret text-charbon mx-souffle px-arret py-souffle hover:bg-brume transition-all duration-200 ease-in-out rounded-lg" href="#">
+<span class="material-symbols-outlined">verified_user</span>
+<span class="font-body-medium text-body-medium">KYC</span>
+</a>
+<a class="flex items-center gap-arret text-charbon mx-souffle px-arret py-souffle hover:bg-brume transition-all duration-200 ease-in-out rounded-lg" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="font-body-medium text-body-medium">Finances</span>
+</a>
+<!-- Active Tab -->
+<a class="flex items-center gap-arret bg-foret text-on-primary rounded-lg mx-souffle px-arret py-souffle transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined icon-fill">campaign</span>
+<span class="font-body-medium text-body-medium">Marketing</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col h-full w-full overflow-hidden relative">
+<!-- TopAppBar -->
+<header class="docked full-width top-0 border-b border-brume bg-manioc flex justify-between items-center w-full px-couloir py-arret shrink-0 z-40 relative">
+<div class="flex items-center gap-arret">
+<button class="md:hidden text-foret hover:bg-brume p-2 rounded-full transition-colors active:scale-95 duration-150 flex items-center justify-center">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<span class="font-h3 text-h3 text-foret">CAARCO</span>
+</div>
+<div class="flex items-center gap-souffle">
+<div class="w-10 h-10 rounded-full bg-surface-container-high border border-brume overflow-hidden flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="A minimalist avatar image featuring the initials 'DP' in an elegant Marcellus font against a textured, light earth-toned background, suitable for a professional delivery driver profile within a premium logistics app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeZdtKcXdZ5FfD7-x-lRLsE8Aus95304xEnnvWSDxmftYBc14nS5kLPQ-pXTQO44-diZ1z4frmy4BIplfE7uOF1o_N8ahtLmd7Ztgvv9bCP65O5Sq9Slps06z36zT1L5Usrikegn16DnI7T8E_YZGw6b40skW0ers1IQ73KEgAW2dYcdBLQTBqTGGNp4gqjUlDN7b1e_uDEAzyw3GQj24dj9ngM35yTaV7yqrK0SMEyU8lo0YhLsWY"/>
+</div>
+</div>
+</header>
+<!-- Scrollable Page Content -->
+<main class="flex-1 overflow-y-auto bg-background p-couloir pb-place">
+<div class="max-w-7xl mx-auto space-y-patio">
+<!-- Page Header -->
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-arret">
+<div>
+<h1 class="font-h2 text-h2 text-foret">Gestion des Publicités</h1>
+<p class="font-body text-body text-cendre mt-1">Gérez les bannières promotionnelles affichées dans l'application.</p>
+</div>
+<button class="w-full sm:w-auto px-couloir py-souffle bg-foret text-foret-30 rounded-full font-body-semibold hover:opacity-90 active:scale-95 transition-all flex items-center justify-center gap-pause shadow-sm">
+<span class="material-symbols-outlined">add</span>
+                        Ajouter une publicité
+                    </button>
+</div>
+<!-- Banners Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-couloir">
+<!-- Card 1: Active -->
+<article class="bg-surface-container-lowest border border-brume rounded-xl overflow-hidden shadow-[0px_4px_12px_rgba(29,36,32,0.05)] flex flex-col hover:shadow-md transition-shadow duration-300 group">
+<div class="relative h-48 w-full overflow-hidden bg-surface-variant">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A stunning, high-contrast promotional image showcasing a modern fleet of freight trucks crossing a beautifully engineered bridge in Cameroon. The lighting is golden hour, casting warm laterite tones across the scene. The aesthetic is robust, professional, and sophisticated, perfectly aligned with a premium logistics service." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAj_uUE0vcb8c4_g_oRzRshGD7A3WhEYOwPLDAyw6hxouPAz9_807o9RaIgTetXzCxJojg9dCPNI4l8DGVmzDPwx8BHClJRrcXfnKWQaFL8iJqaKbAFQJJkRHMFteBNmHWL6Ms1DSJcKivT450IlIAeQzhowUV29tmFd5n_JUCevM70VekuXoKhXUKUzYIgQXLDJHrNbLElwL7FbPVp4hp7jqEJAbY44iwamg7byizTNdXySht1Y6ks"/>
+<div class="absolute top-souffle right-souffle bg-bambou/90 backdrop-blur-sm px-pause py-1 rounded text-on-primary font-label-mono text-label-mono shadow-sm">
+                                En cours
+                            </div>
+</div>
+<div class="p-arret flex flex-col flex-1 gap-souffle">
+<div>
+<h3 class="font-body-semibold text-body-semibold text-foret line-clamp-1" title="Campagne Fret National 2024">Campagne Fret National 2024</h3>
+<p class="font-label-mono text-label-mono text-cendre mt-1">ID: BNR_FRET_NAT_24</p>
+</div>
+<div class="flex flex-wrap items-center gap-souffle mt-auto pt-souffle">
+<span class="font-label-mono text-label-mono text-charbon bg-surface-container-low border border-brume px-2 py-1 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">format_list_numbered</span>
+                                    Ordre 1
+                                </span>
+<span class="font-label-mono text-label-mono text-cendre flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span>
+                                    Expire le 12/08/2026
+                                </span>
+</div>
+<div class="flex justify-between items-center pt-arret border-t border-brume/50 mt-pause">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-brume after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-foret"></div>
+<span class="ml-3 font-label-mono text-label-mono text-charbon">Actif</span>
+</label>
+<button aria-label="Supprimer la publicité" class="text-cendre hover:text-error hover:bg-error-container p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Card 2: Inactive -->
+<article class="bg-surface-container-lowest border border-brume rounded-xl overflow-hidden shadow-[0px_4px_12px_rgba(29,36,32,0.05)] flex flex-col hover:shadow-md transition-shadow duration-300 group opacity-75">
+<div class="relative h-48 w-full overflow-hidden bg-surface-variant">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 grayscale-[30%]" data-alt="A clean, minimalist advertisement graphic featuring beautifully arranged organic agricultural products like manioc and yams in premium woven baskets. The setting is a bright, modern studio with soft, diffused light, emphasizing the 'Terroir Moderne' theme of connecting local resources with high-end transport." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKqerqBO-QixDT1urY5rdLFfvqn6YjZUTSVqw6CxjPSHt1H7kE9xmQ_87bOLXupsZsWtlXly0xhz1cHbbBCCwOf6-aV09PEotcqsFsTD5XCFFiWVet1T6xLyuieIz38lgWjhRRJif0xNkG8ywP86MNFzumS81lx26zx2_pTLluHKWWv27ztJetqqx3Ego2do7GSwb611tPOtSQEj5XaWX11c5TxqMRHuHO2ILWtGfNVf5iOVRirsPb"/>
+<div class="absolute top-souffle right-souffle bg-surface-variant/90 backdrop-blur-sm px-pause py-1 rounded text-on-surface-variant border border-brume font-label-mono text-label-mono shadow-sm">
+                                Inactif
+                            </div>
+</div>
+<div class="p-arret flex flex-col flex-1 gap-souffle">
+<div>
+<h3 class="font-body-semibold text-body-semibold text-foret line-clamp-1" title="Promotion Agri-Transport">Promotion Agri-Transport</h3>
+<p class="font-label-mono text-label-mono text-cendre mt-1">ID: BNR_AGRI_PROMO_Q2</p>
+</div>
+<div class="flex flex-wrap items-center gap-souffle mt-auto pt-souffle">
+<span class="font-label-mono text-label-mono text-charbon bg-surface-container-low border border-brume px-2 py-1 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">format_list_numbered</span>
+                                    Ordre 2
+                                </span>
+<span class="font-label-mono text-label-mono text-error flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">event_busy</span>
+                                    Expiré le 01/03/2024
+                                </span>
+</div>
+<div class="flex justify-between items-center pt-arret border-t border-brume/50 mt-pause">
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-brume after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-foret"></div>
+<span class="ml-3 font-label-mono text-label-mono text-cendre">Inactif</span>
+</label>
+<button aria-label="Supprimer la publicité" class="text-cendre hover:text-error hover:bg-error-container p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Card 3: Draft/Upcoming -->
+<article class="bg-surface-container-lowest border border-dashed border-brume hover:border-foret rounded-xl overflow-hidden shadow-[0px_4px_12px_rgba(29,36,32,0.05)] flex flex-col hover:shadow-md transition-all duration-300 group cursor-pointer">
+<div class="h-48 w-full bg-surface-container flex flex-col items-center justify-center gap-souffle text-cendre group-hover:text-foret transition-colors">
+<span class="material-symbols-outlined text-4xl">add_photo_alternate</span>
+<span class="font-label-mono text-label-mono">Nouvel Emplacement</span>
+</div>
+<div class="p-arret flex flex-col flex-1 items-center justify-center text-center">
+<h3 class="font-body-semibold text-body-semibold text-foret mb-2">Espace Disponible</h3>
+<p class="font-body text-body text-cendre text-sm">Cliquez ici pour configurer une nouvelle bannière publicitaire dans cet emplacement.</p>
+</div>
+</article>
+</div>
+</div>
+</main>
+</div>
+</body></html>

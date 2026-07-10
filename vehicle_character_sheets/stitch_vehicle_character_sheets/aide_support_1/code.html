@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Centre d'Aide - Terroir Moderne</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&amp;family=Marcellus&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#f0eee8",
+                        "on-secondary-fixed-variant": "#225031",
+                        "primary-container": "#1f3b2a",
+                        "nuit": "#0f1411",
+                        "error-container": "#ffdad6",
+                        "brume": "#ece9e0",
+                        "surface-container-highest": "#e4e2dd",
+                        "tertiary-container": "#4a3000",
+                        "inverse-surface": "#30312d",
+                        "surface": "#fbf9f3",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#304d3b",
+                        "on-error": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "primary": "#082516",
+                        "on-background": "#1b1c19",
+                        "tertiary-fixed": "#ffddb0",
+                        "secondary": "#3a6847",
+                        "outline-variant": "#c2c8c1",
+                        "on-tertiary": "#ffffff",
+                        "tertiary": "#2e1c00",
+                        "primary-fixed-dim": "#aeceb7",
+                        "cendre": "#6b6f68",
+                        "laterite": "#b8612e",
+                        "charbon": "#1d2420",
+                        "foret": "#1f3b2a",
+                        "on-tertiary-container": "#c99441",
+                        "primary-fixed": "#caebd2",
+                        "surface-dim": "#dcdad4",
+                        "inverse-on-surface": "#f2f1eb",
+                        "on-primary-container": "#86a58f",
+                        "surface-variant": "#e4e2dd",
+                        "on-secondary-container": "#406e4d",
+                        "on-surface-variant": "#424843",
+                        "foret-90": "#284a36",
+                        "background": "#fbf9f3",
+                        "secondary-fixed-dim": "#a0d2aa",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#eae8e2",
+                        "outline": "#727972",
+                        "on-tertiary-fixed-variant": "#614000",
+                        "on-tertiary-fixed": "#291800",
+                        "manioc": "#fbf9f3",
+                        "foret-30": "#b4c4b9",
+                        "tertiary-fixed-dim": "#f6bd65",
+                        "nere": "#c89441",
+                        "secondary-container": "#bcefc5",
+                        "surface-tint": "#486551",
+                        "surface-container-low": "#f5f3ee",
+                        "on-surface": "#1b1c19",
+                        "inverse-primary": "#aeceb7",
+                        "bambou": "#3d6b4a",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#fbf9f3",
+                        "on-primary-fixed": "#042011",
+                        "secondary-fixed": "#bcefc5",
+                        "on-secondary-fixed": "#00210d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "souffle": "12px",
+                        "couloir": "24px",
+                        "arret": "16px",
+                        "pas": "4px",
+                        "place": "64px",
+                        "parvis": "48px",
+                        "pause": "8px",
+                        "patio": "32px"
+                    },
+                    "fontFamily": {
+                        "body-semibold": ["Plus Jakarta Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "h2": ["Marcellus"],
+                        "price-display": ["JetBrains Mono"],
+                        "label-mono": ["JetBrains Mono"],
+                        "h1": ["Marcellus"],
+                        "lede": ["Plus Jakarta Sans"],
+                        "h3": ["Marcellus"],
+                        "body-medium": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-semibold": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "h2": ["36px", { "lineHeight": "44px", "fontWeight": "400" }],
+                        "price-display": ["18px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "label-mono": ["13px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "400" }],
+                        "h1": ["48px", { "lineHeight": "56px", "fontWeight": "400" }],
+                        "lede": ["20px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "h3": ["24px", { "lineHeight": "32px", "fontWeight": "400" }],
+                        "body-medium": ["16px", { "lineHeight": "24px", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Subtle transition for cards */
+        .plaquette-hover {
+            transition: all 0.3s ease;
+        }
+        .plaquette-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0px 4px 12px rgba(29, 36, 32, 0.05);
+            border-color: #c2c8c1;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body antialiased min-h-screen pb-[80px] md:pb-0 md:pl-80 flex flex-col md:flex-row">
+<!-- Desktop SideNav (NavigationDrawer) -->
+<nav class="hidden md:flex bg-surface-container h-full w-80 fixed left-0 top-0 shadow-sm flex-col p-arret z-40">
+<div class="mb-parvis">
+<h1 class="font-h2 text-h2 text-primary mb-couloir">Terroir Moderne</h1>
+<!-- Profile Header -->
+<div class="flex items-center gap-arret bg-surface p-souffle rounded border border-brume mb-patio">
+<div class="w-12 h-12 rounded-full bg-brume flex items-center justify-center font-h3 text-h3 text-charbon overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Professional portrait of an administrative user for a modern freight logistics platform, shot in natural daylight with a clean, high-end corporate aesthetic. Soft earthy tones, shallow depth of field, clear focused subject, premium modern feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlKN1GRMRfpXa-WM_kAzO-r3rgAauOkD9ycPJ_vyDPEe7c_C-tuHMrFUru1YC9CsPhJ1naOGBZIIY8ZZGadSqXiT5UguYRQsAJ54JRoOLNYZ8gV1WLEAlMS_PSg-73eYkbF6U1XtoXwW8SeCM0h3WW6m-SF8bUX_78DDSSf8K-d7QeFziD7HN1lQA9BD2JIepb5esfP2vrXclAfksR2EpaBQqdwqce2TiEGidhTBjXuKFsGiOLJCM6"/>
+</div>
+<div>
+<h2 class="font-body-semibold text-body-semibold text-primary">Administration</h2>
+<p class="font-body text-body text-on-surface-variant">Gestion du Fret</p>
+<p class="font-label-mono text-label-mono text-cendre mt-pas">Région Centre</p>
+</div>
+</div>
+</div>
+<ul class="flex-1 space-y-souffle">
+<li>
+<a class="flex items-center gap-souffle p-souffle text-on-surface-variant font-body hover:bg-surface-container-highest transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Tableau de bord</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-souffle p-souffle text-on-surface-variant font-body hover:bg-surface-container-highest transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">verified_user</span>
+<span>Vérification KYC</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-souffle p-souffle bg-primary-container text-on-primary-container font-body-semibold rounded-lg active:opacity-80" href="#">
+<span class="material-symbols-outlined fill-icon">gavel</span>
+<span>Litiges &amp; Support</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-souffle p-souffle text-on-surface-variant font-body hover:bg-surface-container-highest transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span>Finances</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-souffle p-souffle text-on-surface-variant font-body hover:bg-surface-container-highest transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">campaign</span>
+<span>Marketing</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-souffle p-souffle text-on-surface-variant font-body hover:bg-surface-container-highest transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Paramètres</span>
+</a>
+</li>
+</ul>
+</nav>
+<!-- Mobile TopAppBar -->
+<header class="md:hidden bg-surface w-full top-0 sticky border-b border-brume z-40">
+<div class="flex justify-between items-center px-couloir py-souffle w-full">
+<div class="flex items-center gap-souffle">
+<div class="w-10 h-10 rounded-full bg-brume overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Small circular avatar profile picture of a user, clean modern aesthetic, soft natural lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6y5ncJ7S0i4JEgW5McNKQtinaji7QLuSk2eMzFX5LsGCk8rob3EotWjfeR7vZHaVvCBCvr4RWLT_kGKaGhWGgByGMo_-3qX8w9LWVUpt-Jfzu601o-EDPUuRlTqZZd0CBWftCNuLSZFy3eK-3dv68kbuw6Xs3NDNFXHtkS4zIPpiT76PhPuKmCaIZBU-ij3UvghmGj_X9EPMfq6uEDkQzTw05SF3JICw-WfAYu2gOe-3DB0dHrHXH"/>
+</div>
+</div>
+<h1 class="font-h3 text-h3 text-primary font-bold">Terroir Moderne</h1>
+<button class="text-primary hover:bg-surface-container-low transition-colors p-pause rounded-full active:scale-95 duration-100">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 px-couloir py-patio md:px-parvis md:py-place w-full max-w-5xl mx-auto">
+<!-- Header Section -->
+<section class="mb-place text-center md:text-left">
+<h1 class="font-h1 text-h1 text-primary mb-souffle">Centre d'Aide</h1>
+<p class="font-lede text-lede text-on-surface-variant max-w-2xl">Trouvez des réponses rapidement ou contactez notre équipe de support dédiée pour une assistance personnalisée.</p>
+<!-- Search Bar (Sillon style) -->
+<div class="mt-patio max-w-xl mx-auto md:mx-0 relative">
+<label class="sr-only">Rechercher</label>
+<div class="absolute inset-y-0 left-0 pl-souffle flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-cendre">search</span>
+</div>
+<input class="w-full pl-parvis pr-couloir py-arret bg-manioc border border-brume rounded font-body text-body text-on-surface focus:outline-none focus:border-foret focus:ring-1 focus:ring-foret transition-colors placeholder-cendre" placeholder="Rechercher un article, un mot-clé..." type="text"/>
+</div>
+</section>
+<!-- Bento Grid: Categories -->
+<section class="mb-place">
+<h2 class="font-h2 text-h2 text-primary mb-patio">Catégories</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-arret">
+<!-- Category Card 1 -->
+<a class="block bg-surface-container-lowest border border-brume rounded p-couloir plaquette-hover relative overflow-hidden group" href="#">
+<div class="w-12 h-12 bg-surface-container flex items-center justify-center rounded-full mb-arret group-hover:bg-primary-container group-hover:text-on-primary-container transition-colors">
+<span class="material-symbols-outlined">rocket_launch</span>
+</div>
+<h3 class="font-body-semibold text-body-semibold text-primary mb-pause">Démarrage Rapide</h3>
+<p class="font-body text-body text-on-surface-variant">Guides pour créer votre compte et commencer à utiliser la plateforme.</p>
+</a>
+<!-- Category Card 2 -->
+<a class="block bg-surface-container-lowest border border-brume rounded p-couloir plaquette-hover relative overflow-hidden group" href="#">
+<div class="w-12 h-12 bg-surface-container flex items-center justify-center rounded-full mb-arret group-hover:bg-primary-container group-hover:text-on-primary-container transition-colors">
+<span class="material-symbols-outlined">local_shipping</span>
+</div>
+<h3 class="font-body-semibold text-body-semibold text-primary mb-pause">Gestion des Expéditions</h3>
+<p class="font-body text-body text-on-surface-variant">Comment suivre, modifier ou annuler vos frets en cours.</p>
+</a>
+<!-- Category Card 3 -->
+<a class="block bg-surface-container-lowest border border-brume rounded p-couloir plaquette-hover relative overflow-hidden group" href="#">
+<div class="w-12 h-12 bg-surface-container flex items-center justify-center rounded-full mb-arret group-hover:bg-primary-container group-hover:text-on-primary-container transition-colors">
+<span class="material-symbols-outlined">credit_card</span>
+</div>
+<h3 class="font-body-semibold text-body-semibold text-primary mb-pause">Paiements &amp; Facturation</h3>
+<p class="font-body text-body text-on-surface-variant">Gérer vos méthodes de paiement, factures et litiges financiers.</p>
+</a>
+<!-- Category Card 4 -->
+<a class="block bg-surface-container-lowest border border-brume rounded p-couloir plaquette-hover relative overflow-hidden group md:col-span-2" href="#">
+<div class="flex items-start gap-arret">
+<div class="w-12 h-12 bg-surface-container flex items-center justify-center rounded-full shrink-0 group-hover:bg-primary-container group-hover:text-on-primary-container transition-colors">
+<span class="material-symbols-outlined">gpp_good</span>
+</div>
+<div>
+<h3 class="font-body-semibold text-body-semibold text-primary mb-pause">Sécurité &amp; Conformité</h3>
+<p class="font-body text-body text-on-surface-variant mb-souffle">Règles de transport, assurances des marchandises et normes de sécurité appliquées sur notre réseau.</p>
+<div class="inline-flex items-center gap-pas font-label-mono text-label-mono text-secondary uppercase tracking-wider">
+<span>Voir les politiques</span>
+<span class="material-symbols-outlined" style="font-size: 16px;">arrow_forward</span>
+</div>
+</div>
+</div>
+</a>
+<!-- Category Card 5 -->
+<a class="block bg-surface-container-lowest border border-brume rounded p-couloir plaquette-hover relative overflow-hidden group" href="#">
+<div class="w-12 h-12 bg-surface-container flex items-center justify-center rounded-full mb-arret group-hover:bg-primary-container group-hover:text-on-primary-container transition-colors">
+<span class="material-symbols-outlined">manage_accounts</span>
+</div>
+<h3 class="font-body-semibold text-body-semibold text-primary mb-pause">Profil &amp; Compte</h3>
+<p class="font-body text-body text-on-surface-variant">Mise à jour des informations KYC et paramètres de confidentialité.</p>
+</a>
+</div>
+</section>
+<!-- Two-column Layout: FAQs & Contact -->
+<section class="grid grid-cols-1 lg:grid-cols-5 gap-patio">
+<!-- FAQs Section -->
+<div class="lg:col-span-3">
+<h2 class="font-h2 text-h2 text-primary mb-patio">Questions Fréquentes</h2>
+<div class="space-y-souffle">
+<!-- FAQ Item 1 -->
+<details class="bg-surface-container-lowest border border-brume rounded overflow-hidden group">
+<summary class="flex justify-between items-center p-arret cursor-pointer list-none font-body-medium text-body-medium text-primary">
+<span>Comment suivre l'avancement de mon fret en temps réel ?</span>
+<span class="material-symbols-outlined text-outline group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="px-arret pb-arret pt-0 font-body text-body text-on-surface-variant">
+                            Rendez-vous dans la section "Suivi" de votre tableau de bord. Vous y trouverez une carte interactive (Jalons) indiquant la position actuelle de votre cargaison, avec des mises à jour régulières basées sur le signal GPS du transporteur.
+                        </div>
+</details>
+<!-- FAQ Item 2 -->
+<details class="bg-surface-container-lowest border border-brume rounded overflow-hidden group">
+<summary class="flex justify-between items-center p-arret cursor-pointer list-none font-body-medium text-body-medium text-primary">
+<span>Quels sont les délais de traitement des litiges ?</span>
+<span class="material-symbols-outlined text-outline group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="px-arret pb-arret pt-0 font-body text-body text-on-surface-variant">
+                            Notre équipe s'engage à traiter tout litige signalé dans un délai de 48 heures ouvrables. Pour accélérer le processus, veuillez fournir des preuves photographiques et détailler le problème via l'onglet "Litiges".
+                        </div>
+</details>
+<!-- FAQ Item 3 -->
+<details class="bg-surface-container-lowest border border-brume rounded overflow-hidden group">
+<summary class="flex justify-between items-center p-arret cursor-pointer list-none font-body-medium text-body-medium text-primary">
+<span>Puis-je modifier l'adresse de destination en cours de route ?</span>
+<span class="material-symbols-outlined text-outline group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="px-arret pb-arret pt-0 font-body text-body text-on-surface-variant">
+                            Les modifications d'adresse en cours de route nécessitent l'approbation du transporteur et peuvent entraîner des frais supplémentaires (calculés selon la distance additionnelle). Contactez immédiatement le support si ce besoin se présente.
+                        </div>
+</details>
+</div>
+<a class="inline-block mt-arret font-label-mono text-label-mono text-secondary uppercase hover:text-primary transition-colors" href="#">
+                    Voir toute la base de connaissances →
+                </a>
+</div>
+<!-- Contact Section (Glassmorphism/Premium Card) -->
+<div class="lg:col-span-2">
+<div class="bg-primary text-on-primary rounded-lg p-parvis shadow-lg relative overflow-hidden">
+<!-- Subtle decorative element -->
+<div class="absolute -right-8 -top-8 w-32 h-32 bg-primary-fixed-dim rounded-full opacity-10 blur-xl"></div>
+<div class="absolute -left-8 -bottom-8 w-40 h-40 bg-secondary rounded-full opacity-20 blur-2xl"></div>
+<div class="relative z-10">
+<h2 class="font-h2 text-h2 mb-souffle text-surface-bright">Besoin d'aide immédiate ?</h2>
+<p class="font-body text-body text-surface-variant mb-patio">Notre équipe d'experts en logistique est disponible de 8h à 20h pour résoudre vos problèmes critiques.</p>
+<div class="space-y-souffle">
+<button class="w-full flex items-center justify-center gap-arret bg-secondary hover:bg-bambou text-on-secondary font-body-semibold text-body-semibold py-souffle px-couloir rounded-full transition-colors active:scale-95 duration-100">
+<span class="material-symbols-outlined">forum</span>
+                                Discuter avec le Support
+                            </button>
+<button class="w-full flex items-center justify-center gap-arret bg-transparent border border-surface-dim hover:bg-surface-dim/10 text-surface-bright font-body-semibold text-body-semibold py-souffle px-couloir rounded-full transition-colors active:scale-95 duration-100">
+<span class="material-symbols-outlined">call</span>
+                                Appeler le +237 200 000 000
+                            </button>
+</div>
+<div class="mt-patio flex items-center justify-center gap-pas">
+<div class="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></div>
+<span class="font-label-mono text-label-mono text-surface-variant uppercase">Temps d'attente estimé: &lt; 2 min</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Mobile BottomNavBar -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 rounded-t-lg border-t border-brume shadow-lg bg-surface flex justify-around items-center px-couloir pb-souffle pt-pas">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-mono text-label-mono">Accueil</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary" href="#">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="font-label-mono text-label-mono">Suivi</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-pas py-pas active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined fill-icon">contact_support</span>
+<span class="font-label-mono text-label-mono">Support</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-mono text-label-mono">Compte</span>
+</a>
+</nav>
+</body></html>

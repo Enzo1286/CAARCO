@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Historique des Courses - TransLogix</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Marcellus&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#dcdad4",
+                        "secondary": "#3a6847",
+                        "on-primary-fixed": "#042011",
+                        "on-surface-variant": "#424843",
+                        "foret": "#1f3b2a",
+                        "nuit": "#0f1411",
+                        "on-background": "#1b1c19",
+                        "foret-90": "#284a36",
+                        "secondary-container": "#bcefc5",
+                        "primary-container": "#1f3b2a",
+                        "on-tertiary": "#ffffff",
+                        "charbon": "#1d2420",
+                        "surface-container": "#f0eee8",
+                        "secondary-fixed": "#bcefc5",
+                        "primary-fixed-dim": "#aeceb7",
+                        "error-container": "#ffdad6",
+                        "brume": "#ece9e0",
+                        "on-primary-container": "#86a58f",
+                        "surface-variant": "#e4e2dd",
+                        "outline-variant": "#c2c8c1",
+                        "primary-fixed": "#caebd2",
+                        "bambou": "#3d6b4a",
+                        "on-tertiary-fixed-variant": "#614000",
+                        "tertiary-fixed": "#ffddb0",
+                        "cendre": "#6b6f68",
+                        "on-secondary-fixed": "#00210d",
+                        "on-secondary": "#ffffff",
+                        "manioc": "#fbf9f3",
+                        "foret-30": "#b4c4b9",
+                        "surface-tint": "#486551",
+                        "nere": "#c89441",
+                        "surface-container-low": "#f5f3ee",
+                        "error": "#ba1a1a",
+                        "secondary-fixed-dim": "#a0d2aa",
+                        "surface-container-highest": "#e4e2dd",
+                        "on-secondary-container": "#406e4d",
+                        "background": "#fbf9f3",
+                        "outline": "#727972",
+                        "inverse-surface": "#30312d",
+                        "surface": "#fbf9f3",
+                        "on-secondary-fixed-variant": "#225031",
+                        "inverse-primary": "#aeceb7",
+                        "tertiary-fixed-dim": "#f6bd65",
+                        "surface-container-high": "#eae8e2",
+                        "on-tertiary-fixed": "#291800",
+                        "on-tertiary-container": "#c99441",
+                        "tertiary-container": "#4a3000",
+                        "on-error": "#ffffff",
+                        "laterite": "#b8612e",
+                        "on-primary": "#ffffff",
+                        "primary": "#082516",
+                        "surface-bright": "#fbf9f3",
+                        "on-primary-fixed-variant": "#304d3b",
+                        "on-surface": "#1b1c19",
+                        "tertiary": "#2e1c00",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#f2f1eb"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "souffle": "12px",
+                        "arret": "16px",
+                        "patio": "32px",
+                        "couloir": "24px",
+                        "place": "64px",
+                        "pause": "8px",
+                        "parvis": "48px",
+                        "pas": "4px"
+                    },
+                    "fontFamily": {
+                        "label-mono": ["JetBrains Mono"],
+                        "h3": ["Marcellus"],
+                        "body-semibold": ["Plus Jakarta Sans"],
+                        "h1": ["Marcellus"],
+                        "body-medium": ["Plus Jakarta Sans"],
+                        "price-display": ["JetBrains Mono"],
+                        "lede": ["Plus Jakarta Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "h2": ["Marcellus"]
+                    },
+                    "fontSize": {
+                        "label-mono": ["13px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "400" }],
+                        "h3": ["24px", { "lineHeight": "32px", "fontWeight": "400" }],
+                        "body-semibold": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "h1": ["48px", { "lineHeight": "56px", "fontWeight": "400" }],
+                        "body-medium": ["16px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "price-display": ["18px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "lede": ["20px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "h2": ["36px", { "lineHeight": "44px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-manioc text-on-background min-h-screen pb-[80px]">
+<!-- TopAppBar -->
+<header class="bg-manioc dark:bg-nuit sticky full-width top-0 z-40 border-b-0" style="box-shadow: none;">
+<div class="flex justify-between items-center px-couloir py-souffle w-full">
+<button class="text-foret dark:text-primary-fixed hover:bg-brume dark:hover:bg-foret-90 active:scale-95 transition-transform p-2 rounded-full">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="font-h3 text-h3 text-foret dark:text-primary-fixed font-bold tracking-tight">TransLogix</h1>
+<div class="w-10 h-10 rounded-full bg-brume flex items-center justify-center text-foret overflow-hidden border border-brume">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="px-couloir pt-patio pb-place max-w-3xl mx-auto">
+<header class="mb-patio flex flex-col gap-souffle">
+<h2 class="font-h2 text-h2 text-foret">Mes Courses</h2>
+<!-- Filters -->
+<div class="flex gap-souffle overflow-x-auto pb-pause no-scrollbar -mx-couloir px-couloir">
+<button class="whitespace-nowrap px-arret py-pause rounded-full bg-foret text-manioc font-label-mono text-label-mono border border-foret transition-colors">Octobre</button>
+<button class="whitespace-nowrap px-arret py-pause rounded-full bg-transparent text-charbon font-label-mono text-label-mono border border-brume hover:bg-brume transition-colors">Septembre</button>
+<button class="whitespace-nowrap px-arret py-pause rounded-full bg-transparent text-charbon font-label-mono text-label-mono border border-brume hover:bg-brume transition-colors">Août</button>
+<button class="whitespace-nowrap px-arret py-pause rounded-full bg-transparent text-charbon font-label-mono text-label-mono border border-brume hover:bg-brume transition-colors">Juillet</button>
+</div>
+</header>
+<!-- Course List -->
+<div class="flex flex-col gap-arret">
+<!-- Card 1: Completed -->
+<article class="bg-surface-container-lowest border border-brume rounded-lg p-arret shadow-[0px_4px_12px_rgba(29,36,32,0.05)] hover:shadow-md transition-shadow cursor-pointer">
+<div class="flex justify-between items-start mb-souffle">
+<div class="flex items-center gap-pause">
+<span class="font-label-mono text-label-mono text-cendre uppercase">12 Oct 2023, 14:30</span>
+</div>
+<div class="bg-secondary-container text-on-secondary-container px-pause py-pas rounded-sm font-label-mono text-[11px] uppercase tracking-wider">
+                        Terminé
+                    </div>
+</div>
+<div class="flex gap-arret mb-arret relative">
+<!-- Timeline connector -->
+<div class="absolute left-[11px] top-6 bottom-4 w-[2px] bg-brume"></div>
+<div class="flex flex-col gap-pas items-center pt-1 z-10">
+<div class="w-6 h-6 rounded-full bg-manioc border-2 border-bambou flex items-center justify-center">
+<div class="w-2 h-2 rounded-full bg-bambou"></div>
+</div>
+<div class="flex-1 w-[2px] bg-transparent"></div>
+<div class="w-6 h-6 rounded-full bg-manioc border-2 border-nere flex items-center justify-center mt-6">
+<div class="w-2 h-2 rounded-full bg-nere"></div>
+</div>
+</div>
+<div class="flex flex-col gap-arret flex-1">
+<div>
+<p class="font-body-semibold text-body-semibold text-charbon">Douala, Akwa</p>
+<p class="font-body text-body text-cendre text-sm">Rue Drouot</p>
+</div>
+<div>
+<p class="font-body-semibold text-body-semibold text-charbon">Yaoundé, Bastos</p>
+<p class="font-body text-body text-cendre text-sm">Avenue des Ambassades</p>
+</div>
+</div>
+</div>
+<div class="flex justify-between items-end border-t border-brume pt-souffle mt-souffle">
+<div class="flex items-center gap-pause text-cendre">
+<span class="material-symbols-outlined text-[18px]" data-icon="local_shipping">local_shipping</span>
+<span class="font-body-medium text-sm">Camion 5T</span>
+</div>
+<div class="text-right">
+<span class="font-price-display text-price-display text-nere font-medium">85,000 FCFA</span>
+</div>
+</div>
+</article>
+<!-- Card 2: Completed -->
+<article class="bg-surface-container-lowest border border-brume rounded-lg p-arret shadow-[0px_4px_12px_rgba(29,36,32,0.05)] hover:shadow-md transition-shadow cursor-pointer">
+<div class="flex justify-between items-start mb-souffle">
+<div class="flex items-center gap-pause">
+<span class="font-label-mono text-label-mono text-cendre uppercase">08 Oct 2023, 09:15</span>
+</div>
+<div class="bg-secondary-container text-on-secondary-container px-pause py-pas rounded-sm font-label-mono text-[11px] uppercase tracking-wider">
+                        Terminé
+                    </div>
+</div>
+<div class="flex gap-arret mb-arret relative">
+<div class="absolute left-[11px] top-6 bottom-4 w-[2px] bg-brume"></div>
+<div class="flex flex-col gap-pas items-center pt-1 z-10">
+<div class="w-6 h-6 rounded-full bg-manioc border-2 border-bambou flex items-center justify-center">
+<div class="w-2 h-2 rounded-full bg-bambou"></div>
+</div>
+<div class="w-6 h-6 rounded-full bg-manioc border-2 border-nere flex items-center justify-center mt-6">
+<div class="w-2 h-2 rounded-full bg-nere"></div>
+</div>
+</div>
+<div class="flex flex-col gap-arret flex-1">
+<div>
+<p class="font-body-semibold text-body-semibold text-charbon">Kribi, Port Autonome</p>
+<p class="font-body text-body text-cendre text-sm">Zone Industrielle</p>
+</div>
+<div>
+<p class="font-body-semibold text-body-semibold text-charbon">Douala, Bonabéri</p>
+<p class="font-body text-body text-cendre text-sm">Z.I. Magzi</p>
+</div>
+</div>
+</div>
+<div class="flex justify-between items-end border-t border-brume pt-souffle mt-souffle">
+<div class="flex items-center gap-pause text-cendre">
+<span class="material-symbols-outlined text-[18px]" data-icon="local_shipping">local_shipping</span>
+<span class="font-body-medium text-sm">Camion 10T</span>
+</div>
+<div class="text-right">
+<span class="font-price-display text-price-display text-nere font-medium">120,000 FCFA</span>
+</div>
+</div>
+</article>
+<!-- Card 3: Cancelled -->
+<article class="bg-surface-container-lowest border border-brume rounded-lg p-arret opacity-75 grayscale-[0.2]">
+<div class="flex justify-between items-start mb-souffle">
+<div class="flex items-center gap-pause">
+<span class="font-label-mono text-label-mono text-cendre uppercase">02 Oct 2023, 16:00</span>
+</div>
+<div class="bg-error-container text-on-error-container px-pause py-pas rounded-sm font-label-mono text-[11px] uppercase tracking-wider">
+                        Annulé
+                    </div>
+</div>
+<div class="flex gap-arret mb-arret relative">
+<div class="absolute left-[11px] top-6 bottom-4 w-[2px] bg-surface-variant"></div>
+<div class="flex flex-col gap-pas items-center pt-1 z-10">
+<div class="w-6 h-6 rounded-full bg-manioc border-2 border-outline-variant flex items-center justify-center">
+<div class="w-2 h-2 rounded-full bg-outline-variant"></div>
+</div>
+<div class="w-6 h-6 rounded-full bg-manioc border-2 border-outline-variant flex items-center justify-center mt-6">
+<div class="w-2 h-2 rounded-full bg-outline-variant"></div>
+</div>
+</div>
+<div class="flex flex-col gap-arret flex-1">
+<div>
+<p class="font-body-semibold text-body-semibold text-surface-tint">Douala, Deido</p>
+<p class="font-body text-body text-cendre text-sm">Rond Point</p>
+</div>
+<div>
+<p class="font-body-semibold text-body-semibold text-surface-tint">Douala, Logbessou</p>
+<p class="font-body text-body text-cendre text-sm">Carrefour</p>
+</div>
+</div>
+</div>
+<div class="flex justify-between items-end border-t border-surface-variant pt-souffle mt-souffle">
+<div class="flex items-center gap-pause text-outline-variant">
+<span class="material-symbols-outlined text-[18px]" data-icon="local_shipping">local_shipping</span>
+<span class="font-body-medium text-sm">Fourgonnette</span>
+</div>
+<div class="text-right">
+<span class="font-price-display text-price-display text-outline font-medium line-through">15,000 FCFA</span>
+</div>
+</div>
+</article>
+</div>
+</main>
+<!-- BottomNavBar (Destination: Commandes) -->
+<nav class="fixed bottom-0 w-full z-50 md:hidden border-t border-brume dark:border-foret-90 shadow-sm">
+<div class="fixed bottom-0 w-full flex justify-around items-center px-souffle pb-arret pt-pas bg-manioc dark:bg-nuit">
+<a class="flex flex-col items-center justify-center text-cendre dark:text-foret-30 px-souffle py-pas hover:text-foret dark:hover:text-primary-fixed active:scale-90 transition-all" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="explore">explore</span>
+<span class="font-label-mono text-label-mono text-[10px]">Explorer</span>
+</a>
+<a class="flex flex-col items-center justify-center text-cendre dark:text-foret-30 px-souffle py-pas hover:text-foret dark:hover:text-primary-fixed active:scale-90 transition-all" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="location_on">location_on</span>
+<span class="font-label-mono text-label-mono text-[10px]">Suivi</span>
+</a>
+<!-- Active State: Commandes (History maps to Orders) -->
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-full px-souffle py-pas active:scale-90 transition-all" href="#">
+<span class="material-symbols-outlined fill mb-1" data-icon="receipt_long">receipt_long</span>
+<span class="font-label-mono text-label-mono text-[10px]">Commandes</span>
+</a>
+<a class="flex flex-col items-center justify-center text-cendre dark:text-foret-30 px-souffle py-pas hover:text-foret dark:hover:text-primary-fixed active:scale-90 transition-all" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="person">person</span>
+<span class="font-label-mono text-label-mono text-[10px]">Profil</span>
+</a>
+</div>
+</nav>
+<style>
+        /* Hide scrollbar for horizontal filter list */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
+</body></html>

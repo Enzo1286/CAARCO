@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CAARCO - Détails du Colis</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;family=Marcellus&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "surface-container-low": "#f5f3ee",
+                        "surface-tint": "#486551",
+                        "nere": "#c89441",
+                        "foret-30": "#b4c4b9",
+                        "surface-container-highest": "#e4e2dd",
+                        "secondary-fixed-dim": "#a0d2aa",
+                        "manioc": "#fbf9f3",
+                        "surface-container-high": "#eae8e2",
+                        "on-tertiary-fixed": "#291800",
+                        "tertiary-fixed-dim": "#f6bd65",
+                        "inverse-primary": "#aeceb7",
+                        "surface": "#fbf9f3",
+                        "on-secondary-fixed-variant": "#225031",
+                        "on-tertiary-container": "#c99441",
+                        "outline": "#727972",
+                        "on-secondary-container": "#406e4d",
+                        "background": "#fbf9f3",
+                        "inverse-surface": "#30312d",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "laterite": "#b8612e",
+                        "tertiary-container": "#4a3000",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#f2f1eb",
+                        "surface-bright": "#fbf9f3",
+                        "on-primary-fixed-variant": "#304d3b",
+                        "primary": "#082516",
+                        "tertiary": "#2e1c00",
+                        "on-surface": "#1b1c19",
+                        "on-surface-variant": "#424843",
+                        "secondary": "#3a6847",
+                        "on-primary-fixed": "#042011",
+                        "nuit": "#0f1411",
+                        "foret": "#1f3b2a",
+                        "surface-dim": "#dcdad4",
+                        "on-error-container": "#93000a",
+                        "primary-container": "#1f3b2a",
+                        "secondary-container": "#bcefc5",
+                        "charbon": "#1d2420",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#1b1c19",
+                        "foret-90": "#284a36",
+                        "surface-variant": "#e4e2dd",
+                        "on-primary-container": "#86a58f",
+                        "primary-fixed": "#caebd2",
+                        "outline-variant": "#c2c8c1",
+                        "surface-container": "#f0eee8",
+                        "error-container": "#ffdad6",
+                        "brume": "#ece9e0",
+                        "primary-fixed-dim": "#aeceb7",
+                        "secondary-fixed": "#bcefc5",
+                        "tertiary-fixed": "#ffddb0",
+                        "on-tertiary-fixed-variant": "#614000",
+                        "bambou": "#3d6b4a",
+                        "on-secondary-fixed": "#00210d",
+                        "on-secondary": "#ffffff",
+                        "cendre": "#6b6f68"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "arret": "16px",
+                        "patio": "32px",
+                        "couloir": "24px",
+                        "souffle": "12px",
+                        "pas": "4px",
+                        "place": "64px",
+                        "pause": "8px",
+                        "parvis": "48px"
+                    },
+                    "fontFamily": {
+                        "label-mono": ["JetBrains Mono"],
+                        "h3": ["Marcellus"],
+                        "body-semibold": ["Plus Jakarta Sans"],
+                        "h1": ["Marcellus"],
+                        "body-medium": ["Plus Jakarta Sans"],
+                        "price-display": ["JetBrains Mono"],
+                        "lede": ["Plus Jakarta Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "h2": ["Marcellus"]
+                    },
+                    "fontSize": {
+                        "label-mono": ["13px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "400" }],
+                        "h3": ["24px", { "lineHeight": "32px", "fontWeight": "400" }],
+                        "body-semibold": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "h1": ["48px", { "lineHeight": "56px", "fontWeight": "400" }],
+                        "body-medium": ["16px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "price-display": ["18px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "lede": ["20px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "h2": ["36px", { "lineHeight": "44px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Custom scrollbar to match theme */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e4e2dd;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #dcdad4;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body selection:bg-bambou/20 selection:text-foret antialiased pb-32">
+<!-- Top App Bar - Linear Journey (Suppressed Nav Shell, keeping simple header with back button) -->
+<header class="w-full top-0 sticky z-40 bg-background border-b border-brume px-couloir py-arret flex items-center shadow-[0px_4px_12px_rgba(29,36,32,0.02)]">
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-surface-container transition-colors text-charbon mr-4 group">
+<span class="material-symbols-outlined group-active:scale-90 transition-transform">arrow_back</span>
+</button>
+<div class="flex-1">
+<h1 class="font-h3 text-h3 text-foret tracking-tight">Détails du colis</h1>
+</div>
+<button class="text-cendre hover:text-charbon font-body-medium text-body-medium transition-colors">
+            Annuler
+        </button>
+</header>
+<main class="flex-1 w-full max-w-2xl mx-auto px-couloir py-patio">
+<!-- Jalons (Progress Bar) -->
+<div class="mb-parvis">
+<div class="flex justify-between items-end mb-pause">
+<span class="font-label-mono text-label-mono text-cendre uppercase">Étape 2 sur 4</span>
+<span class="font-body-medium text-body-medium text-foret">Informations</span>
+</div>
+<div class="h-2 bg-brume rounded-full overflow-hidden flex">
+<div class="w-1/4 bg-foret-30 h-full border-r border-background"></div>
+<div class="w-1/4 bg-foret h-full rounded-r-full relative overflow-hidden">
+<div class="absolute inset-0 bg-white/20 -translate-x-full animate-[shimmer_2s_infinite]"></div>
+</div>
+<div class="w-1/4 bg-transparent h-full"></div>
+<div class="w-1/4 bg-transparent h-full"></div>
+</div>
+<style>
+                @keyframes shimmer {
+                    100% { transform: translateX(100%); }
+                }
+            </style>
+</div>
+<!-- Section 1: Type de colis -->
+<section class="mb-place animate-[fade-in-up_0.4s_ease-out]">
+<h2 class="font-lede text-lede text-charbon mb-arret">Type de colis</h2>
+<p class="font-body text-body text-outline mb-couloir">Sélectionnez la catégorie qui décrit le mieux votre envoi.</p>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-souffle">
+<!-- Category Pill: Vêtements -->
+<label class="cursor-pointer group relative">
+<input checked="" class="peer sr-only" name="package_type" type="radio" value="clothes"/>
+<div class="h-full bg-surface-container-lowest border border-brume rounded-DEFAULT p-arret flex flex-col items-center justify-center gap-pause transition-all duration-300 peer-checked:border-foret peer-checked:bg-secondary-container/20 peer-checked:shadow-[0_0_0_1px_#1f3b2a] hover:border-bambou/50">
+<span class="material-symbols-outlined text-[28px] text-cendre peer-checked:text-foret group-hover:text-bambou transition-colors">checkroom</span>
+<span class="font-body-medium text-body-medium text-on-surface text-center">Vêtements</span>
+</div>
+<div class="absolute top-2 right-2 opacity-0 peer-checked:opacity-100 transition-opacity">
+<span class="material-symbols-outlined fill text-[18px] text-foret">check_circle</span>
+</div>
+</label>
+<!-- Category Pill: Électronique -->
+<label class="cursor-pointer group relative">
+<input class="peer sr-only" name="package_type" type="radio" value="electronics"/>
+<div class="h-full bg-surface-container-lowest border border-brume rounded-DEFAULT p-arret flex flex-col items-center justify-center gap-pause transition-all duration-300 peer-checked:border-foret peer-checked:bg-secondary-container/20 peer-checked:shadow-[0_0_0_1px_#1f3b2a] hover:border-bambou/50">
+<span class="material-symbols-outlined text-[28px] text-cendre peer-checked:text-foret group-hover:text-bambou transition-colors">devices</span>
+<span class="font-body-medium text-body-medium text-on-surface text-center">Électronique</span>
+</div>
+<div class="absolute top-2 right-2 opacity-0 peer-checked:opacity-100 transition-opacity">
+<span class="material-symbols-outlined fill text-[18px] text-foret">check_circle</span>
+</div>
+</label>
+<!-- Category Pill: Fragile -->
+<label class="cursor-pointer group relative">
+<input class="peer sr-only" name="package_type" type="radio" value="fragile"/>
+<div class="h-full bg-surface-container-lowest border border-brume rounded-DEFAULT p-arret flex flex-col items-center justify-center gap-pause transition-all duration-300 peer-checked:border-foret peer-checked:bg-secondary-container/20 peer-checked:shadow-[0_0_0_1px_#1f3b2a] hover:border-bambou/50">
+<span class="material-symbols-outlined text-[28px] text-cendre peer-checked:text-foret group-hover:text-bambou transition-colors">wine_bar</span>
+<span class="font-body-medium text-body-medium text-on-surface text-center">Fragile</span>
+</div>
+<div class="absolute top-2 right-2 opacity-0 peer-checked:opacity-100 transition-opacity">
+<span class="material-symbols-outlined fill text-[18px] text-foret">check_circle</span>
+</div>
+</label>
+<!-- Category Pill: Documents -->
+<label class="cursor-pointer group relative">
+<input class="peer sr-only" name="package_type" type="radio" value="documents"/>
+<div class="h-full bg-surface-container-lowest border border-brume rounded-DEFAULT p-arret flex flex-col items-center justify-center gap-pause transition-all duration-300 peer-checked:border-foret peer-checked:bg-secondary-container/20 peer-checked:shadow-[0_0_0_1px_#1f3b2a] hover:border-bambou/50">
+<span class="material-symbols-outlined text-[28px] text-cendre peer-checked:text-foret group-hover:text-bambou transition-colors">description</span>
+<span class="font-body-medium text-body-medium text-on-surface text-center">Documents</span>
+</div>
+<div class="absolute top-2 right-2 opacity-0 peer-checked:opacity-100 transition-opacity">
+<span class="material-symbols-outlined fill text-[18px] text-foret">check_circle</span>
+</div>
+</label>
+<!-- Category Pill: Alimentaire -->
+<label class="cursor-pointer group relative">
+<input class="peer sr-only" name="package_type" type="radio" value="food"/>
+<div class="h-full bg-surface-container-lowest border border-brume rounded-DEFAULT p-arret flex flex-col items-center justify-center gap-pause transition-all duration-300 peer-checked:border-foret peer-checked:bg-secondary-container/20 peer-checked:shadow-[0_0_0_1px_#1f3b2a] hover:border-bambou/50">
+<span class="material-symbols-outlined text-[28px] text-cendre peer-checked:text-foret group-hover:text-bambou transition-colors">restaurant</span>
+<span class="font-body-medium text-body-medium text-on-surface text-center">Alimentaire</span>
+</div>
+<div class="absolute top-2 right-2 opacity-0 peer-checked:opacity-100 transition-opacity">
+<span class="material-symbols-outlined fill text-[18px] text-foret">check_circle</span>
+</div>
+</label>
+<!-- Category Pill: Autre -->
+<label class="cursor-pointer group relative">
+<input class="peer sr-only" name="package_type" type="radio" value="other"/>
+<div class="h-full bg-surface-container-lowest border border-brume rounded-DEFAULT p-arret flex flex-col items-center justify-center gap-pause transition-all duration-300 peer-checked:border-foret peer-checked:bg-secondary-container/20 peer-checked:shadow-[0_0_0_1px_#1f3b2a] hover:border-bambou/50">
+<span class="material-symbols-outlined text-[28px] text-cendre peer-checked:text-foret group-hover:text-bambou transition-colors">box</span>
+<span class="font-body-medium text-body-medium text-on-surface text-center">Autre</span>
+</div>
+<div class="absolute top-2 right-2 opacity-0 peer-checked:opacity-100 transition-opacity">
+<span class="material-symbols-outlined fill text-[18px] text-foret">check_circle</span>
+</div>
+</label>
+</div>
+</section>
+<!-- Section 2: Poids & Dimensions (Sillon Inputs) -->
+<section class="mb-place animate-[fade-in-up_0.5s_ease-out]">
+<h2 class="font-lede text-lede text-charbon mb-couloir">Poids &amp; Dimensions</h2>
+<div class="space-y-couloir">
+<!-- Sillon: Poids -->
+<div class="group">
+<label class="block font-label-mono text-label-mono text-cendre uppercase mb-pause" for="weight">Poids estimé (kg)</label>
+<div class="relative flex items-center">
+<input class="w-full bg-surface-container-lowest border border-brume rounded-DEFAULT px-arret py-[14px] font-price-display text-price-display text-on-surface focus:outline-none focus:border-foret focus:ring-1 focus:ring-foret transition-colors placeholder:text-cendre/50" id="weight" placeholder="0.0" type="number"/>
+<span class="absolute right-arret text-cendre font-body-medium text-body-medium">kg</span>
+</div>
+</div>
+<!-- Dimensions Bento Layout -->
+<div>
+<label class="block font-label-mono text-label-mono text-cendre uppercase mb-pause">Dimensions (cm) <span class="text-outline-variant font-normal normal-case ml-2">Optionnel</span></label>
+<div class="grid grid-cols-3 gap-souffle">
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border border-brume rounded-DEFAULT px-arret py-[14px] font-price-display text-price-display text-on-surface focus:outline-none focus:border-foret focus:ring-1 focus:ring-foret transition-colors placeholder:text-cendre/50 text-center" placeholder="Long." type="number"/>
+</div>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border border-brume rounded-DEFAULT px-arret py-[14px] font-price-display text-price-display text-on-surface focus:outline-none focus:border-foret focus:ring-1 focus:ring-foret transition-colors placeholder:text-cendre/50 text-center" placeholder="Larg." type="number"/>
+</div>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border border-brume rounded-DEFAULT px-arret py-[14px] font-price-display text-price-display text-on-surface focus:outline-none focus:border-foret focus:ring-1 focus:ring-foret transition-colors placeholder:text-cendre/50 text-center" placeholder="Haut." type="number"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: Photos du colis -->
+<section class="mb-place animate-[fade-in-up_0.6s_ease-out]">
+<div class="flex justify-between items-baseline mb-arret">
+<h2 class="font-lede text-lede text-charbon">Photos du colis</h2>
+<span class="font-label-mono text-label-mono text-cendre bg-surface-container px-2 py-1 rounded-sm">0/3</span>
+</div>
+<p class="font-body text-body text-outline mb-couloir">Ajoutez des photos pour aider le livreur à identifier votre colis et attester de son état.</p>
+<div class="grid grid-cols-3 gap-souffle">
+<!-- Upload Button -->
+<button class="aspect-square bg-surface-container-low border-2 border-dashed border-outline-variant rounded-DEFAULT flex flex-col items-center justify-center text-cendre hover:bg-surface-container hover:border-foret hover:text-foret transition-all group focus:outline-none focus:ring-2 focus:ring-foret focus:ring-offset-2 focus:ring-offset-background">
+<span class="material-symbols-outlined text-[32px] mb-pause group-hover:scale-110 transition-transform">add_a_photo</span>
+<span class="font-body-medium text-label-mono">Ajouter</span>
+</button>
+<!-- Placeholder slots (empty state) -->
+<div class="aspect-square bg-surface-container-lowest border border-brume rounded-DEFAULT flex items-center justify-center text-brume/50">
+<span class="material-symbols-outlined text-[32px]">image</span>
+</div>
+<div class="aspect-square bg-surface-container-lowest border border-brume rounded-DEFAULT flex items-center justify-center text-brume/50">
+<span class="material-symbols-outlined text-[32px]">image</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Fixed Bottom Action Area -->
+<div class="fixed bottom-0 w-full bg-gradient-to-t from-background via-background to-transparent pt-place pb-couloir px-couloir z-50 pointer-events-none">
+<div class="max-w-2xl mx-auto w-full pointer-events-auto shadow-[0_-20px_40px_rgba(251,249,243,0.9)]">
+<!-- Galet (Button) Primary -->
+<button class="w-full bg-foret text-foret-30 font-body-semibold text-body-semibold py-[18px] px-couloir rounded-full flex items-center justify-center gap-pause hover:bg-charbon active:scale-[0.98] transition-all shadow-[0_4px_12px_rgba(31,59,42,0.15)] group focus:outline-none focus:ring-2 focus:ring-foret focus:ring-offset-2 focus:ring-offset-background">
+<span>Suivant</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+<style>
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</body></html>

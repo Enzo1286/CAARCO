@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CAARCO - Calendrier Marketing</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#c2c8c1",
+                        "surface-container-highest": "#e4e2dd",
+                        "tertiary-container": "#4a3000",
+                        "secondary": "#3a6847",
+                        "on-tertiary-fixed-variant": "#614000",
+                        "inverse-on-surface": "#f2f1eb",
+                        "on-tertiary-container": "#c99441",
+                        "bambou": "#3d6b4a",
+                        "primary": "#082516",
+                        "on-tertiary-fixed": "#291800",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#e4e2dd",
+                        "surface-container-low": "#f5f3ee",
+                        "on-primary-fixed-variant": "#304d3b",
+                        "manioc": "#fbf9f3",
+                        "secondary-fixed-dim": "#a0d2aa",
+                        "error-container": "#ffdad6",
+                        "primary-fixed": "#caebd2",
+                        "cendre": "#6b6f68",
+                        "tertiary-fixed-dim": "#f6bd65",
+                        "tertiary": "#2e1c00",
+                        "outline": "#727972",
+                        "primary-container": "#1f3b2a",
+                        "on-primary": "#ffffff",
+                        "foret-30": "#b4c4b9",
+                        "error": "#ba1a1a",
+                        "on-secondary-container": "#406e4d",
+                        "background": "#fbf9f3",
+                        "secondary-fixed": "#bcefc5",
+                        "surface-container": "#f0eee8",
+                        "on-error-container": "#93000a",
+                        "surface-bright": "#fbf9f3",
+                        "brume": "#ece9e0",
+                        "surface-container-high": "#eae8e2",
+                        "laterite": "#b8612e",
+                        "on-surface": "#1b1c19",
+                        "inverse-surface": "#30312d",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed": "#042011",
+                        "on-background": "#1b1c19",
+                        "tertiary-fixed": "#ffddb0",
+                        "surface-dim": "#dcdad4",
+                        "surface": "#fbf9f3",
+                        "surface-tint": "#486551",
+                        "on-secondary-fixed": "#00210d",
+                        "surface-container-lowest": "#ffffff",
+                        "foret-90": "#284a36",
+                        "on-secondary-fixed-variant": "#225031",
+                        "charbon": "#1d2420",
+                        "nere": "#c89441",
+                        "on-secondary": "#ffffff",
+                        "on-surface-variant": "#424843",
+                        "on-primary-container": "#86a58f",
+                        "secondary-container": "#bcefc5",
+                        "inverse-primary": "#aeceb7",
+                        "primary-fixed-dim": "#aeceb7",
+                        "nuit": "#0f1411",
+                        "foret": "#1f3b2a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "place": "64px",
+                        "couloir": "24px",
+                        "arret": "16px",
+                        "pause": "8px",
+                        "parvis": "48px",
+                        "souffle": "12px",
+                        "patio": "32px",
+                        "pas": "4px"
+                    },
+                    "fontFamily": {
+                        "h1": ["Marcellus"],
+                        "h3": ["Marcellus"],
+                        "body-semibold": ["Plus Jakarta Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "price-display": ["JetBrains Mono"],
+                        "label-mono": ["JetBrains Mono"],
+                        "h2": ["Marcellus"],
+                        "body-medium": ["Plus Jakarta Sans"],
+                        "lede": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "h1": ["48px", { "lineHeight": "56px", "fontWeight": "400" }],
+                        "h3": ["24px", { "lineHeight": "32px", "fontWeight": "400" }],
+                        "body-semibold": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "price-display": ["18px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "label-mono": ["13px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "400" }],
+                        "h2": ["36px", { "lineHeight": "44px", "fontWeight": "400" }],
+                        "body-medium": ["16px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "lede": ["20px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.manioc'); color: theme('colors.on-surface'); }
+        /* Voilage Shadow */
+        .shadow-voilage { box-shadow: 0px 4px 12px rgba(29, 36, 32, 0.05); }
+        /* Futaie Shadow */
+        .shadow-futaie { box-shadow: 0px 10px 25px rgba(15, 20, 17, 0.15); }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 1px;
+            background-color: theme('colors.brume');
+        }
+        .calendar-cell {
+            background-color: theme('colors.surface-container-lowest');
+            aspect-ratio: 1 / 1.2;
+            padding: theme('spacing.pause');
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .calendar-cell:hover {
+            background-color: theme('colors.manioc');
+        }
+        .calendar-cell.active {
+            background-color: theme('colors.foret');
+            color: theme('colors.manioc');
+        }
+        .calendar-cell.active .day-number {
+            color: theme('colors.manioc');
+        }
+        .calendar-cell.other-month {
+            background-color: theme('colors.surface-container-low');
+            color: theme('colors.cendre');
+        }
+        .calendar-cell.other-month .day-number {
+            color: theme('colors.outline-variant');
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen pb-place">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 border-b border-brume dark:border-charbon bg-manioc dark:bg-nuit transition-colors duration-200">
+<div class="flex justify-between items-center px-couloir h-place w-full max-w-full">
+<div class="flex items-center gap-arret">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center font-h3 text-h3 text-foret dark:text-manioc overflow-hidden border border-brume">
+<img class="w-full h-full object-cover" data-alt="A sophisticated headshot of an administrative user, captured in a clean, modern corporate environment. High key lighting, soft shadows, professional and trustworthy aesthetic. Dressed in smart-casual business attire with earth tones. Neutral background, conveying an administrative or executive role." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCr3rGre1vY6S2w2LG4w87Te9qfbyEmQRKNnAbfvHvg_ALvtC7O7_mERqc12IMHRk3DTi7AHj3KqaC3mURC5UNC7_gyAIHlhVajxO5WtBL-Hh3RDhMdVSvqZ93_ciA4piAEGxMxzwTkxbpxKQOVxrXhrnpUF2r4jFLK4cYWwPxnNF8UbuKYrUeBkvagAGHjzIiEmr7OaA9Ak98mLunrWOyLQiyUtQwWfvLjAWm1Za18HeJg_YqZBkM1"/>
+</div>
+<h1 class="font-h2 text-h2 text-foret dark:text-manioc tracking-tight">CAARCO</h1>
+</div>
+<button class="text-cendre dark:text-foret-30 hover:bg-brume/50 dark:hover:bg-charbon/50 rounded-full p-pause transition-colors duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+</button>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="pt-place mt-couloir px-couloir max-w-7xl mx-auto flex flex-col gap-patio">
+<!-- Header Section -->
+<section class="flex flex-col md:flex-row justify-between items-start md:items-center gap-arret">
+<div>
+<h2 class="font-h1 text-h1 text-foret">Octobre 2023</h2>
+<p class="font-body text-body text-cendre mt-pas">Vue d'ensemble des actions marketing programmées.</p>
+</div>
+<div class="flex gap-pause flex-wrap">
+<div class="flex items-center gap-pas px-souffle py-pause rounded-full border border-brume bg-surface-container-lowest shadow-voilage">
+<span class="w-3 h-3 rounded-full bg-laterite"></span>
+<span class="font-label-mono text-label-mono text-charbon uppercase">Push</span>
+</div>
+<div class="flex items-center gap-pas px-souffle py-pause rounded-full border border-brume bg-surface-container-lowest shadow-voilage">
+<span class="w-3 h-3 rounded-full bg-nere"></span>
+<span class="font-label-mono text-label-mono text-charbon uppercase">Promo</span>
+</div>
+<div class="flex items-center gap-pas px-souffle py-pause rounded-full border border-brume bg-surface-container-lowest shadow-voilage">
+<span class="w-3 h-3 rounded-full bg-bambou"></span>
+<span class="font-label-mono text-label-mono text-charbon uppercase">In-App</span>
+</div>
+</div>
+</section>
+<!-- Calendar and Details Grid -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-couloir items-start">
+<!-- Calendar View -->
+<div class="lg:col-span-2 rounded-xl overflow-hidden border border-brume shadow-voilage bg-surface-container-lowest">
+<!-- Days Header -->
+<div class="grid grid-cols-7 border-b border-brume bg-manioc">
+<div class="py-souffle text-center font-label-mono text-label-mono text-cendre uppercase">Lun</div>
+<div class="py-souffle text-center font-label-mono text-label-mono text-cendre uppercase">Mar</div>
+<div class="py-souffle text-center font-label-mono text-label-mono text-cendre uppercase">Mer</div>
+<div class="py-souffle text-center font-label-mono text-label-mono text-cendre uppercase">Jeu</div>
+<div class="py-souffle text-center font-label-mono text-label-mono text-cendre uppercase">Ven</div>
+<div class="py-souffle text-center font-label-mono text-label-mono text-cendre uppercase">Sam</div>
+<div class="py-souffle text-center font-label-mono text-label-mono text-cendre uppercase">Dim</div>
+</div>
+<!-- Grid Cells -->
+<div class="calendar-grid">
+<!-- Week 1 -->
+<div class="calendar-cell other-month">
+<span class="day-number font-price-display text-price-display mb-auto">25</span>
+</div>
+<div class="calendar-cell other-month">
+<span class="day-number font-price-display text-price-display mb-auto">26</span>
+</div>
+<div class="calendar-cell other-month">
+<span class="day-number font-price-display text-price-display mb-auto">27</span>
+</div>
+<div class="calendar-cell other-month">
+<span class="day-number font-price-display text-price-display mb-auto">28</span>
+</div>
+<div class="calendar-cell other-month">
+<span class="day-number font-price-display text-price-display mb-auto">29</span>
+</div>
+<div class="calendar-cell other-month">
+<span class="day-number font-price-display text-price-display mb-auto">30</span>
+<div class="flex gap-pas mt-auto">
+<span class="w-2 h-2 rounded-full bg-laterite opacity-50"></span>
+</div>
+</div>
+<div class="calendar-cell">
+<span class="day-number font-price-display text-price-display text-charbon mb-auto">1</span>
+</div>
+<!-- Week 2 -->
+<div class="calendar-cell">
+<span class="day-number font-price-display text-price-display text-charbon mb-auto">2</span>
+</div>
+<div class="calendar-cell">
+<span class="day-number font-price-display text-price-display text-charbon mb-auto">3</span>
+</div>
+<div class="calendar-cell">
+<span class="day-number font-price-display text-price-display text-charbon mb-auto">4</span>
+<div class="flex gap-pas mt-auto">
+<span class="w-2 h-2 rounded-full bg-bambou"></span>
+</div>
+</div>
+<div class="calendar-cell">
+<span class="day-number font-price-display text-price-display text-charbon mb-auto">5</span>
+</div>
+<div class="calendar-cell">
+<span class="day-number font-price-display text-price-display text-charbon mb-auto">6</span>
+<div class="flex gap-pas mt-auto">
+<span class="w-2 h-2 rounded-full bg-laterite"></span>
+<span class="w-2 h-2 rounded-full bg-nere"></span>
+</div>
+</div>
+<div class="calendar-cell">
+<span class="day-number font-price-display text-price-display text-charbon mb-auto">7</span>
+</div>
+<div class="calendar-cell">
+<span class="day-number font-price-display text-price-display text-charbon mb-auto">8</span>
+</div>
+<!-- Week 3 -->
+<div class="calendar-cell">
+<span class="day-number font-price-display text-price-display text-charbon mb-auto">9</span>
+</div>
+<div class="calendar-cell">
+<span class="day-number font-price-display text-price-display text-charbon mb-auto">10</span>
+</div>
+<div class="calendar-cell">
+<span class="day-number font-price-display text-price-display text-charbon mb-auto">11</span>
+</div>
+<div class="calendar-cell active">
+<span class="day-number font-price-display text-price-display mb-auto">12</span>
+<div class="flex gap-pas mt-auto">
+<span class="w-2 h-2 rounded-full bg-laterite"></span>
+<span class="w-2 h-2 rounded-full bg-bambou"></span>
+</div>
+</div>
+<div class="calendar-cell">
+<span class="day-number font-price-display text-price-display text-charbon mb-auto">13</span>
+</div>
+<div class="calendar-cell">
+<span class="day-number font-price-display text-price-display text-charbon mb-auto">14</span>
+</div>
+<div class="calendar-cell">
+<span class="day-number font-price-display text-price-display text-charbon mb-auto">15</span>
+<div class="flex gap-pas mt-auto">
+<span class="w-2 h-2 rounded-full bg-nere"></span>
+</div>
+</div>
+<!-- Week 4 -->
+<div class="calendar-cell">
+<span class="day-number font-price-display text-price-display text-charbon mb-auto">16</span>
+</div>
+<div class="calendar-cell">
+<span class="day-number font-price-display text-price-display text-charbon mb-auto">17</span>
+</div>
+<div class="calendar-cell">
+<span class="day-number font-price-display text-price-display text-charbon mb-auto">18</span>
+<div class="flex gap-pas mt-auto">
+<span class="w-2 h-2 rounded-full bg-laterite"></span>
+</div>
+</div>
+<div class="calendar-cell">
+<span class="day-number font-price-display text-price-display text-charbon mb-auto">19</span>
+</div>
+<div class="calendar-cell">
+<span class="day-number font-price-display text-price-display text-charbon mb-auto">20</span>
+</div>
+<div class="calendar-cell">
+<span class="day-number font-price-display text-price-display text-charbon mb-auto">21</span>
+</div>
+<div class="calendar-cell">
+<span class="day-number font-price-display text-price-display text-charbon mb-auto">22</span>
+</div>
+<!-- Week 5 -->
+<div class="calendar-cell">
+<span class="day-number font-price-display text-price-display text-charbon mb-auto">23</span>
+</div>
+<div class="calendar-cell">
+<span class="day-number font-price-display text-price-display text-charbon mb-auto">24</span>
+</div>
+<div class="calendar-cell">
+<span class="day-number font-price-display text-price-display text-charbon mb-auto">25</span>
+</div>
+<div class="calendar-cell">
+<span class="day-number font-price-display text-price-display text-charbon mb-auto">26</span>
+</div>
+<div class="calendar-cell">
+<span class="day-number font-price-display text-price-display text-charbon mb-auto">27</span>
+<div class="flex gap-pas mt-auto">
+<span class="w-2 h-2 rounded-full bg-bambou"></span>
+</div>
+</div>
+<div class="calendar-cell">
+<span class="day-number font-price-display text-price-display text-charbon mb-auto">28</span>
+</div>
+<div class="calendar-cell">
+<span class="day-number font-price-display text-price-display text-charbon mb-auto">29</span>
+</div>
+<!-- Week 6 (Partial) -->
+<div class="calendar-cell">
+<span class="day-number font-price-display text-price-display text-charbon mb-auto">30</span>
+<div class="flex gap-pas mt-auto">
+<span class="w-2 h-2 rounded-full bg-nere"></span>
+<span class="w-2 h-2 rounded-full bg-laterite"></span>
+</div>
+</div>
+<div class="calendar-cell">
+<span class="day-number font-price-display text-price-display text-charbon mb-auto">31</span>
+</div>
+<div class="calendar-cell other-month">
+<span class="day-number font-price-display text-price-display mb-auto">1</span>
+</div>
+<div class="calendar-cell other-month">
+<span class="day-number font-price-display text-price-display mb-auto">2</span>
+</div>
+<div class="calendar-cell other-month">
+<span class="day-number font-price-display text-price-display mb-auto">3</span>
+</div>
+<div class="calendar-cell other-month">
+<span class="day-number font-price-display text-price-display mb-auto">4</span>
+</div>
+<div class="calendar-cell other-month">
+<span class="day-number font-price-display text-price-display mb-auto">5</span>
+</div>
+</div>
+</div>
+<!-- Selected Day Panel (Plaquette) -->
+<aside class="flex flex-col gap-arret">
+<div class="bg-surface-container-lowest border border-brume rounded-xl p-couloir shadow-voilage">
+<h3 class="font-h3 text-h3 text-foret mb-souffle border-b border-brume pb-pause">12 Octobre 2023</h3>
+<div class="flex flex-col gap-arret mt-arret">
+<!-- Action Item 1 -->
+<div class="flex items-start gap-souffle">
+<div class="w-10 h-10 rounded-full bg-error-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-laterite" style="font-variation-settings: 'FILL' 1;">notifications_active</span>
+</div>
+<div>
+<div class="flex items-center gap-pause">
+<h4 class="font-body-semibold text-body-semibold text-charbon">Relance Chariots</h4>
+<span class="font-label-mono text-[10px] uppercase text-laterite bg-error-container/50 px-2 py-0.5 rounded">Push</span>
+</div>
+<p class="font-body text-body text-cendre text-sm mt-pas">Ciblage: Utilisateurs avec un déménagement en attente depuis 3 jours.</p>
+<div class="flex items-center gap-pas mt-2">
+<span class="material-symbols-outlined text-cendre text-[16px]">schedule</span>
+<span class="font-label-mono text-label-mono text-cendre">14:00</span>
+</div>
+</div>
+</div>
+<div class="h-px bg-brume w-full"></div>
+<!-- Action Item 2 -->
+<div class="flex items-start gap-souffle">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-bambou" style="font-variation-settings: 'FILL' 1;">ad_units</span>
+</div>
+<div>
+<div class="flex items-center gap-pause">
+<h4 class="font-body-semibold text-body-semibold text-charbon">Bannière "Longue Distance"</h4>
+<span class="font-label-mono text-[10px] uppercase text-bambou bg-secondary-container/50 px-2 py-0.5 rounded">In-App</span>
+</div>
+<p class="font-body text-body text-cendre text-sm mt-pas">Affichage sur l'écran d'accueil pour promouvoir les trajets interurbains.</p>
+<div class="flex items-center gap-pas mt-2">
+<span class="material-symbols-outlined text-cendre text-[16px]">schedule</span>
+<span class="font-label-mono text-label-mono text-cendre">Toute la journée</span>
+</div>
+</div>
+</div>
+</div>
+<button class="w-full mt-couloir bg-brume hover:bg-surface-dim text-charbon font-body-semibold text-body-semibold py-souffle rounded-full transition-colors">
+                        Ajouter une action
+                    </button>
+</div>
+<!-- Quick Stats -->
+<div class="bg-foret text-manioc border border-charbon rounded-xl p-couloir shadow-voilage">
+<h4 class="font-h3 text-h3 mb-souffle text-inverse-primary">Aperçu du mois</h4>
+<ul class="flex flex-col gap-souffle font-body text-body mt-arret">
+<li class="flex justify-between items-center">
+<span class="text-foret-30">Campagnes Push</span>
+<span class="font-price-display text-price-display">8</span>
+</li>
+<li class="flex justify-between items-center">
+<span class="text-foret-30">Codes Promo</span>
+<span class="font-price-display text-price-display">3</span>
+</li>
+<li class="flex justify-between items-center">
+<span class="text-foret-30">Ads In-App</span>
+<span class="font-price-display text-price-display">5</span>
+</li>
+</ul>
+</div>
+</aside>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-pause pb-souffle pt-pause bg-manioc dark:bg-nuit border-t border-brume dark:border-charbon rounded-t-lg shadow-sm">
+<a class="flex flex-col items-center justify-center text-cendre dark:text-foret-30 hover:text-foret dark:hover:text-manioc scale-95 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">dashboard</span>
+<span class="font-label-mono text-label-mono mt-pas">Tableau</span>
+</a>
+<a class="flex flex-col items-center justify-center text-cendre dark:text-foret-30 hover:text-foret dark:hover:text-manioc scale-95 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">gavel</span>
+<span class="font-label-mono text-label-mono mt-pas">Litiges</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-foret-90 text-on-secondary-container dark:text-manioc rounded-full px-arret py-pas scale-95 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">event_note</span>
+<span class="font-label-mono text-label-mono mt-pas">Marketing</span>
+</a>
+<a class="flex flex-col items-center justify-center text-cendre dark:text-foret-30 hover:text-foret dark:hover:text-manioc scale-95 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">payments</span>
+<span class="font-label-mono text-label-mono mt-pas">Revenus</span>
+</a>
+<a class="flex flex-col items-center justify-center text-cendre dark:text-foret-30 hover:text-foret dark:hover:text-manioc scale-95 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">settings_suggest</span>
+<span class="font-label-mono text-label-mono mt-pas">Tarifs</span>
+</a>
+</nav>
+</body></html>

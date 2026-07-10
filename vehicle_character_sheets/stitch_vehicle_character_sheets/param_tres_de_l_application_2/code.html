@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html class="bg-manioc dark:bg-nuit text-on-background" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Paramètres - CAARCO</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "foret-90": "#284a36",
+                        "nuit": "#0f1411",
+                        "background": "#fbf9f3",
+                        "laterite": "#b8612e",
+                        "inverse-surface": "#30312d",
+                        "manioc": "#fbf9f3",
+                        "error": "#ba1a1a",
+                        "surface-dim": "#dcdad4",
+                        "secondary-fixed": "#bcefc5",
+                        "tertiary": "#2e1c00",
+                        "on-surface-variant": "#424843",
+                        "on-tertiary-fixed": "#291800",
+                        "on-background": "#1b1c19",
+                        "primary-fixed": "#caebd2",
+                        "on-tertiary-fixed-variant": "#614000",
+                        "tertiary-fixed-dim": "#f6bd65",
+                        "nere": "#c89441",
+                        "outline-variant": "#c2c8c1",
+                        "inverse-primary": "#aeceb7",
+                        "foret": "#1f3b2a",
+                        "surface-container": "#f0eee8",
+                        "surface-variant": "#e4e2dd",
+                        "on-surface": "#1b1c19",
+                        "primary-fixed-dim": "#aeceb7",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#4a3000",
+                        "on-secondary-container": "#406e4d",
+                        "on-primary-fixed-variant": "#304d3b",
+                        "bambou": "#3d6b4a",
+                        "surface-tint": "#486551",
+                        "primary-container": "#1f3b2a",
+                        "secondary-container": "#bcefc5",
+                        "on-error": "#ffffff",
+                        "surface-container-high": "#eae8e2",
+                        "outline": "#727972",
+                        "on-secondary-fixed-variant": "#225031",
+                        "primary": "#082516",
+                        "on-primary-fixed": "#042011",
+                        "foret-30": "#b4c4b9",
+                        "charbon": "#1d2420",
+                        "cendre": "#6b6f68",
+                        "secondary-fixed-dim": "#a0d2aa",
+                        "on-tertiary-container": "#c99441",
+                        "tertiary-fixed": "#ffddb0",
+                        "secondary": "#3a6847",
+                        "inverse-on-surface": "#f2f1eb",
+                        "surface-container-highest": "#e4e2dd",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-low": "#f5f3ee",
+                        "surface": "#fbf9f3",
+                        "on-secondary-fixed": "#00210d",
+                        "on-primary": "#ffffff",
+                        "brume": "#ece9e0",
+                        "surface-bright": "#fbf9f3",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#86a58f",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "place": "64px",
+                        "pause": "8px",
+                        "parvis": "48px",
+                        "couloir": "24px",
+                        "patio": "32px",
+                        "arret": "16px",
+                        "pas": "4px",
+                        "souffle": "12px"
+                    },
+                    "fontFamily": {
+                        "body-medium": ["Plus Jakarta Sans"],
+                        "label-mono": ["JetBrains Mono"],
+                        "price-display": ["JetBrains Mono"],
+                        "body": ["Plus Jakarta Sans"],
+                        "h3": ["Marcellus"],
+                        "h1": ["Marcellus"],
+                        "body-semibold": ["Plus Jakarta Sans"],
+                        "lede": ["Plus Jakarta Sans"],
+                        "h2": ["Marcellus"]
+                    },
+                    "fontSize": {
+                        "body-medium": ["16px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "label-mono": ["13px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "400" }],
+                        "price-display": ["18px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "h3": ["24px", { "lineHeight": "32px", "fontWeight": "400" }],
+                        "h1": ["48px", { "lineHeight": "56px", "fontWeight": "400" }],
+                        "body-semibold": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "lede": ["20px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "h2": ["36px", { "lineHeight": "44px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body text-body bg-manioc min-h-screen flex flex-col md:flex-row">
+<!-- Desktop Sidebar Navigation Drawer -->
+<nav class="hidden md:flex bg-surface dark:bg-nuit border-r border-brume dark:border-foret-90 shadow-lg flex-col h-screen py-parvis px-couloir w-80 rounded-r-lg sticky top-0 shrink-0">
+<div class="flex items-center gap-arret mb-patio">
+<div class="h-12 w-12 rounded-full bg-foret flex items-center justify-center text-on-primary font-h3">
+                JD
+            </div>
+<div>
+<h2 class="font-h3 text-foret dark:text-foret-30">Jean Dupont</h2>
+<p class="font-label-mono text-cendre">Client Premium • Douala, CM</p>
+</div>
+</div>
+<ul class="flex flex-col gap-pause flex-1 mt-patio">
+<li>
+<a class="flex items-center gap-souffle px-arret py-souffle rounded-full text-charbon dark:text-foret-30 hover:bg-brume dark:hover:bg-foret-90 transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-medium">Tableau de bord</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-souffle px-arret py-souffle rounded-full text-charbon dark:text-foret-30 hover:bg-brume dark:hover:bg-foret-90 transition-colors" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-body-medium">Historique</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-souffle px-arret py-souffle rounded-full text-charbon dark:text-foret-30 hover:bg-brume dark:hover:bg-foret-90 transition-colors" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="font-body-medium">Paiements</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-souffle px-arret py-souffle rounded-full text-charbon dark:text-foret-30 hover:bg-brume dark:hover:bg-foret-90 transition-colors" href="#">
+<span class="material-symbols-outlined">support_agent</span>
+<span class="font-body-medium">Assistance</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-souffle px-arret py-souffle rounded-full bg-secondary-fixed dark:bg-primary-container text-on-secondary-fixed dark:text-on-primary-fixed font-body-semibold opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined fill">settings</span>
+<span>Paramètres</span>
+</a>
+</li>
+</ul>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col min-h-screen">
+<!-- Mobile TopAppBar -->
+<header class="md:hidden bg-surface dark:bg-nuit border-b border-brume dark:border-foret-90 flex justify-between items-center px-couloir h-[72px] w-full sticky top-0 z-40">
+<button class="text-foret dark:text-foret-30 hover:bg-brume dark:hover:bg-foret-90 p-pause rounded-full transition-colors active:scale-95 duration-100">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-h2 text-h2 text-foret dark:text-foret-30 tracking-tight">CAARCO</h1>
+<div class="w-10 h-10 rounded-full bg-foret flex items-center justify-center text-on-primary font-body-semibold text-sm">
+                JD
+            </div>
+</header>
+<main class="flex-1 p-couloir md:p-place max-w-4xl mx-auto w-full pb-[100px] md:pb-place">
+<header class="mb-patio">
+<h1 class="font-h2 text-foret dark:text-foret-30 mb-pause">Paramètres de l'Application</h1>
+<p class="text-cendre font-body">Gérez vos préférences et paramètres de compte.</p>
+</header>
+<div class="flex flex-col gap-patio">
+<!-- Préférences Section -->
+<section>
+<h2 class="font-label-mono text-cendre uppercase tracking-wider mb-arret ml-pause">Préférences</h2>
+<div class="bg-surface-container-lowest border border-brume rounded-DEFAULT overflow-hidden shadow-sm">
+<!-- Language -->
+<div class="p-couloir border-b border-brume flex flex-col sm:flex-row sm:items-center justify-between gap-arret hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-arret">
+<span class="material-symbols-outlined text-foret-90">language</span>
+<div>
+<h3 class="font-body-medium text-charbon">Langue de l'application</h3>
+<p class="font-body text-cendre text-sm">Choisissez votre langue préférée</p>
+</div>
+</div>
+<div class="relative min-w-[150px]">
+<select class="appearance-none w-full bg-surface-variant border border-brume text-charbon py-pause pl-souffle pr-patio rounded-lg focus:outline-none focus:ring-1 focus:ring-foret font-body-medium">
+<option value="fr">Français (FR)</option>
+<option value="en">English (EN)</option>
+</select>
+<span class="material-symbols-outlined absolute right-souffle top-1/2 -translate-y-1/2 pointer-events-none text-cendre">expand_more</span>
+</div>
+</div>
+<!-- Push Notifications -->
+<div class="p-couloir border-b border-brume flex items-center justify-between gap-arret hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-arret">
+<span class="material-symbols-outlined text-foret-90">notifications</span>
+<div>
+<h3 class="font-body-medium text-charbon">Notifications Push</h3>
+<p class="font-body text-cendre text-sm">Mises à jour sur vos trajets</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-foret"></div>
+</label>
+</div>
+<!-- Dark Mode -->
+<div class="p-couloir flex items-center justify-between gap-arret hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-arret">
+<span class="material-symbols-outlined text-foret-90">dark_mode</span>
+<div>
+<h3 class="font-body-medium text-charbon">Mode Sombre</h3>
+<p class="font-body text-cendre text-sm">Apparence de l'interface</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-foret"></div>
+</label>
+</div>
+</div>
+</section>
+<!-- Navigation Tools Section -->
+<section>
+<h2 class="font-label-mono text-cendre uppercase tracking-wider mb-arret ml-pause">Outils de Navigation</h2>
+<div class="bg-surface-container-lowest border border-brume rounded-DEFAULT overflow-hidden shadow-sm p-couloir">
+<p class="font-body text-cendre mb-arret">Choisissez l'application de navigation par défaut pour vos itinéraires.</p>
+<div class="flex flex-col gap-souffle">
+<label class="flex items-center gap-arret p-arret border border-brume rounded-lg cursor-pointer hover:bg-surface-container-low transition-colors">
+<input checked="" class="w-5 h-5 text-foret focus:ring-foret border-outline" name="navigation_app" type="radio"/>
+<span class="material-symbols-outlined text-foret">map</span>
+<span class="font-body-medium text-charbon">Google Maps</span>
+</label>
+<label class="flex items-center gap-arret p-arret border border-brume rounded-lg cursor-pointer hover:bg-surface-container-low transition-colors">
+<input class="w-5 h-5 text-foret focus:ring-foret border-outline" name="navigation_app" type="radio"/>
+<span class="material-symbols-outlined text-foret">navigation</span>
+<span class="font-body-medium text-charbon">Waze</span>
+</label>
+</div>
+</div>
+</section>
+<!-- Support & About Section -->
+<section>
+<h2 class="font-label-mono text-cendre uppercase tracking-wider mb-arret ml-pause">Support &amp; À Propos</h2>
+<div class="bg-surface-container-lowest border border-brume rounded-DEFAULT overflow-hidden shadow-sm">
+<a class="p-couloir border-b border-brume flex items-center justify-between hover:bg-surface-container-low transition-colors group" href="#">
+<div class="flex items-center gap-arret">
+<span class="material-symbols-outlined text-foret-90">help</span>
+<span class="font-body-medium text-charbon">Centre d'Aide</span>
+</div>
+<span class="material-symbols-outlined text-cendre group-hover:translate-x-1 transition-transform">chevron_right</span>
+</a>
+<a class="p-couloir border-b border-brume flex items-center justify-between hover:bg-surface-container-low transition-colors group" href="#">
+<div class="flex items-center gap-arret">
+<span class="material-symbols-outlined text-foret-90">info</span>
+<span class="font-body-medium text-charbon">À Propos de CAARCO</span>
+</div>
+<span class="material-symbols-outlined text-cendre group-hover:translate-x-1 transition-transform">chevron_right</span>
+</a>
+<a class="p-couloir flex items-center justify-between hover:bg-surface-container-low transition-colors group" href="#">
+<div class="flex items-center gap-arret">
+<span class="material-symbols-outlined text-foret-90">description</span>
+<span class="font-body-medium text-charbon">Termes et Conditions</span>
+</div>
+<span class="material-symbols-outlined text-cendre group-hover:translate-x-1 transition-transform">chevron_right</span>
+</a>
+</div>
+</section>
+<!-- Logout Button -->
+<div class="mt-patio flex justify-center">
+<button class="flex items-center justify-center gap-souffle bg-error-container text-on-error-container px-place py-arret rounded-full font-body-semibold hover:opacity-90 transition-opacity w-full sm:w-auto">
+<span class="material-symbols-outlined">logout</span>
+<span>Se Déconnecter</span>
+</button>
+</div>
+</div>
+</main>
+</div>
+<!-- Mobile Bottom NavBar -->
+<nav class="md:hidden bg-manioc dark:bg-nuit border-t border-brume dark:border-foret-90 shadow-sm fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-arret pb-pause pt-pas rounded-t-lg">
+<a class="flex flex-col items-center justify-center text-cendre dark:text-foret-30 px-souffle py-pas hover:bg-surface-variant dark:hover:bg-foret-90 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-label-mono mt-1">Explorer</span>
+</a>
+<a class="flex flex-col items-center justify-center text-cendre dark:text-foret-30 px-souffle py-pas hover:bg-surface-variant dark:hover:bg-foret-90 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="font-label-mono mt-1">Trajets</span>
+</a>
+<a class="flex flex-col items-center justify-center text-cendre dark:text-foret-30 px-souffle py-pas hover:bg-surface-variant dark:hover:bg-foret-90 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">chat_bubble</span>
+<span class="font-label-mono mt-1">Messages</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-primary-container text-on-secondary-container dark:text-on-primary-container rounded-full px-souffle py-pas scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined fill">person</span>
+<span class="font-label-mono mt-1">Compte</span>
+</a>
+</nav>
+</body></html>

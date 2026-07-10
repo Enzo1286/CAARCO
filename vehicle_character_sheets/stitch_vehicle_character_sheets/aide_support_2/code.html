@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Centre d'Aide - CAARCO</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Marcellus&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config from Design System -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "foret-90": "#284a36",
+                        "nuit": "#0f1411",
+                        "background": "#fbf9f3",
+                        "laterite": "#b8612e",
+                        "inverse-surface": "#30312d",
+                        "manioc": "#fbf9f3",
+                        "error": "#ba1a1a",
+                        "surface-dim": "#dcdad4",
+                        "secondary-fixed": "#bcefc5",
+                        "tertiary": "#2e1c00",
+                        "on-surface-variant": "#424843",
+                        "on-tertiary-fixed": "#291800",
+                        "on-background": "#1b1c19",
+                        "primary-fixed": "#caebd2",
+                        "on-tertiary-fixed-variant": "#614000",
+                        "tertiary-fixed-dim": "#f6bd65",
+                        "nere": "#c89441",
+                        "outline-variant": "#c2c8c1",
+                        "inverse-primary": "#aeceb7",
+                        "foret": "#1f3b2a",
+                        "surface-container": "#f0eee8",
+                        "surface-variant": "#e4e2dd",
+                        "on-surface": "#1b1c19",
+                        "primary-fixed-dim": "#aeceb7",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#4a3000",
+                        "on-secondary-container": "#406e4d",
+                        "on-primary-fixed-variant": "#304d3b",
+                        "bambou": "#3d6b4a",
+                        "surface-tint": "#486551",
+                        "primary-container": "#1f3b2a",
+                        "secondary-container": "#bcefc5",
+                        "on-error": "#ffffff",
+                        "surface-container-high": "#eae8e2",
+                        "outline": "#727972",
+                        "on-secondary-fixed-variant": "#225031",
+                        "primary": "#082516",
+                        "on-primary-fixed": "#042011",
+                        "foret-30": "#b4c4b9",
+                        "charbon": "#1d2420",
+                        "cendre": "#6b6f68",
+                        "secondary-fixed-dim": "#a0d2aa",
+                        "on-tertiary-container": "#c99441",
+                        "tertiary-fixed": "#ffddb0",
+                        "secondary": "#3a6847",
+                        "inverse-on-surface": "#f2f1eb",
+                        "surface-container-highest": "#e4e2dd",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-low": "#f5f3ee",
+                        "surface": "#fbf9f3",
+                        "on-secondary-fixed": "#00210d",
+                        "on-primary": "#ffffff",
+                        "brume": "#ece9e0",
+                        "surface-bright": "#fbf9f3",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#86a58f",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "place": "64px",
+                        "pause": "8px",
+                        "parvis": "48px",
+                        "couloir": "24px",
+                        "patio": "32px",
+                        "arret": "16px",
+                        "pas": "4px",
+                        "souffle": "12px"
+                    },
+                    fontFamily: {
+                        "body-medium": ["Plus Jakarta Sans"],
+                        "label-mono": ["JetBrains Mono"],
+                        "price-display": ["JetBrains Mono"],
+                        "body": ["Plus Jakarta Sans"],
+                        "h3": ["Marcellus"],
+                        "h1": ["Marcellus"],
+                        "body-semibold": ["Plus Jakarta Sans"],
+                        "lede": ["Plus Jakarta Sans"],
+                        "h2": ["Marcellus"]
+                    },
+                    fontSize: {
+                        "body-medium": ["16px", { lineHeight: "24px", fontWeight: "500" }],
+                        "label-mono": ["13px", { lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "400" }],
+                        "price-display": ["18px", { lineHeight: "24px", fontWeight: "500" }],
+                        "body": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "h3": ["24px", { lineHeight: "32px", fontWeight: "400" }],
+                        "h1": ["48px", { lineHeight: "56px", fontWeight: "400" }],
+                        "body-semibold": ["16px", { lineHeight: "24px", fontWeight: "600" }],
+                        "lede": ["20px", { lineHeight: "28px", fontWeight: "400" }],
+                        "h2": ["36px", { lineHeight: "44px", fontWeight: "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Custom styles for details/summary accordion behavior */
+        details > summary {
+            list-style: none;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+        details[open] summary ~ * {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-manioc text-on-background font-body antialiased min-h-screen flex flex-col relative">
+<!-- TopAppBar (Shared Component) -->
+<header class="bg-surface dark:bg-nuit docked full-width top-0 border-b border-brume dark:border-foret-90 flex justify-between items-center px-couloir h-[72px] w-full z-50">
+<div class="flex items-center gap-arret">
+<button class="text-foret dark:text-foret-30 hover:bg-brume dark:hover:bg-foret-90 transition-colors p-pas rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="font-h2 text-h2 text-foret dark:text-foret-30 tracking-tight">CAARCO</h1>
+</div>
+<button class="h-10 w-10 rounded-full bg-surface-variant flex items-center justify-center border border-brume overflow-hidden">
+<span class="material-symbols-outlined text-cendre">person</span>
+</button>
+</header>
+<!-- Main Canvas -->
+<main class="flex-grow px-couloir pt-patio pb-[200px] max-w-4xl mx-auto w-full">
+<!-- Page Header -->
+<div class="mb-patio">
+<h2 class="font-h1 text-h1 text-foret mb-pause">Centre d'Aide</h2>
+<p class="font-lede text-lede text-cendre">Comment pouvons-nous vous aider aujourd'hui ?</p>
+</div>
+<!-- Search Bar -->
+<div class="relative mb-parvis w-full">
+<span class="material-symbols-outlined absolute left-couloir top-1/2 -translate-y-1/2 text-cendre pointer-events-none">search</span>
+<input class="w-full pl-12 pr-couloir py-4 rounded-full border border-brume bg-surface-container-lowest focus:border-foret focus:ring-1 focus:ring-foret font-body text-charbon placeholder:text-cendre outline-none transition-all shadow-sm" placeholder="Rechercher une question, un article..." type="text"/>
+</div>
+<!-- Categories Grid -->
+<section class="mb-parvis">
+<h3 class="font-label-mono text-label-mono text-cendre uppercase mb-arret">Catégories</h3>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-arret">
+<!-- Card 1 -->
+<button class="bg-surface-container-lowest border border-brume rounded-DEFAULT p-couloir flex flex-col items-center gap-pause hover:border-foret hover:shadow-[0px_4px_12px_rgba(29,36,32,0.05)] transition-all group">
+<div class="h-12 w-12 rounded-full bg-manioc flex items-center justify-center group-hover:bg-primary-fixed transition-colors">
+<span class="material-symbols-outlined text-foret" data-weight="fill">rocket_launch</span>
+</div>
+<span class="font-body-semibold text-body-semibold text-charbon text-center mt-pas">Démarrage Rapide</span>
+</button>
+<!-- Card 2 -->
+<button class="bg-surface-container-lowest border border-brume rounded-DEFAULT p-couloir flex flex-col items-center gap-pause hover:border-foret hover:shadow-[0px_4px_12px_rgba(29,36,32,0.05)] transition-all group">
+<div class="h-12 w-12 rounded-full bg-manioc flex items-center justify-center group-hover:bg-primary-fixed transition-colors">
+<span class="material-symbols-outlined text-foret" data-weight="fill">local_shipping</span>
+</div>
+<span class="font-body-semibold text-body-semibold text-charbon text-center mt-pas">Gestion des Expéditions</span>
+</button>
+<!-- Card 3 -->
+<button class="bg-surface-container-lowest border border-brume rounded-DEFAULT p-couloir flex flex-col items-center gap-pause hover:border-foret hover:shadow-[0px_4px_12px_rgba(29,36,32,0.05)] transition-all group">
+<div class="h-12 w-12 rounded-full bg-manioc flex items-center justify-center group-hover:bg-primary-fixed transition-colors">
+<span class="material-symbols-outlined text-foret" data-weight="fill">account_balance_wallet</span>
+</div>
+<span class="font-body-semibold text-body-semibold text-charbon text-center mt-pas">Paiements &amp; Facturation</span>
+</button>
+<!-- Card 4 -->
+<button class="bg-surface-container-lowest border border-brume rounded-DEFAULT p-couloir flex flex-col items-center gap-pause hover:border-foret hover:shadow-[0px_4px_12px_rgba(29,36,32,0.05)] transition-all group">
+<div class="h-12 w-12 rounded-full bg-manioc flex items-center justify-center group-hover:bg-primary-fixed transition-colors">
+<span class="material-symbols-outlined text-foret" data-weight="fill">shield_locked</span>
+</div>
+<span class="font-body-semibold text-body-semibold text-charbon text-center mt-pas">Sécurité &amp; Conformité</span>
+</button>
+</div>
+</section>
+<!-- FAQs Section -->
+<section class="mb-place">
+<h3 class="font-label-mono text-label-mono text-cendre uppercase mb-arret">Questions Fréquentes</h3>
+<div class="bg-surface-container-lowest border border-brume rounded-lg overflow-hidden">
+<!-- FAQ Item 1 -->
+<details class="group border-b border-brume last:border-0">
+<summary class="flex justify-between items-center p-couloir cursor-pointer hover:bg-surface transition-colors">
+<span class="font-body-semibold text-body-semibold text-foret">Comment suivre mon expédition en temps réel ?</span>
+<span class="material-symbols-outlined text-cendre group-open:rotate-180 transition-transform duration-300">expand_more</span>
+</summary>
+<div class="px-couloir pb-couloir text-on-surface-variant font-body">
+<p>Vous pouvez suivre votre expédition en vous rendant dans l'onglet "Trajets" de votre application. Sélectionnez le trajet en cours pour voir la position en temps réel de votre transporteur sur la carte, ainsi que l'estimation de l'heure d'arrivée.</p>
+</div>
+</details>
+<!-- FAQ Item 2 -->
+<details class="group border-b border-brume last:border-0">
+<summary class="flex justify-between items-center p-couloir cursor-pointer hover:bg-surface transition-colors">
+<span class="font-body-semibold text-body-semibold text-foret">Quels sont les moyens de paiement acceptés ?</span>
+<span class="material-symbols-outlined text-cendre group-open:rotate-180 transition-transform duration-300">expand_more</span>
+</summary>
+<div class="px-couloir pb-couloir text-on-surface-variant font-body">
+<p>Nous acceptons les paiements par Mobile Money (MTN, Orange), les cartes bancaires (Visa, Mastercard), ainsi que les virements bancaires pour les comptes professionnels vérifiés.</p>
+</div>
+</details>
+<!-- FAQ Item 3 -->
+<details class="group border-b border-brume last:border-0">
+<summary class="flex justify-between items-center p-couloir cursor-pointer hover:bg-surface transition-colors">
+<span class="font-body-semibold text-body-semibold text-foret">Que faire si mon chargement est endommagé ?</span>
+<span class="material-symbols-outlined text-cendre group-open:rotate-180 transition-transform duration-300">expand_more</span>
+</summary>
+<div class="px-couloir pb-couloir text-on-surface-variant font-body">
+<p>Prenez des photos immédiatement à la réception. Signalez le problème via le bouton "Signaler un litige" dans les détails de votre trajet sous 24h. Notre équipe d'assurance prendra le relais.</p>
+</div>
+</details>
+<!-- FAQ Item 4 -->
+<details class="group border-b border-brume last:border-0">
+<summary class="flex justify-between items-center p-couloir cursor-pointer hover:bg-surface transition-colors">
+<span class="font-body-semibold text-body-semibold text-foret">Comment modifier l'adresse de destination ?</span>
+<span class="material-symbols-outlined text-cendre group-open:rotate-180 transition-transform duration-300">expand_more</span>
+</summary>
+<div class="px-couloir pb-couloir text-on-surface-variant font-body">
+<p>Les modifications d'adresse ne sont possibles que si le trajet n'a pas encore débuté. Allez dans vos réservations en cours et sélectionnez "Modifier". Des frais supplémentaires peuvent s'appliquer selon la nouvelle distance.</p>
+</div>
+</details>
+</div>
+</section>
+</main>
+<!-- Sticky Bottom Action Sheet -->
+<div class="fixed bottom-0 left-0 w-full bg-surface-container-lowest border-t border-brume px-couloir py-patio z-40 shadow-[0_-10px_25px_rgba(15,20,17,0.05)]">
+<div class="max-w-4xl mx-auto">
+<h3 class="font-h3 text-h3 text-foret mb-arret">Besoin d'aide immédiate ?</h3>
+<div class="flex flex-col sm:flex-row gap-arret">
+<!-- Primary Action (WhatsApp Style using brand Bambou green) -->
+<button class="flex-1 bg-bambou text-white rounded-full py-3 px-couloir flex items-center justify-center gap-pause font-body-medium hover:bg-opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-weight="fill">chat</span>
+                    Discuter avec le Support
+                </button>
+<!-- Secondary Action -->
+<button class="flex-1 bg-surface-variant text-charbon rounded-full py-3 px-couloir flex items-center justify-center gap-pause font-body-medium hover:bg-surface-dim active:scale-95 transition-all">
+<span class="material-symbols-outlined">call</span>
+                    Appeler le support
+                </button>
+</div>
+</div>
+</div>
+</body></html>

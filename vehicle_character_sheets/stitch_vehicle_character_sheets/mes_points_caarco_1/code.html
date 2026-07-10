@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CAARCO - Mes Points Fidélité</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;family=Marcellus&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-fixed-variant": "#225031",
+                      "on-error": "#ffffff",
+                      "bambou": "#3d6b4a",
+                      "on-secondary": "#ffffff",
+                      "foret-90": "#284a36",
+                      "secondary-container": "#bcefc5",
+                      "surface-container-low": "#f5f3ee",
+                      "nuit": "#0f1411",
+                      "nere": "#c89441",
+                      "inverse-on-surface": "#f2f1eb",
+                      "on-tertiary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary": "#3a6847",
+                      "surface-variant": "#e4e2dd",
+                      "cendre": "#6b6f68",
+                      "error": "#ba1a1a",
+                      "on-primary": "#ffffff",
+                      "tertiary-container": "#4a3000",
+                      "primary": "#082516",
+                      "primary-fixed": "#caebd2",
+                      "on-primary-container": "#86a58f",
+                      "outline-variant": "#c2c8c1",
+                      "manioc": "#fbf9f3",
+                      "primary-fixed-dim": "#aeceb7",
+                      "on-tertiary-fixed-variant": "#614000",
+                      "on-surface": "#1b1c19",
+                      "on-error-container": "#93000a",
+                      "on-secondary-fixed": "#00210d",
+                      "surface-bright": "#fbf9f3",
+                      "foret": "#1f3b2a",
+                      "inverse-surface": "#30312d",
+                      "surface-tint": "#486551",
+                      "on-tertiary-container": "#c99441",
+                      "on-background": "#1b1c19",
+                      "error-container": "#ffdad6",
+                      "foret-30": "#b4c4b9",
+                      "charbon": "#1d2420",
+                      "tertiary": "#2e1c00",
+                      "surface-container": "#f0eee8",
+                      "on-tertiary-fixed": "#291800",
+                      "primary-container": "#1f3b2a",
+                      "on-surface-variant": "#424843",
+                      "surface-dim": "#dcdad4",
+                      "tertiary-fixed-dim": "#f6bd65",
+                      "on-secondary-container": "#406e4d",
+                      "background": "#fbf9f3",
+                      "on-primary-fixed-variant": "#304d3b",
+                      "brume": "#ece9e0",
+                      "on-primary-fixed": "#042011",
+                      "surface": "#fbf9f3",
+                      "secondary-fixed-dim": "#a0d2aa",
+                      "secondary-fixed": "#bcefc5",
+                      "outline": "#727972",
+                      "tertiary-fixed": "#ffddb0",
+                      "surface-container-high": "#eae8e2",
+                      "laterite": "#b8612e",
+                      "surface-container-highest": "#e4e2dd",
+                      "inverse-primary": "#aeceb7"
+              },
+              "borderRadius": {
+                      "DEFAULT": "1rem",
+                      "lg": "2rem",
+                      "xl": "3rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "parvis": "48px",
+                      "souffle": "12px",
+                      "place": "64px",
+                      "patio": "32px",
+                      "arret": "16px",
+                      "pause": "8px",
+                      "couloir": "24px",
+                      "pas": "4px"
+              },
+              "fontFamily": {
+                      "label-mono": ["JetBrains Mono"],
+                      "body": ["Plus Jakarta Sans"],
+                      "h3": ["Marcellus"],
+                      "price-display": ["JetBrains Mono"],
+                      "h1": ["Marcellus"],
+                      "body-medium": ["Plus Jakarta Sans"],
+                      "lede": ["Plus Jakarta Sans"],
+                      "h2": ["Marcellus"],
+                      "body-semibold": ["Plus Jakarta Sans"]
+              },
+              "fontSize": {
+                      "label-mono": ["13px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "400"}],
+                      "body": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "h3": ["24px", {"lineHeight": "32px", "fontWeight": "400"}],
+                      "price-display": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                      "h1": ["48px", {"lineHeight": "56px", "fontWeight": "400"}],
+                      "body-medium": ["16px", {"lineHeight": "24px", "fontWeight": "500"}],
+                      "lede": ["20px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "h2": ["36px", {"lineHeight": "44px", "fontWeight": "400"}],
+                      "body-semibold": ["16px", {"lineHeight": "24px", "fontWeight": "600"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[style*="'FILL' 1"] {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-manioc dark:bg-nuit text-on-surface dark:text-inverse-on-surface font-body min-h-screen flex flex-col pb-24 md:pb-0">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky bg-manioc dark:bg-nuit border-b border-brume dark:border-on-surface-variant transition-colors duration-200 z-40">
+<div class="flex justify-between items-center px-couloir py-arret w-full max-w-full">
+<button aria-label="Menu" class="text-foret dark:text-primary-fixed-dim hover:bg-surface-container dark:hover:bg-surface-variant/10 p-2 rounded-full transition-colors duration-200">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="font-h1 text-h3 md:text-h2 tracking-tight text-foret dark:text-primary-fixed-dim">CAARCO</h1>
+<button aria-label="User profile photo" class="text-foret dark:text-primary-fixed-dim hover:bg-surface-container dark:hover:bg-surface-variant/10 p-2 rounded-full transition-colors duration-200 overflow-hidden w-10 h-10 bg-brume">
+<span class="font-h3 text-h3 flex items-center justify-center h-full text-foret">JD</span>
+</button>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-grow w-full max-w-2xl mx-auto px-couloir py-patio">
+<!-- Header / Solde Points -->
+<section class="mb-place text-center">
+<h2 class="font-h3 text-h3 text-foret dark:text-primary-fixed-dim mb-pause">Mes Points Fidélité</h2>
+<p class="font-body text-body text-cendre dark:text-outline mb-arret">Cumulez des points à chaque trajet et débloquez des avantages exclusifs.</p>
+<div class="inline-flex flex-col items-center justify-center p-couloir bg-blanc dark:bg-charbon border border-brume dark:border-surface-variant rounded-xl shadow-[0px_4px_12px_rgba(29,36,32,0.05)] w-full max-w-sm mx-auto">
+<span class="font-label-mono text-label-mono text-nere uppercase tracking-wider mb-pause">Solde Actuel</span>
+<div class="flex items-baseline gap-2 text-foret dark:text-primary-fixed-dim">
+<span class="font-h1 text-h1">1,450</span>
+<span class="font-h3 text-h3">pts</span>
+</div>
+</div>
+</section>
+<!-- Jauge de Progression -->
+<section class="mb-place bg-blanc dark:bg-charbon p-couloir border border-brume dark:border-surface-variant rounded-xl shadow-[0px_4px_12px_rgba(29,36,32,0.05)]">
+<div class="flex justify-between items-end mb-souffle">
+<div>
+<span class="font-label-mono text-label-mono text-cendre uppercase tracking-wider block mb-1">Niveau Actuel</span>
+<span class="font-body-semibold text-body-semibold text-bambou">Explorateur</span>
+</div>
+<div class="text-right">
+<span class="font-label-mono text-label-mono text-cendre uppercase tracking-wider block mb-1">Prochain Niveau</span>
+<span class="font-body-semibold text-body-semibold text-nere">Habitué</span>
+</div>
+</div>
+<!-- Progress Track -->
+<div class="w-full bg-brume dark:bg-surface-variant h-2 rounded-full overflow-hidden mb-pause">
+<div class="bg-bambou h-full rounded-full transition-all duration-1000 ease-in-out" style="width: 72%;"></div>
+</div>
+<p class="font-body text-body text-cendre text-sm text-center">Plus que <strong class="text-foret dark:text-primary-fixed-dim">550 pts</strong> pour atteindre le niveau Habitué.</p>
+</section>
+<!-- Récompenses -->
+<section class="mb-place">
+<div class="flex items-center gap-2 mb-patio">
+<span class="material-symbols-outlined text-nere" style="font-variation-settings: 'FILL' 1;">stars</span>
+<h3 class="font-h3 text-h3 text-foret dark:text-primary-fixed-dim">Récompenses disponibles</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-arret">
+<!-- Récompense 1 (Débloquée) -->
+<div class="bg-blanc dark:bg-charbon border border-nere/30 rounded-xl p-arret flex flex-col justify-between shadow-[0px_4px_12px_rgba(29,36,32,0.05)] relative overflow-hidden">
+<div class="absolute top-0 right-0 bg-nere text-manioc font-label-mono text-[10px] uppercase px-2 py-1 rounded-bl-lg">Débloqué</div>
+<div class="flex items-start gap-arret mb-arret">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-nere flex-shrink-0">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_offer</span>
+</div>
+<div>
+<h4 class="font-body-semibold text-body-semibold text-foret mb-1">-10% sur la prochaine course</h4>
+<p class="font-body text-sm text-cendre">Valable sur tous les trajets locaux.</p>
+</div>
+</div>
+<button class="w-full py-souffle bg-foret text-foret-30 font-body-medium text-body-medium rounded-full hover:bg-foret-90 transition-colors">
+                        Utiliser (500 pts)
+                    </button>
+</div>
+<!-- Récompense 2 (Verrouillée) -->
+<div class="bg-manioc dark:bg-nuit border border-brume dark:border-surface-variant rounded-xl p-arret flex flex-col justify-between opacity-75">
+<div class="flex items-start gap-arret mb-arret">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-cendre flex-shrink-0">
+<span class="material-symbols-outlined">directions_car</span>
+</div>
+<div>
+<h4 class="font-body-semibold text-body-semibold text-foret dark:text-primary-fixed-dim mb-1">Surclassement Premium</h4>
+<p class="font-body text-sm text-cendre">Profitez d'un véhicule haut de gamme.</p>
+</div>
+</div>
+<button class="w-full py-souffle bg-brume text-charbon font-body-medium text-body-medium rounded-full cursor-not-allowed">
+                        2,000 pts requis
+                    </button>
+</div>
+</div>
+</section>
+<!-- Historique -->
+<section>
+<div class="flex items-center gap-2 mb-patio">
+<span class="material-symbols-outlined text-bambou" style="font-variation-settings: 'FILL' 1;">history</span>
+<h3 class="font-h3 text-h3 text-foret dark:text-primary-fixed-dim">Historique récent</h3>
+</div>
+<div class="space-y-pas">
+<!-- Transaction 1 -->
+<div class="flex items-center justify-between p-arret bg-blanc dark:bg-charbon border-b border-brume dark:border-surface-variant last:border-0 rounded-t-xl">
+<div class="flex items-center gap-arret">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-bambou">
+<span class="material-symbols-outlined">route</span>
+</div>
+<div>
+<p class="font-body-medium text-body-medium text-foret dark:text-primary-fixed-dim">Trajet: Douala Centre - Bonapriso</p>
+<p class="font-body text-sm text-cendre">Aujourd'hui, 14:30</p>
+</div>
+</div>
+<span class="font-price-display text-price-display text-bambou">+45 pts</span>
+</div>
+<!-- Transaction 2 -->
+<div class="flex items-center justify-between p-arret bg-blanc dark:bg-charbon border-b border-brume dark:border-surface-variant last:border-0">
+<div class="flex items-center gap-arret">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-nere">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+</div>
+<div>
+<p class="font-body-medium text-body-medium text-foret dark:text-primary-fixed-dim">Bonus Streak (3 courses cette semaine)</p>
+<p class="font-body text-sm text-cendre">Hier, 18:00</p>
+</div>
+</div>
+<span class="font-price-display text-price-display text-nere">+100 pts</span>
+</div>
+<!-- Transaction 3 -->
+<div class="flex items-center justify-between p-arret bg-blanc dark:bg-charbon border-b border-brume dark:border-surface-variant last:border-0 rounded-b-xl">
+<div class="flex items-center gap-arret">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-bambou">
+<span class="material-symbols-outlined">route</span>
+</div>
+<div>
+<p class="font-body-medium text-body-medium text-foret dark:text-primary-fixed-dim">Trajet: Aéroport - Akwa</p>
+<p class="font-body text-sm text-cendre">12 Oct 2023</p>
+</div>
+</div>
+<span class="font-price-display text-price-display text-bambou">+80 pts</span>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-arret pb-souffle pt-pause bg-foret dark:bg-charbon rounded-t-lg shadow-lg md:hidden">
+<a aria-label="Home" class="flex flex-col items-center justify-center text-foret-30/70 dark:text-outline-variant p-souffle hover:text-manioc transition-all scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-mono text-label-mono uppercase mt-1">Home</span>
+</a>
+<a aria-label="Orders" class="flex flex-col items-center justify-center text-foret-30/70 dark:text-outline-variant p-souffle hover:text-manioc transition-all scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="font-label-mono text-label-mono uppercase mt-1">Orders</span>
+</a>
+<a aria-label="Wallet" class="flex flex-col items-center justify-center text-foret-30/70 dark:text-outline-variant p-souffle hover:text-manioc transition-all scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="font-label-mono text-label-mono uppercase mt-1">Wallet</span>
+</a>
+<a aria-label="Profile" class="flex flex-col items-center justify-center bg-bambou/20 text-manioc dark:text-primary-fixed rounded-xl p-souffle hover:text-manioc transition-all scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-mono text-label-mono uppercase mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

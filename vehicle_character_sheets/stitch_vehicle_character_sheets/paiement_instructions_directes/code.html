@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Paiement - CAARCO</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary": "#2e1c00",
+                      "on-tertiary-fixed": "#291800",
+                      "primary-fixed-dim": "#aeceb7",
+                      "foret-90": "#284a36",
+                      "surface-container-low": "#f5f3ee",
+                      "surface-container-highest": "#e4e2dd",
+                      "charbon": "#1d2420",
+                      "foret-30": "#b4c4b9",
+                      "secondary-fixed": "#bcefc5",
+                      "on-secondary-fixed-variant": "#225031",
+                      "on-primary-container": "#86a58f",
+                      "cendre": "#6b6f68",
+                      "manioc": "#fbf9f3",
+                      "nuit": "#0f1411",
+                      "brume": "#ece9e0",
+                      "foret": "#1f3b2a",
+                      "on-primary": "#ffffff",
+                      "on-error": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "outline-variant": "#c2c8c1",
+                      "surface-container-lowest": "#ffffff",
+                      "inverse-surface": "#30312d",
+                      "secondary-container": "#bcefc5",
+                      "primary-container": "#1f3b2a",
+                      "on-tertiary": "#ffffff",
+                      "on-background": "#1b1c19",
+                      "primary": "#082516",
+                      "on-secondary-container": "#406e4d",
+                      "on-primary-fixed-variant": "#304d3b",
+                      "laterite": "#b8612e",
+                      "surface-bright": "#fbf9f3",
+                      "outline": "#727972",
+                      "primary-fixed": "#caebd2",
+                      "surface-variant": "#e4e2dd",
+                      "surface-dim": "#dcdad4",
+                      "surface-tint": "#486551",
+                      "tertiary-container": "#4a3000",
+                      "on-tertiary-container": "#c99441",
+                      "tertiary-fixed": "#ffddb0",
+                      "on-surface": "#1b1c19",
+                      "on-primary-fixed": "#042011",
+                      "nere": "#c89441",
+                      "secondary": "#3a6847",
+                      "inverse-primary": "#aeceb7",
+                      "on-tertiary-fixed-variant": "#614000",
+                      "inverse-on-surface": "#f2f1eb",
+                      "tertiary-fixed-dim": "#f6bd65",
+                      "error": "#ba1a1a",
+                      "surface-container": "#f0eee8",
+                      "surface-container-high": "#eae8e2",
+                      "background": "#fbf9f3",
+                      "secondary-fixed-dim": "#a0d2aa",
+                      "bambou": "#3d6b4a",
+                      "surface": "#fbf9f3",
+                      "on-secondary-fixed": "#00210d",
+                      "on-error-container": "#93000a",
+                      "on-surface-variant": "#424843",
+                      "on-secondary": "#ffffff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "1rem",
+                      "lg": "2rem",
+                      "xl": "3rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "parvis": "48px",
+                      "couloir": "24px",
+                      "arret": "16px",
+                      "pas": "4px",
+                      "souffle": "12px",
+                      "patio": "32px",
+                      "place": "64px",
+                      "pause": "8px"
+              },
+              "fontFamily": {
+                      "body-semibold": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "body": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "h2": [
+                              "Marcellus"
+                      ],
+                      "body-medium": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "h1": [
+                              "Marcellus"
+                      ],
+                      "price-display": [
+                              "JetBrains Mono"
+                      ],
+                      "label-mono": [
+                              "JetBrains Mono"
+                      ],
+                      "lede": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "h3": [
+                              "Marcellus"
+                      ]
+              },
+              "fontSize": {
+                      "body-semibold": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h2": [
+                              "36px",
+                              {
+                                      "lineHeight": "44px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-medium": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "h1": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "price-display": [
+                              "18px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "label-mono": [
+                              "13px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "lede": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h3": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body { background-color: #fbf9f3; /* manioc */ }
+        .galet-primary {
+            background-color: #1f3b2a; /* foret */
+            color: #b4c4b9; /* foret-30 */
+        }
+        .text-nere { color: #c89441; }
+        .border-brume { border-color: #ece9e0; }
+        .bg-blanc { background-color: #ffffff; }
+    </style>
+</head>
+<body class="bg-manioc font-body text-charbon min-h-screen flex flex-col antialiased">
+<!-- TopAppBar -->
+<header class="bg-manioc w-full top-0 sticky border-b border-brume transition-colors duration-200 z-40">
+<div class="flex justify-between items-center px-couloir py-arret w-full max-w-full mx-auto max-w-md">
+<button aria-label="Retour" class="flex items-center justify-center p-2 rounded-full hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-foret" style="font-variation-settings: 'FILL' 0;">arrow_back</span>
+</button>
+<h1 class="font-h3 text-h3 text-foret">Paiement</h1>
+<div class="w-10"></div> <!-- Spacer for alignment -->
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 px-couloir py-patio w-full max-w-md mx-auto flex flex-col gap-place">
+<!-- Summary Card (Plaquette) -->
+<section class="bg-blanc rounded border border-brume p-couloir flex flex-col items-center justify-center text-center shadow-[0px_4px_12px_rgba(29,36,32,0.05)] relative overflow-hidden">
+<!-- Decorative background blur -->
+<div class="absolute inset-0 bg-nere/5 blur-3xl rounded-full -z-10 scale-150"></div>
+<p class="font-label-mono text-label-mono text-cendre uppercase mb-pause tracking-widest">Montant à régler</p>
+<h2 class="font-h1 text-h1 text-nere tracking-tight">15 500 XAF</h2>
+<p class="font-body text-body text-outline mt-pause">Livraison #CR-8492</p>
+</section>
+<!-- Payment Methods -->
+<section class="flex flex-col gap-arret">
+<h3 class="font-body-semibold text-body-semibold text-charbon mb-pause">Paiement direct au chauffeur (Espèces ou Mobile Money)</h3>
+<!-- Orange Money (Selected) -->
+<label class="bg-blanc border border-brume hover:border-outline-variant rounded p-arret flex items-center justify-between cursor-pointer transition-all"><div class="flex items-center gap-souffle"><div class="w-10 h-10 rounded-full bg-foret flex items-center justify-center text-white"><span class="material-symbols-outlined">payments</span></div><span class="font-body text-body">Espèces (Cash)</span></div><div class="w-5 h-5 rounded-full border-2 border-brume"></div></label><label class="bg-blanc border-2 border-foret rounded p-arret flex flex-col gap-souffle cursor-pointer transition-all">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-souffle">
+<div class="w-10 h-10 rounded-full bg-[#FF7900] flex items-center justify-center text-white font-body-semibold text-sm">OM</div>
+<span class="font-body-semibold text-body-semibold">Orange Money</span>
+</div>
+<div class="w-5 h-5 rounded-full border-2 border-foret flex items-center justify-center">
+<div class="w-2.5 h-2.5 rounded-full bg-foret"></div>
+</div>
+</div>
+<!-- Phone Input (Sillon) -->
+<div class="mt-pas ml-14">
+<label class="block font-label-mono text-label-mono text-cendre uppercase mb-pas" for="phone">Numéro de téléphone</label>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 font-body text-body text-outline">+237</span>
+<input class="w-full bg-manioc border border-foret rounded py-2 pl-14 pr-3 font-body text-body text-charbon focus:ring-0 focus:border-foret focus:outline-none transition-colors" id="phone" type="tel" value="6XX XXX XXX"/>
+</div>
+</div>
+</label>
+<!-- MTN MoMo -->
+<label class="bg-blanc border border-brume hover:border-outline-variant rounded p-arret flex items-center justify-between cursor-pointer transition-all">
+<div class="flex items-center gap-souffle">
+<div class="w-10 h-10 rounded-full bg-[#FFCC00] flex items-center justify-center text-[#000000] font-body-semibold text-sm">MTN</div>
+<span class="font-body text-body">MTN MoMo</span>
+</div>
+<div class="w-5 h-5 rounded-full border-2 border-brume"></div>
+</label>
+<!-- Wallet (Insufficient) -->
+</section>
+</main>
+<!-- Bottom Action Area -->
+<div class="fixed bottom-0 w-full bg-manioc pb-couloir pt-arret px-couloir border-t border-brume z-50">
+<div class="max-w-md mx-auto flex flex-col gap-souffle items-center">
+<div class="flex items-center gap-2 text-cendre font-body text-sm mb-pas">
+<span class="material-symbols-outlined text-sm" style="font-size: 16px;">lock</span>
+<span class="">Transaction sécurisée • Paiement direct au chauffeur</span>
+</div>
+<button class="w-full galet-primary rounded-full py-arret font-body-semibold text-body-semibold flex items-center justify-center gap-2 hover:bg-primary transition-colors shadow-lg active:scale-[0.98]">
+<span class="">Confirmer le paiement</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">Transaction sécurisée • Paiement direct au chauffeur</span>
+</button>
+</div>
+</div>
+<!-- Padding to account for fixed bottom area -->
+<div class="h-32"></div>
+</body></html>

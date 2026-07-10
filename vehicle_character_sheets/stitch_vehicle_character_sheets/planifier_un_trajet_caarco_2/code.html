@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TransLogix - Planification de trajet</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Marcellus&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#dcdad4",
+                        "secondary": "#3a6847",
+                        "on-primary-fixed": "#042011",
+                        "on-surface-variant": "#424843",
+                        "foret": "#1f3b2a",
+                        "nuit": "#0f1411",
+                        "on-background": "#1b1c19",
+                        "foret-90": "#284a36",
+                        "secondary-container": "#bcefc5",
+                        "primary-container": "#1f3b2a",
+                        "on-tertiary": "#ffffff",
+                        "charbon": "#1d2420",
+                        "surface-container": "#f0eee8",
+                        "secondary-fixed": "#bcefc5",
+                        "primary-fixed-dim": "#aeceb7",
+                        "error-container": "#ffdad6",
+                        "brume": "#ece9e0",
+                        "on-primary-container": "#86a58f",
+                        "surface-variant": "#e4e2dd",
+                        "outline-variant": "#c2c8c1",
+                        "primary-fixed": "#caebd2",
+                        "bambou": "#3d6b4a",
+                        "on-tertiary-fixed-variant": "#614000",
+                        "tertiary-fixed": "#ffddb0",
+                        "cendre": "#6b6f68",
+                        "on-secondary-fixed": "#00210d",
+                        "on-secondary": "#ffffff",
+                        "manioc": "#fbf9f3",
+                        "foret-30": "#b4c4b9",
+                        "surface-tint": "#486551",
+                        "nere": "#c89441",
+                        "surface-container-low": "#f5f3ee",
+                        "error": "#ba1a1a",
+                        "secondary-fixed-dim": "#a0d2aa",
+                        "surface-container-highest": "#e4e2dd",
+                        "on-secondary-container": "#406e4d",
+                        "background": "#fbf9f3",
+                        "outline": "#727972",
+                        "inverse-surface": "#30312d",
+                        "surface": "#fbf9f3",
+                        "on-secondary-fixed-variant": "#225031",
+                        "inverse-primary": "#aeceb7",
+                        "tertiary-fixed-dim": "#f6bd65",
+                        "surface-container-high": "#eae8e2",
+                        "on-tertiary-fixed": "#291800",
+                        "on-tertiary-container": "#c99441",
+                        "tertiary-container": "#4a3000",
+                        "on-error": "#ffffff",
+                        "laterite": "#b8612e",
+                        "on-primary": "#ffffff",
+                        "primary": "#082516",
+                        "surface-bright": "#fbf9f3",
+                        "on-primary-fixed-variant": "#304d3b",
+                        "on-surface": "#1b1c19",
+                        "tertiary": "#2e1c00",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#f2f1eb"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "souffle": "12px",
+                        "arret": "16px",
+                        "patio": "32px",
+                        "couloir": "24px",
+                        "place": "64px",
+                        "pause": "8px",
+                        "parvis": "48px",
+                        "pas": "4px"
+                    },
+                    "fontFamily": {
+                        "label-mono": ["JetBrains Mono"],
+                        "h3": ["Marcellus"],
+                        "body-semibold": ["Plus Jakarta Sans"],
+                        "h1": ["Marcellus"],
+                        "body-medium": ["Plus Jakarta Sans"],
+                        "price-display": ["JetBrains Mono"],
+                        "lede": ["Plus Jakarta Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "h2": ["Marcellus"]
+                    },
+                    "fontSize": {
+                        "label-mono": ["13px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "400"}],
+                        "h3": ["24px", {"lineHeight": "32px", "fontWeight": "400"}],
+                        "body-semibold": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "h1": ["48px", {"lineHeight": "56px", "fontWeight": "400"}],
+                        "body-medium": ["16px", {"lineHeight": "24px", "fontWeight": "500"}],
+                        "price-display": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                        "lede": ["20px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "h2": ["36px", {"lineHeight": "44px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Map container styles */
+        .map-container {
+            height: 60vh;
+            width: 100%;
+            position: relative;
+        }
+        
+        /* Slide panel styles */
+        .slide-panel {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: auto;
+            max-height: 80vh;
+            border-top-left-radius: 24px;
+            border-top-right-radius: 24px;
+            box-shadow: 0px -4px 20px rgba(0, 0, 0, 0.08);
+            transform: translateY(0);
+            transition: transform 0.3s ease-in-out;
+            z-index: 10;
+        }
+        
+        /* Hide scrollbar for vehicle selector */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body h-screen overflow-hidden relative">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-20 flex justify-between items-center px-couloir py-souffle bg-manioc bg-opacity-90 backdrop-blur-md">
+<button aria-label="Menu" class="flex items-center justify-center p-2 rounded-full hover:bg-brume transition-colors">
+<span class="material-symbols-outlined text-foret" data-icon="menu">menu</span>
+</button>
+<h1 class="font-h3 text-h3 text-foret tracking-wide">TransLogix</h1>
+<div class="w-10 h-10 rounded-full bg-surface-container overflow-hidden border border-brume flex items-center justify-center">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A small, professional avatar portrait of a logistics user with an earth-toned background. The lighting is soft and corporate, matching the TransLogix brand aesthetic of quiet luxury and robustness." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzZAT6XUiTrhxGCj-UXNWtJsnxlfneNK_K1BaNQo0lWggFy1utU919yyXHEeLHYJm3yD968wfAl72YsqVGYcB3Wi0zX1GY8H9vDwJf4zRgHt-ug-DXp5dz5CzD6GNBp8ccTX6q2jvIU4_LDge5LnWGAlvEAher2KvcnHqFOwFabrUdwsseWqU0Kdz2HD9C5OZCb4T-Y6PZYLWNXShXc6-wrqE1_DkGTuQI0vyd-MPYcVxwQozHzpQP"/>
+</div>
+</header>
+<!-- Map Area (60% height) -->
+<div class="map-container bg-surface-variant relative pt-20">
+<!-- Map Background Image -->
+<img class="w-full h-full object-cover absolute inset-0 z-0" data-alt="A clean, minimalist street map of Douala, Cameroon. The map is rendered in light earth tones, pale greens, and soft beige to match a premium modern aesthetic. It is bright and high-contrast, designed for legibility on logistics apps." data-location="Douala" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4fX1mu2DshhklonEkbrFphDjpPzRNnnWWtuDaYlzUCu0HUfCmn54918Gi97M_nJ6NSQGlnY6s2WOZ7pvKZa3zE8N7zvltXgFh4m4g3vBzmoo9iGrXCWHh4RtU0m14n-Lb0eXRZb8cmQQfnY2YQFq8oKPVeZ_WMrBTZPZsG2UPfJAefuX1eTuMkCk6MAjJygUaoJr-2NQkJH0ULtxWMPDPFd7dkhSIlIBqqJIxnzeXOwQTmvm0OCbr"/>
+<!-- Map Gradient Overlay for readability -->
+<div class="absolute inset-0 bg-gradient-to-b from-transparent to-manioc/30 z-0 pointer-events-none"></div>
+<!-- Start Marker -->
+<div class="absolute top-[30%] left-[40%] flex flex-col items-center z-10 transform -translate-x-1/2 -translate-y-full">
+<div class="bg-surface-container-lowest px-3 py-1 rounded-full shadow-md mb-2 border border-brume">
+<span class="font-label-mono text-label-mono text-foret">DÉPART</span>
+</div>
+<div class="w-8 h-8 bg-surface-container-lowest rounded-full flex items-center justify-center shadow-lg border-2 border-foret">
+<div class="w-3 h-3 bg-foret rounded-full"></div>
+</div>
+</div>
+<!-- End Marker -->
+<div class="absolute top-[60%] left-[60%] flex flex-col items-center z-10 transform -translate-x-1/2 -translate-y-full">
+<div class="bg-surface-container-lowest px-3 py-1 rounded-full shadow-md mb-2 border border-brume">
+<span class="font-label-mono text-label-mono text-laterite">ARRIVÉE</span>
+</div>
+<div class="w-8 h-8 bg-surface-container-lowest rounded-full flex items-center justify-center shadow-lg border-2 border-laterite">
+<span class="material-symbols-outlined text-laterite text-sm" data-icon="location_on" data-weight="fill">location_on</span>
+</div>
+</div>
+<!-- Route Line (SVG approximation) -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none z-0" style="filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));">
+<path d="M 40% 30% Q 50% 30% 50% 45% T 60% 60%" fill="none" stroke="#1f3b2a" stroke-dasharray="8,8" stroke-width="4"></path>
+</svg>
+<!-- Current Location FAB -->
+<button class="absolute bottom-6 right-couloir w-12 h-12 bg-surface-container-lowest rounded-full shadow-lg flex items-center justify-center z-10 border border-brume hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-foret" data-icon="my_location">my_location</span>
+</button>
+</div>
+<!-- Bottom Slide Panel -->
+<div class="slide-panel bg-manioc w-full flex flex-col relative z-20 pb-safe">
+<!-- Drag Handle -->
+<div class="w-full flex justify-center pt-souffle pb-pause cursor-grab">
+<div class="w-12 h-1.5 bg-brume rounded-full"></div>
+</div>
+<div class="px-couloir pb-couloir pt-arret flex-grow overflow-y-auto">
+<h2 class="font-h3 text-h3 text-foret mb-arret">Planifier un trajet</h2>
+<!-- Input Fields (Sillon) -->
+<div class="flex flex-col gap-arret mb-patio relative">
+<!-- Decorative Timeline Line -->
+<div class="absolute left-4 top-8 bottom-8 w-[2px] bg-brume z-0"></div>
+<!-- Departure Input -->
+<div class="relative z-10 flex items-center gap-souffle">
+<div class="w-8 flex justify-center">
+<div class="w-3 h-3 bg-foret rounded-full outline outline-4 outline-manioc"></div>
+</div>
+<div class="flex-grow">
+<label class="font-label-mono text-label-mono text-cendre uppercase block mb-pas">Départ</label>
+<div class="flex items-center bg-manioc border border-brume rounded-lg px-souffle py-3 focus-within:border-foret focus-within:ring-1 focus-within:ring-foret transition-all">
+<input class="bg-transparent border-none outline-none w-full font-body-medium text-body-medium text-charbon" placeholder="Saisir le point de départ" type="text" value="Port de Douala, Quai 2"/>
+</div>
+</div>
+</div>
+<!-- Destination Input -->
+<div class="relative z-10 flex items-center gap-souffle">
+<div class="w-8 flex justify-center">
+<span class="material-symbols-outlined text-laterite bg-manioc outline outline-4 outline-manioc rounded-full" data-icon="location_on" data-weight="fill">location_on</span>
+</div>
+<div class="flex-grow">
+<label class="font-label-mono text-label-mono text-cendre uppercase block mb-pas">Destination</label>
+<div class="flex items-center bg-manioc border border-brume rounded-lg px-souffle py-3 focus-within:border-foret focus-within:ring-1 focus-within:ring-foret transition-all">
+<input class="bg-transparent border-none outline-none w-full font-body-medium text-body-medium text-charbon" placeholder="Saisir la destination" type="text" value="Zone Industrielle de Bassa"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Vehicle Selector -->
+<div class="mb-parvis">
+<label class="font-label-mono text-label-mono text-cendre uppercase block mb-souffle">Type de véhicule</label>
+<div class="flex gap-souffle overflow-x-auto no-scrollbar pb-2 -mx-couloir px-couloir">
+<!-- Moto -->
+<button class="flex-shrink-0 w-28 p-souffle rounded-xl border border-brume bg-surface-container-lowest flex flex-col items-center justify-center gap-2 hover:border-foret transition-colors">
+<span class="material-symbols-outlined text-3xl text-cendre" data-icon="two_wheeler">two_wheeler</span>
+<span class="font-body-medium text-body-medium text-charbon">Moto</span>
+<span class="font-label-mono text-label-mono text-cendre">Dès 2k FCFA</span>
+</button>
+<!-- Voiture -->
+<button class="flex-shrink-0 w-28 p-souffle rounded-xl border border-brume bg-surface-container-lowest flex flex-col items-center justify-center gap-2 hover:border-foret transition-colors">
+<span class="material-symbols-outlined text-3xl text-cendre" data-icon="directions_car">directions_car</span>
+<span class="font-body-medium text-body-medium text-charbon">Voiture</span>
+<span class="font-label-mono text-label-mono text-cendre">Dès 5k FCFA</span>
+</button>
+<!-- Camionnette (Selected) -->
+<button class="flex-shrink-0 w-28 p-souffle rounded-xl border-2 border-foret bg-secondary-container bg-opacity-20 flex flex-col items-center justify-center gap-2 transition-colors relative">
+<div class="absolute -top-2 -right-2 bg-foret text-on-primary w-5 h-5 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px]" data-icon="check" data-weight="fill">check</span>
+</div>
+<span class="material-symbols-outlined text-3xl text-foret" data-icon="local_shipping" data-weight="fill">local_shipping</span>
+<span class="font-body-semibold text-body-semibold text-foret">Fourgon</span>
+<span class="font-label-mono text-label-mono text-foret">Dès 15k FCFA</span>
+</button>
+<!-- Camion -->
+<button class="flex-shrink-0 w-28 p-souffle rounded-xl border border-brume bg-surface-container-lowest flex flex-col items-center justify-center gap-2 hover:border-foret transition-colors">
+<span class="material-symbols-outlined text-3xl text-cendre" data-icon="fire_truck">fire_truck</span>
+<span class="font-body-medium text-body-medium text-charbon">Camion</span>
+<span class="font-label-mono text-label-mono text-cendre">Sur devis</span>
+</button>
+</div>
+</div>
+<!-- Primary Action Button (Galet) -->
+<button class="w-full bg-foret text-on-primary py-4 rounded-full font-body-semibold text-body-semibold flex items-center justify-center gap-2 hover:bg-foret-90 active:scale-[0.98] transition-all shadow-md mt-auto">
+                Confirmer le trajet
+                <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</body></html>

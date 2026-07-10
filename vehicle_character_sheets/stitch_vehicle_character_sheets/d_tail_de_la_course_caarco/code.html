@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Détail de la course - CAARCO</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Marcellus&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#dcdad4",
+                        "secondary-fixed-dim": "#a0d2aa",
+                        "secondary-fixed": "#bcefc5",
+                        "bambou": "#3d6b4a",
+                        "inverse-on-surface": "#f2f1eb",
+                        "error-container": "#ffdad6",
+                        "on-surface-variant": "#424843",
+                        "surface-container-high": "#eae8e2",
+                        "manioc": "#fbf9f3",
+                        "on-primary": "#ffffff",
+                        "foret": "#1f3b2a",
+                        "primary-fixed-dim": "#aeceb7",
+                        "outline": "#727972",
+                        "inverse-surface": "#30312d",
+                        "surface-container-highest": "#e4e2dd",
+                        "on-tertiary-fixed": "#291800",
+                        "background": "#fbf9f3",
+                        "outline-variant": "#c2c8c1",
+                        "primary": "#082516",
+                        "foret-30": "#b4c4b9",
+                        "surface": "#fbf9f3",
+                        "primary-fixed": "#caebd2",
+                        "on-background": "#1b1c19",
+                        "primary-container": "#1f3b2a",
+                        "nuit": "#0f1411",
+                        "surface-container": "#f0eee8",
+                        "surface-variant": "#e4e2dd",
+                        "surface-tint": "#486551",
+                        "surface-container-low": "#f5f3ee",
+                        "secondary-container": "#bcefc5",
+                        "cendre": "#6b6f68",
+                        "on-primary-container": "#86a58f",
+                        "brume": "#ece9e0",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#3a6847",
+                        "foret-90": "#284a36",
+                        "on-tertiary-container": "#c99441",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#ffddb0",
+                        "nere": "#c89441",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-primary": "#aeceb7",
+                        "on-surface": "#1b1c19",
+                        "tertiary-fixed-dim": "#f6bd65",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed": "#042011",
+                        "on-secondary-fixed": "#00210d",
+                        "surface-bright": "#fbf9f3",
+                        "tertiary": "#2e1c00",
+                        "tertiary-container": "#4a3000",
+                        "on-secondary-fixed-variant": "#225031",
+                        "on-tertiary-fixed-variant": "#614000",
+                        "on-primary-fixed-variant": "#304d3b",
+                        "on-secondary-container": "#406e4d",
+                        "laterite": "#b8612e",
+                        "charbon": "#1d2420"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "parvis": "48px",
+                        "souffle": "12px",
+                        "pas": "4px",
+                        "place": "64px",
+                        "couloir": "24px",
+                        "patio": "32px",
+                        "pause": "8px",
+                        "arret": "16px"
+                    },
+                    "fontFamily": {
+                        "body-semibold": ["Plus Jakarta Sans"],
+                        "lede": ["Plus Jakarta Sans"],
+                        "h3": ["Marcellus"],
+                        "body": ["Plus Jakarta Sans"],
+                        "price-display": ["JetBrains Mono"],
+                        "body-medium": ["Plus Jakarta Sans"],
+                        "h2": ["Marcellus"],
+                        "label-mono": ["JetBrains Mono"],
+                        "h1": ["Marcellus"]
+                    },
+                    "fontSize": {
+                        "body-semibold": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "lede": ["20px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "h3": ["24px", { "lineHeight": "32px", "fontWeight": "400" }],
+                        "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "price-display": ["18px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "body-medium": ["16px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "h2": ["36px", { "lineHeight": "44px", "fontWeight": "400" }],
+                        "label-mono": ["13px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "400" }],
+                        "h1": ["48px", { "lineHeight": "56px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .voilage-shadow { box-shadow: 0px 4px 12px rgba(29, 36, 32, 0.05); }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-manioc text-on-background min-h-screen flex flex-col font-body">
+<!-- TopAppBar -->
+<header class="bg-surface border-b border-brume docked full-width top-0 flex justify-between items-center px-couloir h-arret w-full py-4 sticky z-50">
+<button class="text-cendre hover:bg-brume transition-colors rounded-full p-2 flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-h3 text-h3 text-foret tracking-tight">Détail de la course</h1>
+<div class="w-10"></div> <!-- Spacer for centering -->
+</header>
+<!-- Main Content -->
+<main class="flex-grow px-couloir py-patio max-w-3xl mx-auto w-full flex flex-col gap-arret">
+<!-- Status Badge & Date -->
+<div class="flex justify-between items-center mb-souffle">
+<div class="bg-secondary-container text-on-secondary-container font-label-mono text-label-mono px-3 py-1 rounded-full uppercase tracking-widest">
+                Terminée
+            </div>
+<div class="font-label-mono text-label-mono text-cendre uppercase">
+                12 Oct 2023 • 14:30
+            </div>
+</div>
+<!-- Trajet Card -->
+<section class="bg-surface-container-lowest border border-brume rounded-lg p-arret voilage-shadow">
+<h2 class="font-label-mono text-label-mono text-cendre uppercase mb-souffle">Trajet</h2>
+<div class="relative pl-8">
+<!-- Timeline visual -->
+<div class="absolute left-3 top-2 bottom-2 w-0.5 bg-brume flex flex-col justify-between items-center z-0">
+<div class="w-3 h-3 rounded-full bg-foret absolute -top-1 -left-[5px] z-10 border-2 border-surface-container-lowest"></div>
+<div class="w-3 h-3 rounded-full bg-nere absolute -bottom-1 -left-[5px] z-10 border-2 border-surface-container-lowest"></div>
+</div>
+<div class="mb-arret relative z-10">
+<p class="font-body-semibold text-body-semibold text-charbon">Quartier Akwa, Douala</p>
+<p class="font-body text-body text-cendre text-sm">Départ</p>
+</div>
+<div class="relative z-10">
+<p class="font-body-semibold text-body-semibold text-charbon">Zone Industrielle Bonabéri</p>
+<p class="font-body text-body text-cendre text-sm">Arrivée</p>
+</div>
+</div>
+</section>
+<!-- Driver & Vehicle Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-arret">
+<!-- Driver Info -->
+<section class="bg-surface-container-lowest border border-brume rounded-lg p-arret voilage-shadow flex flex-col gap-souffle">
+<h2 class="font-label-mono text-label-mono text-cendre uppercase">Chauffeur</h2>
+<div class="flex items-center gap-arret">
+<div class="w-12 h-12 rounded-full bg-surface-variant flex items-center justify-center font-h3 text-h3 text-foret border border-brume overflow-hidden">
+<img alt="Driver" class="w-full h-full object-cover" data-alt="Portrait photograph of a professional African truck driver in a crisp, earthy green uniform, smiling subtly against a soft, bright out-of-focus background. High key lighting, modern, trust-inspiring, subtle corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbl8gdZq9D-FOU27-HRn_V82llryp1oAd36Cq2DQ5Q3bqs4LH4ATXC2qSbXK2ujhuCRCD7ZBXXCwGrpj_4A7UJYRaCx_rbRBy5h1w4-m7WTdbc3jaG3GyLC9hFdGrD9QeU9Jj-azn0xJM2wlEwoxqS7jRXFK5yn7f__jeeAB_Me-fWvJK9XerrpRql7gtmcUBFDM7UCuQ9iIHiWWplG5byftN3qqi7Gc7MPwMpkwhGILEynY7Qeu1j"/>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<p class="font-body-semibold text-body-semibold text-charbon">Amadou B.</p>
+<span class="material-symbols-outlined text-secondary" data-icon="verified" style="font-variation-settings: 'FILL' 1; font-size: 18px;">verified</span>
+</div>
+<p class="font-body text-body text-cendre flex items-center gap-1 text-sm">
+<span class="material-symbols-outlined text-nere" data-icon="star" style="font-variation-settings: 'FILL' 1; font-size: 16px;">star</span> 4.8 (120 courses)
+                        </p>
+</div>
+</div>
+</section>
+<!-- Vehicle Info -->
+<section class="bg-surface-container-lowest border border-brume rounded-lg p-arret voilage-shadow flex flex-col gap-souffle">
+<h2 class="font-label-mono text-label-mono text-cendre uppercase">Véhicule</h2>
+<div class="flex items-center gap-arret">
+<div class="w-16 h-12 bg-surface-variant rounded flex items-center justify-center overflow-hidden border border-brume">
+<img alt="Vehicle" class="w-full h-full object-cover" data-alt="A clean, modern heavy duty delivery truck painted in deep forest green and light cream colors, parked on a sunlit street. High resolution, sharp focus, communicating robustness and reliability in a professional logistics context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkFnxYSXJuT3lNdfdKrcGDNlXdUZAdDUrncC15vNV6A0zqae977-70YFM2Qlj2vKTzwAJJ8SJw7QMET77AQ7kzryJ-a3d2ZRfDGHYE6gklEFAYnR_FgTtLLcbNvWhAeU4WDDlAUj0I5-1FsHClKwy3ELMVi9ctp_HD2pXuygKmVjwI2uDnPO5QPSycf3RCS6BEHG7ExJotrwhqCQLfVOdURymYkuPF5Iv5RrYakKOT6Lz4m-lBvm7N"/>
+</div>
+<div>
+<p class="font-body-semibold text-body-semibold text-charbon">Camion 10T - Mercedes</p>
+<p class="font-label-mono text-label-mono text-cendre uppercase mt-1 bg-surface py-0.5 px-2 rounded w-fit border border-brume">LT-4589-CM</p>
+</div>
+</div>
+</section>
+</div>
+<!-- Price Detail -->
+<section class="bg-surface-container-lowest border border-brume rounded-lg p-arret voilage-shadow mt-souffle">
+<h2 class="font-label-mono text-label-mono text-cendre uppercase mb-arret">Détail du paiement</h2>
+<div class="flex flex-col gap-2 mb-arret border-b border-brume pb-arret">
+<div class="flex justify-between items-center">
+<span class="font-body text-body text-charbon">Tarif de base</span>
+<span class="font-price-display text-price-display text-charbon">45 000 FCFA</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body text-body text-charbon">Distance (24 km)</span>
+<span class="font-price-display text-price-display text-charbon">12 000 FCFA</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body text-body text-cendre text-sm">Frais de service</span>
+<span class="font-price-display text-price-display text-cendre text-sm">2 500 FCFA</span>
+</div>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-semibold text-body-semibold text-foret">Total payé</span>
+<span class="font-price-display text-price-display text-nere text-xl font-bold">59 500 FCFA</span>
+</div>
+</section>
+<!-- Actions -->
+<section class="flex flex-col gap-souffle mt-patio mb-place">
+<button class="w-full bg-foret text-foret-30 font-body-semibold text-body-semibold py-4 rounded-full flex items-center justify-center gap-2 hover:bg-foret-90 transition-colors">
+<span class="material-symbols-outlined" data-icon="replay">replay</span>
+                Relancer la course
+            </button>
+<button class="w-full bg-brume text-charbon font-body-semibold text-body-semibold py-4 rounded-full flex items-center justify-center gap-2 hover:bg-surface-variant transition-colors border border-outline-variant">
+<span class="material-symbols-outlined text-error" data-icon="report_problem">report_problem</span>
+                Signaler un problème
+            </button>
+</section>
+</main>
+</body></html>

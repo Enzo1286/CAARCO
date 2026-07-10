@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CAARCO - Trajet</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Marcellus&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-container": "#406e4d",
+                      "tertiary-fixed-dim": "#f6bd65",
+                      "surface-container": "#f0eee8",
+                      "on-secondary": "#ffffff",
+                      "primary-container": "#1f3b2a",
+                      "surface": "#fbf9f3",
+                      "tertiary-container": "#4a3000",
+                      "secondary-container": "#bcefc5",
+                      "cendre": "#6b6f68",
+                      "surface-dim": "#dcdad4",
+                      "on-secondary-fixed": "#00210d",
+                      "surface-variant": "#e4e2dd",
+                      "error": "#ba1a1a",
+                      "surface-container-low": "#f5f3ee",
+                      "surface-tint": "#486551",
+                      "nere": "#c89441",
+                      "on-secondary-fixed-variant": "#225031",
+                      "on-primary-fixed": "#042011",
+                      "foret": "#1f3b2a",
+                      "inverse-on-surface": "#f2f1eb",
+                      "on-tertiary-fixed": "#291800",
+                      "error-container": "#ffdad6",
+                      "manioc": "#fbf9f3",
+                      "on-primary-fixed-variant": "#304d3b",
+                      "primary-fixed-dim": "#aeceb7",
+                      "primary": "#082516",
+                      "secondary-fixed-dim": "#a0d2aa",
+                      "on-surface": "#1b1c19",
+                      "bambou": "#3d6b4a",
+                      "on-surface-variant": "#424843",
+                      "on-background": "#1b1c19",
+                      "surface-container-lowest": "#ffffff",
+                      "on-error": "#ffffff",
+                      "inverse-surface": "#30312d",
+                      "on-primary-container": "#86a58f",
+                      "foret-90": "#284a36",
+                      "inverse-primary": "#aeceb7",
+                      "surface-container-highest": "#e4e2dd",
+                      "on-tertiary": "#ffffff",
+                      "brume": "#ece9e0",
+                      "on-tertiary-fixed-variant": "#614000",
+                      "on-primary": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "tertiary-fixed": "#ffddb0",
+                      "secondary": "#3a6847",
+                      "surface-container-high": "#eae8e2",
+                      "foret-30": "#b4c4b9",
+                      "outline-variant": "#c2c8c1",
+                      "tertiary": "#2e1c00",
+                      "laterite": "#b8612e",
+                      "charbon": "#1d2420",
+                      "on-tertiary-container": "#c99441",
+                      "nuit": "#0f1411",
+                      "background": "#fbf9f3",
+                      "surface-bright": "#fbf9f3",
+                      "primary-fixed": "#caebd2",
+                      "secondary-fixed": "#bcefc5",
+                      "outline": "#727972"
+              },
+              "borderRadius": {
+                      "DEFAULT": "1rem",
+                      "lg": "2rem",
+                      "xl": "3rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "place": "64px",
+                      "parvis": "48px",
+                      "couloir": "24px",
+                      "arret": "16px",
+                      "pause": "8px",
+                      "patio": "32px",
+                      "pas": "4px",
+                      "souffle": "12px"
+              },
+              "fontFamily": {
+                      "h1": [
+                              "Marcellus"
+                      ],
+                      "body-medium": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "price-display": [
+                              "JetBrains Mono"
+                      ],
+                      "lede": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "body-semibold": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "label-mono": [
+                              "JetBrains Mono"
+                      ],
+                      "body": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "h3": [
+                              "Marcellus"
+                      ],
+                      "h2": [
+                              "Marcellus"
+                      ]
+              },
+              "fontSize": {
+                      "h1": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-medium": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "price-display": [
+                              "18px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "lede": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-semibold": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-mono": [
+                              "13px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h3": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h2": [
+                              "36px",
+                              {
+                                      "lineHeight": "44px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+</head>
+<body class="bg-manioc text-on-surface font-body antialiased min-h-screen flex flex-col selection:bg-foret selection:text-manioc">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky bg-manioc dark:bg-nuit border-b border-brume dark:border-on-surface-variant flex justify-between items-center px-couloir py-arret w-full max-w-full z-40 transition-colors duration-200">
+<button aria-label="Go back" class="text-foret dark:text-primary-fixed-dim hover:bg-surface-container dark:hover:bg-surface-variant/10 p-2 rounded-full transition-colors duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">arrow_back</span>
+</button>
+<h1 class="font-h3 text-h3-mobile md:text-h3 text-foret dark:text-primary-fixed-dim text-center flex-1">CAARCO</h1>
+<div class="w-10 h-10 rounded-full bg-brume overflow-hidden border border-surface-variant flex items-center justify-center">
+<span class="font-h1 text-h3 text-foret">JD</span>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col relative pb-[120px] md:pb-0">
+<!-- Map Area -->
+<section class="relative w-full h-[45vh] bg-surface-variant shrink-0" data-alt="A detailed map view showing a route from Douala to Yaounde in Cameroon, emphasizing major roads with a clear, minimalist cartographic style in earthy tones like deep green and beige. The map style should be modern, functional, and easily legible under bright conditions, reflecting a premium corporate app interface." data-location="Cameroon" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDAj40iIW-qBOcu-XNUnTcBDClfr7FWkwHwABcICJM706Ejce1z1ENYwbr_FZusQpTQ_sF64jUdX7Egl-9K1KYrQE9sW8wM0E02Rz8Yzl6V2PNs2dGQjd-NCliwykMJY8lJjXyoriSdJKPnjPKiVM3aFLMKZeitzoXRGG4b8Er-ilfkSHWJf_zpIrfox_guP3cm932JEBfkaTbJ82uZE1lvCkbNmyPPa9lb33RvIfnTesw3VxyuAwk7')">
+<!-- Simulated Route Line overlay for visual richness -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none opacity-60" preserveaspectratio="none" viewbox="0 0 100 100">
+<path d="M20,80 Q40,40 80,20" fill="none" stroke="#1f3b2a" stroke-dasharray="5,5" stroke-width="3"></path>
+</svg>
+<!-- Map Pins -->
+<div class="absolute bottom-1/4 left-1/4 flex flex-col items-center">
+<div class="w-4 h-4 rounded-full bg-manioc border-4 border-foret shadow-md z-10"></div>
+<div class="bg-surface-container-highest px-3 py-1 rounded-md text-label-mono font-label-mono text-foret mt-2 shadow-sm border border-brume">DOUALA</div>
+</div>
+<div class="absolute top-1/4 right-1/4 flex flex-col items-center">
+<div class="w-4 h-4 rounded-full bg-nere border-4 border-manioc shadow-md z-10"></div>
+<div class="bg-surface-container-highest px-3 py-1 rounded-md text-label-mono font-label-mono text-nere mt-2 shadow-sm border border-brume">YAOUNDÉ</div>
+</div>
+</section>
+<!-- Bottom Action Sheet / Details -->
+<section class="bg-manioc rounded-t-[32px] -mt-8 relative z-20 flex-1 px-couloir pt-parvis pb-place shadow-[0px_-10px_25px_rgba(15,20,17,0.05)]">
+<!-- Handle for visual affordance -->
+<div class="absolute top-4 left-1/2 -translate-x-1/2 w-12 h-1.5 bg-surface-variant rounded-full"></div>
+<header class="mb-patio text-center">
+<h2 class="font-h2 text-h2-mobile md:text-h2 text-charbon">Récapitulatif du trajet</h2>
+</header>
+<div class="max-w-2xl mx-auto space-y-arret">
+<!-- Trip Summary Card (Plaquette) -->
+<div class="bg-surface-container-lowest border border-brume rounded-xl p-couloir flex flex-col md:flex-row gap-couloir items-center shadow-[0px_4px_12px_rgba(29,36,32,0.05)]">
+<!-- Vehicle Image -->
+<div class="w-full md:w-1/3 aspect-video md:aspect-square bg-surface-container rounded-lg overflow-hidden flex items-center justify-center p-4">
+<img alt="Selected Vehicle" class="w-full h-full object-contain mix-blend-multiply" data-alt="A modern, dark green compact taxi car shown from a slightly elevated, isometric perspective against a clean, off-white background. The vehicle features subtle gold accents and the word 'CAARCO' on the side, conveying a robust, professional, and slightly tactile 'quiet luxury' aesthetic suitable for a premium logistics service app in Cameroon." src="https://lh3.googleusercontent.com/aida/AP1WRLsr8dUMXf-RF_bIs-NdJl0ny8JZMJHoMF1_zKAam2OAJ_drtVHdtZe7EPT2nxZ92HRE2Ug7nrJ_OVoNU72MoRXcszRwFNMPtAhzZYEwEss1Gce1qJhrdlRLPBxWNIQvCPBMcQ0uBMn7DyrqmZdb0eKWYRJo8oGnRbm1H1LSXXIcNwF9rf_S_ixGJ5ZJZSjJhAXiUvLfShP2pj9APCFXR54A1efaL68Y3VGW7wD2xMzAcl2BgAmyGsRZphE"/>
+</div>
+<!-- Details -->
+<div class="w-full md:w-2/3 space-y-arret">
+<div class="flex justify-between items-start border-b border-surface-variant pb-souffle">
+<div>
+<h3 class="font-body-semibold text-body-semibold text-charbon">Standard Interurbain</h3>
+<p class="font-body text-body text-cendre mt-1">Trajet confortable, climatisé</p>
+</div>
+<div class="bg-surface-container px-2 py-1 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-foret" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-mono text-label-mono text-foret">4</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface p-souffle rounded-lg border border-brume">
+<span class="block font-label-mono text-label-mono text-cendre uppercase mb-1">Distance</span>
+<span class="font-body-medium text-body-medium text-charbon">240 km</span>
+</div>
+<div class="bg-surface p-souffle rounded-lg border border-brume">
+<span class="block font-label-mono text-label-mono text-cendre uppercase mb-1">Durée Est.</span>
+<span class="font-body-medium text-body-medium text-charbon">4h 15m</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Price Highlight -->
+<div class="flex justify-between items-center py-couloir px-arret bg-foret-90/5 rounded-xl border border-foret-90/10">
+<span class="font-body-semibold text-body-semibold text-charbon">Total estimé</span>
+<span class="font-price-display text-[24px] leading-[32px] font-medium text-nere tracking-tight">60 500 XAF</span>
+</div>
+<!-- Payment Method Selection -->
+<div class="pt-arret space-y-souffle">
+<h4 class="font-label-mono text-label-mono text-cendre uppercase px-pas">Moyen de paiement</h4>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-souffle">
+<!-- Option 1: Cash (Selected) -->
+<label class="relative flex items-center p-arret rounded-xl border-2 border-foret bg-manioc cursor-pointer transition-all hover:bg-surface-container">
+<input checked="" class="peer sr-only" name="payment" type="radio" value="cash"/>
+<div class="flex items-center gap-3 w-full">
+<span class="material-symbols-outlined text-foret" style="font-variation-settings: 'FILL' 0;">payments</span>
+<span class="font-body-medium text-body-medium text-charbon flex-1">Espèces</span>
+<span class="material-symbols-outlined text-foret opacity-100 peer-checked:opacity-100" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</label>
+<!-- Option 2: Mobile Money -->
+<label class="relative flex items-center p-arret rounded-xl border border-brume bg-manioc cursor-pointer transition-all hover:border-foret/50 hover:bg-surface-container">
+<input class="peer sr-only" name="payment" type="radio" value="momo"/>
+<div class="flex items-center gap-3 w-full">
+<span class="material-symbols-outlined text-cendre peer-checked:text-foret" style="font-variation-settings: 'FILL' 0;">send_money</span>
+<span class="font-body-medium text-body-medium text-cendre peer-checked:text-charbon flex-1">MTN MoMo</span>
+</div>
+</label>
+<!-- Option 3: Orange Money -->
+<label class="relative flex items-center p-arret rounded-xl border border-brume bg-manioc cursor-pointer transition-all hover:border-foret/50 hover:bg-surface-container">
+<input class="peer sr-only" name="payment" type="radio" value="om"/>
+<div class="flex items-center gap-3 w-full">
+<span class="material-symbols-outlined text-cendre peer-checked:text-foret" style="font-variation-settings: 'FILL' 0;">account_balance_wallet</span>
+<span class="font-body-medium text-body-medium text-cendre peer-checked:text-charbon flex-1">Orange Money</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Primary Action Button (Galet Accent) -->
+<div class="pt-patio">
+<button class="w-full py-arret px-couloir rounded-full bg-nere text-manioc font-body-semibold text-body-semibold text-center hover:bg-tertiary-container transition-colors shadow-md flex justify-center items-center gap-2">
+<span>Confirmer la commande</span>
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 0;">arrow_forward</span>
+</button>
+<p class="text-center font-label-mono text-label-mono text-cendre mt-souffle uppercase">Annulation gratuite sous 5 min</p>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Hidden on desktop, shown on mobile if it's a main destination, but this is a transactional flow so it's suppressed per rules, but I will include it hidden for structural completeness or just suppress it entirely as instructed for transactional pages. I will suppress it to prioritize the content canvas). -->
+<!-- Navigation Suppressed for Linear/Transactional Task -->
+</body></html>

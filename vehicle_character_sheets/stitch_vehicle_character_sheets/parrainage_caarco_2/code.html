@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CAARCO - Parrainage</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "nere": "#c89441",
+                        "tertiary": "#2e1c00",
+                        "outline": "#727972",
+                        "secondary": "#3a6847",
+                        "on-secondary": "#ffffff",
+                        "foret": "#1f3b2a",
+                        "surface-variant": "#e4e2dd",
+                        "surface-container": "#f0eee8",
+                        "secondary-fixed": "#bcefc5",
+                        "on-primary-fixed-variant": "#304d3b",
+                        "primary": "#082516",
+                        "on-tertiary-container": "#c99441",
+                        "on-surface": "#1b1c19",
+                        "manioc": "#fbf9f3",
+                        "on-tertiary-fixed": "#291800",
+                        "charbon": "#1d2420",
+                        "on-tertiary-fixed-variant": "#614000",
+                        "surface-container-highest": "#e4e2dd",
+                        "on-tertiary": "#ffffff",
+                        "outline-variant": "#c2c8c1",
+                        "laterite": "#b8612e",
+                        "inverse-on-surface": "#f2f1eb",
+                        "primary-container": "#1f3b2a",
+                        "on-secondary-fixed-variant": "#225031",
+                        "surface-tint": "#486551",
+                        "surface-container-low": "#f5f3ee",
+                        "secondary-container": "#bcefc5",
+                        "on-primary-fixed": "#042011",
+                        "inverse-primary": "#aeceb7",
+                        "on-surface-variant": "#424843",
+                        "error": "#ba1a1a",
+                        "bambou": "#3d6b4a",
+                        "tertiary-fixed-dim": "#f6bd65",
+                        "on-error-container": "#93000a",
+                        "surface-bright": "#fbf9f3",
+                        "on-secondary-fixed": "#00210d",
+                        "tertiary-container": "#4a3000",
+                        "tertiary-fixed": "#ffddb0",
+                        "nuit": "#0f1411",
+                        "error-container": "#ffdad6",
+                        "foret-90": "#284a36",
+                        "brume": "#ece9e0",
+                        "background": "#fbf9f3",
+                        "secondary-fixed-dim": "#a0d2aa",
+                        "surface-dim": "#dcdad4",
+                        "primary-fixed-dim": "#aeceb7",
+                        "foret-30": "#b4c4b9",
+                        "surface-container-high": "#eae8e2",
+                        "cendre": "#6b6f68",
+                        "on-background": "#1b1c19",
+                        "on-primary": "#ffffff",
+                        "on-primary-container": "#86a58f",
+                        "primary-fixed": "#caebd2",
+                        "on-secondary-container": "#406e4d",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-surface": "#30312d",
+                        "on-error": "#ffffff",
+                        "surface": "#fbf9f3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "patio": "32px",
+                        "pause": "8px",
+                        "pas": "4px",
+                        "parvis": "48px",
+                        "arret": "16px",
+                        "place": "64px",
+                        "couloir": "24px",
+                        "souffle": "12px"
+                    },
+                    "fontFamily": {
+                        "price-display": ["JetBrains Mono"],
+                        "h3": ["Marcellus"],
+                        "body": ["Plus Jakarta Sans"],
+                        "h2": ["Marcellus"],
+                        "lede": ["Plus Jakarta Sans"],
+                        "h1": ["Marcellus"],
+                        "body-medium": ["Plus Jakarta Sans"],
+                        "label-mono": ["JetBrains Mono"],
+                        "body-semibold": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "price-display": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                        "h3": ["24px", {"lineHeight": "32px", "fontWeight": "400"}],
+                        "body": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "h2": ["36px", {"lineHeight": "44px", "fontWeight": "400"}],
+                        "lede": ["20px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "h1": ["48px", {"lineHeight": "56px", "fontWeight": "400"}],
+                        "body-medium": ["16px", {"lineHeight": "24px", "fontWeight": "500"}],
+                        "label-mono": ["13px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "400"}],
+                        "body-semibold": ["16px", {"lineHeight": "24px", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-manioc text-on-surface font-body min-h-screen flex flex-col relative pb-32">
+<!-- TopAppBar -->
+<header class="w-full top-0 bg-manioc border-b border-brume flex justify-between items-center px-couloir py-arret sticky z-40">
+<button class="text-foret hover:bg-brume p-2 rounded-full transition-all">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="font-h2 text-h2 text-foret tracking-tight">CAARCO</div>
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center overflow-hidden border border-brume">
+<img alt="User profile avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQUc-m62aAJxxEO7MPsJmxlpGCzaqsIiDwYffj_zjzGOwNFsNxgGb0tfObMbsTwvAT1VQeL_qL0Fj2LHurLHOm_p9sn9LbmObphB_4PKA2n2NZcvb-lkxy05uEP10Vour-mOwzkKo5ghm1QhEiwXGg_UyQklockDHNZ-a6hAQUkAIJTgwFw_J_R54WhzA4Bkdnwz9aCrXvvRmfl0wSwWUt_5A1iU3afmsPOsJrDZLxsMfWJOmthbhO"/>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 w-full max-w-md mx-auto px-couloir pt-patio pb-place space-y-parvis">
+<!-- Header Section -->
+<section class="text-center space-y-souffle">
+<h1 class="font-h1 text-h1 text-foret">Parrainage</h1>
+<p class="font-lede text-lede text-on-surface-variant">Invitez vos amis et gagnez des récompenses.</p>
+</section>
+<!-- Referral Code Card -->
+<section class="bg-surface-container-lowest border border-brume rounded-xl p-couloir shadow-[0px_4px_12px_rgba(29,36,32,0.05)] text-center space-y-arret relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-1 bg-nere"></div>
+<p class="font-label-mono text-label-mono text-cendre uppercase">Votre code unique</p>
+<div class="flex items-center justify-center space-x-souffle bg-surface-container-low rounded-lg p-arret border border-brume group">
+<span class="font-price-display text-price-display text-foret tracking-widest" id="referralCode">CAARCO-JEAN</span>
+<button aria-label="Copier le code" class="text-on-surface-variant hover:text-foret transition-colors p-2 rounded-full hover:bg-brume" onclick="copyCode()">
+<span class="material-symbols-outlined">content_copy</span>
+</button>
+</div>
+<p class="font-body-medium text-body-medium text-foret">Gagnez 20 points pour chaque ami inscrit</p>
+<button class="w-full bg-foret text-foret-30 hover:opacity-90 transition-opacity rounded-full py-arret px-couloir font-body-semibold flex items-center justify-center space-x-2 mt-arret">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">share</span>
+<span>Partager sur WhatsApp</span>
+</button>
+</section>
+<!-- Referrals List Section -->
+<section class="space-y-couloir">
+<h2 class="font-h3 text-h3 text-foret">Filleuls inscrits</h2>
+<div class="space-y-arret">
+<!-- Referral Item 1 -->
+<div class="flex items-center justify-between bg-surface-container-lowest border border-brume rounded-xl p-arret shadow-[0px_4px_12px_rgba(29,36,32,0.05)]">
+<div class="flex items-center space-x-arret">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-h3 text-h3 border border-secondary-fixed">
+                            AM
+                        </div>
+<div>
+<p class="font-body-semibold text-body-semibold text-charbon">Aline M.</p>
+<p class="font-label-mono text-label-mono text-on-surface-variant">Inscrit le 12 Oct</p>
+</div>
+</div>
+<div class="bg-secondary-fixed-dim text-on-secondary-fixed-variant px-3 py-1 rounded border border-secondary-container">
+<span class="font-label-mono text-label-mono uppercase">Actif</span>
+</div>
+</div>
+<!-- Referral Item 2 -->
+<div class="flex items-center justify-between bg-surface-container-lowest border border-brume rounded-xl p-arret shadow-[0px_4px_12px_rgba(29,36,32,0.05)] opacity-70">
+<div class="flex items-center space-x-arret">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant font-h3 text-h3 border border-brume">
+                            PB
+                        </div>
+<div>
+<p class="font-body-semibold text-body-semibold text-charbon">Paul B.</p>
+<p class="font-label-mono text-label-mono text-cendre">Invitation envoyée</p>
+</div>
+</div>
+<div class="bg-surface-container-high text-on-surface-variant px-3 py-1 rounded border border-brume">
+<span class="font-label-mono text-label-mono uppercase">En attente</span>
+</div>
+</div>
+<!-- Referral Item 3 -->
+<div class="flex items-center justify-between bg-surface-container-lowest border border-brume rounded-xl p-arret shadow-[0px_4px_12px_rgba(29,36,32,0.05)]">
+<div class="flex items-center space-x-arret">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-h3 text-h3 border border-secondary-fixed">
+                            SD
+                        </div>
+<div>
+<p class="font-body-semibold text-body-semibold text-charbon">Sophie D.</p>
+<p class="font-label-mono text-label-mono text-on-surface-variant">Inscrit le 05 Oct</p>
+</div>
+</div>
+<div class="bg-secondary-fixed-dim text-on-secondary-fixed-variant px-3 py-1 rounded border border-secondary-container">
+<span class="font-label-mono text-label-mono uppercase">Actif</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-lg bg-manioc border-t border-brume shadow-lg flex justify-around items-center h-20 px-pas pb-safe md:hidden">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-arret py-pas hover:text-nere transition-colors" href="#">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="font-body text-body-medium text-xs mt-1">Expéditions</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-arret py-pas hover:text-nere transition-colors" href="#">
+<span class="material-symbols-outlined">location_on</span>
+<span class="font-body text-body-medium text-xs mt-1">Suivi</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-arret py-pas hover:text-nere transition-colors" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="font-body text-body-medium text-xs mt-1">Portefeuille</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-arret py-pas hover:text-nere transition-colors" href="#">
+<span class="material-symbols-outlined">chat</span>
+<span class="font-body text-body-medium text-xs mt-1">Messages</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-xl px-arret py-pas scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-body text-body-medium text-xs mt-1">Compte</span>
+</a>
+</nav>
+<script>
+        function copyCode() {
+            const codeText = document.getElementById('referralCode').innerText;
+            navigator.clipboard.writeText(codeText).then(() => {
+                // Simple visual feedback could be added here
+                console.log('Code copié : ' + codeText);
+            }).catch(err => {
+                console.error('Erreur lors de la copie du code', err);
+            });
+        }
+    </script>
+</body></html>

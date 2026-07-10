@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Retrait de Gains - CAARCO</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;family=Marcellus&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "secondary-fixed-dim": "#a0d2aa",
+                  "error": "#ba1a1a",
+                  "foret-90": "#284a36",
+                  "background": "#fbf9f3",
+                  "surface-variant": "#e4e2dd",
+                  "on-secondary-container": "#406e4d",
+                  "on-surface-variant": "#424843",
+                  "on-primary-container": "#86a58f",
+                  "inverse-on-surface": "#f2f1eb",
+                  "surface-dim": "#dcdad4",
+                  "primary-fixed": "#caebd2",
+                  "on-primary": "#ffffff",
+                  "surface-container-lowest": "#ffffff",
+                  "surface-bright": "#fbf9f3",
+                  "on-primary-fixed": "#042011",
+                  "surface-container-low": "#f5f3ee",
+                  "on-surface": "#1b1c19",
+                  "inverse-primary": "#aeceb7",
+                  "bambou": "#3d6b4a",
+                  "surface-tint": "#486551",
+                  "on-secondary-fixed": "#00210d",
+                  "secondary-fixed": "#bcefc5",
+                  "on-tertiary-fixed": "#291800",
+                  "manioc": "#fbf9f3",
+                  "foret-30": "#b4c4b9",
+                  "on-tertiary-fixed-variant": "#614000",
+                  "outline": "#727972",
+                  "surface-container-high": "#eae8e2",
+                  "secondary-container": "#bcefc5",
+                  "tertiary-fixed-dim": "#f6bd65",
+                  "nere": "#c89441",
+                  "inverse-surface": "#30312d",
+                  "tertiary-container": "#4a3000",
+                  "on-primary-fixed-variant": "#304d3b",
+                  "on-error": "#ffffff",
+                  "surface": "#fbf9f3",
+                  "on-secondary": "#ffffff",
+                  "surface-container": "#f0eee8",
+                  "error-container": "#ffdad6",
+                  "brume": "#ece9e0",
+                  "surface-container-highest": "#e4e2dd",
+                  "nuit": "#0f1411",
+                  "on-secondary-fixed-variant": "#225031",
+                  "primary-container": "#1f3b2a",
+                  "laterite": "#b8612e",
+                  "cendre": "#6b6f68",
+                  "foret": "#1f3b2a",
+                  "on-tertiary-container": "#c99441",
+                  "charbon": "#1d2420",
+                  "primary": "#082516",
+                  "on-background": "#1b1c19",
+                  "on-error-container": "#93000a",
+                  "secondary": "#3a6847",
+                  "outline-variant": "#c2c8c1",
+                  "on-tertiary": "#ffffff",
+                  "tertiary": "#2e1c00",
+                  "primary-fixed-dim": "#aeceb7",
+                  "tertiary-fixed": "#ffddb0"
+          },
+          "borderRadius": {
+                  "DEFAULT": "1rem",
+                  "lg": "2rem",
+                  "xl": "3rem",
+                  "full": "9999px"
+          },
+          "spacing": {
+                  "pas": "4px",
+                  "souffle": "12px",
+                  "couloir": "24px",
+                  "arret": "16px",
+                  "pause": "8px",
+                  "patio": "32px",
+                  "place": "64px",
+                  "parvis": "48px"
+          },
+          "fontFamily": {
+                  "h1": [
+                          "Marcellus"
+                  ],
+                  "lede": [
+                          "Plus Jakarta Sans"
+                  ],
+                  "h3": [
+                          "Marcellus"
+                  ],
+                  "body-medium": [
+                          "Plus Jakarta Sans"
+                  ],
+                  "body-semibold": [
+                          "Plus Jakarta Sans"
+                  ],
+                  "body": [
+                          "Plus Jakarta Sans"
+                  ],
+                  "h2": [
+                          "Marcellus"
+                  ],
+                  "price-display": [
+                          "JetBrains Mono"
+                  ],
+                  "label-mono": [
+                          "JetBrains Mono"
+                  ]
+          },
+          "fontSize": {
+                  "h1": [
+                          "48px",
+                          {
+                                  "lineHeight": "56px",
+                                  "fontWeight": "400"
+                          }
+                  ],
+                  "lede": [
+                          "20px",
+                          {
+                                  "lineHeight": "28px",
+                                  "fontWeight": "400"
+                          }
+                  ],
+                  "h3": [
+                          "24px",
+                          {
+                                  "lineHeight": "32px",
+                                  "fontWeight": "400"
+                          }
+                  ],
+                  "body-medium": [
+                          "16px",
+                          {
+                                  "lineHeight": "24px",
+                                  "fontWeight": "500"
+                          }
+                  ],
+                  "body-semibold": [
+                          "16px",
+                          {
+                                  "lineHeight": "24px",
+                                  "fontWeight": "600"
+                          }
+                  ],
+                  "body": [
+                          "16px",
+                          {
+                                  "lineHeight": "24px",
+                                  "fontWeight": "400"
+                          }
+                  ],
+                  "h2": [
+                          "36px",
+                          {
+                                  "lineHeight": "44px",
+                                  "fontWeight": "400"
+                          }
+                  ],
+                  "price-display": [
+                          "18px",
+                          {
+                                  "lineHeight": "24px",
+                                  "fontWeight": "500"
+                          }
+                  ],
+                  "label-mono": [
+                          "13px",
+                          {
+                                  "lineHeight": "16px",
+                                  "letterSpacing": "0.05em",
+                                  "fontWeight": "400"
+                          }
+                  ]
+          }
+  },
+      },
+    }
+  </script>
+<style>
+    body {
+      background-color: theme('colors.manioc');
+      color: theme('colors.charbon');
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-manioc antialiased flex flex-col md:flex-row">
+<!-- Mobile TopAppBar (Transactional - Hidden Navigation drawer/bottom bar) -->
+<header class="flex justify-between items-center w-full px-couloir py-arret border-b border-brume bg-manioc z-40 fixed top-0 md:hidden">
+<button class="text-charbon p-pause active:scale-95 duration-150 rounded-full hover:bg-brume transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-h3 text-h3 text-foret font-bold">Historique des Commissions</h1>
+<div class="w-10"></div> <!-- Spacer -->
+</header>
+<!-- Desktop TopAppBar (Transactional) -->
+<header class="hidden md:flex justify-between items-center w-full px-couloir py-arret border-b border-brume bg-manioc z-40 fixed top-0 left-0 right-0">
+<div class="flex items-center gap-arret">
+<button class="text-charbon p-pause active:scale-95 duration-150 rounded-full hover:bg-brume transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-h3 text-h3 text-foret font-bold tracking-tight">CAARCO</h1>
+</div>
+<div class="font-h3 text-h3 text-foret font-bold">Historique des Commissions</div>
+<div class="flex items-center gap-souffle">
+<!-- Mereau (Avatar) -->
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center font-h1 text-sm text-foret border border-brume">
+            DP
+        </div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 w-full max-w-2xl mx-auto px-couloir pt-[88px] pb-place md:pt-32">
+<!-- Balance Card (Plaquette Variant) -->
+<section class="flex flex-col gap-arret"><div class="bg-surface-container-low border border-brume rounded-DEFAULT p-arret flex items-start gap-souffle"><span class="material-symbols-outlined text-cendre shrink-0">info</span><p class="font-body text-body text-charbon">Les paiements sont perçus directement auprès des clients en dehors de l'application. CAARCO ne conserve aucun fonds.</p></div></section>
+<!-- Withdrawal Form -->
+<!-- Action Bar (Sticky at bottom on mobile) -->
+</main>
+</body></html>

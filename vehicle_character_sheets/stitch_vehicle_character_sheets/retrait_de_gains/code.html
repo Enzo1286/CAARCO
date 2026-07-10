@@ -1,0 +1,156 @@
+<!DOCTYPE html><html class="light" lang="fr"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Terroir Moderne - Retrait de Fonds</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "bambou": "#3d6b4a",
+                        "on-secondary-fixed-variant": "#225031",
+                        "on-error": "#ffffff",
+                        "foret-90": "#284a36",
+                        "on-secondary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#3a6847",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-low": "#f5f3ee",
+                        "nuit": "#0f1411",
+                        "nere": "#c89441",
+                        "inverse-on-surface": "#f2f1eb",
+                        "secondary-container": "#bcefc5",
+                        "cendre": "#6b6f68",
+                        "surface-variant": "#e4e2dd",
+                        "primary": "#082516",
+                        "tertiary-container": "#4a3000",
+                        "on-primary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#aeceb7",
+                        "outline-variant": "#c2c8c1",
+                        "manioc": "#fbf9f3",
+                        "primary-fixed": "#caebd2",
+                        "on-primary-container": "#86a58f",
+                        "on-surface": "#1b1c19",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#614000",
+                        "inverse-surface": "#30312d",
+                        "surface-bright": "#fbf9f3",
+                        "foret": "#1f3b2a",
+                        "on-secondary-fixed": "#00210d",
+                        "error-container": "#ffdad6",
+                        "on-background": "#1b1c19",
+                        "on-tertiary-container": "#c99441",
+                        "surface-tint": "#486551",
+                        "charbon": "#1d2420",
+                        "foret-30": "#b4c4b9",
+                        "surface-dim": "#dcdad4",
+                        "on-surface-variant": "#424843",
+                        "primary-container": "#1f3b2a",
+                        "on-tertiary-fixed": "#291800",
+                        "tertiary": "#2e1c00",
+                        "surface-container": "#f0eee8",
+                        "on-primary-fixed": "#042011",
+                        "brume": "#ece9e0",
+                        "on-primary-fixed-variant": "#304d3b",
+                        "on-secondary-container": "#406e4d",
+                        "background": "#fbf9f3",
+                        "tertiary-fixed-dim": "#f6bd65",
+                        "outline": "#727972",
+                        "secondary-fixed-dim": "#a0d2aa",
+                        "secondary-fixed": "#bcefc5",
+                        "surface": "#fbf9f3",
+                        "tertiary-fixed": "#ffddb0",
+                        "inverse-primary": "#aeceb7",
+                        "surface-container-highest": "#e4e2dd",
+                        "laterite": "#b8612e",
+                        "surface-container-high": "#eae8e2"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "place": "64px",
+                        "patio": "32px",
+                        "souffle": "12px",
+                        "parvis": "48px",
+                        "pas": "4px",
+                        "pause": "8px",
+                        "couloir": "24px",
+                        "arret": "16px"
+                    },
+                    fontFamily: {
+                        "body-medium": ["Plus Jakarta Sans"],
+                        "lede": ["Plus Jakarta Sans"],
+                        "h2": ["Marcellus"],
+                        "body-semibold": ["Plus Jakarta Sans"],
+                        "price-display": ["JetBrains Mono"],
+                        "h1": ["Marcellus"],
+                        "h3": ["Marcellus"],
+                        "label-mono": ["JetBrains Mono"],
+                        "body": ["Plus Jakarta Sans"]
+                    },
+                    fontSize: {
+                        "body-medium": ["16px", { lineHeight: "24px", fontWeight: "500" }],
+                        "lede": ["20px", { lineHeight: "28px", fontWeight: "400" }],
+                        "h2": ["36px", { lineHeight: "44px", fontWeight: "400" }],
+                        "body-semibold": ["16px", { lineHeight: "24px", fontWeight: "600" }],
+                        "price-display": ["18px", { lineHeight: "24px", fontWeight: "500" }],
+                        "h1": ["48px", { lineHeight: "56px", fontWeight: "400" }],
+                        "h3": ["24px", { lineHeight: "32px", fontWeight: "400" }],
+                        "label-mono": ["13px", { lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "400" }],
+                        "body": ["16px", { lineHeight: "24px", fontWeight: "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Custom hide scrollbar for clean UI */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-manioc text-on-surface font-body w-full min-h-screen relative pb-32">
+<!-- Transactional Header (Suppressed global nav for linear flow) -->
+<header class="w-full flex items-center justify-between px-couloir py-arret border-b border-brume bg-surface sticky top-0 z-50">
+<button class="text-on-surface hover:bg-surface-container-low p-pause rounded-full transition-colors active:scale-95">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-h3 text-h3 text-primary">Mes Revenus</h1>
+<button class="text-cendre hover:text-on-surface p-pause rounded-full transition-colors">
+<span class="material-symbols-outlined">help</span>
+</button>
+</header>
+<main class="w-full max-w-lg mx-auto">
+<!-- Balance Plaquette -->
+<section class="mx-couloir mt-couloir bg-surface-container-lowest border border-brume rounded-xl p-couloir shadow-[0px_4px_12px_rgba(29,36,32,0.05)] relative overflow-hidden flex flex-col items-center justify-center text-center">
+<!-- Subtle background texture -->
+<div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: radial-gradient(#1d2420 1px, transparent 1px); background-size: 16px 16px;"></div>
+<span class="font-label-mono text-label-mono text-cendre uppercase mb-pause relative z-10 tracking-widest">Solde Disponible</span>
+<div class="font-price-display text-[40px] leading-[48px] text-nere relative z-10 font-bold">
+                1 450 000
+                <span class="text-[20px] ml-1 text-nere/80">FCFA</span>
+</div>
+</section>
+<!-- Form Elements -->
+
+<section class="mx-couloir mt-patio p-couloir bg-surface-container-low border border-brume rounded-xl"><h2 class="font-body-semibold text-body-semibold text-primary mb-pause">Comment percevoir vos gains ?</h2><p class="font-body text-body text-on-surface-variant leading-relaxed">Vos revenus sont automatiquement calculés et versés mensuellement sur votre compte bancaire enregistré lors de votre inscription partenaire. Pour toute modification de vos coordonnées bancaires ou question relative à vos paiements, veuillez contacter notre support administratif.</p></section></main>
+<!-- Bottom Action (Galet Accent) -->
+
+
+
+</body></html>

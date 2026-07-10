@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Paramètres - Terroir Moderne</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#f0eee8",
+                        "on-secondary-fixed-variant": "#225031",
+                        "primary-container": "#1f3b2a",
+                        "nuit": "#0f1411",
+                        "error-container": "#ffdad6",
+                        "brume": "#ece9e0",
+                        "surface-container-highest": "#e4e2dd",
+                        "tertiary-container": "#4a3000",
+                        "inverse-surface": "#30312d",
+                        "surface": "#fbf9f3",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#304d3b",
+                        "on-error": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "primary": "#082516",
+                        "on-background": "#1b1c19",
+                        "tertiary-fixed": "#ffddb0",
+                        "secondary": "#3a6847",
+                        "outline-variant": "#c2c8c1",
+                        "on-tertiary": "#ffffff",
+                        "tertiary": "#2e1c00",
+                        "primary-fixed-dim": "#aeceb7",
+                        "cendre": "#6b6f68",
+                        "laterite": "#b8612e",
+                        "charbon": "#1d2420",
+                        "foret": "#1f3b2a",
+                        "on-tertiary-container": "#c99441",
+                        "primary-fixed": "#caebd2",
+                        "surface-dim": "#dcdad4",
+                        "inverse-on-surface": "#f2f1eb",
+                        "on-primary-container": "#86a58f",
+                        "surface-variant": "#e4e2dd",
+                        "on-secondary-container": "#406e4d",
+                        "on-surface-variant": "#424843",
+                        "foret-90": "#284a36",
+                        "background": "#fbf9f3",
+                        "secondary-fixed-dim": "#a0d2aa",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#eae8e2",
+                        "outline": "#727972",
+                        "on-tertiary-fixed-variant": "#614000",
+                        "on-tertiary-fixed": "#291800",
+                        "manioc": "#fbf9f3",
+                        "foret-30": "#b4c4b9",
+                        "tertiary-fixed-dim": "#f6bd65",
+                        "nere": "#c89441",
+                        "secondary-container": "#bcefc5",
+                        "surface-tint": "#486551",
+                        "surface-container-low": "#f5f3ee",
+                        "on-surface": "#1b1c19",
+                        "inverse-primary": "#aeceb7",
+                        "bambou": "#3d6b4a",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#fbf9f3",
+                        "on-primary-fixed": "#042011",
+                        "secondary-fixed": "#bcefc5",
+                        "on-secondary-fixed": "#00210d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "souffle": "12px",
+                        "couloir": "24px",
+                        "arret": "16px",
+                        "pas": "4px",
+                        "place": "64px",
+                        "parvis": "48px",
+                        "pause": "8px",
+                        "patio": "32px"
+                    },
+                    "fontFamily": {
+                        "body-semibold": ["Plus Jakarta Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "h2": ["Marcellus"],
+                        "price-display": ["JetBrains Mono"],
+                        "label-mono": ["JetBrains Mono"],
+                        "h1": ["Marcellus"],
+                        "lede": ["Plus Jakarta Sans"],
+                        "h3": ["Marcellus"],
+                        "body-medium": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-semibold": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "h2": ["36px", { "lineHeight": "44px", "fontWeight": "400" }],
+                        "price-display": ["18px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "label-mono": ["13px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "400" }],
+                        "h1": ["48px", { "lineHeight": "56px", "fontWeight": "400" }],
+                        "lede": ["20px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "h3": ["24px", { "lineHeight": "32px", "fontWeight": "400" }],
+                        "body-medium": ["16px", { "lineHeight": "24px", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.manioc');
+            color: theme('colors.on-surface');
+        }
+        
+        /* Custom Toggle Switch Styles */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: theme('colors.foret');
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: theme('colors.foret');
+        }
+        .toggle-checkbox:checked + .toggle-label:after {
+            transform: translateX(100%);
+            border-color: white;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body text-body bg-manioc antialiased min-h-screen flex flex-col md:flex-row">
+<!-- Navigation Drawer (Desktop) -->
+<nav class="hidden md:flex flex-col h-full w-80 fixed left-0 top-0 bg-surface-container dark:bg-charbon shadow-sm p-arret z-40">
+<div class="flex items-center gap-arret mb-patio">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-primary-fixed-dim flex items-center justify-center">
+<img alt="Admin Avatar" class="w-full h-full object-cover" data-alt="A professional headshot of an administrator in a well-lit office setting. The lighting is soft and natural, creating a clean, modern aesthetic. The color palette is earthy and sophisticated, reflecting a corporate yet approachable vibe. The subject is slightly off-center for a dynamic composition." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgPAW3mCyRoTVXyv4cEN-Uk6t1tLXZIQD-HX4thbo-SXuIqWfPVX-G3r5s2lZ6_cZE22DnO1s6GntXmEweOv0B0xDqQWEI5VRm525pG6qDxO9WuSmUwk4UoqgPnf5it92RGXDOnzIdJ9-gHkk3a468Zo-8QNtNuSrSMSmxME88MTkUJoLk2JozhDfIRSswBfGP9fyRcnQ5uCYD8jOIEnKwQsi4OF__qibMepdBiOy_mnLt0i4mFFDj"/>
+</div>
+<div>
+<h2 class="font-h3 text-h3 text-primary dark:text-primary-fixed">Administration</h2>
+<p class="font-body text-body text-on-surface-variant">Gestion du Fret</p>
+<p class="font-label-mono text-label-mono text-cendre mt-pas uppercase">Région Centre</p>
+</div>
+</div>
+<ul class="flex flex-col gap-pause flex-1">
+<li>
+<a class="flex items-center gap-souffle px-arret py-souffle text-on-surface-variant font-body hover:bg-surface-container-highest transition-all rounded-lg active:opacity-80" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">dashboard</span>
+                    Tableau de bord
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-souffle px-arret py-souffle text-on-surface-variant font-body hover:bg-surface-container-highest transition-all rounded-lg active:opacity-80" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">verified_user</span>
+                    Vérification KYC
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-souffle px-arret py-souffle text-on-surface-variant font-body hover:bg-surface-container-highest transition-all rounded-lg active:opacity-80" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">gavel</span>
+                    Litiges &amp; Support
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-souffle px-arret py-souffle text-on-surface-variant font-body hover:bg-surface-container-highest transition-all rounded-lg active:opacity-80" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">payments</span>
+                    Finances
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-souffle px-arret py-souffle text-on-surface-variant font-body hover:bg-surface-container-highest transition-all rounded-lg active:opacity-80" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">campaign</span>
+                    Marketing
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-souffle px-arret py-souffle bg-primary-container text-on-primary-container rounded-lg font-body-semibold hover:bg-surface-container-highest transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+                    Paramètres
+                </a>
+</li>
+</ul>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-80 pb-24 md:pb-0">
+<!-- TopAppBar (Mobile) -->
+<header class="md:hidden flex justify-between items-center px-couloir py-souffle w-full top-0 sticky bg-surface dark:bg-nuit border-b border-brume dark:border-charbon z-30">
+<div class="flex items-center gap-arret">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-primary-fixed-dim">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="A professional headshot of an administrator in a well-lit office setting. The lighting is soft and natural, creating a clean, modern aesthetic. The color palette is earthy and sophisticated, reflecting a corporate yet approachable vibe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDApRjee_a9Yw0guvhbynOi5ILP6mNhQHtZlKJnBg2UE_KmGOqAzm8FuMi97jK4qCBR8np8Ljv_BudDPaOb61pepeKyJ61fjkx-OuV_HGNx0_JqHEblNccJ2Ut0zoHrS9H3VXrtmcbhQzAxlM77eEkD7mvRXHgXUHcza7UrsO8cNels4RY3fg9EbyXPyEk736Gob3sdYdYWYYfQNVYPNr83CEkVP7zBSN1T7xkgUR2UtByAit6cmfG4"/>
+</div>
+</div>
+<h1 class="font-h3 text-h3 text-primary dark:text-primary-fixed font-bold tracking-tight">Terroir Moderne</h1>
+<button class="text-primary dark:text-primary-fixed hover:bg-surface-container-low transition-colors p-2 rounded-full active:scale-95 duration-100">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</header>
+<!-- Top Header Area (Desktop) -->
+<div class="hidden md:block px-couloir py-parvis">
+<h1 class="font-h1 text-h1 text-primary">Paramètres</h1>
+<p class="font-lede text-lede text-on-surface-variant mt-pas">Gérez vos préférences et paramètres de compte.</p>
+</div>
+<div class="px-couloir py-patio md:py-0 max-w-4xl mx-auto md:mx-0 w-full space-y-patio">
+<!-- Preferences Section (Plaquette) -->
+<section class="bg-surface rounded-xl border border-brume p-arret md:p-couloir shadow-[0px_4px_12px_rgba(29,36,32,0.05)]">
+<h3 class="font-h3 text-h3 text-primary mb-arret border-b border-brume pb-pause">Préférences de l'Application</h3>
+<div class="space-y-arret">
+<!-- Language Selection -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-souffle">
+<div>
+<h4 class="font-body-semibold text-body-semibold text-on-surface">Langue</h4>
+<p class="font-body text-body text-on-surface-variant text-sm">Choisissez votre langue préférée.</p>
+</div>
+<div class="relative w-full sm:w-48">
+<select class="block appearance-none w-full bg-manioc border border-brume text-on-surface py-souffle px-arret pr-8 rounded-lg font-body focus:outline-none focus:ring-1 focus:ring-foret focus:border-foret">
+<option value="fr">Français</option>
+<option value="en">English</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-on-surface-variant">
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</div>
+</div>
+<div class="h-px bg-brume w-full"></div>
+<!-- Push Notifications Toggle -->
+<div class="flex items-center justify-between gap-souffle">
+<div>
+<h4 class="font-body-semibold text-body-semibold text-on-surface">Notifications Push</h4>
+<p class="font-body text-body text-on-surface-variant text-sm">Recevez des alertes sur l'état de vos livraisons.</p>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer z-10 transition-transform duration-200 ease-in-out" id="toggle-notifications" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-container-high cursor-pointer transition-colors duration-200 ease-in-out" for="toggle-notifications"></label>
+</div>
+</div>
+<div class="h-px bg-brume w-full"></div>
+<!-- Dark Mode Toggle -->
+<div class="flex items-center justify-between gap-souffle">
+<div>
+<h4 class="font-body-semibold text-body-semibold text-on-surface">Mode Sombre</h4>
+<p class="font-body text-body text-on-surface-variant text-sm">Ajustez l'apparence de l'application.</p>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer z-10 transition-transform duration-200 ease-in-out" id="toggle-darkmode" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-container-high cursor-pointer transition-colors duration-200 ease-in-out" for="toggle-darkmode"></label>
+</div>
+</div>
+</div>
+</section>
+<!-- Navigation Preference Section (Plaquette) -->
+<section class="bg-surface rounded-xl border border-brume p-arret md:p-couloir shadow-[0px_4px_12px_rgba(29,36,32,0.05)]">
+<h3 class="font-h3 text-h3 text-primary mb-arret border-b border-brume pb-pause">Outils de Navigation</h3>
+<p class="font-body text-body text-on-surface-variant mb-arret">Pour les transporteurs : choisissez l'application par défaut pour les itinéraires.</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-arret">
+<label class="relative flex cursor-pointer rounded-lg border border-brume bg-manioc p-arret focus:outline-none hover:bg-surface-container-low transition-colors">
+<input checked="" class="sr-only peer" name="nav_app" type="radio" value="google"/>
+<div class="peer-checked:border-foret peer-checked:bg-surface-container-low absolute inset-0 rounded-lg border-2 border-transparent pointer-events-none"></div>
+<div class="flex items-center gap-souffle z-10">
+<span class="material-symbols-outlined text-cendre">map</span>
+<span class="font-body-semibold text-body-semibold text-on-surface">Google Maps</span>
+</div>
+<div class="absolute top-arret right-arret text-foret opacity-0 peer-checked:opacity-100 transition-opacity z-10">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</label>
+<label class="relative flex cursor-pointer rounded-lg border border-brume bg-manioc p-arret focus:outline-none hover:bg-surface-container-low transition-colors">
+<input class="sr-only peer" name="nav_app" type="radio" value="waze"/>
+<div class="peer-checked:border-foret peer-checked:bg-surface-container-low absolute inset-0 rounded-lg border-2 border-transparent pointer-events-none"></div>
+<div class="flex items-center gap-souffle z-10">
+<span class="material-symbols-outlined text-cendre">navigation</span>
+<span class="font-body-semibold text-body-semibold text-on-surface">Waze</span>
+</div>
+<div class="absolute top-arret right-arret text-foret opacity-0 peer-checked:opacity-100 transition-opacity z-10">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</label>
+</div>
+</section>
+<!-- Support & About Section (Plaquette) -->
+<section class="bg-surface rounded-xl border border-brume p-arret md:p-couloir shadow-[0px_4px_12px_rgba(29,36,32,0.05)]">
+<h3 class="font-h3 text-h3 text-primary mb-arret border-b border-brume pb-pause">Support &amp; À Propos</h3>
+<div class="space-y-pas">
+<a class="flex items-center justify-between p-souffle hover:bg-surface-container-low rounded-lg transition-colors group" href="#">
+<div class="flex items-center gap-souffle">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">help_center</span>
+<span class="font-body text-body text-on-surface">Centre d'Aide</span>
+</div>
+<span class="material-symbols-outlined text-cendre">chevron_right</span>
+</a>
+<a class="flex items-center justify-between p-souffle hover:bg-surface-container-low rounded-lg transition-colors group" href="#">
+<div class="flex items-center gap-souffle">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">info</span>
+<span class="font-body text-body text-on-surface">À Propos de Terroir Moderne</span>
+</div>
+<span class="material-symbols-outlined text-cendre">chevron_right</span>
+</a>
+<a class="flex items-center justify-between p-souffle hover:bg-surface-container-low rounded-lg transition-colors group" href="#">
+<div class="flex items-center gap-souffle">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">description</span>
+<span class="font-body text-body text-on-surface">Conditions Générales d'Utilisation</span>
+</div>
+<span class="material-symbols-outlined text-cendre">chevron_right</span>
+</a>
+</div>
+<div class="mt-arret pt-arret border-t border-brume text-center">
+<button class="font-body-semibold text-body-semibold text-error hover:text-error-container transition-colors py-souffle px-couloir rounded-full border border-error w-full sm:w-auto">
+                        Se Déconnecter
+                    </button>
+<p class="font-label-mono text-label-mono text-cendre mt-souffle uppercase">Version 2.4.1 (Build 842)</p>
+</div>
+</section>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 rounded-t-lg bg-surface dark:bg-nuit shadow-lg">
+<ul class="flex justify-around items-center px-couloir pb-souffle pt-pas">
+<li>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-mono text-label-mono mt-1">Accueil</span>
+</a>
+</li>
+<li>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="font-label-mono text-label-mono mt-1">Suivi</span>
+</a>
+</li>
+<li>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">contact_support</span>
+<span class="font-label-mono text-label-mono mt-1">Support</span>
+</a>
+</li>
+<li>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-pas py-pas active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-mono text-label-mono mt-1">Compte</span>
+</a>
+</li>
+</ul>
+</nav>
+<script>
+        // Simple dark mode toggle logic for demonstration
+        const darkModeToggle = document.getElementById('toggle-darkmode');
+        const htmlElement = document.documentElement;
+        
+        darkModeToggle.addEventListener('change', function() {
+            if(this.checked) {
+                htmlElement.classList.add('dark');
+                htmlElement.classList.remove('light');
+            } else {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+            }
+        });
+    </script>
+</body></html>

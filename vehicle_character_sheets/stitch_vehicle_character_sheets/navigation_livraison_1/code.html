@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CAARCO - Navigation &amp; Livraison</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "foret-90": "#284a36",
+                        "nuit": "#0f1411",
+                        "background": "#fbf9f3",
+                        "laterite": "#b8612e",
+                        "inverse-surface": "#30312d",
+                        "manioc": "#fbf9f3",
+                        "error": "#ba1a1a",
+                        "surface-dim": "#dcdad4",
+                        "secondary-fixed": "#bcefc5",
+                        "tertiary": "#2e1c00",
+                        "on-surface-variant": "#424843",
+                        "on-tertiary-fixed": "#291800",
+                        "on-background": "#1b1c19",
+                        "primary-fixed": "#caebd2",
+                        "on-tertiary-fixed-variant": "#614000",
+                        "tertiary-fixed-dim": "#f6bd65",
+                        "nere": "#c89441",
+                        "outline-variant": "#c2c8c1",
+                        "inverse-primary": "#aeceb7",
+                        "foret": "#1f3b2a",
+                        "surface-container": "#f0eee8",
+                        "surface-variant": "#e4e2dd",
+                        "on-surface": "#1b1c19",
+                        "primary-fixed-dim": "#aeceb7",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#4a3000",
+                        "on-secondary-container": "#406e4d",
+                        "on-primary-fixed-variant": "#304d3b",
+                        "bambou": "#3d6b4a",
+                        "surface-tint": "#486551",
+                        "primary-container": "#1f3b2a",
+                        "secondary-container": "#bcefc5",
+                        "on-error": "#ffffff",
+                        "surface-container-high": "#eae8e2",
+                        "outline": "#727972",
+                        "on-secondary-fixed-variant": "#225031",
+                        "primary": "#082516",
+                        "on-primary-fixed": "#042011",
+                        "foret-30": "#b4c4b9",
+                        "charbon": "#1d2420",
+                        "cendre": "#6b6f68",
+                        "secondary-fixed-dim": "#a0d2aa",
+                        "on-tertiary-container": "#c99441",
+                        "tertiary-fixed": "#ffddb0",
+                        "secondary": "#3a6847",
+                        "inverse-on-surface": "#f2f1eb",
+                        "surface-container-highest": "#e4e2dd",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-low": "#f5f3ee",
+                        "surface": "#fbf9f3",
+                        "on-secondary-fixed": "#00210d",
+                        "on-primary": "#ffffff",
+                        "brume": "#ece9e0",
+                        "surface-bright": "#fbf9f3",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#86a58f",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "place": "64px",
+                        "pause": "8px",
+                        "parvis": "48px",
+                        "couloir": "24px",
+                        "patio": "32px",
+                        "arret": "16px",
+                        "pas": "4px",
+                        "souffle": "12px"
+                    },
+                    "fontFamily": {
+                        "body-medium": ["Plus Jakarta Sans"],
+                        "label-mono": ["JetBrains Mono"],
+                        "price-display": ["JetBrains Mono"],
+                        "body": ["Plus Jakarta Sans"],
+                        "h3": ["Marcellus"],
+                        "h1": ["Marcellus"],
+                        "body-semibold": ["Plus Jakarta Sans"],
+                        "lede": ["Plus Jakarta Sans"],
+                        "h2": ["Marcellus"]
+                    },
+                    "fontSize": {
+                        "body-medium": ["16px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "label-mono": ["13px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "400" }],
+                        "price-display": ["18px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "body": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "h3": ["24px", { "lineHeight": "32px", "fontWeight": "400" }],
+                        "h1": ["48px", { "lineHeight": "56px", "fontWeight": "400" }],
+                        "body-semibold": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "lede": ["20px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "h2": ["36px", { "lineHeight": "44px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-manioc text-on-surface font-body min-h-screen flex flex-col relative">
+<!-- Map Area (Background) -->
+<div class="absolute top-0 left-0 w-full h-[486px] z-0">
+<img class="w-full h-full object-cover" data-alt="A clean, modern digital map interface viewed from a slightly angled top-down perspective, highlighting a clear route winding through a stylised city grid. The map uses a light-mode color palette with subtle earth tones, a distinct dark forest green line indicating the path, and small minimalist icons for origin and destination. The overall aesthetic is functional, professional, and visually quiet." data-location="Douala" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDJjWMqoZC-JZLqwCdSrU1An7H2x7vt0FXSojyab4zhVTTDjsP08pTlqOP8Mo44cYsw9OvrGzgH17geA6Wjm8KTBwDXW9T9zY2gUIYMjSViPM5wLz-DcFLauv301wXqg9T4CWbc4GuOZtCQl5I9gAXYR-KIl00WIVd_DIWVtvyDXvziVVsYPsvyoMp49TtDiiA7ayCY64o13s6xfXpLw0DEMxqJi5HFABYTx1u0lLboXf1M1t1zNcv"/>
+<!-- Gradient Overlay for smooth transition -->
+<div class="absolute bottom-0 w-full h-place bg-gradient-to-t from-manioc to-transparent"></div>
+<!-- Back Button Overlay -->
+<button class="absolute top-arret left-couloir z-20 w-12 h-12 bg-blanc border border-brume rounded-full flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-charbon">arrow_back</span>
+</button>
+</div>
+<!-- Main Content Panel (Action Sheet) -->
+<main class="relative z-10 flex-1 flex flex-col mt-[397px] bg-manioc rounded-t-xl shadow-[0px_-4px_20px_rgba(29,36,32,0.05)] border-t border-brume px-couloir pt-arret pb-place rounded-t-[2rem]">
+<!-- Handle -->
+<div class="w-12 h-1 bg-surface-variant rounded-full mx-auto mb-arret"></div>
+<!-- Header / Mission Status -->
+<header class="flex justify-between items-start mb-patio">
+<div>
+<p class="font-label-mono text-label-mono uppercase text-cendre mb-pas tracking-wider">En cours • Livraison</p>
+<h1 class="font-h3 text-h3 text-charbon">Commande #CR-892</h1>
+</div>
+<div class="bg-nereSoft/20 px-souffle py-pas rounded-sm">
+<p class="font-price-display text-price-display text-nere font-medium">4,500 FCFA</p>
+</div>
+</header>
+<!-- Navigation Action -->
+<button class="w-full flex items-center justify-center gap-arret bg-surface-container py-souffle px-couloir rounded-full mb-patio border border-brume active:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined text-primary" data-weight="fill">navigation</span>
+<span class="font-body-semibold text-body-semibold text-charbon">Ouvrir dans Maps</span>
+</button>
+<!-- Progress Bar -->
+<div class="w-full h-2 bg-brume rounded-full mb-arret overflow-hidden flex">
+<div class="h-full bg-foret w-2/3 rounded-full"></div>
+</div>
+<!-- Details Card -->
+<div class="bg-blanc border border-brume rounded-DEFAULT p-arret shadow-sm mb-patio flex flex-col gap-arret">
+<!-- Pickup (Done visually) -->
+<div class="flex items-start gap-arret opacity-60">
+<div class="flex flex-col items-center mt-1">
+<span class="material-symbols-outlined text-cendre text-[20px]" data-weight="fill">check_circle</span>
+<div class="w-[2px] h-8 bg-brume my-1"></div>
+</div>
+<div class="flex-1">
+<p class="font-label-mono text-label-mono text-cendre uppercase">Point de retrait</p>
+<p class="font-body-medium text-body-medium text-charbon">Boutique Terroir, Akwa</p>
+</div>
+</div>
+<!-- Dropoff (Active) -->
+<div class="flex items-start gap-arret">
+<div class="flex flex-col items-center mt-1">
+<span class="material-symbols-outlined text-foret text-[20px]" data-weight="fill">location_on</span>
+</div>
+<div class="flex-1">
+<p class="font-label-mono text-label-mono text-foret uppercase font-medium">Point de livraison</p>
+<p class="font-body-medium text-body-medium text-charbon">M. Kamga Jean</p>
+<p class="font-body text-body text-cendre">Quartier Bonapriso, Rue des Palmiers, Immeuble Horizon (3ème étage)</p>
+<!-- Call Button -->
+<button class="mt-souffle flex items-center gap-pas text-bambou font-body-semibold text-sm">
+<span class="material-symbols-outlined text-[18px]">call</span>
+                        Appeler le client
+                    </button>
+</div>
+</div>
+</div>
+<!-- OTP Input Area -->
+<div class="mb-place">
+<label class="block font-label-mono text-label-mono text-cendre uppercase mb-pause text-center">Code de confirmation client</label>
+<div class="flex justify-center gap-pas">
+<input class="w-12 h-14 text-center font-price-display text-2xl text-charbon bg-surface-container border border-brume focus:border-foret focus:ring-0 rounded-sm" maxlength="1" type="text" value="8"/>
+<input class="w-12 h-14 text-center font-price-display text-2xl text-charbon bg-surface-container border border-brume focus:border-foret focus:ring-0 rounded-sm" maxlength="1" type="text" value="2"/>
+<input autofocus="" class="w-12 h-14 text-center font-price-display text-2xl text-charbon bg-manioc border border-foret focus:border-foret focus:ring-0 rounded-sm" maxlength="1" placeholder="-" type="text"/>
+<input class="w-12 h-14 text-center font-price-display text-2xl text-charbon bg-surface-container border border-brume focus:border-foret focus:ring-0 rounded-sm" maxlength="1" placeholder="-" type="text"/>
+</div>
+</div>
+<!-- Primary CTA -->
+<div class="mt-auto">
+<button class="w-full bg-foret text-foret-30 font-body-semibold text-body-semibold py-4 rounded-full flex items-center justify-center gap-pause active:scale-[0.98] transition-transform">
+<span>Livraison effectuée</span>
+<span class="material-symbols-outlined text-foret-30">check</span>
+</button>
+</div>
+</main>
+<!-- Suppressed Bottom Nav as this is a focused task/journey screen -->
+</body></html>
