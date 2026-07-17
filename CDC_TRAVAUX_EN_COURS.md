@@ -28,10 +28,10 @@ Chantier ouvert aujourd'hui (2026-07-17). Détail complet dans `CDC_ADMIN_WEB.md
 | A3 | Activer le 2FA sur les comptes admin | ✅ Fait — revérifié en base le 2026-07-17 (lecture seule, Management API) : facteur TOTP `verified` sur `679570886` |
 | A4 | Re-lancer le diagnostic, confirmer 2FA actif | ✅ Fait — `scripts/diagnostic_supabase.sql` relancé le 2026-07-17 : migrations 085→108 toutes appliquées, `679570886 — ✅ 2FA actif (totp)`, `role_security_trigger` actif |
 | B | Point d'entrée web dédié (sans écrans client/TR) | ✅ **CLOS le 2026-07-17 (Session 28)** — B1-B3 (commit `d99d53f0`) + B4 test navigateur validé par Cedric (connexion + 2FA + 23 écrans OK). |
-| C | Déploiement Vercel | 🔄 **Bundle prêt (Session 28)** : `App/dist-web` régénéré avec `EXPO_PUBLIC_APP_ENV=production` inliné + `vercel.json` SPA. Déploiement CLI à faire par Cedric (compte Vercel requis). |
+| C | Déploiement Vercel | ✅ **DÉPLOYÉ le 2026-07-17 (Session 29)** : **https://caarco-admin.vercel.app** (projet `caarco-admin`). Bundle re-vérifié (0 secret, `production` inliné → remise à zéro neutralisée). Reste le **test fonctionnel de Cedric** (connexion + 2FA + 23 écrans + confirmer modale remise à zéro ABSENTE). |
 | D | Domaine personnalisé | ⏳ Pas commencé (attend l'achat du domaine) |
 
-**Lots A et B clos.** Lot C : le bundle statique pré-buildé est prêt ; il ne reste que la commande `vercel --prod` depuis le compte de Cedric (voir `CDC_ADMIN_WEB.md` §6 Lot C).
+**Lots A, B et C (déploiement) faits.** Lot C clos dès le test fonctionnel de Cedric OK (voir `CDC_ADMIN_WEB.md` §6 Lot C, point C4).
 
 **⚠️ Découverte Session 28 (résolue)** : `ConfigTarifsScreen.js:37` exposait une modale de **remise à zéro destructive** tant que `EXPO_PUBLIC_APP_ENV != production`. Le `dist-web` de B4 était buildé sans la variable → remise à zéro accessible. Corrigé en régénérant `dist-web` avec la variable inlinée (vérifié bundle : 0 accès runtime restant).
 
@@ -43,7 +43,11 @@ Chantier ouvert aujourd'hui (2026-07-17). Détail complet dans `CDC_ADMIN_WEB.md
 
 Chantier D clos pour 18/18 lots. Reste ouvert (inchangé depuis la session précédente, aucun conflit avec le chantier admin web) :
 
-1. **Lot bloqué (4 écrans)** — `ProfilScreen.js` (sexe/date_naissance), `MerciScreen.js`/`PointsScreen.js` (déjà migrés sur `jalons_client` côté fonctionnel, refonte visuelle jamais faite), `PacksAbonnementScreen.js` (commission dynamique déjà branchée, refonte visuelle jamais faite). Ce sont les seuls écrans du chantier D à n'avoir eu **que** des corrections fonctionnelles, jamais la passe visuelle Stitch appliquée aux 60 autres écrans. Ces écrans sont fonctionnels et déjà utilisés par de vrais utilisateurs (app en ligne) — ce qui reste est uniquement visuel, pas bloquant pour l'usage.
+1. **Ex-lot bloqué (4 écrans) — décisions Cedric PRISES le 2026-07-17 (Session 29)**, reste à implémenter (backend + refonte visuelle). Détail dans `REFONTE_TRACKING.md` :
+   - `ProfilScreen.js` (sexe/date_naissance) → **migration + persister** (créer colonnes + liste blanche).
+   - `MerciScreen.js`/`PointsScreen.js` (récompense streak) → **réduction sur une course (coupon)**, pas de wallet, + **neutraliser le trigger `after_course_terminee`→`wallets`** (🔴 encore actif en prod).
+   - `PacksAbonnementScreen.js` → **implémenter les paliers** : commission variable par palier dans `debiter_commission_tc()` (taux par pack à définir).
+   ⚠️ App en PROD : migrations à la main en SQL Editor, jamais `supabase db push`.
 2. **3 configurations mortes** (Lots 16/18) — à rebrancher ou retirer, décision Cedric.
 3. **`capture-auto.ps1`/Maestro** — toujours bloqué, nécessite le téléphone Android physique de Cedric en USB ; le flow Maestro ne couvre de toute façon aucun écran admin.
 
@@ -73,11 +77,13 @@ Du travail réel et cohérent (pas des brouillons) est actuellement modifié/non
 13 fichiers fantômes racine (débris de collage terminal) supprimés après confirmation de Cedric : `!frFlat[k])`, `'`, `,`, `,-,-,`, `0`, `07`, `_wtest_5` (3 o, « ok »), `m[0]).join('')...`, `t.type`, `{`, `{,`, `{,+`, `{})`. Tous vides (0 o) sauf `_wtest_5`. Vérifié : plus aucun fantôme à la racine ni dans `App/`.
 Dans `App/` : `!nomsVus.has(...)`, `,`, `NOW()`, `NOW())`, `{`, `{,`, `{,+`, plus 2 scripts ponctuels legitimes mais jetables une fois utilisés (`fix.js`, `restore_alpha.js` — outils de recherche/remplacement en masse déjà exécutés) et `crash_log.txt`/`CAARCO_logcat.txt`/`crash.log`/`crash2.log` (logs de debug, à archiver ou supprimer selon utilité).
 
-### 3.4 Sous-module `App/` sans remote GitHub
-Toujours vrai — aucun `.gitmodules`, aucun `origin` configuré. Tous les commits (dont `e8465f32`/`9b3d6442` de la session précédente et le travail non commité ci-dessus) restent locaux. Décision Cedric requise : créer un dépôt GitHub dédié, ou continuer en local uniquement.
+### 3.4 `App/` sans remote GitHub — décision prise (Session 29), en attente d'outillage
+`App/` est un **repo git embarqué** (gitlink dans la racine, PAS un sous-module — aucun `.gitmodules`), avec un historique local propre (dernier commit `17893f42`) mais **aucun `origin`**. `.env` et `dist-web` y sont bien gitignorés. Décision Cedric (Session 29) : **créer un dépôt GitHub privé dédié**. Bloqué sur outillage : `gh` non installé sur le poste. Cedric installe (`winget install --id GitHub.cli -e` puis `gh auth login`), ensuite : `cd App && gh repo create CAARCO-App --private --source=. --remote=origin --push`. NB : App/ a 7 fichiers réels modifiés non commités (App.js + 6 écrans admin) à trier avant tout commit App/.
+
+> ⚠️ Le repo **racine** (`github.com/Enzo1286/CAARCO`), lui, A un `origin`. Il track `App` comme gitlink (les sources d'App n'y sont pas). Commit docs `e99a271` créé le 2026-07-17 (Session 29), **non poussé** — à pousser seulement si ce repo est privé (docs métier).
 
 ### 3.5 Racine `supabase/.temp/linked-project.json`
-Réapparu en untracked — c'est le cache local du CLI Supabase (régénéré à chaque `supabase link`), pas les 85 migrations supprimées au Sprint 2/Chantier A. Déjà couvert par `.gitignore` de `App/` mais le dossier `supabase/` racine n'a pas son propre `.gitignore` (celui d'`App/` ne s'applique qu'à `App/`). Sans risque, mais à ignorer explicitement pour éviter un futur commit accidentel.
+✅ **Ignoré le 2026-07-17 (Session 29)** : `.gitignore` racine étendu (`/supabase/.temp/`, `crash*.log`, `CAARCO_logcat.txt`, `.agents/`, `.codex/`). Plus de risque de commit accidentel.
 
 ---
 
@@ -87,12 +93,12 @@ Réapparu en untracked — c'est le cache local du CLI Supabase (régénéré à
 |---|---|---|---|
 | ~~1~~ | ~~Finaliser l'enrôlement 2FA sur `679570886`~~ | Admin web A3 | ✅ Déjà fait, confirmé en base le 2026-07-17 |
 | 2 | Confirmer : un seul compte admin, pas deux | Admin web | Déjà actée par les faits, confirmation formelle utile |
-| ~~2bis~~ | ~~Démarrer le Lot B~~ | Admin web | ✅ Lot B clos (B1-B4). Reste : **Lot C** = `vercel --prod` depuis le compte Vercel de Cedric (bundle prêt) |
-| 2ter | **Changer le mdp admin `679570886`** (voir §3.2) | Sécurité | Exposition locale seulement (jamais poussé) → faible ; à faire par Cedric (SQL Editor ou écran Sécurité) |
-| 3 | Autoriser le commit du travail « annulation automatique + motif » | Hygiène dépôt | App déjà en ligne → gain immédiat de fiabilité du dépôt, faible risque |
-| 4 | Trancher les 4 écrans du Lot bloqué (refonte visuelle) | Chantier D | App déjà en ligne → amélioration post-lancement, pas bloquant pour l'usage |
+| ~~2bis~~ | ~~Démarrer le Lot B / Lot C~~ | Admin web | ✅ Lot C **déployé** (https://caarco-admin.vercel.app). Reste le **test fonctionnel de Cedric** (connexion + 2FA + 23 écrans + modale remise à zéro ABSENTE) |
+| 2ter | **Changer le mdp admin `679570886`** (voir §3.2) | Sécurité | ⏳ **Pas encore fait (Session 29)** — à faire par Cedric (SQL Editor via `reset_mdp_admin.sql`, ou écran Sécurité). 2FA inchangé = aucun risque |
+| ~~3~~ | ~~Commit « annulation automatique + motif »~~ | Hygiène dépôt | ✅ Fait Session 28 (`c646e6df` + `aaf2fa68`) |
+| ~~4~~ | ~~Trancher les 4 écrans du Lot bloqué~~ | Chantier D | ✅ **Décisions prises Session 29** (voir §2.1) — reste à implémenter (chantier suivant) |
 | 5 | Trancher les 3 configurations mortes | Chantier D | Pas urgent |
-| 6 | Remote GitHub pour `App/` — créer ou rester local | Hygiène dépôt | Pas urgent, mais risque de perte si le poste a un problème |
+| 6 | Remote GitHub pour `App/` (décision prise : créer privé) | Hygiène dépôt | ⏳ En attente install `gh` par Cedric (voir §3.4) |
 | ~~7~~ | ~~Confirmer la suppression des fichiers parasites~~ | Hygiène dépôt | ✅ Fait Session 28 (13 fichiers supprimés) |
 | 8 | `capture-auto.ps1`/Maestro — accès au téléphone physique | Chantier D | Nécessite le matériel de Cedric |
 

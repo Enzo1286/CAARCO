@@ -112,7 +112,17 @@ Effets : bundle plus léger (les écrans client/TR, la carte Leaflet, l'audio, l
 
 > **⚠️ Découverte Session 28 (résolue) :** `ConfigTarifsScreen.js:37` calcule `resetDisponible = EXPO_PUBLIC_APP_ENV !== 'production'` — il expose une **modale de remise à zéro destructive** quand `APP_ENV` n'est pas `production`. Le `dist-web` servi pour B4 avait été buildé **sans** la variable → la remise à zéro était accessible. Corrigé au Lot C : `dist-web` régénéré avec `EXPO_PUBLIC_APP_ENV=production` inliné dans le bundle (vérifié : 0 accès runtime restant à la variable).
 
-### Lot C — Déploiement Vercel (~1 h) — ⏳ Bundle prêt (Session 28), déploiement à faire par Cedric
+### Lot C — Déploiement Vercel (~1 h) — ✅ DÉPLOYÉ le 2026-07-17 (Session 29), test fonctionnel Cedric en cours
+
+**Déployé : https://caarco-admin.vercel.app** (projet Vercel `caarco-admin`, distinct de `caarco-web`).
+Bundle `App/dist-web` re-vérifié côté agent (Session 29) : 0 secret (SERVICE_ROLE/ACCESS_TOKEN/NOTCHPAY),
+0 accès runtime à `EXPO_PUBLIC_APP_ENV` (→ `production` inliné, remise à zéro ConfigTarifs neutralisée),
+clé anon + URL Supabase présentes ; fichier fantôme 0 octet `1)` retiré de `dist-web`. **Reste le test
+fonctionnel de Cedric** (C4 ci-dessous) : connexion `679570886` + 2FA + 23 écrans + confirmer à l'écran
+que la modale de remise à zéro (ConfigTarifs) est ABSENTE, idéalement depuis un autre appareil/réseau.
+Lot C clos dès ce test OK.
+
+
 
 **Approche retenue : déploiement du bundle statique PRÉ-BUILDÉ** (plus simple et plus sûr que de laisser Vercel builder). La variable `EXPO_PUBLIC_APP_ENV=production` (et l'URL/clé anon Supabase) sont **déjà inlinées** dans `App/dist-web` — Vercel n'a donc qu'à servir des fichiers statiques, aucune build ni variable d'env à configurer côté Vercel. Cela garantit aussi que la remise à zéro reste désactivée sans dépendre d'un réglage Vercel correct.
 

@@ -53,9 +53,9 @@ En relisant le code réel (pas seulement la glose de la boîte à outils D.2) av
 
 | Écran | Maquette Stitch | Statut | Lot |
 |---|---|---|---|
-| `ProfilScreen.js` | `mon_profil_caarco_1`, `_2` | bloqué | Décision Cedric sur `sexe`/`date_naissance` (C.3.1) avant retouche. Lot bloqué (D.3.3), rattachement futur au voisinage du Lot 12. |
+| `ProfilScreen.js` | `mon_profil_caarco_1`, `_2` | débloqué (décision 17/07/2026) | **Décision Cedric : migration + persister** `sexe`/`date_naissance` (créer les 2 colonnes + liste blanche `CHAMPS_PROFIL_AUTORISES`). À implémenter (migration SQL + refonte visuelle). Ex-bloqué C.3.1. |
 | `ProfilPublicScreen.js` | `profil_client_caarco` (bloc avis+contact) | fait (09/07/2026) | Lot 12. Redondance avec `transporteur/ProfilClientScreen.js` clarifiée au Lot 11 (pas de fusion, voir CDC D.15.2). **`profil_transporteur_caarco` écarté comme référence** — ce n'est pas une variante-rôle du profil de confiance générique mais une fiche d'offre/enchère (« Choisir ce transporteur », prix proposé) qui ne correspond à aucun écran de l'inventaire D.2, voir CDC D.16. |
-| `MerciScreen.js` | `merci_caarco` | bloqué | Décision Cedric sur la récompense streak (C.2 #3) avant retouche. Lot bloqué (D.3.3), rattachement futur au voisinage des Lots 5-6. |
+| `MerciScreen.js` | `merci_caarco` | débloqué (décision 17/07/2026) | **Décision Cedric : récompense = réduction sur une course** (bon/coupon appliqué au prix, PAS de crédit wallet). À implémenter : mécanisme de coupon backend + neutraliser le trigger `after_course_terminee`→`wallets` + refonte visuelle. Ex-bloqué C.2 #3. |
 | `EcranMaintenance.js` | `maintenance_en_cours_caarco` | fait (09/07/2026) | Lot 12 |
 | `ChatScreen.js` | `messagerie_caarco_2` | fait (09/07/2026) | Lot 12 |
 | `MessagesScreen.js` | `messagerie_caarco_1` | fait (09/07/2026) | Lot 12. **Fichier réel à `client/MessagesScreen.js`**, pas à la racine de `screens/` comme l'inventaire le laissait supposer — voir CDC D.16. |
@@ -80,7 +80,7 @@ En relisant le code réel (pas seulement la glose de la boîte à outils D.2) av
 | `client/HistoriqueScreen.js` | `mes_courses_caarco_1`, `_2` | fait (09/07/2026) | Lot 5 |
 | `client/NotationScreen.js` | `noter_le_transporteur` | fait (09/07/2026) | Lot 5 |
 | `client/ParrainageScreen.js` | `parrainage_caarco_1`, `_2` | fait (09/07/2026) | Lot 6 |
-| `client/PointsScreen.js` | `mes_points_caarco_1`, `_2` | bloqué | Décision Cedric sur les tables `wallets` orphelines + récompense (C.2 #3). Lot bloqué (D.3.3), rattachement futur au voisinage des Lots 5-6. |
+| `client/PointsScreen.js` | `mes_points_caarco_1`, `_2` | débloqué (décision 17/07/2026) | **Décision Cedric : récompense = réduction sur une course** (coupon, pas de wallet). Même chantier que `MerciScreen.js` : coupon backend + neutraliser trigger `wallets` + refonte visuelle. Ex-bloqué C.2 #3. |
 | `client/CoursePlanifieeDetailScreen.js` | Aucune | fait (09/07/2026) | Lot 6 |
 | `client/MesCoursesPlanifieesScreen.js` | Aucune | fait (09/07/2026) | Lot 6 |
 
@@ -94,7 +94,7 @@ En relisant le code réel (pas seulement la glose de la boîte à outils D.2) av
 | `transporteur/AdDetailScreen.js` | `d_tails_de_l_annonce_1`, `_2` | fait (09/07/2026) | Lot 8 |
 | `transporteur/RevenusScreen.js` | `mes_revenus_1`, `_2` | fait (09/07/2026) | Lot 8. Vigilance résiduelle wallets (C.2 #5) tenue — aucune lecture de `wallets` réintroduite. |
 | `transporteur/MesTokensScreen.js` | `mes_tokens_de_course_caarco`, `mes_tokens_de_course`, `achat_de_tokens_tc` | fait (09/07/2026) | Lot 8. Code déjà propre confirmé — seuls 4 hex en dur corrigés. |
-| `transporteur/PacksAbonnementScreen.js` | `packs_abonnement_transporteur` | bloqué | Décision Cedric sur la commission des paliers payants (C.2 #1) avant retouche. Lot bloqué (D.3.3), rattachement futur au voisinage du Lot 9. |
+| `transporteur/PacksAbonnementScreen.js` | `packs_abonnement_transporteur` | débloqué (décision 17/07/2026) | **Décision Cedric : implémenter les paliers** — commission variable par palier dans `debiter_commission_tc()` (migration + logique + paramétrage des taux par pack). Chantier backend conséquent + refonte visuelle. Ex-bloqué C.2 #1. |
 | `transporteur/LeaderboardScreen.js` | `classement_r_gional_caarco` | fait (09/07/2026) | Lot 9. "TransLogix"→CAARCO corrigé dans la maquette (2 occurrences : `<title>` + `<h1>` visible). |
 | `transporteur/StatsTransporteurScreen.js` | `statistiques_performance`, `statistiques_performance_caarco` | fait (09/07/2026) | Lot 9. `CarteStat` local conservé (non remplacé par `Borne`, voir CDC D.13). `Silo` : 1er usage réel. |
 | `transporteur/SoumissionKYCScreen.js` | `v_rification_kyc_transporteur_1` | fait (09/07/2026) | Lot 10 |
@@ -132,13 +132,13 @@ En relisant le code réel (pas seulement la glose de la boîte à outils D.2) av
 
 ---
 
-## Écrans bloqués — récapitulatif (ne pas retoucher avant décision Cedric)
+## Écrans ex-bloqués — décisions Cedric prises le 17/07/2026 (à implémenter)
 
-Détail complet (raison, référence, rattachement futur suggéré) en D.3.3 du CDC.
+Les 4 écrans ne sont plus « en attente de décision » : Cedric a tranché le 17/07/2026. Ils restent **à implémenter** (migration/backend + refonte visuelle) — chantier suivant, hors de cette session. Détail historique (raison, référence) en D.3.3 du CDC.
 
-- `ProfilScreen.js` — champs `sexe`/`date_naissance` (C.3.1)
-- `MerciScreen.js` / `PointsScreen.js` — récompense streak "+100 XAF" et tables `wallets` orphelines (C.2 #3)
-- `PacksAbonnementScreen.js` — commission des paliers payants (C.2 #1)
+- `ProfilScreen.js` — **migration + persister** `sexe`/`date_naissance` (créer les colonnes + liste blanche). Ex-C.3.1.
+- `MerciScreen.js` / `PointsScreen.js` — récompense = **réduction sur une course** (coupon appliqué au prix, PAS de wallet) + neutraliser le trigger `after_course_terminee`→`wallets`. Ex-C.2 #3.
+- `PacksAbonnementScreen.js` — **implémenter les paliers** : commission variable par palier dans `debiter_commission_tc()`. Ex-C.2 #1.
 
 ## Lots D.3 — vue d'ensemble
 
@@ -167,7 +167,7 @@ Détail complet (composants Lot 0 mobilisés, justification) en D.3.2 du CDC. 59
 
 ## Corrections backend indépendantes (Partie C, hors refonte visuelle — ne pas laisser traîner)
 
-- 🔴 Neutraliser le trigger `after_course_terminee` → `verifier_streak_client` (écrit encore dans `wallets`) — **toujours ouvert**, explicitement exclu de la migration 098 (voir ci-dessous) tant que `PointsScreen.js`/`MerciScreen.js` restent bloqués (C.2 #3).
+- 🔴 Neutraliser le trigger `after_course_terminee` → `verifier_streak_client` (écrit encore dans `wallets`) — **débloqué le 17/07/2026** : Cedric a tranché la récompense en **réduction de course (coupon)**, pas de wallet. Action à mener dans le chantier de refonte `MerciScreen`/`PointsScreen` : migration pour (a) neutraliser ce trigger et (b) créer le mécanisme de coupon. À appliquer à la main en SQL Editor (ne jamais `supabase db push` sur ce projet).
 - ✅ **RÉSOLU ET CONFIRMÉ EN PRODUCTION (09/07/2026)** — Contrôle de rôle sur `admin_crediter_wallet_client`. Trouvé au Lot 18 (CDC D.22.7) que la migration `098_audit_20260708_corrections_securite.sql` contenait déjà ce correctif mais que son application réelle n'était pas vérifiable depuis l'environnement d'agent. **Vérifié directement contre la base de production le 09/07/2026** (`supabase db query --linked`, lecture seule, projet lié `dxwkikaniawpfljvteog`, CAARCO ACTIVE_HEALTHY) : les 8 correctifs de la migration 098 sont **tous déjà en place en production** — `admin_crediter_wallet_client` a bien son `IF ... NOT is_admin() THEN RAISE EXCEPTION`, `liberer_sequestre_course` idem, policy `wallets_modification` supprimée, `courses.otp_expires_at` existe, `transactions_tc.deficit_tc` existe, `terminer_livraison` supprimée, `trg_verrouiller_prix_creation` existe, surcharge morte `calculer_prix(4 params)` supprimée. **Ce 🔴 est clos, confirmé sans avoir eu besoin d'exécuter quoi que ce soit** — la migration avait déjà été appliquée à la main (SQL Editor) avant ce lot, seule la table de suivi CLI (`supabase_migrations.schema_migrations`) ne le reflétait pas, d'où le faux signal "pending" de `supabase migration list`/`db push --dry-run`. **Ne jamais lancer `supabase db push` sur ce projet en l'état** : la CLI listerait ~104 migrations comme "à pousser" (002 à 100 + les migrations datées), alors qu'elles sont déjà toutes en place — un `db push` réel tenterait de les rejouer contre un schéma qui les a déjà, avec un risque réel d'erreurs ou de corruption (INSERT non idempotents, colonnes déjà existantes). Vérifié aussi : `users.permissions`, `is_super_admin()`, `has_permission()`, `admin_definir_permissions()` (migration 099), `reset_mot_de_passe_log` (migration 100), `campagnes_push`, `notchpay_ref`, `distance_reelle_km`, `transactions_wallet.description`/`course_id` (migrations datées 20260517/20260616/20260617) — **tous déjà en production**. **Exception** : `App/supabase/migrations/fix_terminer_livraison.sql` (nom hors convention, ignoré par la CLI) recrée l'ancienne version dangereuse de `terminer_livraison` (sans OTP) que la migration 098 a délibérément supprimée — fichier obsolète, **ne jamais l'exécuter**, à supprimer du dépôt (proposé à Cedric, pas fait automatiquement).
 - 🟡 (trouvé Lot 16) `ConfigTarifsScreen.js` section "Commission parrainage" édite `configurations_systeme.commission_parrainage_pct`, lu **uniquement** par `liberer_sequestre_course()` (migrations 032/059/060) — RPC morte (même chaîne inatteignable que C.2 #3/C.3.2). L'admin peut « sauvegarder » ce taux sans aucun effet sur `debiter_commission_tc()` (flux TC actif). Décision Cedric requise : rebrancher ce taux sur le flux TC, ou retirer la section tant que le mécanisme n'est pas réactivé. Détail CDC D.20.
 - 🟡 (trouvé Lot 16) `ConfigTarifsScreen.js` section "Charge utile" (Poids max/Volume max par véhicule) édite `parametres_tarifs.poids_max_kg`/`volume_max_m3` — colonnes absentes de toutes les migrations (`parametres_tarifs` ne les définit nulle part) — et `calculer_prix()` (dernière version active : migration 097) utilise de toute façon des seuils **codés en dur** par véhicule (CASE SQL), jamais lus depuis `parametres_tarifs`. Section 100% cosmétique aujourd'hui, une sauvegarde de ces 2 champs échouerait (colonne inexistante). Décision Cedric requise : migration pour créer les colonnes + brancher `calculer_prix()` dessus, ou retirer la section. Détail CDC D.20.

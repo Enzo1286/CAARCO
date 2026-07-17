@@ -2,7 +2,7 @@
 Dernière mise à jour : 2026-07-17
 Emplacement projet  : D:\Mon projet\CAARCO (déplacé le 2026-07-04, ex-D:\CAARCO)
                       ⚠️ Chemin avec ESPACE → toujours mettre les chemins entre guillemets
-Sessions totales    : 28
+Sessions totales    : 29
 Propriétaire        : Cedric Timene — Bafoussam, Cameroun
 
 ═══════════════════════════════════════════════════════════════
@@ -476,6 +476,42 @@ Format dates : ISO 8601
 ---
 
 ## 💬 CONTEXTE DES SESSIONS
+
+Session 29 (2026-07-17) — Lot C déployé + commit docs + décisions produit des 4 écrans gelés :
+- **Lot C admin web — DÉPLOYÉ par Cedric.** Portail admin en ligne : `https://caarco-admin.vercel.app`
+  (projet Vercel `caarco-admin`, distinct de `caarco-web`). Bundle `App/dist-web` vérifié côté agent
+  avant/après : 0 secret (SERVICE_ROLE/ACCESS_TOKEN/NOTCHPAY), 0 accès runtime à `EXPO_PUBLIC_APP_ENV`
+  (donc `production` bien inliné → **remise à zéro ConfigTarifs neutralisée**), clé anon + URL Supabase
+  présentes. Fichier fantôme 0 octet `1)` retiré de `dist-web/_expo/static/js/web/`. **Reste : le test
+  fonctionnel de Cedric** (connexion 679570886 + 2FA + 23 écrans + confirmer à l'écran que la modale de
+  remise à zéro est ABSENTE), idéalement depuis un autre appareil/réseau. Lot C = clos dès ce test OK.
+  Lot D (domaine) = plus tard, quand acheté.
+- **Rotation mdp admin 679570886 : PAS ENCORE FAITE.** Procédure fournie (SQL Editor, `scripts/reset_mdp_admin.sql`,
+  remplacer le placeholder ligne 26, Run ; 2FA inchangé). Cedric la fait de son côté (mdp jamais transmis à l'agent).
+- **Commit docs racine `e99a271`** (non poussé, à la demande de Cedric) : CDC_ADMIN_WEB.md, CDC_TRAVAUX_EN_COURS.md,
+  MEMORY.md, REFONTE_TRACKING.md, `scripts/` (4 fichiers, vérifiés sans secret), `.gitignore` durci
+  (crash*.log, CAARCO_logcat.txt, supabase/.temp, .agents/, .codex/). Push à faire **seulement si le repo
+  `github.com/Enzo1286/CAARCO` est privé** (docs métier). Exclus volontairement : gitlink `App`, logs, médias
+  (Carrousel-*/Infographie-*/*.jsx/AGENTS.md/CHARTE_…).
+- **Remote GitHub pour App/ : en attente d'install `gh`.** `gh` pas installé ici → Cedric installe
+  (`winget install --id GitHub.cli -e` puis `gh auth login`). Ensuite (prochaine session) :
+  `cd App && gh repo create CAARCO-App --private --source=. --remote=origin --push`. App/ = repo git
+  embarqué (gitlink dans racine, pas sous-module), 0 remote, dernier commit `17893f42`, `.env`+`dist-web`
+  bien gitignorés. NB : App/ a 7 fichiers réels modifiés non commités (App.js + 6 écrans admin) — à trier
+  avant tout commit App/.
+- **Nettoyage fantômes** : ~11 fichiers 0 octet dans `App/` (`,` `0)` `1)` `{` `{,` `{,+` `f(...a))` `HTTP`
+  `NOW()` `NOW())` `!nomsVus.has(...)`) + `(,` racine supprimés. `fix.js`/`restore_alpha.js`/`crash_log.txt`
+  (105 Ko)/`assets/Caarco hero character_reference.jpeg` = réels, conservés.
+- **🎯 Les 4 écrans « gelés » de la refonte sont DÉBLOQUÉS — décisions Cedric prises** (gravées dans
+  REFONTE_TRACKING.md, restent À IMPLÉMENTER = chantier suivant, backend + refonte visuelle) :
+  1. `ProfilScreen.js` (sexe/date_naissance) → **migration + persister** (créer les 2 colonnes + liste blanche
+     `CHAMPS_PROFIL_AUTORISES` dans services/auth.js).
+  2. `MerciScreen.js` + `PointsScreen.js` (récompense streak) → **réduction sur une course (coupon)**, PAS de
+     crédit wallet (Play Store) + **neutraliser le trigger `after_course_terminee`→`verifier_streak_client`**
+     qui écrit encore dans `wallets` (🔴 actif en prod).
+  3. `PacksAbonnementScreen.js` → **implémenter les paliers** : commission variable par palier dans
+     `debiter_commission_tc()` (migration + taux par pack à définir).
+  ⚠️ App en PROD (Play Store) : appliquer les migrations à la main en SQL Editor, jamais `supabase db push`.
 
 Session 28 (2026-07-17) — Lot B clos (B4) + Lot C bundle prêt + assainissement sécurité :
 - **Lot B admin web CLOS** : B4 (test navigateur) validé par Cedric — connexion `679570886` + 2FA +
