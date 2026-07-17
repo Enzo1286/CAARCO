@@ -112,15 +112,32 @@ Effets : bundle plus léger (les écrans client/TR, la carte Leaflet, l'audio, l
 
 > **⚠️ Découverte Session 28 (résolue) :** `ConfigTarifsScreen.js:37` calcule `resetDisponible = EXPO_PUBLIC_APP_ENV !== 'production'` — il expose une **modale de remise à zéro destructive** quand `APP_ENV` n'est pas `production`. Le `dist-web` servi pour B4 avait été buildé **sans** la variable → la remise à zéro était accessible. Corrigé au Lot C : `dist-web` régénéré avec `EXPO_PUBLIC_APP_ENV=production` inliné dans le bundle (vérifié : 0 accès runtime restant à la variable).
 
-### Lot C — Déploiement Vercel (~1 h) — ✅ DÉPLOYÉ le 2026-07-17 (Session 29), test fonctionnel Cedric en cours
+### Lot C — Déploiement Vercel (~1 h) — ✅ CLOS le 2026-07-17 (Session 30) — test fonctionnel Cedric OK
 
-**Déployé : https://caarco-admin.vercel.app** (projet Vercel `caarco-admin`, distinct de `caarco-web`).
-Bundle `App/dist-web` re-vérifié côté agent (Session 29) : 0 secret (SERVICE_ROLE/ACCESS_TOKEN/NOTCHPAY),
-0 accès runtime à `EXPO_PUBLIC_APP_ENV` (→ `production` inliné, remise à zéro ConfigTarifs neutralisée),
-clé anon + URL Supabase présentes ; fichier fantôme 0 octet `1)` retiré de `dist-web`. **Reste le test
-fonctionnel de Cedric** (C4 ci-dessous) : connexion `679570886` + 2FA + 23 écrans + confirmer à l'écran
-que la modale de remise à zéro (ConfigTarifs) est ABSENTE, idéalement depuis un autre appareil/réseau.
-Lot C clos dès ce test OK.
+**En ligne : https://caarco-admin.vercel.app** (projet Vercel `caarco-admin`, distinct de `caarco-web`).
+**Test fonctionnel Cedric VALIDÉ (C4)** : connexion `679570886` + 2FA + navigation des 23 écrans + icônes OK
++ modale de remise à zéro ConfigTarifs ABSENTE. **Lot C clos.**
+
+⚠️ **Le bundle réellement déployé est `App/dist` (PAS `App/dist-web`).** Deux approches ont divergé le
+2026-07-17 ; la version EN LIGNE est celle buildée dans `App/dist` puis corrigée par
+`scripts/fix-web-fonts.mjs` (renomme `assets/node_modules` → `assets/vendor`, car Vercel écarte les chemins
+`node_modules` à l'upload → sinon les polices `@expo/vector-icons` tombaient en carrés « tofu »). Preuve :
+le site live sert `/assets/vendor/…Ionicons.ttf` en HTTP 200. Les mentions `dist-web` ci-dessous sont
+conservées pour l'historique mais la séquence de référence est celle du bloc ci-après.
+
+Bundle re-vérifié côté agent : 0 secret (SERVICE_ROLE/ACCESS_TOKEN/NOTCHPAY), `EXPO_PUBLIC_APP_ENV`
+inliné à `production` (0 accès runtime → **remise à zéro ConfigTarifs éliminée du bundle**, chaîne
+« ZONE DANGER » = 0), clé anon + URL Supabase présentes.
+
+**Séquence de rebuild/redéploiement (à refaire à chaque mise à jour du portail) :**
+```
+cd App
+EXPO_PUBLIC_APP_ENV=production npx expo export --platform web --output-dir dist --clear
+node scripts/fix-web-fonts.mjs dist
+cd dist && npx vercel --prod
+```
+⚠️ Le `--clear` de Metro est **obligatoire** : sans lui le cache gèle `APP_ENV=undefined` et la remise à
+zéro reste exposée. Ne JAMAIS mettre `SERVICE_ROLE_KEY` / `SUPABASE_ACCESS_TOKEN` sur Vercel.
 
 
 
@@ -137,7 +154,7 @@ Lot C clos dès ce test OK.
   # → Framework preset: Other | Build command: (vide) | Output dir: ./
   ```
 - C3. Vercel renvoie une URL gratuite (ex. `caarco-admin.vercel.app`).
-- C4. Test depuis un **autre appareil / autre réseau** : connexion `679570886` + 2FA → 23 écrans ; confirmer que la modale de remise à zéro (ConfigTarifs) est **absente**.
+- C4. ✅ **Fait le 2026-07-17 (Session 30)** — test Cedric validé : connexion `679570886` + 2FA → 23 écrans, icônes OK, modale de remise à zéro (ConfigTarifs) **absente**. **Lot C clos.**
 
 > Alternative (si build par Vercel via un dépôt git) : root dir `App`, build `npx expo export --platform web --output-dir dist-web`, output `dist-web`, et **là** il faut définir `EXPO_PUBLIC_SUPABASE_URL`, `EXPO_PUBLIC_SUPABASE_ANON_KEY`, `EXPO_PUBLIC_APP_ENV=production` dans les env Vercel. Bloqué aujourd'hui : `App/` n'a pas de remote GitHub (cf. §3.4 de `CDC_TRAVAUX_EN_COURS.md`). D'où le choix du déploiement pré-buildé.
 

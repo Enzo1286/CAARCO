@@ -2,7 +2,7 @@
 Dernière mise à jour : 2026-07-17
 Emplacement projet  : D:\Mon projet\CAARCO (déplacé le 2026-07-04, ex-D:\CAARCO)
                       ⚠️ Chemin avec ESPACE → toujours mettre les chemins entre guillemets
-Sessions totales    : 29
+Sessions totales    : 30
 Propriétaire        : Cedric Timene — Bafoussam, Cameroun
 
 ═══════════════════════════════════════════════════════════════
@@ -476,6 +476,32 @@ Format dates : ISO 8601
 ---
 
 ## 💬 CONTEXTE DES SESSIONS
+
+Session 30 (2026-07-17) — Lot C admin web CLOS + découverte majeure : le « chantier suivant » était déjà fait :
+- **Lot C admin web CLOS** : Cedric a validé le test fonctionnel C4 (connexion 679570886 + 2FA + 23 écrans +
+  icônes OK + modale de remise à zéro ConfigTarifs ABSENTE). Portail en ligne : `https://caarco-admin.vercel.app`.
+  CDC_ADMIN_WEB.md + CDC_TRAVAUX_EN_COURS.md + mémoire auto mis à jour. Divergence réconciliée : le bundle
+  RÉELLEMENT en ligne est `App/dist` + `scripts/fix-web-fonts.mjs` (correctif icônes tofu), **pas** `dist-web`.
+  **Lots A/B/C tous clos** ; reste seulement Lot D (domaine, quand acheté).
+- **Commits docs racine `e99a271` + `07b7fc2` POUSSÉS** sur `origin/main` (`414d3b2..07b7fc2`) après confirmation
+  Cedric que `github.com/Enzo1286/CAARCO` est privé. `gh` **toujours pas installé** → repo `CAARCO-App`
+  (sources d'`App/`) toujours en attente.
+- **Rotation mdp admin 679570886** : Cedric a demandé « de quoi s'agit-il » → expliqué (changer le mdp de
+  connexion du compte admin, hygiène après mise en ligne publique du portail ; via écran Sécurité ou
+  `scripts/reset_mdp_admin.sql` ; 2FA inchangé = aucun risque). Statut : à reconfirmer par Cedric.
+- **🔴 DÉCOUVERTE — le « chantier suivant » (3 décisions des 4 écrans gelés) était DÉJÀ FAIT côté backend.**
+  Le mémo Session 29 les listait « à implémenter (backend + visuel) » : **faux**. La section « Session du
+  10/07/2026 » de `REFONTE_TRACKING.md` (l. 982-1021) montre que migrations `101→106` ont exécuté toute la
+  logique une semaine plus tôt, **committé et en prod** : (1) ProfilScreen `sexe`/`date_naissance` — `auth.js`
+  corrigé ; (2) MerciScreen/PointsScreen — trigger `verifier_streak_client` n'écrit **plus** dans `wallets`,
+  coupon `reduction_pct` appliqué au prix (migration 101) ; (3) PacksAbonnement — commission par pack 12/8/5 %
+  (migration 102) + promo perso (migration 104). **Ne plus jamais re-proposer ce backend.** Mémoire auto
+  `decisions-4-ecrans-refonte` + haut de `REFONTE_TRACKING.md` corrigés. Reste UNIQUEMENT la passe visuelle.
+- **V1 — ProfilScreen : passe visuelle FAITE.** Écran déjà très abouti (composants Lot 0, i18n, mode sombre) —
+  seule vraie action DoD : 3 hex en dur retokenisés (`'#0f141173'`→`colors.nuit+'73'` ; bloc WhatsApp
+  `rgba(37,211,102,0.12)`/`#25D166`→const `VERT_WHATSAPP` + `alpha()`). Parse `@babel/parser` OK. Prochains :
+  V2 MerciScreen/PointsScreen (vérifier texte « réduction prochaine course »), V3 PacksAbonnement.
+  ⚠️ `App/` non commité s'accumule (ProfilScreen.js s'ajoute aux 7 fichiers admin déjà modifiés) — à commiter.
 
 Session 29 (2026-07-17) — Lot C déployé + commit docs + décisions produit des 4 écrans gelés :
 - **Lot C admin web — DÉPLOYÉ par Cedric.** Portail admin en ligne : `https://caarco-admin.vercel.app`

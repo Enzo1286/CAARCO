@@ -28,10 +28,10 @@ Chantier ouvert aujourd'hui (2026-07-17). Détail complet dans `CDC_ADMIN_WEB.md
 | A3 | Activer le 2FA sur les comptes admin | ✅ Fait — revérifié en base le 2026-07-17 (lecture seule, Management API) : facteur TOTP `verified` sur `679570886` |
 | A4 | Re-lancer le diagnostic, confirmer 2FA actif | ✅ Fait — `scripts/diagnostic_supabase.sql` relancé le 2026-07-17 : migrations 085→108 toutes appliquées, `679570886 — ✅ 2FA actif (totp)`, `role_security_trigger` actif |
 | B | Point d'entrée web dédié (sans écrans client/TR) | ✅ **CLOS le 2026-07-17 (Session 28)** — B1-B3 (commit `d99d53f0`) + B4 test navigateur validé par Cedric (connexion + 2FA + 23 écrans OK). |
-| C | Déploiement Vercel | ✅ **DÉPLOYÉ le 2026-07-17 (Session 29)** : **https://caarco-admin.vercel.app** (projet `caarco-admin`). Bundle re-vérifié (0 secret, `production` inliné → remise à zéro neutralisée). Reste le **test fonctionnel de Cedric** (connexion + 2FA + 23 écrans + confirmer modale remise à zéro ABSENTE). |
+| C | Déploiement Vercel | ✅ **CLOS le 2026-07-17 (Session 30)** : **https://caarco-admin.vercel.app** (projet `caarco-admin`). Test fonctionnel Cedric **validé** (connexion `679570886` + 2FA + 23 écrans + icônes OK + modale remise à zéro ABSENTE). Bundle réellement en ligne = `App/dist` + `scripts/fix-web-fonts.mjs` (correctif icônes tofu), pas `dist-web`. |
 | D | Domaine personnalisé | ⏳ Pas commencé (attend l'achat du domaine) |
 
-**Lots A, B et C (déploiement) faits.** Lot C clos dès le test fonctionnel de Cedric OK (voir `CDC_ADMIN_WEB.md` §6 Lot C, point C4).
+**Lots A, B et C faits et CLOS.** Reste uniquement le Lot D (domaine, quand acheté).
 
 **⚠️ Découverte Session 28 (résolue)** : `ConfigTarifsScreen.js:37` exposait une modale de **remise à zéro destructive** tant que `EXPO_PUBLIC_APP_ENV != production`. Le `dist-web` de B4 était buildé sans la variable → remise à zéro accessible. Corrigé en régénérant `dist-web` avec la variable inlinée (vérifié bundle : 0 accès runtime restant).
 
@@ -80,7 +80,9 @@ Dans `App/` : `!nomsVus.has(...)`, `,`, `NOW()`, `NOW())`, `{`, `{,`, `{,+`, plu
 ### 3.4 `App/` sans remote GitHub — décision prise (Session 29), en attente d'outillage
 `App/` est un **repo git embarqué** (gitlink dans la racine, PAS un sous-module — aucun `.gitmodules`), avec un historique local propre (dernier commit `17893f42`) mais **aucun `origin`**. `.env` et `dist-web` y sont bien gitignorés. Décision Cedric (Session 29) : **créer un dépôt GitHub privé dédié**. Bloqué sur outillage : `gh` non installé sur le poste. Cedric installe (`winget install --id GitHub.cli -e` puis `gh auth login`), ensuite : `cd App && gh repo create CAARCO-App --private --source=. --remote=origin --push`. NB : App/ a 7 fichiers réels modifiés non commités (App.js + 6 écrans admin) à trier avant tout commit App/.
 
-> ⚠️ Le repo **racine** (`github.com/Enzo1286/CAARCO`), lui, A un `origin`. Il track `App` comme gitlink (les sources d'App n'y sont pas). Commit docs `e99a271` créé le 2026-07-17 (Session 29), **non poussé** — à pousser seulement si ce repo est privé (docs métier).
+> ⚠️ Le repo **racine** (`github.com/Enzo1286/CAARCO`), lui, A un `origin`. Il track `App` comme gitlink (les sources d'App n'y sont pas). Commits docs `e99a271` + `07b7fc2` (Session 29) ✅ **POUSSÉS le 2026-07-17 (Session 30)** sur `origin/main` après confirmation de Cedric que le repo est **privé** (`414d3b2..07b7fc2`).
+
+> ⏳ **`gh` toujours pas installé** au 2026-07-17 (Session 30, vérifié `gh --version` → `command not found`) → la création du repo privé `CAARCO-App` pour `App/` reste bloquée. Cedric installe (`winget install --id GitHub.cli -e` puis `gh auth login`), ensuite : `cd App && gh repo create CAARCO-App --private --source=. --remote=origin --push` (trier d'abord les 7 fichiers réels modifiés d'App/ : `App.js` + 6 écrans admin).
 
 ### 3.5 Racine `supabase/.temp/linked-project.json`
 ✅ **Ignoré le 2026-07-17 (Session 29)** : `.gitignore` racine étendu (`/supabase/.temp/`, `crash*.log`, `CAARCO_logcat.txt`, `.agents/`, `.codex/`). Plus de risque de commit accidentel.
@@ -93,7 +95,7 @@ Dans `App/` : `!nomsVus.has(...)`, `,`, `NOW()`, `NOW())`, `{`, `{,`, `{,+`, plu
 |---|---|---|---|
 | ~~1~~ | ~~Finaliser l'enrôlement 2FA sur `679570886`~~ | Admin web A3 | ✅ Déjà fait, confirmé en base le 2026-07-17 |
 | 2 | Confirmer : un seul compte admin, pas deux | Admin web | Déjà actée par les faits, confirmation formelle utile |
-| ~~2bis~~ | ~~Démarrer le Lot B / Lot C~~ | Admin web | ✅ Lot C **déployé** (https://caarco-admin.vercel.app). Reste le **test fonctionnel de Cedric** (connexion + 2FA + 23 écrans + modale remise à zéro ABSENTE) |
+| ~~2bis~~ | ~~Démarrer le Lot B / Lot C~~ | Admin web | ✅ Lot C **CLOS** (https://caarco-admin.vercel.app) — test fonctionnel Cedric validé le 2026-07-17 (Session 30) |
 | 2ter | **Changer le mdp admin `679570886`** (voir §3.2) | Sécurité | ⏳ **Pas encore fait (Session 29)** — à faire par Cedric (SQL Editor via `reset_mdp_admin.sql`, ou écran Sécurité). 2FA inchangé = aucun risque |
 | ~~3~~ | ~~Commit « annulation automatique + motif »~~ | Hygiène dépôt | ✅ Fait Session 28 (`c646e6df` + `aaf2fa68`) |
 | ~~4~~ | ~~Trancher les 4 écrans du Lot bloqué~~ | Chantier D | ✅ **Décisions prises Session 29** (voir §2.1) — reste à implémenter (chantier suivant) |
