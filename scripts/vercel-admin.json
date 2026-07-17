@@ -1,0 +1,8 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "_note": "MODÈLE pour le portail admin web (Lot C, CDC_ADMIN_WEB.md). Après chaque `npx expo export --platform web --output-dir dist-web`, copier ce fichier dans App/dist-web/vercel.json (l'export écrase le dossier). Routage SPA : toute route non-fichier sert index.html.",
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

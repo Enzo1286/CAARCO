@@ -967,15 +967,14 @@ Le Lot 18 a révélé qu'un correctif déjà écrit dans le dépôt (`098_audit_
 1. **Lot bloqué (D.3.3), jamais traité** — 4 écrans : `ProfilScreen.js` (champs `sexe`/`date_naissance`), `MerciScreen.js`/`PointsScreen.js` (récompense streak "+100 XAF", tables `wallets` orphelines), `PacksAbonnementScreen.js` (commission des paliers payants).
 2. **1 correction backend 🔴 encore ouverte** — trigger `trigger_streak_client`/`verifier_streak_client` (écrit dans `wallets`), volontairement non touché tant que `PointsScreen.js`/`MerciScreen.js` ne sont pas tranchés (point 1 ci-dessus). Le 2ᵉ 🔴 (`admin_crediter_wallet_client`) est **clos**, confirmé appliqué en production le 09/07/2026.
 3. **3 découvertes de configuration morte** (Lots 16, 18, ci-dessus) — rebrancher ou retirer chaque section concernée.
-4. **Captures avant/après** — `scripts/capture-auto.ps1` jamais exécuté sur 18 lots (pas d'ADB/Maestro dans cet environnement), et le flow Maestro `caarco_tous_ecrans.yaml` ne couvre de toute façon aucun écran admin (D.17.9, non résolu en 6 lots) — un flow Maestro dédié admin serait nécessaire en plus du matériel.
-5. **`npx babel --presets babel-preset-expo`** — en panne sans interruption depuis le Lot 4 (15 lots), jamais réparée ; toutes les validations syntaxiques de ce chantier sont passées par `@babel/parser` en remplacement.
+4. **Captures avant/après** — `scripts/capture-auto.ps1` jamais exécuté sur 18 lots (pas d'ADB/Maestro dans cet environnement), et le flow Maestro `caarco_tous_ecrans.yaml` ne couvre de toute façon aucun écran admin (D.17.9, non résolu en 6 lots) — un flow Maestro dédié admin serait nécessaire en plus du matériel. Toujours non résolu — nécessite le téléphone Android physique de Cedric.
+5. ~~`npx babel --presets babel-preset-expo`~~ — **RÉPARÉ (session du 10/07/2026)**. Cause racine : `@babel/cli` n'a jamais été installé en dépendance locale, donc `npx babel` résolvait silencieusement un très vieux paquet `babel` v5.8.38 (~2015, ère `babel-core`), incapable de parser le JSX/ES2020+ moderne — d'où les échecs "Unexpected token" reproduits sans interruption depuis le Lot 4. Corrigé via `npm install --save-dev @babel/cli@^7` (v8 exclue : nécessite `@babel/core@^8`, non installé, hors scope). Vérifié : `npx babel --version` → `7.29.7 (@babel/core 7.29.0)`, et compilation réussie (exit 0) de `NotificationsAdminScreen.js`, le fichier qui échouait depuis le Lot 4. Commit `e8465f32`. Les validations syntaxiques des 18 lots précédents restent documentées telles quelles (faites via `@babel/parser` en contournement, toutes OK) ; la commande standard est utilisable pour les prochains lots.
 
 ### Prochaines étapes suggérées (attente de consigne explicite de Cedric — aucune n'a été lancée)
 
-- Supprimer `App/supabase/migrations/fix_terminer_livraison.sql` du dépôt (fichier obsolète et dangereux, recrée une fonction déjà retirée pour raison de sécurité) — proposé, pas fait automatiquement.
+- ~~Supprimer `App/supabase/migrations/fix_terminer_livraison.sql` du dépôt~~ — **FAIT (session du 10/07/2026)**, commit `9b3d6442`.
 - Trancher les 4 écrans du Lot bloqué et les 3 configurations mortes.
 - Réparer `capture-auto.ps1`/Maestro pour obtenir enfin des captures avant/après sur les 18 lots, et un flow Maestro admin.
-- Réparer `npx babel --presets babel-preset-expo`.
 - Une fois ce qui précède tranché : push GitHub, puis test live guidé par Cedric (non fait dans ce lot, sur consigne explicite de ne rien pousser/tester sans validation).
 
 ---

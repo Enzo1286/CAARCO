@@ -19,3 +19,15 @@ yarn-debug.log*
 yarn-error.log*
 android/
 ios/
+
+# Logs de crash / diagnostics locaux
+crash*.log
+crash_log.txt
+CAARCO_logcat.txt
+
+# État temporaire CLI Supabase
+/supabase/.temp/
+
+# Outillage agents local (non versionné)
+.agents/
+.codex/

@@ -1,8 +1,8 @@
 # MÉMOIRE PROJET — CAARCO
-Dernière mise à jour : 2026-07-09
+Dernière mise à jour : 2026-07-17
 Emplacement projet  : D:\Mon projet\CAARCO (déplacé le 2026-07-04, ex-D:\CAARCO)
                       ⚠️ Chemin avec ESPACE → toujours mettre les chemins entre guillemets
-Sessions totales    : 15
+Sessions totales    : 28
 Propriétaire        : Cedric Timene — Bafoussam, Cameroun
 
 ═══════════════════════════════════════════════════════════════
@@ -476,6 +476,122 @@ Format dates : ISO 8601
 ---
 
 ## 💬 CONTEXTE DES SESSIONS
+
+Session 28 (2026-07-17) — Lot B clos (B4) + Lot C bundle prêt + assainissement sécurité :
+- **Lot B admin web CLOS** : B4 (test navigateur) validé par Cedric — connexion `679570886` + 2FA +
+  23 écrans OK. Audit préalable anti-casse : sur les 23 écrans admin, seuls `PublicitesAdmin`
+  (image-picker/file-system, appelés au clic + garde `isWeb`) et `SecuriteAdminScreen` (WebView QR,
+  déjà gérée Session 26) touchent au natif ; `MFAChallengeScreen` (chemin critique 2FA) est RN pur.
+  Aucun crash au montage.
+- **🔴 Découverte sécurité (résolue) — remise à zéro exposée sur le web** : `ConfigTarifsScreen.js:37`
+  calcule `resetDisponible = EXPO_PUBLIC_APP_ENV !== 'production'` → une modale de remise à zéro
+  destructive est accessible tant que la variable n'est pas `production`. Le `dist-web` servi pour B4
+  avait été buildé SANS la variable (absente de `App/.env`) → remise à zéro accessible. **Corrigé** :
+  `dist-web` régénéré avec `EXPO_PUBLIC_APP_ENV=production npx expo export --platform web --output-dir
+  dist-web` (variable inlinée dans le bundle, PAS persistée dans `.env` pour ne pas toucher les autres
+  builds). Vérifié bundle : client/TR exclus (0), aucun secret (0), `EXPO_PUBLIC_APP_ENV` inliné
+  (0 accès runtime), clé anon/URL présentes.
+- **Lot C — bundle prêt, déploiement à faire par Cedric** : approche retenue = déploiement du bundle
+  STATIQUE pré-buildé (`App/dist-web`, avec `vercel.json` SPA copié depuis `scripts/vercel-admin.json`).
+  Comme `APP_ENV=production` + URL/clé anon sont déjà inlinées, Vercel n'a qu'à servir des fichiers :
+  aucune variable d'env à configurer côté Vercel. Commande : `cd App/dist-web && vercel --prod` (projet
+  `caarco-admin`, distinct de `caarco-web`). Non exécutable côté agent (compte Vercel requis ; l'appel
+  Management API Supabase et toute action sortante authentifiée sont d'ailleurs bloqués par le
+  classifieur du harness en mode auto — constaté cette session).
+- **🔐 Assainissement — la fuite n'était pas où le journal le disait** : `scripts/reset_mdp_admin.sql`
+  ne contenait QUE des placeholders (pas de vrai mdp comme l'affirmait le journal 26bis). La vraie fuite
+  était dans **`MEMORY.md`** (lignes 521/523 : `Brnd.25%E-c`, `Admin@Caarco2026!` en clair). **Retirés.**
+  Vérifié : jamais entrés dans l'historique git (`git log -S` vide, absents de HEAD) — exposition locale
+  uniquement. `reset_mdp_admin.sql` aussi corrigé (ciblait les emails périmés `697028122@`/`admin@` →
+  réécrit pour l'unique compte `679570886@caarco.local`). Rotation du mdp : Cedric a choisi la voie SQL,
+  à exécuter par lui (SQL Editor) car l'API Management est bloquée ici. 2FA inchangé = pas de verrouillage.
+- **Nettoyage** : 13 fichiers parasites racine (débris de collage terminal, tous vides sauf `_wtest_5`)
+  supprimés après confirmation. Plus aucun fantôme racine ni dans `App/`.
+
+Session 26 (2026-07-17) — Comptes admin assainis + cadrage admin web :
+- **Objectif Cedric** : accéder au back-office admin depuis n'importe où (navigateur), sans
+  cette machine ni l'app, et y brancher un nom de domaine plus tard.
+- **CDC_ADMIN_WEB.md créé** (racine) : c'est LE document de référence pour la suite de ce
+  chantier — décisions, état des lieux prouvé, architecture, lots A à D, risques. Lire ce
+  fichier avant toute nouvelle session sur l'admin web, pas ce journal.
+- **Découverte majeure : la base de prod est ENTIÈREMENT à jour.** Les migrations 085 → 108
+  sont TOUTES appliquées (dont 092/093/094/099 que ce MEMORY listait à tort comme « écrites
+  mais pas déployées » — info périmée depuis, corrigée ici). `calculer_prix()` en version 103.
+  Vérifié par `scripts/diagnostic_supabase.sql` (une seule requête, lecture seule, marqueurs
+  par migration — l'historique CLI ne fait pas foi, les migrations ayant été passées à la main).
+- **Comptes admin assainis** (`scripts/migrer_compte_admin.sql`, transaction + garde-fous) :
+  · Il existait 2 super-admins : `697028122` (numéro n'appartenant PAS à Cedric) et `admin`
+    (« Admin CAARCO », identifiant devinable `admin@caarco.local`, jamais connectable car
+    `REGEX_TEL = /^[0-9]{8,15}$/` dans services/auth.js:7 rejette « admin » côté client).
+  · Résultat : **un seul compte admin, `679570886` (le vrai numéro de Cedric), 2FA TOTP
+    `verified` confirmé en base.** Le compte a été migré (même id → mot de passe, historique
+    et facteur 2FA conservés), pas recréé. `admin` supprimé ; compte transporteur de test
+    « Enzo » qui occupait 679570886 supprimé aussi (il était vide : 0 course/TC/KYC/message).
+- **Piège rencontré (à retenir pour toute suppression de compte)** : ~14 clés étrangères vers
+  `users` sont sans ON DELETE CASCADE (dont `wallets`, résidu du modèle abandonné) → un DELETE
+  direct échoue. Le script nettoie les résidus techniques avant suppression. La transaction a
+  protégé : 2 échecs successifs, 0 modification partielle.
+- **Bug corrigé — QR code 2FA invisible sur web** : `SecuriteAdminScreen.js` rendait le QR dans
+  une `WebView` (react-native-webview), inexistante en navigateur → « does not support this
+  platform ». `QRCodeLocal` gère désormais les 2 plateformes (SVG injecté dans le DOM sur web,
+  WebView inchangée sur mobile) + les 2 formats possibles de Supabase (SVG brut ou data-URI).
+  Bon exemple du type d'incompatibilité que le Lot B devra débusquer écran par écran.
+- **Capacité redécouverte** : `SUPABASE_ACCESS_TOKEN` (App/.env) permet d'exécuter du SQL sur la
+  prod via l'API Management (`POST /v1/projects/dxwkikaniawpfljvteog/database/query`). Ne plus
+  affirmer que c'est impossible sans avoir testé.
+- **Prochaine étape** : Lot B du CDC_ADMIN_WEB.md (point d'entrée web admin uniquement), puis
+  Lot C (Vercel). Lot A clos.
+
+Session 26 bis (2026-07-17, reprise) — Commit correctif annulation + Lot B admin web B1-B3 :
+- **Étape 1 close** : le travail non suivi dans `App/` (correctif « annulation automatique des
+  courses planifiées en retard + affichage du motif ») commité en 2 commits séparés —
+  `c646e6df` (migrations 107/108 déjà en prod, `courses-programmees-cron`, 9 écrans client/TR,
+  fr.js/en.js 3 clés) et `aaf2fa68` (bump `app.json` 1.1.0 / versionCode 26, séparé du
+  correctif). `SecuriteAdminScreen.js` (prépa Lot B) laissé non commité à ce stade.
+- **⚠️ Sécurité à traiter** : `scripts/reset_mdp_admin.sql` (racine) contient de VRAIS mots de
+  passe en clair (compte 697028122/679570886 et compte admin supprimé), PAS des emplacements
+  comme l'affirme `CDC_ADMIN_WEB.md` §5.5. Non commité. À assainir avant tout `git add` racine
+  + changer le mdp du compte principal s'il est encore actif.
+  [MDP RÉELS RETIRÉS DE CE JOURNAL LE 2026-07-17 (Session 28) — jamais entrés dans l'historique
+  git ; le fichier `scripts/reset_mdp_admin.sql` s'est avéré ne contenir QUE des placeholders,
+  la vraie fuite était ici même dans MEMORY.md.]
+- **Lot B admin web — B1-B3 faits** (commit `d99d53f0`) : `src/navigation/RootNavigator.web.js`
+  (admin-only, Metro le résout sur web à la place de `RootNavigator.js`) + garde web sur
+  `gpsBackground.js` (`TaskManager.defineTask` derrière `Platform.OS !== 'web'`). Export web OK,
+  navigateurs client/TR exclus du bundle (vérifié par grep de chaînes exclusives). B2 : le repli
+  localStorage de `supabase.js` existait déjà. Détail : mémoire auto `admin-web-entree-dediee`.
+- **B4 (test navigateur) laissé à Cedric** : build servi sur http://localhost:3100 — connexion
+  admin `679570886` + 2FA + navigation 23 écrans ; non-admin → « Espace réservé ».
+- **Lot C (Vercel)** : `EXPO_PUBLIC_APP_ENV` absent de `App/.env` → le fixer à `production` sur
+  Vercel (exclut la remise à zéro totale du build). Projet Vercel distinct de `caarco-web`.
+
+Session 25 (2026-07-12) — Infographie promo Binda :
+- Infographie Instagram 4:5 créée pour la promotion « première course » donnant la possibilité
+  de gagner un écran plat 55 pouces neuf, avec Binda et la mention de conditions.
+- PNG final déposé sur le Bureau : `Infographie-Promo-Binda-55pouces`.
+- Décision de marque : le personnage officiel CAARCO s'appelle désormais **Binda**. Le fichier
+  de référence conserve son nom historique `Kako_character_reference.jpeg`.
+
+Session 24 (2026-07-12) — Carrousel Instagram Kako :
+- Carrousel 4:5 de quatre slides centré sur Kako créé à partir de la planche officielle,
+  avec quatre poses/cadrages, les logos CAARCO et les tokens Atelier CAARCO.
+- PNG finaux déposés sur le Bureau : `Carrousel-Kako-CAARCO`.
+
+Session 23 (2026-07-12) — Carrousel de présentation CAARCO :
+- Carrousel Instagram 4:5 de quatre slides produit : promesse, quatre usages, parcours,
+  appel à l'action. Source React/Tailwind et exporteur conservés dans
+  `Carrousel-Presentation-CAARCO/`.
+- PNG finalisés copiés sur le Bureau dans `Carrousel-Presentation-CAARCO`.
+
+Session 22 (2026-07-12) — Charte Instagram CAARCO × Kako :
+- Charte pérenne créée dans `CHARTE_CARROUSELS_INSTAGRAM_KAKO.md` : formats 1:1 et 4:5,
+  palette Atelier CAARCO, typographies, logos, règles d'écriture et spécification React/Tailwind.
+- Kako devient le personnage officiel obligatoire lorsqu'un carrousel a besoin d'un personnage.
+  Référence copiée dans `App/assets/Kako_character_reference.jpeg`; logos officiels :
+  `App/assets/Logo CAARCO PNG.png` (fond clair) et `App/assets/Logo CAARCO Light PNG.png`
+  (fond sombre).
+- Convention future : toute demande « Create a carousel on [Sujet] » crée par défaut quatre
+  slides; l'export d'images fournit une image distincte par slide.
 
 Sessions 16-21 (2026-07-08/09) — Refonte visuelle Lots 0-6 (en cours) :
 - Suite directe de la Session 15 ci-dessous. Détail exhaustif (méthode, composants, i18n,
