@@ -2,7 +2,7 @@
 Dernière mise à jour : 2026-07-17
 Emplacement projet  : D:\Mon projet\CAARCO (déplacé le 2026-07-04, ex-D:\CAARCO)
                       ⚠️ Chemin avec ESPACE → toujours mettre les chemins entre guillemets
-Sessions totales    : 30
+Sessions totales    : 33
 Propriétaire        : Cedric Timene — Bafoussam, Cameroun
 
 ═══════════════════════════════════════════════════════════════
@@ -343,6 +343,18 @@ Dossier    : D:\CAARCO-WEB (séparé de l'app D:\Mon projet\CAARCO)
 ---
 
 ## 🔄 EN COURS / QUESTIONS OUVERTES
+
+### Session 33 (2026-07-17) — post-refonte : push, Partie C, tests, assets
+Les 4 chantiers listés au démarrage traités :
+1. **Push + nettoyage** : repo parent poussé sur `origin/main` ; 5 parasites supprimés (App/ : fix.js, restore_alpha.js, crash_log.txt, jpeg de référence ; parent : fichier vide `f36dfa2`). ⚠️ `App/` reste local — **aucun remote git** (pour le pousser un jour : créer un repo GitHub dédié + `git remote add`).
+2. **Backend Partie C (REFONTE_TRACKING l.172-174)** — 2,5/3 étaient **déjà faits en prod**, tracking jamais réconcilié :
+   - A (commission parrainage) : tranché « retirer » → section morte retirée de `ConfigTarifsScreen.js` (front only).
+   - B (charge utile) : **déjà fait par migration 103** (calculer_prix lit poids_max_kg/volume_max_m3). Ajout migration repro **109** (`ADD COLUMN IF NOT EXISTS`, no-op prod) pour fermer le trou repro.
+   - C (templates notif) : 2 templates morts **déjà supprimés par migration 106**. Reste 1 UPDATE manuel : `UPDATE notification_templates SET description='Envoyé quand l''admin crédite le compte d''un utilisateur.' WHERE cle='credit_wallet';` (à coller dans SQL Editor).
+3. **Item 20 (tests SQL flux d'argent)** : relecture anti-dérive → **4 tests toujours valides** malgré migrations 098-104 ; `App/supabase/tests/CHECKLIST_EXECUTION_ITEM20.md` écrite. Toujours PAS exécutés (pas d'accès Supabase en session).
+4. **Assets store** : `store-assets/` créé (parent) — `icon-512.png` ✅, `feature-graphic-1024x500.png` ✅ (draft, police Georgia≈Marcellus), `README.md` (procédure captures). Captures 1080×1920 = à faire par Cedric sur device.
+
+Commits : App/ `7ea1942d` + `79794ebf` (locaux, pas de remote) ; parent poussé jusqu'à `cec3341`.
 
 ### Questions ouvertes
 1. **OnboardingScreen** (3 slides) absent du code. Créer avant Play Store ?
