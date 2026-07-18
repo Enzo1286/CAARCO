@@ -344,6 +344,130 @@ Dossier    : D:\CAARCO-WEB (séparé de l'app D:\Mon projet\CAARCO)
 
 ## 🔄 EN COURS / QUESTIONS OUVERTES
 
+### Session 35 (2026-07-18) — tri de la dette wallet TRANSPORTEUR (migrations 112 + 113)
+**Statut d'application — ✅ 112, 113, 114 et 115 TOUTES APPLIQUÉES ET VÉRIFIÉES EN PROD**
+(18/07/2026, sur autorisation formelle de Cedric). Contrôles : `prosrc ILIKE '%wallets%'`
+→ 3 fonctions après le 112, puis **plus aucune écriture réelle dans `wallets`** après le 114 ;
+audit SECURITY DEFINER re-joué → **0 ligne** ; `statut_vip`/`est_vip` absentes, `is_vip` intacte ;
+0 course annulée par les migrations. Tests de fumée OK sur les 4 fonctions réécrites, plus
+2 tests en transaction annulée sur `attribuer_jalon_client` : palier falsifié (0 course → demande
+50) = **0 coupon créé** ; palier légitime (10 courses → demande 10) = coupon -20 % normal.
+
+⚠️ **Note de méthode — écriture concurrente constatée le 18/07** : une seconde session a appliqué
+la 113 et réécrit ce bloc PENDANT la session qui a appliqué 112/114/115. Le bloc affirmait
+« 112 bloquée par le classifieur du harness » : c'était vrai pour cette session-là, **pas** en
+général — la 112 (`DROP FUNCTION`/`DROP COLUMN`) est bien passée par le même endpoint Management
+API depuis l'autre session. Sans dommage ici (migrations idempotentes, état final vérifié en
+base), mais **ne pas lancer deux sessions en parallèle sur la prod** : seul un contrôle SQL
+fait foi, jamais ce qu'un journal affirme.
+🔁 **Rollback** : `scripts/rollback/ROLLBACK_112_113_fonctions_wallet.sql` — état d'avant écriture.
+🔁 **Rollback prêt** : `scripts/rollback/ROLLBACK_112_113_fonctions_wallet.sql` (28 Ko) contient
+les définitions exactes des 16 fonctions telles qu'elles étaient en prod avant toute écriture.
+🛠️ Outil réutilisable créé : `scripts/exec_sql.sh <fichier.sql>` (curl obligatoire — l'API
+Management renvoie 403/Cloudflare 1010 sur urllib ; `scripts/exec_sql.py` conservé pour mémoire).
+1. **Les 19 fonctions écrivant dans `wallets` sont triées.** Preuves croisées : 0 trigger,
+   0 fonction SQL, 0 Edge Function n'en appelle une seule ; `App/src` n'en référence que 4.
+   Volumétrie prod : `wallets` 16 lignes **toutes à 0**, `transactions_wallet` 0, `retraits` 0,
+   `paiements` 0, `dettes_commission` 0. Le modèle wallet est financièrement vide.
+   → **13 mortes** (migration **112**) · **2 basculées sur TC** (migration **113**) ·
+   **1 supprimée sur décision** (`rembourser_dette_tr`) · **3 vivantes conservées**
+   (`admin_reset_compte`, `remise_a_zero_totale`, `client_annuler_apres_no_show`).
+2. **🔴 Faille trouvée — `admin_reset_tous_comptes()`** : SECURITY DEFINER, GRANT à `anon`,
+   **aucun garde** (ni `is_admin()`, ni `auth.uid()`). Elle passe toutes les courses actives à
+   `annulee`. La clé anon est publique (APK + bundle admin web). **Non exploitable aujourd'hui
+   par accident seulement** : elle insère dans `transactions_wallet(user_id, …)` alors que la
+   colonne est `wallet_id` → erreur au parse → rollback. C'est un bug qui tient lieu de
+   serrure. Supprimée par la 112. (`remise_a_zero_totale`, elle, est bien gardée : admin + MFA
+   + confirmation `SUPPRIMER`.) Idem `crediter_wallet()` : definer + anon + 0 garde.
+3. **🔴 Les bonus TR mensuels ne fonctionnaient pas** — 2 crons ACTIFS
+   (`caarco-bonus-volume-mensuel`, `caarco-prime-qualite-mensuel`) créditaient des wallets
+   irretirables ET `calculer_bonus_volume_mensuel` lisait le CA depuis `paiements`, table vide
+   depuis le paiement direct client→TR : **le bonus valait 0 pour tout le monde**.
+   Décision Cedric : **basculer sur les TC**. Migration 113 → crédite `users.solde_tc` +
+   `transactions_tc` (2 nouveaux types `bonus_volume`/`prime_qualite`), CA lu depuis
+   `courses.prix_fcfa`, barèmes inchangés, `REVOKE` de `anon`.
+   ✅ **Appliquée en prod le 18/07/2026 et contrôlée** : contrainte `type` étendue aux 4 valeurs,
+   les 2 fonctions créditent `solde_tc` / ne touchent plus `wallets` / lisent le CA depuis
+   `courses`, ACL réduites à `postgres` + `service_role`. Les 2 fonctions ont été **réellement
+   exécutées** : aucune erreur PL/pgSQL, 0 transaction créée (aucun TR n'a de course terminée
+   le mois dernier → sous les seuils de 10 et 5 courses). Le verrou d'idempotence n'est donc
+   pas posé : le cron du 1er août traitera juillet normalement.
+3bis. **🔴 FAILLE MAJEURE fermée (migration 115) — `attribuer_jalon_client()`.** Plus grave que
+   celle du 112, et **réellement exploitable** (celle du 112 ne l'était que par accident de bug).
+   SECURITY DEFINER + GRANT `anon` + zéro garde, et le palier venait du **paramètre**, jamais
+   vérifié en base. Un appel HTTP avec la clé anon (publique : APK Play Store + bundle admin web)
+   suffisait : `p_nb_courses: 50` → coupon **-70 % valable 30 jours** ; `100` → `is_vip = true`.
+   Le coupon n'est pas décoratif : le trigger `verrouiller_prix_course_creation` lit
+   `jalons_client` et applique la réduction au prix à la création de la course →
+   **perte de CA directe, répétable à volonté.** Correctif : REVOKE (son seul appelant,
+   `confirmer_livraison`, l'invoque en SQL interne → non affecté) + palier désormais **relu
+   depuis `users.nombre_courses`**. Également durcis : gardes d'identité sur `candidater_course`
+   et `accepter_course_programmee` (on pouvait engager un AUTRE transporteur sur une course, dont
+   la commission TC lui aurait été débitée) ; REVOKE `anon` sur 8 tâches planifiées exposées en
+   RPC. Fausse alerte écartée : `admin_reset_compte` a une garde contournable
+   (`auth.uid() IS NOT NULL AND NOT is_admin()`) mais n'est **pas** grantée à `anon` → non
+   exploitable ; durcie quand même (114).
+   📌 **L'audit du 112 ne couvrait que les fonctions touchant `wallets`** — c'est en l'élargissant
+   à TOUT le schéma public que cette faille est sortie. Leçon : auditer par *surface d'exposition*
+   (prosecdef + ACL), jamais par thème métier.
+3ter. **⚠️ Piège SQL à retenir** : `CREATE OR REPLACE FUNCTION` **refuse de retirer la valeur par
+   défaut d'un paramètre existant** (`ERROR 42P13`) — `remise_a_zero_totale(p_confirmation text
+   DEFAULT NULL::text)` a fait échouer (et rollback) toute la 114 au premier essai. Toujours lire
+   `pg_get_function_arguments()` (avec défauts), pas seulement
+   `pg_get_function_identity_arguments()`, avant de réécrire une fonction.
+4. **Chaîne de dette TR retirée** (décision Cedric) : le bouton « Régler l'impayé » du
+   TableauBord testait le solde **TC** puis appelait une RPC exigeant un solde **wallet** →
+   `solde_insuffisant` garanti. Bloc UI + états + styles + 6 clés i18n (fr/en) retirés,
+   `rembourser_dette_tr` droppée. `tableauBord.acheterJetons` **conservée** (CourseScreen).
+5. **Colonnes `users.statut_vip` / `est_vip` supprimées** (112) : booléens, 22 lignes toutes à
+   `false`, 0 écrivain depuis le 111, 0 réf dans `App/src`, 0 vue, 0 policy, 0 index.
+   `is_vip` reste la seule vivante (écrite par `attribuer_jalon_client`, palier 100).
+6. **Point 3 de la session — DÉJÀ RÉGLÉ** : les 6 écrans financiers morts ne sont pas
+   seulement hors bundle, **leurs fichiers n'existent plus** dans `App/src`. L'entrée
+   « suppression bloquée dans l'env Cowork » de la section BUGS CONNUS était périmée
+   (corrigée ci-dessous). `App/src/services/paiement.js` (orphelin, seul appelant de
+   `process_ride_payment`) supprimé cette session.
+6bis. **Sort de la table `wallets` — DÉCISION Cedric (18/07/2026) : DROP après le prochain build.**
+   Concerne `wallets`, `transactions_wallet` et la vue `wallets_avec_retirable`. Preuves :
+   16 lignes toutes à 0, 0 transaction, **0 référence dans `App/src`**. Argument supplémentaire :
+   la FK `wallets → users` sans `ON DELETE CASCADE` est ce qui bloque les suppressions de compte
+   côté admin. À grouper avec le drop de `bloque_impaye` / `dette_commission_fcfa` /
+   `dettes_commission` (point 7) dans une **migration 116**, une fois le build diffusé.
+   Après le 114, plus aucune fonction n'écrit dedans (`remise_a_zero_totale` ne fait plus qu'un
+   TRUNCATE de `transactions_wallet`, protégé par un test d'existence — donc sûr après le DROP).
+7. **⚠️ Garde-fou APK** : `bloque_impaye`, `dette_commission_fcfa` et la table
+   `dettes_commission` n'ont plus d'écrivain mais **restent en base** — l'APK diffusé les lit
+   encore dans le même `select` que `solde_tc`. Les dropper maintenant casserait l'affichage
+   du solde TC en production. Clauses prêtes, sous bandeau, en fin de migration 112.
+
+### Session 34 (2026-07-18) — audit 101 + neutralisation fidélité wallet (migration 111)
+Lecture seule sur la prod (API Management, `App/.env`). Aucune écriture faite par l'agent.
+1. **Audit migration 101 — la prémisse « appliquée partiellement » est FAUSSE.** Les 7 objets
+   du 101 sont TOUS en prod, corps déployés identiques au fichier (vérif `pg_proc` objet par
+   objet) : clé `streak_client_reduction_pct`=10, `appliquer_jalon_client` supprimée,
+   `verifier_streak_client(uuid)` supprimée, `confirmer_livraison` appelle bien
+   `attribuer_jalon_client`, grants OK. Le vrai défaut du 101 est son **PÉRIMÈTRE**, pas son
+   application.
+2. **🔴 Découverte — un SECOND système de fidélité wallet tournait en parallèle en prod.**
+   Le trigger `trigger_jalon_client` (AFTER UPDATE ON courses) → `verifier_jalon_client()`
+   écrivait dans `recompenses_client` (`wallet_credit`) + `statut_vip`/`est_vip`, en même temps
+   que le modèle coupon actif écrivait dans `jalons_client` (`reduction_pct`) + `is_vip`.
+   Aux paliers 10/20/30/50/100, double attribution et colonnes VIP divergentes. Les deux
+   chemins ne comptaient même pas pareil (COUNT(*) courses vs users.nombre_courses).
+   Pas 1 mais **7 objets morts** : le trigger + `verifier_jalon_client`, `verifier_jalons_client`,
+   `verifier_streak_hebdo`, `reveler_jalon`, `reveler_recompense`, `appliquer_recompense`.
+   → **Migration 111 écrite ET APPLIQUÉE EN PROD le 18/07/2026** (contrôle post-application
+   vérifié côté agent : 7 objets absents, `trigger_jalon_client` supprimé, `trigger_streak_client`
+   (coupon) intact, chaîne coupon complète, 0 fonction surchargée, 0 dépendance cassée, table
+   `recompenses_client` + utilitaires admin intacts). Sûreté prouvée avant écriture : `recompenses_client` 0 ligne,
+   `jalons_client` 0 ligne, `wallets` 0 solde non nul, 0 référence dans `App/src`, 0 appelant SQL
+   survivant. Table `recompenses_client` CONSERVÉE (utilisée par `remise_a_zero_totale` +
+   `admin_reset_*`) ; colonnes `statut_vip`/`est_vip` conservées (décision à part).
+3. **Doublons de fonctions surchargées : AUCUN restant.** La requête `pg_proc group by proname
+   having count(*)>1` sur `public` renvoie 0 ligne — la migration 110 a éliminé le dernier.
+4. **Dette signalée, hors périmètre** : ~19 fonctions écrivent encore dans `wallets` côté
+   transporteur (bonus TR, retraits, dette TR, `liberer_sequestre_course`). À trier une autre fois.
+
 ### Session 33 (2026-07-17) — post-refonte : push, Partie C, tests, assets
 Les 4 chantiers listés au démarrage traités :
 1. **Push + nettoyage** : repo parent poussé sur `origin/main` ; 5 parasites supprimés (App/ : fix.js, restore_alpha.js, crash_log.txt, jpeg de référence ; parent : fichier vide `f36dfa2`). ⚠️ `App/` reste local — **aucun remote git** (pour le pousser un jour : créer un repo GitHub dédié + `git remote add`).
@@ -476,10 +600,12 @@ Format dates : ISO 8601
 - ⚠️ **Boutons de paiement morts** : `navigate('Paiement')` dans AccueilScreen (~600)
   et SuiviScreen (payerAvance ~253 + useEffect ~239) pointent vers une route supprimée
   (modèle TC = paiement direct client→TR). À retirer/rediriger avec QA visuelle.
-- ⚠️ **6 écrans financiers morts non supprimés** (WalletScreen, RechargeRapideScreen,
-  PaiementScreen, PayerTransporteurScreen, RetraitScreen, EncaissementScreen) :
-  désormais 0 import, hors bundle. Suppression bloquée dans l'env Cowork — à supprimer
-  depuis VS Code.
+- ✅ **RÉSOLU (Session 35, 18/07/2026)** — les 6 écrans financiers morts (WalletScreen,
+  RechargeRapideScreen, PaiementScreen, PayerTransporteurScreen, RetraitScreen,
+  EncaissementScreen) ont bien été supprimés : plus aucun fichier dans `App/src`,
+  0 import, 0 route. `services/paiement.js` (orphelin) supprimé au passage.
+  Ne pas rouvrir ce point. NB : `RetraitsAdminScreen.js` existe toujours mais n'a plus
+  rien d'un écran de retrait — il a été reconverti en écran admin « Tokens TC ».
 - Migration 014 hors-séquence (listée entre 015 et 013 dans le fs)
   → Risque faible si Supabase applique par timestamp
 - **reset-mot-de-passe** : Edge Function jamais déployée sur Supabase → retourne non-2xx
