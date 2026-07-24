@@ -1,0 +1,42 @@
+-- ============================================================================
+-- ROLLBACK de la migration 116 — Suppression du modèle wallet
+-- Appliquée en prod le 2026-07-23 (après confirmation adoption build 1.1.0).
+-- ============================================================================
+--
+-- 116 a supprimé : tables wallets / transactions_wallet / dettes_commission,
+-- vue wallets_avec_retirable, colonnes users.bloque_impaye /
+-- users.dette_commission_fcfa, et a nettoyé remise_a_zero_totale.
+--
+-- AVANT le DROP, les données ont été sauvegardées :
+--   · En base   : public._backup_116_wallets (16 lignes),
+--                 public._backup_116_transactions_wallet (0),
+--                 public._backup_116_dettes_commission (0)
+--   · En local  : scratchpad/wallets_backup_20260723.json (dump complet)
+--
+-- ⚠️ La 116 n'est PAS réversible par un simple INSERT : le SCHÉMA exact
+-- (types, contraintes CHECK, FK wallets→users, RLS) doit être recréé depuis
+-- les migrations d'origine avant de réinjecter les données :
+--   · wallets / transactions_wallet / vue : migration 070 (+ suivantes)
+--   · dettes_commission, users.bloque_impaye / dette_commission_fcfa :
+--     chaîne « dette commission » (migrations < 112)
+--
+-- PROCÉDURE DE RESTAURATION (si un jour nécessaire) :
+--   1. Ré-exécuter les CREATE TABLE / ALTER TABLE d'origine (070 + chaîne dette)
+--      pour recréer le schéma vide.
+--   2. Réinjecter les données depuis les sauvegardes :
+--        INSERT INTO public.wallets              SELECT * FROM public._backup_116_wallets;
+--        INSERT INTO public.transactions_wallet  SELECT * FROM public._backup_116_transactions_wallet;
+--        INSERT INTO public.dettes_commission    SELECT * FROM public._backup_116_dettes_commission;
+--   3. Recréer la vue wallets_avec_retirable (migration 070).
+--   4. Restaurer l'ancienne version de remise_a_zero_totale (migration 114) si
+--      le TRUNCATE de transactions_wallet doit redevenir actif.
+--
+-- Comme aucune donnée métier active n'y transitait (solde_fcfa = 0 partout ;
+-- seul solde_bonus obsolète non nul) et qu'aucun code App/src ni SQL ne les
+-- lit, un rollback n'a pas d'utilité pratique — laisser 116 en place.
+--
+-- Nettoyage des sauvegardes (une fois 116 confirmée définitive) :
+--   DROP TABLE IF EXISTS public._backup_116_wallets;
+--   DROP TABLE IF EXISTS public._backup_116_transactions_wallet;
+--   DROP TABLE IF EXISTS public._backup_116_dettes_commission;
+-- ============================================================================
