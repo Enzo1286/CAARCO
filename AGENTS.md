@@ -1,7 +1,7 @@
 # AGENTS.md — CAARCO SUPER AGENT
 # Version 4.0 — Application mobile + Site web
 # Cedric Timene — Cameroun — Juin 2026
-# Stack app : Supabase + React Native Expo + Notchpay (Tokens de Course)
+# Stack app : Supabase + React Native Expo + KPay (Jetons de Course - JC)
 # Stack web : Next.js 16 + Tailwind CSS v4 + framer-motion + Google Sheets CMS
 
 ═══════════════════════════════════════════════════════════════════
@@ -46,9 +46,9 @@ Règle absolue : JAMAIS commencer à coder sans avoir complété les étapes 1-4
 Frontend Mobile   : React Native 0.81.5 + Expo SDK 54 (bare workflow)
 Backend / DB      : Supabase (PostgreSQL + PostGIS + Auth + Storage + Edge Functions)
 Authentification  : Supabase Auth + OTP 4 chiffres généré en app
-Tokens de Course  : KPay (MTN/Orange Money) — achat TC uniquement pour les TR
-                    1 TC = 1 FCFA | min 500 TC | boutons rapides 5K/10K/25K/50K/100K
-                    TC déduites à la livraison (20% commission) — non retirables
+Jetons de Course   : KPay (MTN/Orange Money) — achat JC uniquement pour les TR
+                    1 JC = 1 FCFA | min 500 JC | boutons rapides 5K/10K/25K/50K/100K
+                    JC déduites à la livraison (20% commission) — non retirables
 Paiement client   : DIRECT en espèces ou Mobile Money au TR (aucune transaction dans l'app)
 Cartographie      : CarteLeaflet (Leaflet 1.9.4 dans WebView) — 100% GRATUIT, sans clé API
 Tuiles OSM        : tile.openstreetmap.org — 100% gratuit
