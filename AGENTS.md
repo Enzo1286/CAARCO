@@ -46,7 +46,7 @@ Règle absolue : JAMAIS commencer à coder sans avoir complété les étapes 1-4
 Frontend Mobile   : React Native 0.81.5 + Expo SDK 54 (bare workflow)
 Backend / DB      : Supabase (PostgreSQL + PostGIS + Auth + Storage + Edge Functions)
 Authentification  : Supabase Auth + OTP 4 chiffres généré en app
-Tokens de Course  : Notchpay (MTN/Orange Money) — achat TC uniquement pour les TR
+Tokens de Course  : KPay (MTN/Orange Money) — achat TC uniquement pour les TR
                     1 TC = 1 FCFA | min 500 TC | boutons rapides 5K/10K/25K/50K/100K
                     TC déduites à la livraison (20% commission) — non retirables
 Paiement client   : DIRECT en espèces ou Mobile Money au TR (aucune transaction dans l'app)
@@ -66,7 +66,8 @@ Design system     : Atelier CAARCO (voir Section 5)
 ⚠️  MAPBOX = SUPPRIMÉ (token révoqué, aucune référence dans le code)
 ⚠️  ORS = SUPPRIMÉ (remplacé par OSRM gratuit)
 ⚠️  react-native-maps = SUPPRIMÉ (remplacé par CarteLeaflet/WebView)
-⚠️  MONEROO = SUPPRIMÉ (remplacé par Notchpay — achat TC uniquement)
+⚠️  NOTCHPAY = SUPPRIMÉ (remplacé par KPay — achat TC uniquement)
+⚠️  MONEROO = SUPPRIMÉ (remplacé par KPay — achat TC uniquement)
 ⚠️  SÉQUESTRE = SUPPRIMÉ (refusé Play Store — activité financière non agréée)
 ⚠️  PORTEFEUILLE CLIENT = SUPPRIMÉ (aucune rétention d'argent côté client)
 ```

@@ -1,8 +1,8 @@
 # MÉMOIRE PROJET — CAARCO
-Dernière mise à jour : 2026-07-17
+Dernière mise à jour : 2026-08-03
 Emplacement projet  : D:\Mon projet\CAARCO (déplacé le 2026-07-04, ex-D:\CAARCO)
                       ⚠️ Chemin avec ESPACE → toujours mettre les chemins entre guillemets
-Sessions totales    : 33
+Sessions totales    : 35
 Propriétaire        : Cedric Timene — Bafoussam, Cameroun
 
 ═══════════════════════════════════════════════════════════════
@@ -37,7 +37,7 @@ Authentification  : Supabase Auth — téléphone + mot de passe ✅ CONFIRMÉ
                     Email stocké sous forme {telephone}@caarco.local
                     Role forcé côté serveur à la création, jamais côté client
 Paiements V1      : Moneroo (Edge Functions initier-paiement + moneroo-webhook)
-Paiements V2      : Notchpay + Lygos (fallback planifié)
+Paiements V2      : KPay + Lygos (fallback planifié)
 Cartographie      : CarteLeaflet (Leaflet dans WebView) — OSM gratuit, sans clé API
 Routage           : OSRM public (itineraire.js) — gratuit
 Notifications     : Expo Push Notifications (FCM V1 — expo_push_token dans users)
@@ -63,6 +63,7 @@ CMS               : Google Sheet ID 14kZ8nLZgO7eRqGDrDgVovn28uDm17TINYsBiWO3idXE
 ## 🔑 DÉCISIONS STRATÉGIQUES (TOUTES PRISES — FINALES)
 
 ```
+JETONS DE COURSE    🪙 Nom officiel : Jetons de Course (JC). Le terme 'Token/TC' est banni de toutes les interfaces.
 SÉQUESTRE          ✅ ACTIVÉ — RPC liberer_sequestre_course() côté Supabase
 CASH-ON-DELIVERY   ❌ EXCLU de la V1
 ASSURANCE COLIS    📋 Plafond interne 50 000 FCFA (sans assureur externe)
@@ -656,7 +657,7 @@ Session 29 (2026-07-17) — Lot C déployé + commit docs + décisions produit d
   MEMORY.md, REFONTE_TRACKING.md, `scripts/` (4 fichiers, vérifiés sans secret), `.gitignore` durci
   (crash*.log, CAARCO_logcat.txt, supabase/.temp, .agents/, .codex/). Push à faire **seulement si le repo
   `github.com/Enzo1286/CAARCO` est privé** (docs métier). Exclus volontairement : gitlink `App`, logs, médias
-  (Carrousel-*/Infographie-*/*.jsx/AGENTS.md/CHARTE_…).
+  (Infographie-*/*.jsx/AGENTS.md/…).
 - **Remote GitHub pour App/ : en attente d'install `gh`.** `gh` pas installé ici → Cedric installe
   (`winget install --id GitHub.cli -e` puis `gh auth login`). Ensuite (prochaine session) :
   `cd App && gh repo create CAARCO-App --private --source=. --remote=origin --push`. App/ = repo git
@@ -772,26 +773,11 @@ Session 25 (2026-07-12) — Infographie promo Binda :
 - Décision de marque : le personnage officiel CAARCO s'appelle désormais **Binda**. Le fichier
   de référence conserve son nom historique `Kako_character_reference.jpeg`.
 
-Session 24 (2026-07-12) — Carrousel Instagram Kako :
-- Carrousel 4:5 de quatre slides centré sur Kako créé à partir de la planche officielle,
-  avec quatre poses/cadrages, les logos CAARCO et les tokens Atelier CAARCO.
-- PNG finaux déposés sur le Bureau : `Carrousel-Kako-CAARCO`.
-
-Session 23 (2026-07-12) — Carrousel de présentation CAARCO :
-- Carrousel Instagram 4:5 de quatre slides produit : promesse, quatre usages, parcours,
-  appel à l'action. Source React/Tailwind et exporteur conservés dans
-  `Carrousel-Presentation-CAARCO/`.
-- PNG finalisés copiés sur le Bureau dans `Carrousel-Presentation-CAARCO`.
-
-Session 22 (2026-07-12) — Charte Instagram CAARCO × Kako :
-- Charte pérenne créée dans `CHARTE_CARROUSELS_INSTAGRAM_KAKO.md` : formats 1:1 et 4:5,
-  palette Atelier CAARCO, typographies, logos, règles d'écriture et spécification React/Tailwind.
-- Kako devient le personnage officiel obligatoire lorsqu'un carrousel a besoin d'un personnage.
+Session 22 (2026-07-12) — Visuels Instagram CAARCO × Kako :
+- Personnage officiel CAARCO (Kako / Binda).
   Référence copiée dans `App/assets/Kako_character_reference.jpeg`; logos officiels :
   `App/assets/Logo CAARCO PNG.png` (fond clair) et `App/assets/Logo CAARCO Light PNG.png`
   (fond sombre).
-- Convention future : toute demande « Create a carousel on [Sujet] » crée par défaut quatre
-  slides; l'export d'images fournit une image distincte par slide.
 
 Sessions 16-21 (2026-07-08/09) — Refonte visuelle Lots 0-6 (en cours) :
 - Suite directe de la Session 15 ci-dessous. Détail exhaustif (méthode, composants, i18n,
@@ -1109,6 +1095,14 @@ Session 10 (2026-07-05, soir) — Nettoyage git + Sprint 1 (sécurité serveur) 
 - Consigne Cedric : tous les briefs/résumés/rapports doivent être en français désormais.
 - Consigne Cedric : raccourcis de build cdd/ct/crd/crt/prod (voir mémoire Claude Code).
 
+Session 35 (2026-07-26) — Test live & Débogage complet du Back-Office Admin :
+- Serveur de dev Web lancé sur http://localhost:8081 (1119 modules compilés sans erreur).
+- Correction du crash bloquant `sm is not defined` dans `DashboardScreen.js` (définition manquante du StyleSheet `sm` pour `ModalMaintenance`).
+- Correction dans `LieuxAdminScreen.js` : remplacement du hook `useFocusEffect` par `useEffect` (incompatible avec la navigation `AdminShell` car hors React Navigation, ce qui empêchait le chargement des lieux).
+- Nettoyage et purge des dossiers et fichiers parasites générés accidentellement dans `src/components` et `src/screens/admin`.
+- Audit de la totalité des 26 écrans administratifs : tout est prêt pour le test en direct.
+
+
 Session 9 (2026-07-04) — Déménagement du projet :
 - Projet déplacé (copié) : D:\CAARCO → D:\Mon projet\CAARCO
   · ⚠️ L'ancien dossier D:\CAARCO existe ENCORE (copie 4 Go) — à supprimer après vérification
@@ -1152,3 +1146,36 @@ Session 9 (2026-07-04) — Déménagement du projet :
 - Cameroun : réseau MTN + Orange dominant
 - Moneroo : methode 'orange_money' → 'orange_cm', 'mtn_mobile_money' → 'mtn_cm'
 - EAS Build : eas.json à créer avant de pouvoir générer un APK
+
+---
+
+## Session 36 (2026-08-01) — Audit qualité et sécurité préproduction
+
+- Audit approfondi du code mobile/web, des Edge Functions Supabase, des migrations,
+  dépendances, formulaires, accessibilité statique, génération PDF/QR et tarification.
+- Correctifs critiques réalisés localement :
+  - neutralisation de la réinitialisation de mot de passe par simple numéro de téléphone ;
+  - authentification/autorisation des notifications, campagnes et tâches planifiées ;
+  - contrôle d'appartenance des transactions NotchPay/KPay et durcissement des webhooks ;
+  - désactivation HTTP 410 des anciens endpoints de paiement/recharge incompatibles avec
+    le modèle officiel CAARCO (paiement direct client → transporteur) ;
+  - tarification programmée recalculée côté serveur, distance OSRM vérifiée et absence de surge ;
+  - QR générés localement, reçu renommé en récapitulatif sans valeur de preuve de paiement ;
+  - corrections de contraste, accessibilité, préférences de paiement et mots de passe admin.
+- Nouvelles migrations :
+  - `135_securite_crons_vault.sql` : secrets de cron via Vault et réinstallation sécurisée ;
+  - `136_tarification_course_serveur.sql` : garde-fou serveur sur prix/distance/coordonnées.
+- Validations locales réussies : 8/8 tests de régression sécurité, analyse syntaxique de
+  198 fichiers JS/TS, Expo Doctor 18/18, export web de 1095 modules (bundle JS 2,85 Mo),
+  `npm audit` sans vulnérabilité critique ou haute (16 modérées transitives restantes).
+- Limites de l'audit : aucun navigateur n'était disponible dans le connecteur ; l'inspection
+  responsive/visuelle et les clics réels restent à faire. Le connecteur Supabase a refusé
+  l'accès et Docker est absent ; les migrations et les 7 suites SQL n'ont donc pas été
+  exécutées contre une base réelle.
+- Score de préparation actuel : 6,5/10 tant que le déploiement et les tests de staging ne
+  sont pas terminés.
+- Prochaine étape obligatoire : créer le secret Vault `caarco_service_role_key`, appliquer
+  les migrations 135 puis 136 sur staging, redéployer les Edge Functions modifiées, lancer
+  les tests SQL et effectuer la matrice visuelle/fonctionnelle desktop-tablette-mobile.
+- Correction de mémoire : la stack effectivement validée est Expo 54.0.36 + React Native
+  0.81.5 ; la note précédente « Expo SDK 55 » était erronée.
