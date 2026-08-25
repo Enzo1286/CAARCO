@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Pictogramme d'accès : Piste carrossable (route en terre battue / ornières carrossables) -->
+  <!-- Tracé sinueux de la piste en perspective -->
+  <path d="M10,42 C12,32 15,24 19,16 C21,12 21,8 20,6" />
+  <path d="M38,42 C36,32 33,24 29,16 C27,12 27,8 28,6" />
+  <!-- Double trace de roulement / ornières de pneus -->
+  <path d="M18,42 C19,34 21,26 23,18" stroke-dasharray="3 3" stroke-width="1.8" />
+  <path d="M30,42 C29,34 27,26 25,18" stroke-dasharray="3 3" stroke-width="1.8" />
+  <!-- Texture de terre / gravillons sur les côtés -->
+  <circle cx="7" cy="36" r="1" fill="currentColor" />
+  <circle cx="9" cy="28" r="0.8" fill="currentColor" />
+  <circle cx="41" cy="34" r="1" fill="currentColor" />
+  <circle cx="39" cy="26" r="0.8" fill="currentColor" />
+</svg>

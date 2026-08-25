@@ -22,8 +22,11 @@ $sdkPath = "$env:LOCALAPPDATA\Android\Sdk" -replace "\\", "\\\\"
 "sdk.dir=$sdkPath" | Out-File -FilePath "android\local.properties" -Encoding ascii
 
 # 3. Compilation
-Write-Host "Compilation en release en cours..." -ForegroundColor Cyan
+Write-Host "Arret des anciens daemons Gradle..." -ForegroundColor Cyan
 Set-Location "$PSScriptRoot\App\android"
+.\gradlew --stop
+
+Write-Host "Compilation en release en cours..." -ForegroundColor Cyan
 .\gradlew assembleRelease --max-workers=2
 
 if ($LASTEXITCODE -eq 0) {
@@ -40,7 +43,13 @@ if ($LASTEXITCODE -eq 0) {
         exit 1
     }
 
-    Write-Host "Build reussi. APK: $apk" -ForegroundColor Green
+    $size = [math]::Round((Get-Item "$PSScriptRoot\App\android\$apk").Length / 1MB, 1)
+    Write-Host "Build reussi ($size Mo). APK: $apk" -ForegroundColor Green
+
+    # Copie sur le bureau
+    $desktopPath = "$env:USERPROFILE\Desktop\caarco-release.apk"
+    Copy-Item "$PSScriptRoot\App\android\$apk" $desktopPath -Force
+    Write-Host "APK depose sur le bureau : $desktopPath" -ForegroundColor Green
 
     # 4. Installation
     $adb = "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe"
@@ -56,6 +65,8 @@ if ($LASTEXITCODE -eq 0) {
             & $adb -s $device install "$PSScriptRoot\App\android\$apk"
             if ($LASTEXITCODE -eq 0) {
                 Write-Host "Succes sur $device" -ForegroundColor Green
+                Write-Host "Lancement de l'application..." -ForegroundColor Cyan
+                & $adb -s $device shell monkey -p com.caarco.app -c android.intent.category.LAUNCHER 1
             } else {
                 Write-Host "Echec sur $device" -ForegroundColor Red
             }

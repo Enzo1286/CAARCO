@@ -41,6 +41,11 @@ if ($LASTEXITCODE -eq 0) {
     $size = [math]::Round((Get-Item $apk).Length / 1MB, 1)
     Write-Host "Build reussi ($size Mo). APK: $apk" -ForegroundColor Green
 
+    # Copie sur le bureau
+    $desktopPath = "$env:USERPROFILE\Desktop\caarco-debug.apk"
+    Copy-Item "$PSScriptRoot\App\android\$apk" $desktopPath -Force
+    Write-Host "APK depose sur le bureau : $desktopPath" -ForegroundColor Green
+
     # 4. Installation
     $adb = "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe"
     $devicesOutput = & $adb devices

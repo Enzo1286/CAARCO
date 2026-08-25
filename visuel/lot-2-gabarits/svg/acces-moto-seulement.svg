@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Pictogramme d'accès : Moto seulement (borne/potelets interdisant les 4 roues + silhouette moto) -->
+  <!-- Silhouette épurée de moto de face / trois-quarts profil -->
+  <!-- Roue avant -->
+  <circle cx="16" cy="34" r="7" stroke-width="2.5" />
+  <circle cx="16" cy="34" r="2" fill="currentColor" />
+  
+  <!-- Roue arrière -->
+  <circle cx="34" cy="34" r="7" stroke-width="2.5" />
+  <circle cx="34" cy="34" r="2" fill="currentColor" />
+
+  <!-- Cadre, réservoir et selle -->
+  <path d="M16,34 L22,22 L31,22 L34,34" stroke-width="2.2" />
+  <path d="M22,22 L19,15 L25,15" stroke-width="2.2" />
+  <!-- Guidon -->
+  <line x1="16" y1="13" x2="23" y2="15" stroke-width="2.5" />
+  <!-- Selle -->
+  <path d="M25,20 L33,20" stroke-width="3" />
+  <!-- Phare -->
+  <circle cx="18" cy="18" r="1.5" fill="currentColor" />
+
+  <!-- Potelet / borne d'accès piéton/2-roues à droite -->
+  <rect x="42" y="24" width="3" height="17" rx="1.5" stroke-width="1.8" />
+  <rect x="3" y="24" width="3" height="17" rx="1.5" stroke-width="1.8" />
+</svg>

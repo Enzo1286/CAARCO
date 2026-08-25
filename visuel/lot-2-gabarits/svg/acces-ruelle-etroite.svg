@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Pictogramme d'accès : Ruelle étroite (passage serré entre deux façades/murs) -->
+  <!-- Façade gauche -->
+  <path d="M4,42 L4,10 L16,16 L16,42 Z" />
+  <line x1="8" y1="20" x2="12" y2="22" stroke-width="1.8" />
+  <line x1="8" y1="28" x2="12" y2="30" stroke-width="1.8" />
+  <line x1="8" y1="36" x2="12" y2="38" stroke-width="1.8" />
+
+  <!-- Façade droite -->
+  <path d="M44,42 L44,10 L32,16 L32,42 Z" />
+  <line x1="40" y1="20" x2="36" y2="22" stroke-width="1.8" />
+  <line x1="40" y1="28" x2="36" y2="30" stroke-width="1.8" />
+  <line x1="40" y1="36" x2="36" y2="38" stroke-width="1.8" />
+
+  <!-- Passage étroit au sol avec flèche de progression -->
+  <line x1="24" y1="38" x2="24" y2="18" stroke-width="2" stroke-dasharray="2 2" />
+  <polyline points="21,22 24,18 27,22" stroke-width="2" />
+  
+  <!-- Flèches de resserrement horizontal (< >) -->
+  <polyline points="19,29 17,31 19,33" stroke-width="1.8" />
+  <polyline points="29,29 31,31 29,33" stroke-width="1.8" />
+</svg>

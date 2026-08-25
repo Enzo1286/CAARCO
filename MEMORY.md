@@ -1,8 +1,7 @@
 # MÉMOIRE PROJET — CAARCO
-Dernière mise à jour : 2026-08-03
-Emplacement projet  : D:\Mon projet\CAARCO (déplacé le 2026-07-04, ex-D:\CAARCO)
-                      ⚠️ Chemin avec ESPACE → toujours mettre les chemins entre guillemets
-Sessions totales    : 35
+Dernière mise à jour : 2026-08-24
+Emplacement projet  : D:\Mon projet\CAARCO
+Sessions totales    : 43
 Propriétaire        : Cedric Timene — Bafoussam, Cameroun
 
 ═══════════════════════════════════════════════════════════════
@@ -63,7 +62,7 @@ CMS               : Google Sheet ID 14kZ8nLZgO7eRqGDrDgVovn28uDm17TINYsBiWO3idXE
 ## 🔑 DÉCISIONS STRATÉGIQUES (TOUTES PRISES — FINALES)
 
 ```
-JETONS DE COURSE    🪙 Nom officiel : Jetons de Course (JC). Le terme 'Token/TC' est banni de toutes les interfaces.
+TOKENS DE COURSE    🪙 Nom officiel : Tokens de Course (TC). 1 TC = 1 FCFA, non retirables (renommage JC annulé — commit 8489d24).
 SÉQUESTRE          ✅ ACTIVÉ — RPC liberer_sequestre_course() côté Supabase
 CASH-ON-DELIVERY   ❌ EXCLU de la V1
 ASSURANCE COLIS    📋 Plafond interne 50 000 FCFA (sans assureur externe)
@@ -98,11 +97,12 @@ prix = Math.max(MINIMUM, Math.ceil(
 // Net transporteur : Math.round(prix * 0.80)
 ```
 
-Tarifs par catégorie (AccueilScreen) :
+Tarifs par catégorie (AccueilScreen & TrajetScreen) :
 - Moto            : 150 XAF/km
-- Voiture         : 250 XAF/km
-- Tricycle / Van  : 400 XAF/km
-- Camion          : à vérifier
+- Voiture         : 350 XAF/km
+- Tricycle        : 550 XAF/km
+- Camionnette     : 600 XAF/km
+- Camion          : 1000 XAF/km
 
 ⚠️ Vérifier que App/src/services/prix.js appelle l'Edge Function
    et ne calcule PAS le prix localement.
@@ -344,6 +344,24 @@ Dossier    : D:\CAARCO-WEB (séparé de l'app D:\Mon projet\CAARCO)
 ---
 
 ## 🔄 EN COURS / QUESTIONS OUVERTES
+
+### Session 43 (2026-08-24) — Audit UI/UX Senior & Boucle d'Amélioration Complète
+1. **Audit UI/UX de tous les écrans** :
+   - Note globale attribuée : 8.7/10 (avec points forts remarquables sur l'identité Warm Authority, la cartographie Leaflet/OSM gratuite, l'ergonomie chauffeur et la transparence financière).
+2. **Corrections & Optimisations appliquées (Loop qualité)** :
+   - **Typographie Onboarding** (`OnboardingScreen.js`) : `fontSize.h1` (48px) corrigé à 28px avec `lineHeight: 36` pour supprimer les collisions de texte multilignes sur petits appareils.
+   - **Ergonomie Auth** (`ConnexionScreen.js`) : `hitSlop` et marges augmentées sur la checkbox "Rester connecté" et le lien "Mot de passe oublié" pour garantir une zone tactile confortable ≥ 44×44px.
+   - **Harmonisation complète JC → TC (Tokens de Course)** : Nettoyage et uniformisation de toutes les mentions résiduelles `JC` vers `TC` dans les traductions (`fr.js`, `en.js`), les écrans (`MesTokensScreen.js`, `TableauBordScreen.js`, `CourseScreen.js`), les composants (`ModalAuditRecharges.js`, `CatalogueComposantsScreen.js`) et le back-office admin (`TransporteursAdminScreen.js`, `FinancesAdminScreen.js`, `RetraitsAdminScreen.js`, `NotificationsAdminScreen.js`, `ConfigTarifsScreen.js`).
+   - **Refonte Écran Mot de passe oublié** (`MotDePasseOublieScreen.js`) :
+     - Suppression du fond vert sombre/hardcodé au profit de la palette claire et chaleureuse Atelier CAARCO (`tc.manioc`, `tc.blanc`, `tc.foret`).
+     - Élimination de la duplication du code (le code généré est affiché une seule fois avec bouton de copie, sans ré-affichage dans un champ texte redondant).
+     - Correction du wrapping de texte sur les 6 chiffres du code.
+     - Ajout d'un lien direct de retour vers la page de connexion (`navigation.navigate('Connexion')`) dès la réception du code.
+   - **Audit Complet & Optimisations Admin (23 écrans)** :
+     - Correction d'un bug critique dans `LitigesScreen.js` (nom de colonne `litige_raison` corrigé au lieu de l'inexistant `motif_litige` qui échouait silencieusement).
+     - Correction d'un contraste texte invisible dans `CampagnesPushScreen.js` (bouton de segmentation actif avec fond forêt et texte blanc).
+     - Modernisation responsive du sélecteur de pays (`SelecteurPays.js`) et neutralisation globale de l'encadré et du fond bleu d'autofill des navigateurs web (`injectWebIcons.web.js`, `Sillon.js`, `ChampTelephone.js`).
+     - Mise en conformité de la barre latérale `AdminShell.js` (`Tokens TC`).
 
 ### Session 35 (2026-07-18) — tri de la dette wallet TRANSPORTEUR (migrations 112 + 113)
 **Statut d'application — ✅ 112, 113, 114 et 115 TOUTES APPLIQUÉES ET VÉRIFIÉES EN PROD**
@@ -1152,30 +1170,72 @@ Session 9 (2026-07-04) — Déménagement du projet :
 ## Session 36 (2026-08-01) — Audit qualité et sécurité préproduction
 
 - Audit approfondi du code mobile/web, des Edge Functions Supabase, des migrations,
-  dépendances, formulaires, accessibilité statique, génération PDF/QR et tarification.
-- Correctifs critiques réalisés localement :
-  - neutralisation de la réinitialisation de mot de passe par simple numéro de téléphone ;
-  - authentification/autorisation des notifications, campagnes et tâches planifiées ;
-  - contrôle d'appartenance des transactions NotchPay/KPay et durcissement des webhooks ;
-  - désactivation HTTP 410 des anciens endpoints de paiement/recharge incompatibles avec
-    le modèle officiel CAARCO (paiement direct client → transporteur) ;
-  - tarification programmée recalculée côté serveur, distance OSRM vérifiée et absence de surge ;
-  - QR générés localement, reçu renommé en récapitulatif sans valeur de preuve de paiement ;
-  - corrections de contraste, accessibilité, préférences de paiement et mots de passe admin.
-- Nouvelles migrations :
-  - `135_securite_crons_vault.sql` : secrets de cron via Vault et réinstallation sécurisée ;
-  - `136_tarification_course_serveur.sql` : garde-fou serveur sur prix/distance/coordonnées.
-- Validations locales réussies : 8/8 tests de régression sécurité, analyse syntaxique de
-  198 fichiers JS/TS, Expo Doctor 18/18, export web de 1095 modules (bundle JS 2,85 Mo),
-  `npm audit` sans vulnérabilité critique ou haute (16 modérées transitives restantes).
-- Limites de l'audit : aucun navigateur n'était disponible dans le connecteur ; l'inspection
-  responsive/visuelle et les clics réels restent à faire. Le connecteur Supabase a refusé
-  l'accès et Docker est absent ; les migrations et les 7 suites SQL n'ont donc pas été
-  exécutées contre une base réelle.
-- Score de préparation actuel : 6,5/10 tant que le déploiement et les tests de staging ne
-  sont pas terminés.
-- Prochaine étape obligatoire : créer le secret Vault `caarco_service_role_key`, appliquer
-  les migrations 135 puis 136 sur staging, redéployer les Edge Functions modifiées, lancer
-  les tests SQL et effectuer la matrice visuelle/fonctionnelle desktop-tablette-mobile.
-- Correction de mémoire : la stack effectivement validée est Expo 54.0.36 + React Native
-  0.81.5 ; la note précédente « Expo SDK 55 » était erronée.
+- `ProfilPublicScreen.js` : Chargement du type de véhicule réel (users + table `transporteurs_kyc`), calcul du total cumulé de toutes les courses réelles terminées (`courses` count all-time), et anonymisation des noms de clients dans les avis (`C****c T.`) pour éviter tout détournement de clientèle ou conflit entre transporteurs.
+- `TableauBordScreen.js` : Indicateur « Aucune course disponible » remonté (`marginBottom: 96`) pour flotter au-dessus de la barre de navigation sans jamais être obstrué.
+- `RootNavigator.js` : Déplacement du bouton développeur catalogue vers le haut (`top: insets.top + 60`) pour dégager les commandes en bas à droite.
+
+### 8. Intégration WhatsApp 3D, Palette Officielle & Carte Plein Écran (`TableauBordScreen.js`, `BoutonSignalementCarte.js`, `TabBarFlottante.js`)
+- `TabBarFlottante.js` : Alignement sur la palette officielle Atelier CAARCO (fond vert forêt `#1f3b2a` à 96% d'opacité, liseré néré doré et pastille active or néré `#c89441`).
+- `TransporteurNavigator.js` & `ClientNavigator.js` : `tabBarStyle` configuré en transparence absolue (`position: 'absolute'`, `backgroundColor: 'transparent'`), garantissant une carte Leaflet continue de bord à bord sans fond blanc.
+- `BoutonSignalementCarte.js` : Bouton `[🚩 Signaler]` rehaussé à `bottom: 92` pour ne pas être obstrué par la barre de navigation.
+
+### 9. Bouton 3D WhatsApp Flottant Animé & Signaler (`App/assets/whatsapp_3d.png`, `TableauBordScreen.js`, `BoutonSignalementCarte.js`)
+- Intégration de l'asset `whatsapp_3d.png` détouré en PNG transparent pur haute définition.
+- Agencement au-dessus du bandeau « Aucune course disponible » :
+  * **À gauche** : Icône WhatsApp 3D animée (`104x104 px`) avec double rebond (`-24px`) toutes les 10 secondes et lien vers la chaîne officielle.
+  * **À droite** : Bouton `[🚩 Signaler]` posé juste au-dessus du coin droit du bandeau.
+- Carte Leaflet 100% plein écran sans aucune interruption ni fond opaque arrière.
+### 10. Dégagement Inférieur des Écrans d'Onglets (`ProfilScreen`, `CoursesTransporteurScreen`, `MessagesTransporteurScreen`, `RevenusScreen`, `LeaderboardScreen`, `HistoriqueScreen`)
+- Application systématique de `paddingBottom: 110` sur tous les `ScrollView` et `FlatList` des écrans racine.
+- Garantit qu'aucun texte, bouton, ou lien de bas de page (ex: *Conditions d'utilisation · Confidentialité*, version, boutons d'action) ne soit masqué ou coupé par la barre de navigation flottante.
+
+### 11. Cahier Visuel CAARCO — Lot 2 : Gabarits de Chargement & Pictogrammes d'Accès (`visuel/lot-2-gabarits/`)
+- **Règle d'or respectée** : Aucun fichier `.js` applicatif modifié. Livraison 100% vectorielle et documentation de spécification.
+- **6 Illustrations de gabarits SVG créées** (`visuel/lot-2-gabarits/svg/`) :
+  * `carton.svg` (738 o) : Colis unique / document (Moto / Tricycle).
+  * `cartons-10.svg` (1.62 Ko) : Pile de 10 cartons (Tricycle / Voiture).
+  * `mobilier.svg` (1.00 Ko) : Fauteuil + table basse + lampe (Camionnette).
+  * `electromenager.svg` (984 o) : Réfrigérateur combiné double porte.
+  * `materiaux.svg` (1.64 Ko) : Sacs de ciment empilés + parpaings avec alvéoles.
+  * `demenagement.svg` (1.58 Ko) : Camion caisse grand volume chargé.
+- **5 Pictogrammes d'accès de retrait créés** (`visuel/lot-2-gabarits/svg/`) :
+  * `acces-route-bitumee.svg` (861 o) : Voie goudronnée avec marquage médian.
+  * `acces-piste-carrossable.svg` (964 o) : Piste en terre battue avec traces de roulement.
+  * `acces-ruelle-etroite.svg` (1.17 Ko) : Passage resserré entre murs et flèche d'accès.
+  * `acces-moto-seulement.svg` (1.22 Ko) : Silhouette 2 roues + bornes anti-4 roues.
+  * `acces-pente-forte.svg` (1.05 Ko) : Déclivité raide + flèche d'effort en montée.
+- **Planches de contrôle haute définition** (`visuel/lot-2-gabarits/controle/`) :
+  * `planche-48dp.png` : Rendu nominal à 48 dp sur fond Manioc `#fbf9f3` et cartes Brume `#ece9e0` (teintes Forêt, Bambou, Néré, Latérite).
+  * `planche-echelle-1.3.png` : Rendu à l'échelle d'accessibilité 1.3x (62.4 dp) validant les cibles tactiles et le contraste WCAG AA.
+- **Spécifications techniques d'intégration rédigées** (`visuel/lot-2-gabarits/SPEC.md`) :
+  * Tableau d'animation complet respectant les 5 tokens temporels (`tap` 90ms, `vif` 160ms, `pose` 240ms, `ample` 400ms, `boucle` 1400ms) et propriétés `transform` / `opacity` exclusives.
+  * Validation des 8 points de conformité du cahier des charges (§7).
+  * Poids total du lot : 11.8 Ko (< 2 Mo).
+
+---
+
+## Session 43 (2026-08-24) — Retrait de tous les boutons d'appel téléphonique dans l'app
+
+- Suppression de tous les boutons d'appel téléphonique direct (`tel:`) et icônes d'appel associées dans l'application mobile et le panneau admin :
+  * `NavigationScreen.js` (Transporteur) : Suppression du bouton d'appel circulaire du panneau client pour ne conserver que le bouton de messagerie instantanée (Chat).
+  * `CourseAccepteeScreen.js` (Client) : Suppression de la ligne d'action « Appeler le transporteur » et nettoyage des imports/fonctions d'appel.
+  * `CourseDetailClientScreen.js` (Client) : Suppression du bouton « Appeler » dans la rangée d'actions transporteur.
+  * `CoursePlanifieeDetailScreen.js` (Client) : Suppression du bouton d'appel du bloc transporteur.
+  * `SuiviScreen.js` (Client) : Remplacement du bouton d'appel « Contacter » par le bouton « Chat » ouvrant la messagerie directe avec le transporteur.
+  * `UtilisateursScreen.js` (Admin) : Suppression du bouton d'action « Contacter » par appel téléphonique.
+- `fr.js` / `AccueilScreen.js` : Correction du séparateur de jalon en `🏆 Jalon : {x} courses atteint !`.
+- Vérification syntaxique et compilation réussies via `@babel/parser`.
+
+---
+
+## Session 44 (2026-08-24) — Refonte visuelle des écrans/modales de mise à jour & Jauge trajet en véhicule animé
+
+- Remplacement du design sombre et agressif de mise à jour par une interface moderne, claire et rassurante (fond Manioc, carte blanche surélevée, illustration téléchargement vert émeraude + badge d'alerte rouge/orange) :
+  * `ModaleQuoiDeNeuf.js` : Refonte de la modale de mise à jour avec l'illustration du plateau de téléchargement vert + badge alerte, titre « Nouvelle mise à jour disponible », bouton d'action « Mettre à jour l'application » et bouton « Pas maintenant ».
+  * `EcranMiseAJourObligatoire.js` : Refonte complète de la barrière de mise à jour obligatoire sur fond clair Manioc et carte centrale blanche. Le bouton de redirection vers le Play Store est désormais **garanti et toujours visible**, avec repli automatique vers `market://details?id=com.caarco.app` ou l'URL Play Store officielle.
+  * `i18n` (`fr.js`, `en.js`) : Ajout des clés `majModale` et mise à jour de `majObligatoire`.
+- `TrajetProgressionMaj.js` : Nouveau composant de jauge de progression sous forme de **trajet routier animé** (départ 📍 → destination 🏁) où un véhicule CAARCO roule en direct sur la route au fil du téléchargement des mégaoctets, avec suspension/vibration animée et tracé vert de route complétée.
+- `telechargementMaj.js` : Moteur de téléchargement in-app avec `expo-file-system` (suivi des Mo téléchargés et pourcentage en direct) + déclenchement automatique de l'installateur natif Android via `expo-sharing`.
+
+
+

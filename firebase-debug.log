@@ -1,0 +1,30 @@
+[debug] [2026-08-24T18:05:44.750Z] ----------------------------------------------------------------------
+[debug] [2026-08-24T18:05:44.774Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Cedric Timene\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js apps:android:sha:list 1:716255645989:android:b0fa245b934ee6a2c78acc --project caarco-19a88
+[debug] [2026-08-24T18:05:44.775Z] CLI Version:   15.19.0
+[debug] [2026-08-24T18:05:44.775Z] Platform:      win32
+[debug] [2026-08-24T18:05:44.775Z] Node Version:  v24.18.0
+[debug] [2026-08-24T18:05:44.776Z] Time:          Mon Aug 24 2026 19:05:44 GMT+0100 (heure d’Afrique de l’Ouest)
+[debug] [2026-08-24T18:05:44.776Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-08-24T18:05:45.024Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-08-24T18:05:45.030Z] > authorizing via signed-in user (cdtimene@gmail.com)
+[debug] [2026-08-24T18:05:45.058Z] Checked if tokens are valid: true, expires at: 1787595894617
+[debug] [2026-08-24T18:05:45.059Z] Checked if tokens are valid: true, expires at: 1787595894617
+[debug] [2026-08-24T18:05:45.064Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/caarco-19a88/androidApps/1:716255645989:android:b0fa245b934ee6a2c78acc/sha [none]
+[debug] [2026-08-24T18:05:46.272Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/caarco-19a88/androidApps/1:716255645989:android:b0fa245b934ee6a2c78acc/sha 200
+[debug] [2026-08-24T18:05:46.273Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/caarco-19a88/androidApps/1:716255645989:android:b0fa245b934ee6a2c78acc/sha {"certificates":[{"name":"projects/caarco-19a88/androidApps/1:716255645989:android:b0fa245b934ee6a2c78acc/sha/d0909c09ecc1d1fd","shaHash":"5e8f16062ea3cd2c4a0d547876baa6f38cabf625","certType":"SHA_1"},{"name":"projects/caarco-19a88/androidApps/1:716255645989:android:b0fa245b934ee6a2c78acc/sha/fe8508e7a79853d4","shaHash":"bf1f6fccff3f9f7eebb305cb60fa60e13920722b","certType":"SHA_1"}]}
+[info] ┌───────────────────────────────────────────────┬──────────────────┬──────────────────────────────────────────┬───────────────┐
+│ App Id                                        │ SHA Id           │ SHA Hash                                 │ SHA Hash Type │
+├───────────────────────────────────────────────┼──────────────────┼──────────────────────────────────────────┼───────────────┤
+│ 1:716255645989:android:b0fa245b934ee6a2c78acc │ d0909c09ecc1d1fd │ 5e8f16062ea3cd2c4a0d547876baa6f38cabf625 │ SHA_1         │
+├───────────────────────────────────────────────┼──────────────────┼──────────────────────────────────────────┼───────────────┤
+│ 1:716255645989:android:b0fa245b934ee6a2c78acc │ fe8508e7a79853d4 │ bf1f6fccff3f9f7eebb305cb60fa60e13920722b │ SHA_1         │
+└───────────────────────────────────────────────┴──────────────────┴──────────────────────────────────────────┴───────────────┘
+[info] 
+[info] 2 SHA hash(es) total.
+[debug] [2026-08-24T18:05:53.081Z] Error: Timed out.
+    at Timeout._onTimeout (C:\Users\Cedric Timene\AppData\Roaming\npm\node_modules\firebase-tools\lib\utils.js:309:49)
+    at listOnTimeout (node:internal/timers:605:17)
+    at process.processTimers (node:internal/timers:541:7)
+[error] 
+[error] Error: An unexpected error has occurred.

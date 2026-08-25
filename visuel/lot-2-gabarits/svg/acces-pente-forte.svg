@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Pictogramme d'accès : Pente forte (déclivité raide + pourcentage/flèche d'inclinaison) -->
+  <!-- Triangle de pente raide -->
+  <polygon points="6,38 42,16 42,38" stroke-width="2.5" />
+  
+  <!-- Flèche montante d'effort / forte déclivité -->
+  <line x1="14" y1="28" x2="30" y2="18" stroke-width="2.5" />
+  <polyline points="24,17 31,17 31,24" stroke-width="2.5" />
+  
+  <!-- Silhouette véhicule incliné en montée -->
+  <!-- Roues -->
+  <circle cx="16" cy="30" r="3" stroke-width="2" />
+  <circle cx="28" cy="23" r="3" stroke-width="2" />
+  <!-- Châssis incliné -->
+  <line x1="14" y1="27" x2="30" y2="18" stroke-width="2.5" />
+  
+  <!-- Hachures de dénivelé sous la pente -->
+  <line x1="22" y1="38" x2="22" y2="28" stroke-width="1.5" stroke-dasharray="2 2" />
+  <line x1="32" y1="38" x2="32" y2="22" stroke-width="1.5" stroke-dasharray="2 2" />
+</svg>

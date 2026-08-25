@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Sacs & matériaux de construction : Sac de ciment couché + sac debout + briques -->
+  <!-- Sac de ciment couché (base gauche) -->
+  <path d="M4,34 C4,30 6,28 10,28 L24,28 C28,28 30,30 30,34 L30,36 C30,40 28,42 24,42 L10,42 C6,42 4,40 4,36 Z" />
+  <!-- Coutures / plis du sac couché -->
+  <path d="M6,31 L8,39" stroke-width="1.8" />
+  <path d="M28,31 L26,39" stroke-width="1.8" />
+  <line x1="12" y1="35" x2="22" y2="35" stroke-width="1.8" stroke-dasharray="2 2" />
+
+  <!-- Deuxième sac incliné / superposé -->
+  <path d="M8,18 C8,14 10,12 14,12 L24,12 C28,12 30,14 30,18 L30,22 C30,26 28,28 24,28 L14,28 C10,28 8,26 8,22 Z" />
+  <!-- Coutures sac supérieur -->
+  <path d="M10,15 L12,25" stroke-width="1.8" />
+  <path d="M28,15 L26,25" stroke-width="1.8" />
+  <line x1="15" y1="20" x2="23" y2="20" stroke-width="1.8" stroke-dasharray="2 2" />
+
+  <!-- Pile de briques / parpaings à droite -->
+  <rect x="33" y="34" width="12" height="8" rx="1.5" />
+  <rect x="33" y="24" width="12" height="8" rx="1.5" />
+  <rect x="33" y="14" width="12" height="8" rx="1.5" />
+  <!-- Alvéoles de parpaing -->
+  <circle cx="36.5" cy="38" r="1" fill="currentColor" />
+  <circle cx="41.5" cy="38" r="1" fill="currentColor" />
+  <circle cx="36.5" cy="28" r="1" fill="currentColor" />
+  <circle cx="41.5" cy="28" r="1" fill="currentColor" />
+  <circle cx="36.5" cy="18" r="1" fill="currentColor" />
+  <circle cx="41.5" cy="18" r="1" fill="currentColor" />
+</svg>
