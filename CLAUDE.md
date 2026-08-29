@@ -1,7 +1,7 @@
 # CLAUDE.md — CAARCO SUPER AGENT
 # Version 4.0 — Application mobile + Site web
 # Cedric Timene — Cameroun — Juin 2026
-# Stack app : Supabase + React Native Expo + Notchpay (Tokens de Course)
+# Stack app : Supabase + React Native Expo + Notchpay (Jetons de Course)
 # Stack web : Next.js 16 + Tailwind CSS v4 + framer-motion + Google Sheets CMS
 
 ═══════════════════════════════════════════════════════════════════
@@ -46,9 +46,9 @@ Règle absolue : JAMAIS commencer à coder sans avoir complété les étapes 1-4
 Frontend Mobile   : React Native 0.81.5 + Expo SDK 54 (bare workflow)
 Backend / DB      : Supabase (PostgreSQL + PostGIS + Auth + Storage + Edge Functions)
 Authentification  : Supabase Auth + OTP 4 chiffres généré en app
-Tokens de Course  : KPay (MTN/Orange Money) — achat TC uniquement pour les TR
-                    1 TC = 1 FCFA | min 500 TC | boutons rapides 5K/10K/25K/50K/100K
-                    TC déduites à la livraison (20% commission) — non retirables
+Jetons de Course  : KPay (MTN/Orange Money) — achat JC uniquement pour les TR
+                    1 JC = 1 FCFA | min 500 JC | boutons rapides 5K/10K/25K/50K/100K
+                    JC déduites à la livraison (20% commission) — non retirables
 Paiement client   : DIRECT en espèces ou Mobile Money au TR (aucune transaction dans l'app)
 Cartographie      : CarteLeaflet (Leaflet 1.9.4 dans WebView) — 100% GRATUIT, sans clé API
 Tuiles OSM        : tile.openstreetmap.org — 100% gratuit
@@ -66,8 +66,8 @@ Design system     : Atelier CAARCO (voir Section 5)
 ⚠️  MAPBOX = SUPPRIMÉ (token révoqué, aucune référence dans le code)
 ⚠️  ORS = SUPPRIMÉ (remplacé par OSRM gratuit)
 ⚠️  react-native-maps = SUPPRIMÉ (remplacé par CarteLeaflet/WebView)
-⚠️  NOTCHPAY = SUPPRIMÉ (remplacé par KPay — achat TC uniquement)
-⚠️  MONEROO = SUPPRIMÉ (remplacé par KPay — achat TC uniquement)
+⚠️  NOTCHPAY = SUPPRIMÉ (remplacé par KPay — achat JC uniquement)
+⚠️  MONEROO = SUPPRIMÉ (remplacé par KPay — achat JC uniquement)
 ⚠️  SÉQUESTRE = SUPPRIMÉ (refusé Play Store — activité financière non agréée)
 ⚠️  PORTEFEUILLE CLIENT = SUPPRIMÉ (aucune rétention d'argent côté client)
 ```
@@ -157,8 +157,8 @@ Les appliquer directement dans le code.
 ```
 SÉQUESTRE          = DÉSACTIVÉ (refusé Google Play — activité financière non agréée)
 PORTEFEUILLE CL    = DÉSACTIVÉ (aucune rétention d'argent côté client)
-TOKENS DE COURSE   = ACTIVÉ — seul système monétaire dans l'app (côté TR uniquement)
-                     TR achète TC via Notchpay → TC déduites à la livraison (20%)
+JETONS DE COURSE   = ACTIVÉ — seul système monétaire dans l'app (côté TR uniquement)
+                     TR achète JC via Notchpay → JC déduites à la livraison (20%)
                      Client paie TR directement en espèces ou Mobile Money
 CASH-ON-DELIVERY   = N/A — paiement direct client→TR sans passer par l'app
 ASSURANCE COLIS    = Plafond interne 50 000 FCFA
@@ -166,8 +166,8 @@ COOPTATION         = Pas de pénalité pour le parrain
 GÉOFENCING         = Cameroun uniquement au lancement V1
 PRODUITS INTERDITS = Liste statique + validation admin humaine (IA en V2)
 PRICING DYNAMIQUE  = PAS de surge pricing en V1
-COMMISSION         = 20% en TC déduites du solde TR à la livraison
-                     Math.round(prix_fcfa * 0.20) TC débitées
+COMMISSION         = 20% en JC déduites du solde TR à la livraison
+                     Math.round(prix_fcfa * 0.20) JC débitées
 TRANSIT CHINE-AFR  = EXCLU définitivement du scope CAARCO
 TVA / OHADA        = Immatriculation OHADA obligatoire avant lancement
 HÉBERGEMENT DATA   = Supabase EU (Frankfurt) — RGPD compliant
@@ -266,14 +266,14 @@ BACKEND (Supabase)
 ├── [✅/🔄/❌/📋] PostGIS activé (calcul distance GPS)
 ├── [✅/🔄/❌/📋] RLS (Row Level Security) configuré
 ├── [✅/🔄/❌/📋] Edge Functions (pricing, OTP, matching)
-└── [✅/🔄/❌/📋] Webhooks Notchpay configurés (achat TC)
+└── [✅/🔄/❌/📋] Webhooks Notchpay configurés (achat JC)
 
-TOKENS DE COURSE (TC)
+JETONS DE COURSE (JC)
 ├── [✅/🔄/❌/📋] Compte Notchpay créé + API Key
-├── [✅/🔄/❌/📋] MesTokensScreen (achat TC 4 étapes + historique)
+├── [✅/🔄/❌/📋] MesTokensScreen (achat JC 4 étapes + historique)
 ├── [✅/🔄/❌/📋] Edge Function notchpay-init-achat-tc
-├── [✅/🔄/❌/📋] Edge Function notchpay-webhook (crédit TC idempotent)
-└── [✅/🔄/❌/📋] Alerte solde < 1 000 TC (TableauBord + MesTokens)
+├── [✅/🔄/❌/📋] Edge Function notchpay-webhook (crédit JC idempotent)
+└── [✅/🔄/❌/📋] Alerte solde < 1 000 JC (TableauBord + MesTokens)
 
 DÉPLOIEMENT
 ├── [✅/🔄/❌/📋] Compte Expo EAS configuré
@@ -362,7 +362,7 @@ Format de correction :
 │       └── BottomNav.tsx
 ├── lib/                  # Services et utilitaires
 │   ├── supabase.ts      # Client Supabase
-│   ├── tokensTC.js      # Service Tokens de Course (achat, solde, débit commission)
+│   ├── tokensTC.js      # Service Jetons de Course (achat, solde, débit commission)
 │   ├── location.ts      # GPS et géolocalisation
 │   ├── notifications.ts # Expo Push Notifications
 │   ├── otp.ts           # Génération OTP 4 chiffres
@@ -438,8 +438,8 @@ Format de correction :
 3.5  Navigation GPS vers le client
 3.6  Confirmation chargement → statut EN_COURS
 3.7  OTPValidationScreen — saisir le code OTP du client (modal dans NavigationScreen)
-3.8  Confirmation livraison → débit TC commission (Math.round(prix * 0.20))
-3.9  GainsScreen / MesTokensScreen — solde TC + historique transactions
+3.8  Confirmation livraison → débit JC commission (Math.round(prix * 0.20))
+3.9  GainsScreen / MesTokensScreen — solde JC + historique transactions
 
 ⚠️ CHECKPOINT 3.1 : Valider le flow KYC avec Cedric
 ```
@@ -459,7 +459,7 @@ Format de correction :
 ### PHASE 5 — Tests et déploiement (Sprint 6, ~5 jours)
 ```
 5.1  Tests end-to-end sur Android physique (Tecno/Samsung A)
-5.2  Tests achat TC Notchpay (sandbox → production)
+5.2  Tests achat JC Notchpay (sandbox → production)
 5.3  Security review complet (/security --pre-deploy)
 5.4  Optimisation performance (bundle < 30MB APK)
 5.5  Créer compte Google Play Console (voir Section 9)
@@ -646,7 +646,7 @@ npx expo install expo-location
 npx expo install @expo-google-fonts/plus-jakarta-sans
 npx expo install expo-font
 
-# Notchpay TC checkout via WebView
+# Notchpay JC checkout via WebView
 npx expo install react-native-webview
 
 # Notifications
@@ -863,8 +863,8 @@ Dans Supabase Dashboard :
    → calculate-price           (calcul prix GPS)
    → generate-otp              (OTP 4 chiffres)
    → match-transporter         (algorithme de matching)
-   → notchpay-init-achat-tc    (initier achat TC via Notchpay)
-   → notchpay-webhook          (webhook Notchpay → créditer TC)
+   → notchpay-init-achat-tc    (initier achat JC via Notchpay)
+   → notchpay-webhook          (webhook Notchpay → créditer JC)
 
 Ou via CLI Supabase :
 supabase functions new calculate-price
@@ -939,7 +939,7 @@ serve(async (req) => {
 
 
 ## ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-## SECTION 9 — TOKENS DE COURSE (TC) + NOTCHPAY
+## SECTION 9 — JETONS DE COURSE (JC) + NOTCHPAY
 ## ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ### Pourquoi ce système ?
@@ -947,10 +947,10 @@ serve(async (req) => {
 Google Play a refusé l'app V1 car le séquestre de l'argent des clients
 constitue une activité financière nécessitant une licence (organisation agréée).
 
-Solution : CAARCO vend des Tokens de Course (TC) aux transporteurs uniquement.
-- TC = crédits de service prépayés (1 TC = 1 FCFA)
-- TR achète des TC avec son propre argent → MT MoMo ou Orange Money
-- TC déduites à chaque livraison (20% commission)
+Solution : CAARCO vend des Jetons de Course (JC) aux transporteurs uniquement.
+- JC = crédits de service prépayés (1 JC = 1 FCFA)
+- TR achète des JC avec son propre argent → MT MoMo ou Orange Money
+- JC déduites à chaque livraison (20% commission)
 - Aucun argent client ne transite par l'app
 ```
 
@@ -969,13 +969,13 @@ Solution : CAARCO vend des Tokens de Course (TC) aux transporteurs uniquement.
 9. Activer Orange Money Cameroun (XAF)
 ```
 
-### ÉTAPE B — Flux achat TC (5 étapes dans MesTokensScreen)
+### ÉTAPE B — Flux achat JC (5 étapes dans MesTokensScreen)
 ```
-ÉTAPE 1 — CHOIX : TR saisit la quantité de TC ou clique un bouton rapide
-          Boutons : 5 000 / 10 000 / 25 000 / 50 000 / 100 000 TC
-          Minimum : 500 TC
+ÉTAPE 1 — CHOIX : TR saisit la quantité de JC ou clique un bouton rapide
+          Boutons : 5 000 / 10 000 / 25 000 / 50 000 / 100 000 JC
+          Minimum : 500 JC
 
-ÉTAPE 2 — RECAP : Résumé (montant FCFA = montant TC, 1:1)
+ÉTAPE 2 — RECAP : Résumé (montant FCFA = montant JC, 1:1)
 
 ÉTAPE 3 — PAIEMENT : App appelle Edge Function notchpay-init-achat-tc
           → Edge Function crée une transaction_tc en_attente
@@ -990,7 +990,7 @@ Solution : CAARCO vend des Tokens de Course (TC) aux transporteurs uniquement.
           → users.solde_tc += montantTC
           → App recharge le solde après 2.5s
 
-ALERTE : Si solde_tc < 1 000 TC → bannière rouge dans TableauBord + MesTokens
+ALERTE : Si solde_tc < 1 000 JC → bannière rouge dans TableauBord + MesTokens
 ```
 
 ### ÉTAPE C — Code Edge Function notchpay-init-achat-tc
@@ -1003,7 +1003,7 @@ serve(async (req) => {
   const { transporteurId, montantTC } = await req.json();
   
   if (montantTC < 500) {
-    return new Response(JSON.stringify({ error: 'Minimum 500 TC' }), { status: 400 });
+    return new Response(JSON.stringify({ error: 'Minimum 500 JC' }), { status: 400 });
   }
   
   const supabase = createClient(
@@ -1030,9 +1030,9 @@ serve(async (req) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      amount: montantTC,   // 1 TC = 1 FCFA
+      amount: montantTC,   // 1 JC = 1 FCFA
       currency: 'XAF',
-      description: `Achat ${montantTC} Tokens de Course CAARCO`,
+      description: `Achat ${montantTC} Jetons de Course CAARCO`,
       reference,
       callback: 'caarco://tokens-confirmes',
       webhook: `${Deno.env.get('SUPABASE_URL')}/functions/v1/notchpay-webhook`,
@@ -1050,7 +1050,7 @@ serve(async (req) => {
 ### ÉTAPE D — Code Edge Function notchpay-webhook
 ```typescript
 // supabase/functions/notchpay-webhook/index.ts
-// Appelé par Notchpay après paiement TC confirmé
+// Appelé par Notchpay après paiement JC confirmé
 
 serve(async (req) => {
   const payload = await req.text();
@@ -1128,7 +1128,7 @@ RETURNS void AS $$
 BEGIN
   UPDATE users SET solde_tc = solde_tc - p_commission_tc
   WHERE id = p_transporteur_id AND solde_tc >= p_commission_tc;
-  IF NOT FOUND THEN RAISE EXCEPTION 'Solde TC insuffisant'; END IF;
+  IF NOT FOUND THEN RAISE EXCEPTION 'Solde JC insuffisant'; END IF;
   INSERT INTO transactions_tc (transporteur_id, type, montant_tc, course_id, statut)
   VALUES (p_transporteur_id, 'commission', p_commission_tc, p_course_id, 'confirme');
 END; $$ LANGUAGE plpgsql SECURITY DEFINER;
@@ -1138,11 +1138,11 @@ END; $$ LANGUAGE plpgsql SECURITY DEFINER;
 ```
 1. Dans Notchpay Dashboard → activer "Sandbox Mode"
 2. Utiliser les credentials de test fournis par Notchpay
-3. Simuler un achat de 5 000 TC (MTN MoMo test)
+3. Simuler un achat de 5 000 JC (MTN MoMo test)
 4. Vérifier que le webhook est reçu par l'Edge Function
 5. Vérifier que users.solde_tc += 5000
 6. Accepter une course, livrer, saisir OTP
-7. Vérifier que TC débitées = Math.round(prix * 0.20)
+7. Vérifier que JC débitées = Math.round(prix * 0.20)
 8. Quand tout fonctionne en sandbox → passer en production
 ```
 
@@ -1340,9 +1340,9 @@ async function envoyerNotification(expoPushToken: string, titre: string, corps: 
 // - "Transporteur trouvé !" (client)
 // - "Nouvelle course disponible" (transporteur)  
 // - "Votre transporteur est arrivé" (client)
-// - "Livraison confirmée — X TC débités" (transporteur)
-// - "Achat TC confirmé — X TC créditées" (transporteur, depuis notchpay-webhook)
-// - "Solde TC faible — rechargez vos tokens" (transporteur si < 1000 TC)
+// - "Livraison confirmée — X JC débités" (transporteur)
+// - "Achat JC confirmé — X JC créditées" (transporteur, depuis notchpay-webhook)
+// - "Solde JC faible — rechargez vos jetons" (transporteur si < 1000 JC)
 // - "Votre KYC a été approuvé" (transporteur)
 // - "Litige ouvert — L'admin va trancher" (les deux)
 ```
@@ -1362,14 +1362,14 @@ OTP           : 4 chiffres générés aléatoirement dans l'Edge Function
                Expire après 15 minutes
                Validé côté serveur uniquement (modal dans NavigationScreen)
 
-TOKENS DE COURSE (TC) :
-               1 TC = 1 FCFA — non retirables, non transférables, non revendables
-               TR PEUT voir les courses mais NE PEUT PAS postuler si TC < commission
-               TC vérifiées à l'acceptation (CourseScreen), débitées à la LIVRAISON
-               Commission = Math.round(prix_fcfa * 0.20) TC
-               Achat TC = Notchpay WebView → webhook → crediter_tc_achat (idempotent)
-               Alerte automatique si solde_tc < 1 000 TC
-               ❌ JAMAIS de retrait TC — TC = crédits de service uniquement
+JETONS DE COURSE (JC) :
+               1 JC = 1 FCFA — non retirables, non transférables, non revendables
+               TR PEUT voir les courses mais NE PEUT PAS postuler si JC < commission
+               JC vérifiées à l'acceptation (CourseScreen), débitées à la LIVRAISON
+               Commission = Math.round(prix_fcfa * 0.20) JC
+               Achat JC = Notchpay WebView → webhook → crediter_tc_achat (idempotent)
+               Alerte automatique si solde_tc < 1 000 JC
+               ❌ JAMAIS de retrait JC — JC = crédits de service uniquement
 
 PAIEMENT CLIENT → TR :
                Le client paie le transporteur DIRECTEMENT (espèces ou Mobile Money)
@@ -1380,9 +1380,9 @@ RÔLES         : Client, Transporteur, Admin — mutuellement exclusifs
                Vérifié sur chaque requête Supabase via RLS
                Admin = uniquement via service_role (jamais côté client)
 
-MONTANTS      : TOUJOURS des entiers en FCFA ou TC (jamais de décimaux)
+MONTANTS      : TOUJOURS des entiers en FCFA ou JC (jamais de décimaux)
                Format d'affichage FCFA : "2 500 FCFA" (espace + Mono font)
-               Format TC : "2 500 TC" (même règle)
+               Format JC : "2 500 JC" (même règle)
 
 GPS           : Jamais stocker en clair
                Suppression automatique après 30 jours
@@ -1406,7 +1406,7 @@ STATUTS       : DEMANDE → EN_RECHERCHE → CONFIRMEE → EN_COURS → TERMINEE
 /mem status     → Résumé rapide de l'avancement
 /mem update     → Ajouter une information à la mémoire
 /supabase setup → Guide étape par étape Supabase
-/notchpay setup → Guide étape par étape Notchpay TC (Section 9)
+/notchpay setup → Guide étape par étape Notchpay JC (Section 9)
 /build android  → Commandes EAS Build Android
 /build ios      → Commandes EAS Build iOS
 /deploy         → Guide complet Play Store / App Store

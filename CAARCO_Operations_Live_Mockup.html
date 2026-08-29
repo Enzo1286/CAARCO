@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CAARCO — Cockpit Opérations & Dispatch en Live</title>
+  
+  <!-- Polices Atelier CAARCO -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Marcellus&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    :root {
+      --foret: #1f3b2a;
+      --foret-90: #284a36;
+      --foret-10: rgba(31, 59, 42, 0.08);
+      --bambou: #3d6b4a;
+      --bambou-soft: #d8e5db;
+      --nere: #c89441;
+      --nere-soft: #f7eedb;
+      --laterite: #b8612e;
+      --laterite-soft: #fbeae1;
+      --manioc: #fbf9f3;
+      --brume: #ece9e0;
+      --charbon: #1d2420;
+      --cendre: #6b6f68;
+      --blanc: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #e3dfd5;
+      background-image: radial-gradient(#d1ccbf 1px, transparent 1px);
+      background-size: 24px 24px;
+      color: var(--charbon);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    /* Container Cockpit Desktop */
+    .cockpit-container {
+      width: 100%;
+      max-width: 1440px;
+      background: var(--manioc);
+      border-radius: 28px;
+      box-shadow: 0 25px 60px -15px rgba(29, 36, 32, 0.25), 0 0 0 1px rgba(31, 59, 42, 0.06);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Navigation Bar */
+    .top-bar {
+      background: var(--foret);
+      color: var(--blanc);
+      padding: 16px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand-logo {
+      font-family: 'Marcellus', serif;
+      font-size: 22px;
+      letter-spacing: 2px;
+      color: var(--nere);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+    }
+
+    .live-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(61, 107, 74, 0.4);
+      border: 1px solid rgba(110, 194, 134, 0.4);
+      padding: 4px 10px;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #8be4a7;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      background: #4ade80;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #4ade80;
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .search-input-box {
+      position: relative;
+      width: 380px;
+    }
+
+    .search-input-box input {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 9px 14px 9px 38px;
+      color: var(--blanc);
+      font-size: 13px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .search-input-box input:focus {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: var(--nere);
+    }
+
+    .search-input-box i {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--brume);
+      width: 16px;
+      height: 16px;
+    }
+
+    .header-kpi-group {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .kpi-chip {
+      display: flex;
+      flex-direction: column;
+      text-align: right;
+    }
+
+    .kpi-chip .lbl {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .kpi-chip .val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--nere);
+    }
+
+    /* Main Grid Layout */
+    .cockpit-grid {
+      display: grid;
+      grid-template-columns: 410px 1fr;
+      min-height: 820px;
+      background: var(--manioc);
+    }
+
+    /* Left Panel: Course Details & Drivers */
+    .left-panel {
+      background: var(--blanc);
+      border-right: 1px solid var(--brume);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      overflow-y: auto;
+      max-height: 840px;
+    }
+
+    /* Header Course */
+    .course-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 1px solid var(--brume);
+      padding-bottom: 16px;
+    }
+
+    .course-ref {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--foret);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .statut-badge {
+      background: var(--bambou-soft);
+      color: var(--foret);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 9999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* Quick Metrics Grid */
+    .metrics-mini-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .metric-box {
+      background: var(--manioc);
+      border: 1px solid var(--brume);
+      border-radius: 12px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .metric-box .m-title {
+      font-size: 10px;
+      color: var(--cendre);
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .metric-box .m-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--foret);
+    }
+
+    /* Driver Profile Card */
+    .actor-box {
+      background: linear-gradient(135deg, rgba(31, 59, 42, 0.04) 0%, rgba(200, 148, 65, 0.08) 100%);
+      border: 1px solid rgba(31, 59, 42, 0.12);
+      border-radius: 18px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .actor-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .avatar-driver {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      background: var(--foret);
+      color: var(--blanc);
+      font-weight: 700;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      box-shadow: 0 4px 12px rgba(31, 59, 42, 0.2);
+    }
+
+    .avatar-driver .verified-badge {
+      position: absolute;
+      bottom: -4px;
+      right: -4px;
+      background: #10b981;
+      color: white;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid white;
+    }
+
+    .actor-info {
+      flex: 1;
+    }
+
+    .actor-info .nom {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--charbon);
+    }
+
+    .actor-info .vehicule {
+      font-size: 12px;
+      color: var(--cendre);
+      margin-top: 2px;
+    }
+
+    .actor-info .stars {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--nere);
+      margin-top: 4px;
+    }
+
+    .action-btn-group {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-action-round {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      border: 1px solid var(--brume);
+      background: var(--blanc);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--foret);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-action-round:hover {
+      background: var(--foret);
+      color: var(--blanc);
+    }
+
+    /* Jalons Itinéraire */
+    .timeline-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+    }
+
+    .timeline-step {
+      display: flex;
+      gap: 14px;
+      position: relative;
+      padding-bottom: 22px;
+    }
+
+    .timeline-step:last-child {
+      padding-bottom: 0;
+    }
+
+    .timeline-step::before {
+      content: '';
+      position: absolute;
+      left: 11px;
+      top: 24px;
+      bottom: 0;
+      width: 2px;
+      background: var(--brume);
+    }
+
+    .timeline-step.completed::before {
+      background: var(--bambou);
+    }
+
+    .timeline-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--blanc);
+      border: 2px solid var(--brume);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      flex-shrink: 0;
+    }
+
+    .timeline-step.completed .timeline-icon {
+      background: var(--bambou);
+      border-color: var(--bambou);
+      color: white;
+    }
+
+    .timeline-step.active .timeline-icon {
+      background: var(--nere);
+      border-color: var(--nere);
+      box-shadow: 0 0 0 4px var(--nere-soft);
+      color: white;
+    }
+
+    .timeline-content {
+      flex: 1;
+    }
+
+    .timeline-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .timeline-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--charbon);
+    }
+
+    .timeline-time {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--cendre);
+    }
+
+    .timeline-subtitle {
+      font-size: 12px;
+      color: var(--cendre);
+      margin-top: 2px;
+    }
+
+    /* Right Main Cockpit Area */
+    .right-cockpit {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    /* Map Viewport */
+    .map-viewport {
+      flex: 1;
+      position: relative;
+      background: #e9ece8;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Faux Vector OSM Map Styling */
+    .map-svg-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Floating Vehicle Telemetry Card */
+    .floating-vehicle-card {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(31, 59, 42, 0.12);
+      border-radius: 20px;
+      padding: 16px;
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+      width: 320px;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .vehicle-preview-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .vehicle-type-tag {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--foret);
+      background: var(--foret-10);
+      padding: 4px 10px;
+      border-radius: 8px;
+    }
+
+    .vehicle-speed-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--bambou);
+      background: var(--bambou-soft);
+      padding: 4px 10px;
+      border-radius: 8px;
+    }
+
+    .vehicle-img-box {
+      width: 100%;
+      height: 110px;
+      background: radial-gradient(circle, rgba(61, 107, 74, 0.1) 0%, transparent 70%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 56px;
+    }
+
+    .vehicle-telemetry-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      font-size: 11px;
+    }
+
+    .telemetry-item {
+      background: var(--manioc);
+      border-radius: 8px;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .telemetry-item .t-label {
+      color: var(--cendre);
+      font-size: 10px;
+    }
+
+    .telemetry-item .t-val {
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--charbon);
+      margin-top: 2px;
+    }
+
+    /* Radar Pulse Marker on Map */
+    .radar-vehicle-marker {
+      position: absolute;
+      top: 48%;
+      left: 54%;
+      transform: translate(-50%, -50%);
+      z-index: 8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .radar-pulse-ring {
+      position: absolute;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: rgba(61, 107, 74, 0.2);
+      border: 1.5px solid var(--bambou);
+      animation: radarExpand 2.2s infinite ease-out;
+    }
+
+    @keyframes radarExpand {
+      0% { transform: scale(0.3); opacity: 1; }
+      100% { transform: scale(1.8); opacity: 0; }
+    }
+
+    .radar-center-dot {
+      width: 44px;
+      height: 44px;
+      background: var(--foret);
+      color: white;
+      border-radius: 50%;
+      border: 3px solid white;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      z-index: 9;
+    }
+
+    .radar-tooltip {
+      position: absolute;
+      top: -38px;
+      background: var(--charbon);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 8px;
+      white-space: nowrap;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Bottom Control & Voice Drawer */
+    .bottom-dispatch-drawer {
+      height: 260px;
+      background: var(--blanc);
+      border-top: 1px solid var(--brume);
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      overflow: hidden;
+    }
+
+    .dispatch-tabs-section {
+      padding: 18px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      border-right: 1px solid var(--brume);
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 18px;
+      border-bottom: 1px solid var(--brume);
+      padding-bottom: 10px;
+    }
+
+    .nav-tab {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--cendre);
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s;
+    }
+
+    .nav-tab.active {
+      color: var(--foret);
+      font-weight: 700;
+    }
+
+    .nav-tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: -11px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--foret);
+      border-radius: 3px 3px 0 0;
+    }
+
+    .log-feed-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow-y: auto;
+      padding-right: 8px;
+    }
+
+    .log-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+      padding: 8px 12px;
+      border-radius: 10px;
+      background: var(--manioc);
+      border: 1px solid var(--brume);
+    }
+
+    .log-item .time {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--cendre);
+      font-size: 11px;
+      flex-shrink: 0;
+    }
+
+    .log-item .msg {
+      flex: 1;
+      color: var(--charbon);
+    }
+
+    .log-item .tag {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: var(--bambou-soft);
+      color: var(--bambou);
+    }
+
+    /* Dispatch Voice & Security Box */
+    .dispatch-voice-box {
+      padding: 20px;
+      background: linear-gradient(180deg, #faf8f2 0%, #f0ece0 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .voice-radar-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .voice-radar-header .title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--foret);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .soundwave-visualizer {
+      height: 48px;
+      background: var(--blanc);
+      border: 1px solid var(--brume);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 14px;
+      gap: 3px;
+    }
+
+    .wave-bar {
+      width: 4px;
+      background: var(--foret);
+      border-radius: 99px;
+      height: 12px;
+      animation: waveMove 1.4s infinite ease-in-out;
+    }
+
+    .wave-bar:nth-child(2) { height: 28px; animation-delay: 0.2s; background: var(--bambou); }
+    .wave-bar:nth-child(3) { height: 42px; animation-delay: 0.4s; background: var(--nere); }
+    .wave-bar:nth-child(4) { height: 22px; animation-delay: 0.1s; background: var(--bambou); }
+    .wave-bar:nth-child(5) { height: 35px; animation-delay: 0.3s; background: var(--foret); }
+    .wave-bar:nth-child(6) { height: 18px; animation-delay: 0.5s; }
+
+    @keyframes waveMove {
+      0%, 100% { transform: scaleY(0.6); }
+      50% { transform: scaleY(1.3); }
+    }
+
+    .voice-actions-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-talkie {
+      flex: 1;
+      background: var(--foret);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 12px;
+      font-weight: 700;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(31, 59, 42, 0.2);
+    }
+
+    .btn-otp-security {
+      background: var(--nere-soft);
+      border: 1px dashed var(--nere);
+      border-radius: 12px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .otp-code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      color: var(--nere);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cockpit-container">
+    
+    <!-- Top Bar -->
+    <div class="top-bar">
+      <div class="brand-section">
+        <div class="brand-logo">
+          <i data-lucide="truck"></i>
+          CAARCO
+        </div>
+        <div class="live-badge">
+          <span class="live-dot"></span>
+          Cockpit Live
+        </div>
+      </div>
+
+      <div class="search-input-box">
+        <i data-lucide="search"></i>
+        <input type="text" placeholder="Rechercher course #CR, chauffeur, corridor..." value="#CR-84920 (Douala ➔ Yaoundé)" />
+      </div>
+
+      <div class="header-kpi-group">
+        <div class="kpi-chip">
+          <span class="lbl">Courses Actives</span>
+          <span class="val">48 en direct</span>
+        </div>
+        <div class="kpi-chip">
+          <span class="lbl">Flotte en Ligne</span>
+          <span class="val">124 chauffeurs</span>
+        </div>
+        <div class="kpi-chip">
+          <span class="lbl">Ponctualité</span>
+          <span class="val" style="color: #4ade80;">98.4 %</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Grid -->
+    <div class="cockpit-grid">
+      
+      <!-- Left Panel -->
+      <div class="left-panel">
+        
+        <div class="course-card-top">
+          <div>
+            <div class="course-ref">#CR-84920</div>
+            <div style="font-size: 12px; color: var(--cendre); margin-top: 2px;">Créée le 26 Août 2026 • 08:15</div>
+          </div>
+          <span class="statut-badge">
+            <i data-lucide="navigation" style="width: 12px; height: 12px;"></i>
+            En acheminement
+          </span>
+        </div>
+
+        <!-- Metrics Grid -->
+        <div class="metrics-mini-grid">
+          <div class="metric-box">
+            <div class="m-title">Montant</div>
+            <div class="m-val" style="color: var(--nere);">48 500 F</div>
+          </div>
+          <div class="metric-box">
+            <div class="m-title">Distance</div>
+            <div class="m-val">242 km</div>
+          </div>
+          <div class="metric-box">
+            <div class="m-title">Poids Fret</div>
+            <div class="m-val">850 kg</div>
+          </div>
+          <div class="metric-box">
+            <div class="m-title">Séquestre</div>
+            <div class="m-val" style="color: var(--bambou);">Bloqué</div>
+          </div>
+        </div>
+
+        <!-- Chauffeur & Client Card -->
+        <div class="actor-box">
+          <div class="actor-row">
+            <div class="avatar-driver">
+              JM
+              <div class="verified-badge">
+                <i data-lucide="check" style="width: 10px; height: 10px;"></i>
+              </div>
+            </div>
+            <div class="actor-info">
+              <div class="nom">Jean-Pierre Mengue</div>
+              <div class="vehicule">Camionnette Isuzu 1.5T • LT-492-AC</div>
+              <div class="stars">
+                ★ 4.9 <span style="color: var(--cendre); font-weight: 500;">(128 courses terminées)</span>
+              </div>
+            </div>
+            <div class="action-btn-group">
+              <button class="btn-action-round" title="Appeler"><i data-lucide="phone" style="width: 16px; height: 16px;"></i></button>
+              <button class="btn-action-round" title="Chat direct"><i data-lucide="message-square" style="width: 16px; height: 16px;"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline Jalons -->
+        <div>
+          <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--cendre); margin-bottom: 14px;">
+            Jalons du Corridor Logistique
+          </div>
+
+          <div class="timeline-container">
+            <!-- Jalon 1 -->
+            <div class="timeline-step completed">
+              <div class="timeline-icon">
+                <i data-lucide="check" style="width: 12px; height: 12px;"></i>
+              </div>
+              <div class="timeline-content">
+                <div class="timeline-header">
+                  <span class="timeline-title">Départ : Douala (Akwa)</span>
+                  <span class="timeline-time">08:30</span>
+                </div>
+                <div class="timeline-subtitle">Colis chargé & vérifié à l'entrepôt central.</div>
+              </div>
+            </div>
+
+            <!-- Jalon 2 -->
+            <div class="timeline-step completed">
+              <div class="timeline-icon">
+                <i data-lucide="check" style="width: 12px; height: 12px;"></i>
+              </div>
+              <div class="timeline-content">
+                <div class="timeline-header">
+                  <span class="timeline-title">Péage d'Edéa</span>
+                  <span class="timeline-time">10:15</span>
+                </div>
+                <div class="timeline-subtitle">Point de contrôle franchi sans incident.</div>
+              </div>
+            </div>
+
+            <!-- Jalon 3 -->
+            <div class="timeline-step active">
+              <div class="timeline-icon">
+                <i data-lucide="navigation-2" style="width: 12px; height: 12px;"></i>
+              </div>
+              <div class="timeline-content">
+                <div class="timeline-header">
+                  <span class="timeline-title" style="color: var(--foret);">En route : Boumnyébel</span>
+                  <span class="timeline-time" style="color: var(--nere);">11:40</span>
+                </div>
+                <div class="timeline-subtitle">Vitesse de croisière : 78 km/h • Trafic fluide.</div>
+              </div>
+            </div>
+
+            <!-- Jalon 4 -->
+            <div class="timeline-step">
+              <div class="timeline-icon">
+                <i data-lucide="map-pin" style="width: 12px; height: 12px; color: var(--cendre);"></i>
+              </div>
+              <div class="timeline-content">
+                <div class="timeline-header">
+                  <span class="timeline-title" style="color: var(--cendre);">Arrivée : Yaoundé (Bastos)</span>
+                  <span class="timeline-time" style="color: var(--bambou);">ETA 12:45</span>
+                </div>
+                <div class="timeline-subtitle">Livraison finale et validation du code OTP.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Cockpit -->
+      <div class="right-cockpit">
+        
+        <!-- Interactive Map Viewport -->
+        <div class="map-viewport">
+          
+          <!-- Vector Map SVG Drawing -->
+          <svg class="map-svg-canvas" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="routeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#3d6b4a" />
+                <stop offset="60%" stop-color="#c89441" />
+                <stop offset="100%" stop-color="#1f3b2a" />
+              </linearGradient>
+              <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="4" result="blur" />
+                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+              </filter>
+            </defs>
+
+            <!-- Background Land Shapes & Routes -->
+            <path d="M 50 150 Q 200 80 450 220 T 850 180" fill="none" stroke="#d5dcce" stroke-width="40" stroke-linecap="round" />
+            <path d="M 120 400 Q 350 320 600 480 T 950 350" fill="none" stroke="#dbe2d4" stroke-width="28" stroke-linecap="round" />
+            <path d="M 280 50 Q 400 300 520 650" fill="none" stroke="#e0e6d9" stroke-width="20" stroke-linecap="round" />
+
+            <!-- Main Route (Douala -> Yaoundé Corridor) -->
+            <path d="M 160 480 C 260 400, 360 450, 480 320 S 680 260, 820 160" fill="none" stroke="rgba(31, 59, 42, 0.15)" stroke-width="12" stroke-linecap="round" />
+            <path d="M 160 480 C 260 400, 360 450, 480 320 S 680 260, 820 160" fill="none" stroke="url(#routeGradient)" stroke-width="6" stroke-linecap="round" stroke-dasharray="8 4" filter="url(#glow)" />
+
+            <!-- Departure Point Pin (Douala) -->
+            <circle cx="160" cy="480" r="8" fill="#1f3b2a" stroke="white" stroke-width="3" />
+            <text x="130" y="515" font-family="Plus Jakarta Sans" font-size="12" font-weight="700" fill="#1f3b2a">Douala (Akwa)</text>
+
+            <!-- Destination Point Pin (Yaoundé) -->
+            <circle cx="820" cy="160" r="9" fill="#c89441" stroke="white" stroke-width="3" />
+            <text x="770" y="140" font-family="Plus Jakarta Sans" font-size="12" font-weight="700" fill="#c89441">Yaoundé (Bastos)</text>
+          </svg>
+
+          <!-- Radar Vehicle Marker -->
+          <div class="radar-vehicle-marker" style="top: 48%; left: 47%;">
+            <div class="radar-pulse-ring"></div>
+            <div class="radar-tooltip">🚚 78 km/h • GPS Précis</div>
+            <div class="radar-center-dot">
+              <i data-lucide="navigation" style="width: 20px; height: 20px; transform: rotate(45deg);"></i>
+            </div>
+          </div>
+
+          <!-- Floating Vehicle Telemetry Card -->
+          <div class="floating-vehicle-card">
+            <div class="vehicle-preview-header">
+              <span class="vehicle-type-tag">Camionnette 1.5T</span>
+              <span class="vehicle-speed-badge">⚡ 78 km/h</span>
+            </div>
+
+            <div class="vehicle-img-box">
+              🚚
+            </div>
+
+            <div class="vehicle-telemetry-row">
+              <div class="telemetry-item">
+                <span class="t-label">Batterie Smartphone</span>
+                <span class="t-val" style="color: #10b981;">🔋 94 %</span>
+              </div>
+              <div class="telemetry-item">
+                <span class="t-label">Précision Signal</span>
+                <span class="t-val">📡 ± 3 mètres</span>
+              </div>
+              <div class="telemetry-item">
+                <span class="t-label">Dernière synchro</span>
+                <span class="t-val">Il y a 4 sec</span>
+              </div>
+              <div class="telemetry-item">
+                <span class="t-label">Pression Fret</span>
+                <span class="t-val" style="color: var(--nere);">57 % utile</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Bottom Dispatch Drawer -->
+        <div class="bottom-dispatch-drawer">
+          
+          <div class="dispatch-tabs-section">
+            <div class="nav-tabs">
+              <div class="nav-tab active">Journal d'Activité Live</div>
+              <div class="nav-tab">Preuves & Photos Fret (2)</div>
+              <div class="nav-tab">Notes Dispatch Régulateur</div>
+              <div class="nav-tab">Sécurité & Alerte Litige</div>
+            </div>
+
+            <div class="log-feed-list">
+              <div class="log-item">
+                <span class="time">11:40:12</span>
+                <span class="msg">Position GPS synchronisée : axe Boumnyébel, vitesse stable 78 km/h.</span>
+                <span class="tag">GPS FIX</span>
+              </div>
+              <div class="log-item">
+                <span class="time">10:15:00</span>
+                <span class="msg">Péage d'Edéa validé par le système de géofencing automatique.</span>
+                <span class="tag" style="background: var(--nere-soft); color: var(--nere);">GÉOFENCE</span>
+              </div>
+              <div class="log-item">
+                <span class="time">08:30:24</span>
+                <span class="msg">Course confirmée par Jean-Pierre Mengue. Séquestre de 48 500 FCFA verrouillé.</span>
+                <span class="tag">SÉQUESTRE OK</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dispatch Voice / OTP Security Box -->
+          <div class="dispatch-voice-box">
+            <div class="voice-radar-header">
+              <span class="title">
+                <i data-lucide="radio" style="width: 16px; height: 16px; color: var(--bambou);"></i>
+                Canal Talkie-Walkie PTT
+              </span>
+              <span style="font-size: 10px; font-weight: 700; color: #10b981;">ACTIF</span>
+            </div>
+
+            <div class="soundwave-visualizer">
+              <div class="wave-bar"></div>
+              <div class="wave-bar"></div>
+              <div class="wave-bar"></div>
+              <div class="wave-bar"></div>
+              <div class="wave-bar"></div>
+              <div class="wave-bar"></div>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--cendre); margin-left: 8px;">0:18 / Direct</span>
+            </div>
+
+            <div class="btn-otp-security">
+              <div>
+                <div style="font-size: 10px; color: var(--cendre); text-transform: uppercase; font-weight: 700;">Code OTP Livraison</div>
+                <div style="font-size: 11px; color: var(--foret); font-weight: 600;">Sécurisation Séquestre</div>
+              </div>
+              <div class="otp-code">8 4 9 2</div>
+            </div>
+
+            <button class="btn-talkie">
+              <i data-lucide="mic" style="width: 16px; height: 16px;"></i>
+              Maintenir pour parler au chauffeur
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    // Activation des icônes Lucide
+    lucide.createIcons();
+  </script>
+</body>
+</html>

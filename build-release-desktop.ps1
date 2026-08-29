@@ -16,14 +16,20 @@ if (Test-Path ".env") {
     }
 }
 
-# 2. Recreer local.properties
-Write-Host "Creation de local.properties..." -ForegroundColor Cyan
+# 2. Recreer local.properties et configurer la mémoire
+Write-Host "Configuration de la mémoire (Node & Gradle)..." -ForegroundColor Cyan
+$env:NODE_OPTIONS = "--max-old-space-size=4096"
+$env:GRADLE_OPTS = "-Dorg.gradle.jvmargs=`"-Xmx2048m -XX:MaxMetaspaceSize=512m -Dfile.encoding=UTF-8`""
+
 $sdkPath = "$env:LOCALAPPDATA\Android\Sdk" -replace "\\", "\\\\"
 "sdk.dir=$sdkPath" | Out-File -FilePath "android\local.properties" -Encoding ascii
 
 # 3. Compilation
-Write-Host "Compilation en release en cours..." -ForegroundColor Cyan
+Write-Host "Arret des anciens daemons Gradle..." -ForegroundColor Cyan
 Set-Location "$PSScriptRoot\App\android"
+.\gradlew --stop
+
+Write-Host "Compilation en release en cours..." -ForegroundColor Cyan
 .\gradlew assembleRelease --max-workers=2
 
 if ($LASTEXITCODE -eq 0) {

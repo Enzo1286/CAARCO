@@ -16,8 +16,11 @@ if (Test-Path ".env") {
     }
 }
 
-# 2. Recreer local.properties
-Write-Host "Creation de local.properties..." -ForegroundColor Cyan
+# 2. Recreer local.properties et configurer la mémoire
+Write-Host "Configuration de la mémoire (Node & Gradle)..." -ForegroundColor Cyan
+$env:NODE_OPTIONS = "--max-old-space-size=4096"
+$env:GRADLE_OPTS = "-Dorg.gradle.jvmargs=`"-Xmx2048m -XX:MaxMetaspaceSize=512m -Dfile.encoding=UTF-8`""
+
 $sdkPath = "$env:LOCALAPPDATA\Android\Sdk" -replace "\\", "\\\\"
 "sdk.dir=$sdkPath" | Out-File -FilePath "android\local.properties" -Encoding ascii
 
