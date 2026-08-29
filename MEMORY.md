@@ -25,6 +25,13 @@ Brand essence : "Warm Authority" — Limpide, Robuste, Camerounais.
 - Outils de dev    : Claude Code + VS Code + Claude Cowork
 - Style            : Livrables directs et prêts à l'emploi
 
+### ⚡ DIRECTIVES DES COMMANDES RAPIDES
+- `cdd`  : Compile en debug et dépose sur le Bureau (`CAARCO-debug.apk`).
+- `ct` / `cdt` : Compile en debug, dépose sur le Bureau et installe sur tous les téléphones connectés en USB.
+- `crd`  : Compile en release et dépose sur le Bureau (`CAARCO-release.apk`).
+- `crt`  : Compile en release, dépose sur le Bureau et installe sur tous les téléphones connectés en USB.
+- `prod` : Upgrade de version (`versionName` et `versionCode` +1), compile la version de production Play Store (`bundleRelease` + `assembleRelease`), déplace les fichiers `.aab` et `.apk` sur le Bureau, **ET génère automatiquement les notes de version Play Store balisées `<fr-FR>` et `<en-US>`, sans émojis et courtes (< 500 caractères)**.
+
 ---
 
 ## 🏗️ STACK TECHNIQUE (RÉELLE — vérifiée au 2026-06-01)
@@ -345,15 +352,25 @@ Dossier    : D:\CAARCO-WEB (séparé de l'app D:\Mon projet\CAARCO)
 
 ## 🔄 EN COURS / QUESTIONS OUVERTES
 
-### Session 56 (2026-08-27) — Release Production Play Store v1.2.1 (versionCode 31)
-1. **Incrémentation des Versions (+1)** :
-   - `versionName` : `1.2.0` $\rightarrow$ `1.2.1` dans `app.json`, `android/app/build.gradle` et `package.json`.
-   - `versionCode` : `30` $\rightarrow$ `31` dans `app.json` et `android/app/build.gradle`.
-2. **Compilation Release Production & Export Bureau** :
+### Session 57 (2026-08-29) — Release Production Play Store v1.2.3 (versionCode 33) & Audit Bord en Bord
+1. **Intégration des Deux Mascottes 3D dans Compléter Profil (`CompleterProfilScreen.js`)** :
+   - Ajout de la section visuelle interactive : *« Quel est votre genre ? »* avec les deux cartes mascottes 3D (Homme / Femme) côte à côte.
+   - Présentation épurée avec aura lumineuse, visuel 3D immersif plein format et marqueur de sélection vert forêt/néré avec icône ✓ (`fadeDuration={0}` pour un rendu instantané).
+   - Pré-chargement automatique depuis `AsyncStorage` (`genre_utilisateur`) si le genre a déjà été choisi lors de l'onboarding.
+   - Sauvegarde automatique de `email_recuperation`, `telephone`, `pays_code` et `sexe` dans `public.users`.
+2. **Suppression Définitive de Comptes & Edge Function (`admin-assister-mdp`)** :
+   - Déploiement de l'action `supprimer_utilisateur` côté serveur avec suppression en cascade de `public.users` et `auth.users` via `supabaseAdmin.auth.admin.deleteUser()`.
+   - Portail Admin sur Vercel re-compilé et re-déployé en production (`https://caarco-admin.vercel.app`).
+3. **Audit Complet & Tests Automatiques (Score 10/10)** :
+   - Création et exécution de la suite `full_end_to_end_system_audit.test.mjs` (16 tests sur les 9 modules clés).
+   - Validation 100% réussie sur la tarification 5 véhicules, les JC KPay, la fidélité, les interstitiels et les flux de livraison.
+4. **Compilation Release Production Play Store & Export Bureau** :
+   - `versionName` : `1.2.3` dans `app.json`, `android/app/build.gradle` et `package.json`.
+   - `versionCode` : `33` dans `app.json` et `android/app/build.gradle`.
    - Exécution complète de `bundleRelease` et `assembleRelease` via Gradle (optimisation R8 + signature `caarco-release.keystore`).
    - Fichiers générés et copiés sur le Bureau (`C:\Users\Cedric Timene\Desktop`) :
-     * `CAARCO-v1.2.1-c31-release.aab` (49.3 Mo) — **Bundle officiel pour la Google Play Console**.
-     * `CAARCO-v1.2.1-c31-release.apk` (64.8 Mo) — **APK Release autonome signée**.
+     * `CAARCO-v1.2.3-c33-release.aab` (49.5 Mo) — **Bundle officiel pour la Google Play Console**.
+     * `CAARCO-v1.2.3-c33-release.apk` (65.1 Mo) — **APK Release autonome signée**.
 
 ### Session 55 (2026-08-27) — Blindage Universel & Élimination Totale des Erreurs Système Visibles
 
