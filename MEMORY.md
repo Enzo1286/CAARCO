@@ -1964,8 +1964,21 @@ Session 9 (2026-07-04) — Déménagement du projet :
   - Correction du sélecteur de destination (`LocationPicker.js`) : auparavant, lors du glissement de la carte, le nom restait vide et affichait des coordonnées brutes (`5.4916, 10.4196`).
   - Implémentation d'un géocodage inverse automatique avec débounce (300 ms) dès que la carte s'arrête : le nom du repère réel le plus proche (ex: *Tougang Village Stadium, Bafoussam*) s'affiche désormais directement dans le panneau du bas sans attendre la validation.
   - Ajout des repères locaux précis du secteur Tougang : *Tougang Village Stadium, Stade Tougang Village, Paroisse Sainte Trinité de Tougang, Standard English School, Pont Tchitchap, Goethe-Institut Kamerun*.
-- **Validation :** 215 fichiers analysés, 0 erreur d'import, 21/21 tests unitaires validés.
+---
 
+## Session 91 (2026-08-29) — Audit de Sécurité WD.MD, Harmonisation i18n & Déploiement Global
 
-
-
+- **Audit de Sécurité Approfondi (`WD.MD`) :**
+  - Validation exhaustive de l'ensemble des 4 sections de la méthodologie `wd.md` :
+    - Gestion étanche des secrets et variables d'environnement (`.gitignore`, masquage client).
+    - RLS activé sur 100% des tables avec policies basées sur `auth.uid()`.
+    - Authentification validée par `getUser()` côté Edge Functions et stockage sécurisé `AsyncStorage`.
+    - Validation stricte des méthodes HTTP et absence de fuites de données dans les erreurs.
+- **Harmonisation Typographique & Casse i18n FR / EN :**
+  - Identification et correction des 14 libellés anglais qui étaient en majuscules abusives (`ALL CAPS` -> `Sentence / Title Case`, ex: `LANGUAGE` -> `Language`, `REFERRAL CODE` -> `Referral code`, `JOURNEY` -> `Journey`).
+  - Alignement parfait de la typographie entre l'anglais et le français sur tous les écrans client, transporteur et profil.
+- **Build Web & Déploiement :**
+  - Compilation et export du bundle web (`npm run build:web`) validés avec succès sans erreur (`dist/`).
+  - Déploiement des Edge Functions Supabase (`confirmer-code-reset`, `envoyer-code-reset`, `admin-assister-mdp`).
+  - Push des commits vers les dépôts distants GitHub (`Enzo1286/CAARCO-App` et `Enzo1286/CAARCO`).
+- **Validation :** 215 fichiers analysés, 0 erreur d'import, 21/21 tests unitaires validés (100%).
